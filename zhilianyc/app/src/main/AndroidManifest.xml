@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.play.zhilianyc">
+    package="com.zlyc.www">
 
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.INTERNET" />
 
 
     <application
-        android:name=".MyApplication"
+        android:name="com.zlyc.www.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,8 +16,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".view.login.LoginActivity"
-
+            android:name="com.zlyc.www.view.login.LoginActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -28,7 +27,7 @@
         </activity>
 
         <activity
-            android:name=".view.home.HomeActivity"
+            android:name="com.zlyc.www.view.home.HomeActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan" />
 
