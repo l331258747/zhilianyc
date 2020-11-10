@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">智链云仓</string>
 
-    <string name="login_title">智链云仓(%1$s)</string>
+    <string name="str_tab_new">新闻</string>
+    <string name="str_tab_game">游戏</string>
+    <string name="str_tab_shop">商城</string>
+    <string name="str_tab_warehouse">仓储</string>
+    <string name="str_tab_my">我的</string>
 </resources>

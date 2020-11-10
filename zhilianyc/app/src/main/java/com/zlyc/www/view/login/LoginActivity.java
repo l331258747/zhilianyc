@@ -1,5 +1,6 @@
 package com.zlyc.www.view.login;
 
+import android.content.Intent;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import com.zlyc.www.util.AppUtils;
 import com.zlyc.www.util.LoginUtil;
 import com.zlyc.www.util.StatusBarUtil;
 import com.zlyc.www.util.ToastUtil;
+import com.zlyc.www.view.home.HomeActivity;
 
 import androidx.core.content.ContextCompat;
 
@@ -54,8 +56,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         btn_login.setOnClickListener(this);
         btn_forget.setOnClickListener(this);
 
+        testLogin();
 
+    }
 
+    public void testLogin(){
+        et_phone.setText("13200000000");
+        et_password.setText("123456");
     }
 
     @Override
@@ -83,6 +90,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if (!LoginUtil.verifyPassword(et_password.getText().toString()))
                     return;
                 //请求
+
+                startActivity(new Intent(context, HomeActivity.class));
+
                 break;
             case R.id.btn_forget:
                 ToastUtil.showShortToast(context,"忘记密码");

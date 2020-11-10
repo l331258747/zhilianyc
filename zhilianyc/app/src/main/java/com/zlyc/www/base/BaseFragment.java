@@ -1,6 +1,5 @@
 package com.zlyc.www.base;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +9,7 @@ import android.view.ViewGroup;
 import com.zlyc.www.util.ToastUtil;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by Administrator on 2017\10\12 0012.
