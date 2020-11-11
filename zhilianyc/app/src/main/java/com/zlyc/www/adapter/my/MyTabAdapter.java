@@ -1,4 +1,4 @@
-package com.zlyc.www.adapter;
+package com.zlyc.www.adapter.my;
 
 import android.content.Context;
 import android.view.LayoutInflater;

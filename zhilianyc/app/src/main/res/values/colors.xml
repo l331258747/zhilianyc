@@ -15,7 +15,6 @@
     <!--      start -->
     <color name="color_window_background">#f7f7f7</color>
     <color name="color_text">#1a1a1a</color>
-    <color name="color_fa9611">#ff9912</color>
 
     <color name="color_99">#999999</color>
     <color name="color_66">#666666</color>
@@ -23,11 +22,17 @@
     <color name="color_4b_66">#664b4b4b</color>
     <color name="color_red">#FF0000</color>
 
-
-    <color name="color_f0f0f0">#f0f0f0</color>
+<!--    渐变色 -->
     <color name="color_1C81E9">#1C81E9</color>
     <color name="color_69B3FF">#69B3FF</color>
+    <color name="color_FBAE17">#FBAE17</color>
+    <color name="color_F7C03F">#F7C03F</color>
 
+<!--    分割线-->
+    <color name="color_ededed">#ededed</color>
 
+<!--    文字颜色-->
+    <color name="color_368FEB">#368FEB</color>
+    <color name="color_f0f0f0">#f0f0f0</color>
 
 </resources>

@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zlyc.www.R;
-import com.zlyc.www.adapter.MyTabAdapter;
+import com.zlyc.www.adapter.my.MyTabAdapter;
 import com.zlyc.www.base.BaseFragment;
 import com.zlyc.www.bean.MySelfInfo;
 import com.zlyc.www.bean.my.MyTabBean;
@@ -14,6 +14,7 @@ import com.zlyc.www.constant.Constant;
 import com.zlyc.www.util.ToastUtil;
 import com.zlyc.www.util.glide.GlideUtil;
 import com.zlyc.www.view.my.AccountActivity;
+import com.zlyc.www.view.my.MyTeamActivity;
 
 import java.util.List;
 
@@ -84,6 +85,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 MyTabBean item = datas.get(position);
                 switch (item.getId()) {
                     case Constant.MY_TAB_TEAM:
+                        startActivity(new Intent(context, MyTeamActivity.class));
+                        break;
                     case Constant.MY_TAB_SECURITY:
                     case Constant.MY_TAB_ORDER:
                     case Constant.MY_TAB_TRANSACTION_DTS:
@@ -100,8 +103,6 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 }
             }
         });
-
-
     }
 
     @Override

@@ -33,6 +33,9 @@
         <activity
             android:name=".view.my.AccountActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.my.MyTeamActivity"
+            android:windowSoftInputMode="adjustPan" />
 
     </application>
 
