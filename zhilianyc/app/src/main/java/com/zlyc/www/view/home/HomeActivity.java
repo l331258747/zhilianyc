@@ -3,6 +3,7 @@ package com.zlyc.www.view.home;
 import com.zlyc.www.R;
 import com.zlyc.www.base.BaseActivity;
 import com.zlyc.www.base.BaseFragment;
+import com.zlyc.www.util.StatusBarUtil;
 import com.zlyc.www.view.home.fragment.GameFragment;
 import com.zlyc.www.view.home.fragment.MyFragment;
 import com.zlyc.www.view.home.fragment.NewFragment;
@@ -14,6 +15,7 @@ import com.zlyc.www.widget.tab.TabView;
 
 import java.util.ArrayList;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -106,6 +108,7 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
     @Override
     public void onTabItemClick(TabItem tabItem) {
         int index = tabItems.indexOf(tabItem);
+
         switch (index) {
             case 0:
                 setTitleSingle(true, getResString(R.string.str_tab_new));
@@ -121,8 +124,15 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
 //                RxBus2.getInstance().post(new NotifyEvent(false));
                 break;
             case 4:
-                setTitleSingle(true, getResString(R.string.str_tab_my));
+                setTitleSingle(false, getResString(R.string.str_tab_my));
+
                 break;
+        }
+
+        if(index == 4){
+            StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context,R.color.color_1C81E9));
+        }else{
+            StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context,R.color.white));
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

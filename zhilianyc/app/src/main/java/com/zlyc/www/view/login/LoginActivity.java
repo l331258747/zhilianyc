@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.zlyc.www.R;
 import com.zlyc.www.base.BaseActivity;
+import com.zlyc.www.bean.MySelfInfo;
+import com.zlyc.www.bean.login.LoginModel;
 import com.zlyc.www.util.AppUtils;
 import com.zlyc.www.util.LoginUtil;
 import com.zlyc.www.util.StatusBarUtil;
@@ -91,6 +93,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     return;
                 //请求
 
+                LoginModel loginModel = new LoginModel();
+                loginModel.setUserId("88888");
+                loginModel.setNickname("李智链");
+                loginModel.setAvatar("https://img.zcool.cn/community/012e005544cd150000019ae966ea02.jpg@1280w_1l_2o_100sh.jpg");
+                loginModel.setMobile(et_phone.getText().toString());
+                loginModel.setToken("ahw4yh34harehgfh");
+                MySelfInfo.getInstance().setData(loginModel);
+
                 startActivity(new Intent(context, HomeActivity.class));
 
                 break;
@@ -112,11 +122,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         line_register.setVisibility(View.INVISIBLE);
 
         if(isLogin){
-            tv_login.setTextColor(ContextCompat.getColor(context,R.color.color_1a1a1a));
+            tv_login.setTextColor(ContextCompat.getColor(context,R.color.color_text));
             tv_login.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             line_login.setVisibility(View.VISIBLE);
         }else{
-            tv_register.setTextColor(ContextCompat.getColor(context,R.color.color_1a1a1a));
+            tv_register.setTextColor(ContextCompat.getColor(context,R.color.color_text));
             tv_register.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             line_register.setVisibility(View.VISIBLE);
         }

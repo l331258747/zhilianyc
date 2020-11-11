@@ -7,7 +7,7 @@
 
 
     <application
-        android:name="com.zlyc.www.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.zlyc.www.view.login.LoginActivity"
+            android:name=".view.login.LoginActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -27,8 +27,11 @@
         </activity>
 
         <activity
-            android:name="com.zlyc.www.view.home.HomeActivity"
+            android:name=".view.home.HomeActivity"
             android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.my.AccountActivity"
             android:windowSoftInputMode="adjustPan" />
 
     </application>

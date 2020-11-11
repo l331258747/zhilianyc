@@ -83,13 +83,13 @@ public class TabLayout extends LinearLayout implements View.OnClickListener{
 			View view = getChildAt(i);
 			if (selectView != view){
 				view.setSelected(true);
-//				((TextView)view.findViewById(R.id.tab_lable)).setTextColor(getResources().getColor(R.color.black));
+				((TextView)view.findViewById(R.id.tab_lable)).setTextColor(getResources().getColor(R.color.color_1C81E9));
 				TextPaint tp = ((TextView)view.findViewById(R.id.tab_lable)).getPaint();
 				tp.setFakeBoldText(true);
 
 				if (selectView != null){
 					selectView.setSelected(false);
-//					((TextView)selectView.findViewById(R.id.tab_lable)).setTextColor(getResources().getColor(R.color.black));
+					((TextView)selectView.findViewById(R.id.tab_lable)).setTextColor(getResources().getColor(R.color.color_66));
 
 					TextPaint tp2 = ((TextView) selectView.findViewById(R.id.tab_lable)).getPaint();
 					tp2.setFakeBoldText(false);
