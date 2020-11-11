@@ -6,4 +6,7 @@
     <string name="str_tab_shop">商城</string>
     <string name="str_tab_warehouse">仓储</string>
     <string name="str_tab_my">我的</string>
+
+    <string name="verify"><Data><![CDATA[重新发送<font color="#dd0000">%ds</font>]]></Data></string>
+
 </resources>

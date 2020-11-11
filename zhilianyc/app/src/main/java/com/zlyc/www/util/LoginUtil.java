@@ -54,10 +54,30 @@ public class LoginUtil {
 
     public static boolean verifyName(String name) {
         if (name.equals("")) {
-            ToastUtil.showShortToast(AppUtils.getContext(), "请输入联系人");
+            ToastUtil.showShortToast(AppUtils.getContext(), "请输入名称");
         } else if (name.length() < 2) {
-            ToastUtil.showShortToast(AppUtils.getContext(), "请输入正确的联系人");
+            ToastUtil.showShortToast(AppUtils.getContext(), "请输入正确的名称");
         } else {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean verifyID(String name) {
+        if (name.equals("")) {
+            ToastUtil.showShortToast(AppUtils.getContext(), "请输入证件号");
+        } else if (name.length() < 15) {
+            ToastUtil.showShortToast(AppUtils.getContext(), "请输入正确的证件号");
+        } else {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean verifyEmpty(String name,String tip) {
+        if (name.equals("")) {
+            ToastUtil.showShortToast(AppUtils.getContext(), tip);
+        }  else {
             return true;
         }
         return false;

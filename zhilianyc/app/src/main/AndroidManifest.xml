@@ -36,6 +36,18 @@
         <activity
             android:name=".view.my.MyTeamActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.security.SecurityActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.security.ModifyPwdActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.security.CapitalSetActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.security.AuthenticationActivity"
+            android:windowSoftInputMode="adjustPan" />
 
     </application>
 

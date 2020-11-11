@@ -15,6 +15,7 @@ import com.zlyc.www.util.ToastUtil;
 import com.zlyc.www.util.glide.GlideUtil;
 import com.zlyc.www.view.my.AccountActivity;
 import com.zlyc.www.view.my.MyTeamActivity;
+import com.zlyc.www.view.security.SecurityActivity;
 
 import java.util.List;
 
@@ -88,6 +89,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                         startActivity(new Intent(context, MyTeamActivity.class));
                         break;
                     case Constant.MY_TAB_SECURITY:
+                        startActivity(new Intent(context, SecurityActivity.class));
+                        break;
                     case Constant.MY_TAB_ORDER:
                     case Constant.MY_TAB_TRANSACTION_DTS:
                     case Constant.MY_TAB_INVITAT:

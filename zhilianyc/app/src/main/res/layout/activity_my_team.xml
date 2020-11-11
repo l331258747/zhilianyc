@@ -286,7 +286,7 @@
                 android:id="@+id/tv_people_director_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_368FEB"
+                android:textColor="@color/color_368feb"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 tools:text="1" />
@@ -316,7 +316,7 @@
                 android:id="@+id/tv_people_manager_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_368FEB"
+                android:textColor="@color/color_368feb"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 tools:text="1" />
@@ -346,7 +346,7 @@
                 android:id="@+id/tv_people_big_manager_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_368FEB"
+                android:textColor="@color/color_368feb"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 tools:text="1" />
@@ -376,7 +376,7 @@
                 android:id="@+id/tv_people_small_boss_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_368FEB"
+                android:textColor="@color/color_368feb"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 tools:text="1" />
@@ -406,7 +406,7 @@
                 android:id="@+id/tv_people_boss_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_368FEB"
+                android:textColor="@color/color_368feb"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 tools:text="1" />
