@@ -54,7 +54,7 @@ public class SecurityActivity extends BaseActivity implements View.OnClickListen
                 showShortToast("地址");
                 break;
             case R.id.view_collection:
-                showShortToast("账号设置");
+                startActivity(new Intent(context,CollectionActivity.class));
                 break;
         }
     }

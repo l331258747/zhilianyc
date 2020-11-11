@@ -48,6 +48,15 @@
         <activity
             android:name=".view.security.AuthenticationActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.security.CollectionActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.security.AddressEditActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.security.AddressSetActivity"
+            android:windowSoftInputMode="adjustPan" />
 
     </application>
 
