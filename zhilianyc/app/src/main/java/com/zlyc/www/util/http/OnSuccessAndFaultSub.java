@@ -103,13 +103,11 @@ public class OnSuccessAndFaultSub extends DisposableObserver<BaseResponse> imple
         LogUtil.e("msg:"+t.getMsg());
         LogUtil.e("data:"+t.getData());
 
-        if(t.getCode()==0 && t.getErrno() == 0){
+        if(t.getCode()==0){
             mResponseCallback.onSuccess(t.getData());
         }else{
             if(!TextUtils.isEmpty(t.getMsg())){
                 mResponseCallback.onFault(t.getMsg());
-            }else if(!TextUtils.isEmpty(t.getErrmsg())){
-                mResponseCallback.onFault(t.getErrmsg());
             }else{
                 mResponseCallback.onFault("--");
             }
@@ -118,16 +116,6 @@ public class OnSuccessAndFaultSub extends DisposableObserver<BaseResponse> imple
             if(t.getCode() == 401){
                 MySelfInfo.getInstance().loginOff();
                 DialogUtil.getInstance().getDefaultDialog(context, t.getMsg(), "去登录", new DialogUtil.DialogCallBack() {
-                    @Override
-                    public void exectEvent(DialogInterface alterDialog) {
-                        Intent intent = new Intent(new Intent(context, LoginActivity.class));
-                        intent.putExtra("LOGIN_PHONE",phone);
-                        context.startActivity(intent);
-                    }
-                }).show();
-            }else if(t.getErrno() == 401){
-                MySelfInfo.getInstance().loginOff();
-                DialogUtil.getInstance().getDefaultDialog(context, t.getErrmsg(), "去登录", new DialogUtil.DialogCallBack() {
                     @Override
                     public void exectEvent(DialogInterface alterDialog) {
                         Intent intent = new Intent(new Intent(context, LoginActivity.class));

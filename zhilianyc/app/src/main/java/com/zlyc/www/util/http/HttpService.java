@@ -1,5 +1,13 @@
 package com.zlyc.www.util.http;
 
+import com.zlyc.www.bean.BaseResponse;
+import com.zlyc.www.bean.EmptyModel;
+
+import io.reactivex.Observable;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
+
 /**
  * Created by LGQ
  * Time: 2018/7/17
@@ -21,7 +29,12 @@ public interface HttpService {
 //            @Field("loginType") int loginType
 //    );
 
-
+    //登录系列   start
+    //登录
+    @POST("user/login")
+    Observable<BaseResponse<EmptyModel>> login(
+            @Body RequestBody body
+    );
 
 
 }

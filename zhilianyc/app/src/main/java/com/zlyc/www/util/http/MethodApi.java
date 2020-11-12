@@ -1,5 +1,14 @@
 package com.zlyc.www.util.http;
 
+import org.json.JSONObject;
+
+import java.util.Map;
+
+import io.reactivex.Observable;
+import io.reactivex.observers.DisposableObserver;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+
 /**
  * Created by LGQ
  * Time: 2018/7/18
@@ -8,21 +17,16 @@ package com.zlyc.www.util.http;
 
 public class MethodApi {
 
-    /**
-     * 获取用户详细信息
-     *
-     * @Field("telphone") String telphone,
-     * @Field("passWord") String passWord,
-     * @Field("captcha") String captcha,
-     * @Field("channel") int channel
-     */
-//    public static void register(DisposableObserver<BaseResponse> subscriber
-//            , String telphone, String passWord, String captcha, int channel) {
-//        Observable observable = HttpMethods.getInstance().getHttpService().register(telphone,
-//                passWord,
-//                captcha,
-//                channel); //在HttpServer中
-//        HttpMethods.getInstance().toSubscribe(observable, subscriber);
-//    }
+    //登录
+    public static void login(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().login(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+
+    private static RequestBody getRequestBody(Map<String, String> params){
+        RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"),
+                new JSONObject(params).toString());
+        return requestBody;
+    }
 
 }

@@ -9,8 +9,11 @@ import android.widget.TextView;
 
 import com.zlyc.www.R;
 import com.zlyc.www.base.BaseActivity;
+import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.MySelfInfo;
 import com.zlyc.www.bean.login.LoginModel;
+import com.zlyc.www.mvp.login.LoginContract;
+import com.zlyc.www.mvp.login.LoginPresenter;
 import com.zlyc.www.util.AppUtils;
 import com.zlyc.www.util.LoginUtil;
 import com.zlyc.www.util.StatusBarUtil;
@@ -19,12 +22,14 @@ import com.zlyc.www.view.home.HomeActivity;
 
 import androidx.core.content.ContextCompat;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginContract.View {
 
     TextView tv_title,tv_register,tv_login,btn_login,btn_forget;
     LinearLayout tab_login,tab_register;
     View line_register,line_login;
     EditText et_phone,et_password;
+
+    LoginPresenter mPresenter;
 
     @Override
     public int getLayoutId() {
@@ -63,13 +68,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     public void testLogin(){
-        et_phone.setText("13200000000");
+        et_phone.setText("15616397868");
         et_password.setText("123456");
     }
 
     @Override
     public void initData() {
         tv_title.setText(String.format("智链云仓(%1$s)",AppUtils.getVersionName()));
+
+        mPresenter = new LoginPresenter(context,this);
     }
 
     @Override
@@ -85,7 +92,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 setTab(false);
                 break;
             case R.id.btn_login:
-                ToastUtil.showShortToast(context,"登录");
                 //判断账号密码    请求
                 if (!LoginUtil.verifyPhone(et_phone.getText().toString()))
                     return;
@@ -93,15 +99,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     return;
                 //请求
 
-                LoginModel loginModel = new LoginModel();
-                loginModel.setUserId("88888");
-                loginModel.setNickname("李智链");
-                loginModel.setAvatar("https://img.zcool.cn/community/012e005544cd150000019ae966ea02.jpg@1280w_1l_2o_100sh.jpg");
-                loginModel.setMobile(et_phone.getText().toString());
-                loginModel.setToken("ahw4yh34harehgfh");
-                MySelfInfo.getInstance().setData(loginModel);
-
-                startActivity(new Intent(context, HomeActivity.class));
+                mPresenter.login(et_phone.getText().toString(),et_password.getText().toString());
 
                 break;
             case R.id.btn_forget:
@@ -132,4 +130,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
+    @Override
+    public void loginSuccess(EmptyModel data) {
+        LoginModel loginModel = new LoginModel();
+        loginModel.setUserId("88888");
+        loginModel.setNickname("李智链");
+        loginModel.setAvatar("https://img.zcool.cn/community/012e005544cd150000019ae966ea02.jpg@1280w_1l_2o_100sh.jpg");
+        loginModel.setMobile(et_phone.getText().toString());
+        loginModel.setToken("ahw4yh34harehgfh");
+        MySelfInfo.getInstance().setData(loginModel);
+
+        startActivity(new Intent(context, HomeActivity.class));
+    }
+
+    @Override
+    public void loginFailed(String msg) {
+        showShortToast(msg);
+    }
 }

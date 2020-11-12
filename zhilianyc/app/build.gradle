@@ -18,8 +18,8 @@ android {
         applicationId "com.play.zhilianyc"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 3030
+        versionName "3.0.3"
     }
     buildTypes {
         release {

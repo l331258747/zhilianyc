@@ -32,7 +32,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HttpMethods {
 
     public static final String CACHE_NAME = "lets_go_cache";
-    public static String BASE_URL = URLConstant.BASE_URL + "/api/";
+//    public static String BASE_URL = URLConstant.BASE_URL + "/api/";
+    public static String BASE_URL = URLConstant.BASE_URL;
     private static final int DEFAULT_CONNECT_TIMEOUT = 10;//设置连接超时时间
     private static final int DEFAULT_WRITE_TIMEOUT = 30;//设置写入超时时间
     private static final int DEFAULT_READ_TIMEOUT = 30;//设置读取超时时间
@@ -55,8 +56,8 @@ public class HttpMethods {
             public Response intercept(Chain chain) throws IOException {
                 Request originalRequest = chain.request();
                 Request.Builder requestBuilder = originalRequest.newBuilder()
-                        .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
-//                        .addHeader("Content-Type", "application/json; charset=UTF-8")
+//                        .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+                        .addHeader("Content-Type", "application/json; charset=UTF-8")
 //                        .addHeader("Accept-Encoding", "gzip")
                         .addHeader("Connection", "keep-alive")
                         .addHeader("Accept", "*/*")
@@ -132,7 +133,8 @@ public class HttpMethods {
                 .client(okHttpBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(baseUrl + "/api/")
+//                .baseUrl(baseUrl + "/api/")
+                .baseUrl(baseUrl)
                 .build();
         httpService = retrofit.create(HttpService.class);
     }
