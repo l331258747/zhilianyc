@@ -20,7 +20,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
 public class CapitalSetActivity extends BaseActivity implements View.OnClickListener {
-    EditText et_psd,et_psd2,et_verify;
+    EditText et_pwd, et_pwd2,et_verify;
     TextView tv_verify_code,btn_submit;
 
     @Override
@@ -32,8 +32,8 @@ public class CapitalSetActivity extends BaseActivity implements View.OnClickList
     public void initView() {
         showLeftAndTitle("设置资金密码");
 
-        et_psd = $(R.id.et_psd);
-        et_psd2 = $(R.id.et_psd2);
+        et_pwd = $(R.id.et_pwd);
+        et_pwd2 = $(R.id.et_pwd2);
         et_verify = $(R.id.et_verify);
         tv_verify_code = $(R.id.tv_verify_code);
         btn_submit = $(R.id.btn_submit);
@@ -55,13 +55,13 @@ public class CapitalSetActivity extends BaseActivity implements View.OnClickList
 
                 break;
             case R.id.btn_submit:
-                if (!LoginUtil.verifyPassword(et_psd.getText().toString()))
+                if (!LoginUtil.verifyPassword(et_pwd.getText().toString()))
                     return;
-                if (!LoginUtil.verifyPassword(et_psd2.getText().toString()))
+                if (!LoginUtil.verifyPassword(et_pwd2.getText().toString()))
                     return;
                 if (!LoginUtil.verifyVerify(et_verify.getText().toString()))
                     return;
-                if (!LoginUtil.verifyPasswordDouble(et_psd.getText().toString(),et_psd2.getText().toString()))
+                if (!LoginUtil.verifyPasswordDouble(et_pwd.getText().toString(), et_pwd2.getText().toString()))
                     return;
 
                 showShortToast("设置成功");

@@ -76,6 +76,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         tv_title.setText(String.format("智链云仓(%1$s)",AppUtils.getVersionName()));
 
         mPresenter = new LoginPresenter(context,this);
+
+        if(MySelfInfo.getInstance().isLogin()){
+            startActivity(new Intent(context, HomeActivity.class));
+            finish();
+        }
     }
 
     @Override
@@ -133,6 +138,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public void loginSuccess(LoginBean data) {
         MySelfInfo.getInstance().setLoginData(data,et_phone.getText().toString());
         startActivity(new Intent(context, HomeActivity.class));
+        finish();
     }
 
     @Override

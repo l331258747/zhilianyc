@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/et_old_psd"
+        android:id="@+id/et_old_pwd"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_50"
         android:background="@color/white"
@@ -19,7 +19,7 @@
 
 
     <EditText
-        android:id="@+id/et_new_psd"
+        android:id="@+id/et_new_pwd"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_50"
         android:layout_marginTop="@dimen/dp_10"
@@ -29,11 +29,11 @@
         android:paddingStart="@dimen/dp_15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_old_psd" />
+        app:layout_constraintTop_toBottomOf="@+id/et_old_pwd" />
 
 
     <EditText
-        android:id="@+id/et_new_psd2"
+        android:id="@+id/et_new_pwd2"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_50"
         android:background="@color/white"
@@ -42,7 +42,7 @@
         android:paddingStart="@dimen/dp_15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_new_psd" />
+        app:layout_constraintTop_toBottomOf="@+id/et_new_pwd" />
 
     <TextView
         android:id="@+id/btn_submit"
@@ -58,6 +58,6 @@
         android:textSize="@dimen/sp_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_new_psd2" />
+        app:layout_constraintTop_toBottomOf="@+id/et_new_pwd2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

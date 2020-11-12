@@ -1,6 +1,7 @@
 package com.zlyc.www.util.http;
 
 import com.zlyc.www.bean.BaseResponse;
+import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.login.InfoBean;
 import com.zlyc.www.bean.login.LoginBean;
 import com.zlyc.www.bean.login.MineBean;
@@ -31,13 +32,6 @@ public interface HttpService {
 //            @Field("loginType") int loginType
 //    );
 
-    //登录系列   start
-    //登录
-    @POST("user/login")
-    Observable<BaseResponse<LoginBean>> login(
-            @Body RequestBody body
-    );
-
     //个人中心
     @POST("user/usercenter")
     Observable<BaseResponse<InfoBean>> info(
@@ -49,5 +43,21 @@ public interface HttpService {
     Observable<BaseResponse<MineBean>> mine(
             @Body RequestBody body
     );
+
+    //登录系列   start
+    //登录
+    @POST("user/login")
+    Observable<BaseResponse<LoginBean>> login(
+            @Body RequestBody body
+    );
+
+    //修改密码
+    @POST("user/reset_password")
+    Observable<BaseResponse<EmptyModel>> resetPwd(
+            @Body RequestBody body
+    );
+
+
+    //登录系列   end
 
 }

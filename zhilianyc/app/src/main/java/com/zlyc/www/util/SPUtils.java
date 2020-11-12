@@ -22,7 +22,6 @@ public class SPUtils {
     public static final String SP_USER_MOBILE = "sp_user_mobile";
 
 
-
     public static final String SP_APP_VERSION = "sp_app_version";
 
 
