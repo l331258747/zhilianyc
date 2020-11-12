@@ -1,7 +1,9 @@
 package com.zlyc.www.util.http;
 
 import com.zlyc.www.bean.BaseResponse;
-import com.zlyc.www.bean.EmptyModel;
+import com.zlyc.www.bean.login.InfoBean;
+import com.zlyc.www.bean.login.LoginBean;
+import com.zlyc.www.bean.login.MineBean;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -32,9 +34,20 @@ public interface HttpService {
     //登录系列   start
     //登录
     @POST("user/login")
-    Observable<BaseResponse<EmptyModel>> login(
+    Observable<BaseResponse<LoginBean>> login(
             @Body RequestBody body
     );
 
+    //个人中心
+    @POST("user/usercenter")
+    Observable<BaseResponse<InfoBean>> info(
+            @Body RequestBody body
+    );
+
+    //我的主页信息
+    @POST("user/mine")
+    Observable<BaseResponse<MineBean>> mine(
+            @Body RequestBody body
+    );
 
 }

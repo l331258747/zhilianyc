@@ -112,7 +112,14 @@ public class OnSuccessAndFaultSub extends DisposableObserver<BaseResponse> imple
                 mResponseCallback.onFault("--");
             }
 
-            final String phone = MySelfInfo.getInstance().getUserMoble();
+            final String phone = MySelfInfo.getInstance().getUserMobile();
+
+            //{ //TODO
+            //  "code": 20004,
+            //  "data": null,
+            //  "msg": "登录信息已过期"
+            //}
+
             if(t.getCode() == 401){
                 MySelfInfo.getInstance().loginOff();
                 DialogUtil.getInstance().getDefaultDialog(context, t.getMsg(), "去登录", new DialogUtil.DialogCallBack() {

@@ -2,7 +2,7 @@ package com.zlyc.www.mvp.login;
 
 import android.content.Context;
 
-import com.zlyc.www.bean.EmptyModel;
+import com.zlyc.www.bean.login.LoginBean;
 import com.zlyc.www.util.AppUtils;
 import com.zlyc.www.util.http.MethodApi;
 import com.zlyc.www.util.http.OnSuccessAndFaultSub;
@@ -24,9 +24,9 @@ public class LoginPresenter implements LoginContract.Presenter{
 
     @Override
     public void login(String username, String password) {
-        ResponseCallback listener = new ResponseCallback<EmptyModel>() {
+        ResponseCallback listener = new ResponseCallback<LoginBean>() {
             @Override
-            public void onSuccess(EmptyModel data) {
+            public void onSuccess(LoginBean data) {
                 iView.loginSuccess(data);
             }
 
@@ -36,7 +36,7 @@ public class LoginPresenter implements LoginContract.Presenter{
             }
         };
 
-        final Map<String, String> params = new HashMap<>();
+        Map<String, String> params = new HashMap<>();
         params.put("mobile",username);
         params.put("password", MD5Utils.MD5(password));
         params.put("version",AppUtils.getVersionName());

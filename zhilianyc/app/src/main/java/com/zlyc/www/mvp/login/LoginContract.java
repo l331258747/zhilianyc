@@ -1,6 +1,6 @@
 package com.zlyc.www.mvp.login;
 
-import com.zlyc.www.bean.EmptyModel;
+import com.zlyc.www.bean.login.LoginBean;
 
 public interface LoginContract {
 
@@ -9,7 +9,7 @@ public interface LoginContract {
     }
 
     interface View {
-        void loginSuccess(EmptyModel data);
+        void loginSuccess(LoginBean data);
         void loginFailed(String msg);
     }
 }

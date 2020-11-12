@@ -69,7 +69,7 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
         tabLayout.initData(tabItems, this);
 
         // 点击事件处理
-        onTabItemClick(tabItems.get(0));
+        onTabItemClick(tabItems.get(4));
     }
 
 //    //防止fragment混淆

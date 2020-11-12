@@ -16,12 +16,12 @@ public class SPUtils {
 
     public static final String FIRST_OPENED = "first_open";
 
-
     public static final String SP_USER_TOKEN = "sp_user_token";
-    public static final String SP_USER_NICKNAME = "sp_user_nickname";
-    public static final String SP_USER_MOBILE = "sp_user_mobile";
-    public static final String SP_USER_AVATAR = "sp_user_avatar";
     public static final String SP_USER_ID = "sp_user_id";
+    public static final String SP_USER_USERSTATE = "sp_user_userState";
+    public static final String SP_USER_MOBILE = "sp_user_mobile";
+
+
 
     public static final String SP_APP_VERSION = "sp_app_version";
 
@@ -154,7 +154,6 @@ public class SPUtils {
     public void logoff() {
         remove(SP_USER_TOKEN);
         remove(SP_USER_ID);
-        remove(SP_USER_MOBILE);
-        remove(SP_USER_NICKNAME);
+        remove(SP_USER_USERSTATE);
     }
 }

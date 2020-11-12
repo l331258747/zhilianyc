@@ -9,8 +9,11 @@ import com.zlyc.www.R;
 import com.zlyc.www.adapter.my.MyTabAdapter;
 import com.zlyc.www.base.BaseFragment;
 import com.zlyc.www.bean.MySelfInfo;
+import com.zlyc.www.bean.login.MineBean;
 import com.zlyc.www.bean.my.MyTabBean;
 import com.zlyc.www.constant.Constant;
+import com.zlyc.www.mvp.my.MyInfoContract;
+import com.zlyc.www.mvp.my.MyInfoPresenter;
 import com.zlyc.www.util.ToastUtil;
 import com.zlyc.www.util.glide.GlideUtil;
 import com.zlyc.www.view.my.AccountActivity;
@@ -22,15 +25,17 @@ import java.util.List;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyFragment extends BaseFragment implements View.OnClickListener {
+public class MyFragment extends BaseFragment implements View.OnClickListener, MyInfoContract.View {
 
     RecyclerView recyclerView;
     MyTabAdapter mAdapter;
     List<MyTabBean> datas;
 
     ImageView iv_head;
-    TextView tv_name,tv_UID,tv_data_all_num,tv_data_today_num,tv_data_use_num,tv_data_contribution_num,tv_data_labour_num;
+    TextView tv_name, tv_UID, tv_data_all_num, tv_data_today_num, tv_data_use_num, tv_data_contribution_num, tv_data_labour_num;
     View view_title;
+
+    MyInfoPresenter mPresenter;
 
     @Override
     public int getLayoutId() {
@@ -57,17 +62,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initData() {
-        GlideUtil.LoadCircleImage(context, MySelfInfo.getInstance().getUserAvatar(), iv_head);
-        tv_name.setText(MySelfInfo.getInstance().getUserNickname());
-        tv_UID.setText("UID:" + MySelfInfo.getInstance().getUserId());
-        tv_data_all_num.setText("111");
-        tv_data_today_num.setText("222");
-        tv_data_use_num.setText("333");
-        tv_data_contribution_num.setText("444");
-        tv_data_labour_num.setText("555");
-
-
-
+        mPresenter = new MyInfoPresenter(context, this);
+        mPresenter.mine(MySelfInfo.getInstance().getUserId());
     }
 
     //初始化recyclerview
@@ -110,10 +106,27 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.view_title:
                 startActivity(new Intent(context, AccountActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void mineSuccess(MineBean data) {
+        GlideUtil.LoadCircleImage(context, data.getHeadImg(), iv_head);
+        tv_name.setText(data.getNickName());
+        tv_UID.setText("UID:" + MySelfInfo.getInstance().getUserId());
+        tv_data_all_num.setText(data.getBeans() + "");
+        tv_data_today_num.setText(data.getTodayBeans() + "");
+        tv_data_use_num.setText(data.getSellableBeans() + "");
+        tv_data_contribution_num.setText(data.getContribution() + "");
+        tv_data_labour_num.setText(data.getLabor() + "");
+    }
+
+    @Override
+    public void mineFailed(String msg) {
+        showShortToast(msg);
     }
 }

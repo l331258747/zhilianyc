@@ -9,14 +9,19 @@ import com.zlyc.www.R;
 import com.zlyc.www.base.ActivityCollect;
 import com.zlyc.www.base.BaseActivity;
 import com.zlyc.www.bean.MySelfInfo;
+import com.zlyc.www.bean.login.InfoBean;
+import com.zlyc.www.mvp.my.AccountContract;
+import com.zlyc.www.mvp.my.AccountPresenter;
 import com.zlyc.www.util.glide.GlideUtil;
 import com.zlyc.www.view.login.LoginActivity;
 
-public class AccountActivity extends BaseActivity implements View.OnClickListener {
+public class AccountActivity extends BaseActivity implements View.OnClickListener, AccountContract.View {
 
     View view_head, view_nickname;
     ImageView iv_head;
-    TextView tv_nickname, tv_phone, tv_recommend,btn_loginOff;
+    TextView tv_nickname, tv_phone, tv_recommend, btn_loginOff;
+
+    AccountPresenter mPresenter;
 
     @Override
     public int getLayoutId() {
@@ -43,16 +48,15 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void initData() {
-        GlideUtil.LoadCircleImage(context, MySelfInfo.getInstance().getUserAvatar(), iv_head);
-        tv_nickname.setText(MySelfInfo.getInstance().getUserNickname());
-        tv_phone.setText(MySelfInfo.getInstance().getUserMoble());
-        tv_recommend.setText("13695621459");
+        mPresenter = new AccountPresenter(context, this);
+        mPresenter.info(MySelfInfo.getInstance().getUserId());
+
 
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.view_nickname:
                 showShortToast("昵称");
                 break;
@@ -66,5 +70,18 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
                 break;
 
         }
+    }
+
+    @Override
+    public void infoSuccess(InfoBean data) {
+        GlideUtil.LoadCircleImage(context, data.getHeadImg(), iv_head);
+        tv_nickname.setText(data.getNickName());
+        tv_phone.setText(data.getMobile());
+        tv_recommend.setText(data.getPmobile());
+    }
+
+    @Override
+    public void infoFailed(String msg) {
+        showShortToast(msg);
     }
 }

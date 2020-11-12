@@ -17,6 +17,18 @@ import okhttp3.RequestBody;
 
 public class MethodApi {
 
+    //个人中心
+    public static void mine(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().mine(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+
+    //个人中心
+    public static void info(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().info(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+
     //登录
     public static void login(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().login(getRequestBody(params)); //在HttpServer中

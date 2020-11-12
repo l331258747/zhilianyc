@@ -9,9 +9,8 @@ import android.widget.TextView;
 
 import com.zlyc.www.R;
 import com.zlyc.www.base.BaseActivity;
-import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.MySelfInfo;
-import com.zlyc.www.bean.login.LoginModel;
+import com.zlyc.www.bean.login.LoginBean;
 import com.zlyc.www.mvp.login.LoginContract;
 import com.zlyc.www.mvp.login.LoginPresenter;
 import com.zlyc.www.util.AppUtils;
@@ -131,15 +130,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     @Override
-    public void loginSuccess(EmptyModel data) {
-        LoginModel loginModel = new LoginModel();
-        loginModel.setUserId("88888");
-        loginModel.setNickname("李智链");
-        loginModel.setAvatar("https://img.zcool.cn/community/012e005544cd150000019ae966ea02.jpg@1280w_1l_2o_100sh.jpg");
-        loginModel.setMobile(et_phone.getText().toString());
-        loginModel.setToken("ahw4yh34harehgfh");
-        MySelfInfo.getInstance().setData(loginModel);
-
+    public void loginSuccess(LoginBean data) {
+        MySelfInfo.getInstance().setLoginData(data,et_phone.getText().toString());
         startActivity(new Intent(context, HomeActivity.class));
     }
 
@@ -147,4 +139,5 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public void loginFailed(String msg) {
         showShortToast(msg);
     }
+
 }

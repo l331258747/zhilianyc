@@ -2,7 +2,7 @@ package com.zlyc.www.bean;
 
 import android.text.TextUtils;
 
-import com.zlyc.www.bean.login.LoginModel;
+import com.zlyc.www.bean.login.LoginBean;
 import com.zlyc.www.util.SPUtils;
 
 /**
@@ -33,14 +33,11 @@ public class MySelfInfo {
         return false;
     }
 
-
-    public void setData(LoginModel model) {
-
+    public void setLoginData(LoginBean model,String phone){
         SPUtils.getInstance().putString(SPUtils.SP_USER_TOKEN, model.getToken());
-        SPUtils.getInstance().putString(SPUtils.SP_USER_NICKNAME, model.getNickname());
-        SPUtils.getInstance().putString(SPUtils.SP_USER_MOBILE, model.getMobile());
-        SPUtils.getInstance().putString(SPUtils.SP_USER_AVATAR, model.getAvatar());
         SPUtils.getInstance().putString(SPUtils.SP_USER_ID, model.getUserId());
+        SPUtils.getInstance().putString(SPUtils.SP_USER_USERSTATE, model.getUserState());
+        SPUtils.getInstance().putString(SPUtils.SP_USER_MOBILE, phone);
     }
 
     public String getUserId(){
@@ -51,27 +48,9 @@ public class MySelfInfo {
         return SPUtils.getInstance().getString(SPUtils.SP_USER_TOKEN);
     }
 
-
-    public String getUserNickname() {
-        return SPUtils.getInstance().getString(SPUtils.SP_USER_NICKNAME);
-    }
-
-    public void setUserNickname(String nickname) {
-        SPUtils.getInstance().putString(SPUtils.SP_USER_NICKNAME, nickname);
-    }
-
-    public String getUserMoble() {
+    public String getUserMobile(){
         return SPUtils.getInstance().getString(SPUtils.SP_USER_MOBILE);
     }
-
-    public void setUserMoble(String moble){
-        SPUtils.getInstance().putString(SPUtils.SP_USER_MOBILE,moble);
-    }
-
-    public String getUserAvatar() {
-        return SPUtils.getInstance().getString(SPUtils.SP_USER_AVATAR);
-    }
-
 
 
     public void loginOff() {
