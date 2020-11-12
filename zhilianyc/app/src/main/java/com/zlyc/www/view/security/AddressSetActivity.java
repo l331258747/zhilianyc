@@ -10,6 +10,7 @@ import com.zlyc.www.base.BaseActivity;
 import com.zlyc.www.bean.my.AddressBean;
 import com.zlyc.www.util.rxbus.RxBus2;
 import com.zlyc.www.util.rxbus.busEvent.AddressEditEvent;
+import com.zlyc.www.util.textdrawable.TextdrawableUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,9 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
     AddressBean defaultData;
 
     Disposable disposable;
+
+    TextdrawableUtils mTextdrawableUtils;
+
 
     @Override
     public int getLayoutId() {
@@ -50,44 +54,42 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
         btn_submit.setOnClickListener(this);
         btn_edit.setOnClickListener(this);
 
-
+        initRecycler();
     }
 
     @Override
     public void initData() {
+        mTextdrawableUtils = new TextdrawableUtils(context, "默认");
 
         disposable = RxBus2.getInstance().toObservable(AddressEditEvent.class, new Consumer<AddressEditEvent>() {
             @Override
             public void accept(AddressEditEvent addressEditEvent) throws Exception {
                 AddressBean addressBean = new AddressBean();
                 List<AddressBean> datas = addressBean.getDatas2();
-
-                defaultData = getDefaultItem(datas);
-                otherDatas = getAddressList(datas);
-
-                if (defaultData != null) {//默认图标
-                    tv_head.setText(defaultData.getNameHead());
-                    tv_name.setText(defaultData.getName());
-                    tv_address.setText(defaultData.getAddressAll());
-                }
-
-                mAdapter.setData(otherDatas);
+                setDefaultView(datas);
             }
         });
 
         AddressBean addressBean = new AddressBean();
         List<AddressBean> datas = addressBean.getDatas();
+        setDefaultView(datas);
+
+    }
+
+    public void setDefaultView(List<AddressBean> datas) {
 
         defaultData = getDefaultItem(datas);
         otherDatas = getAddressList(datas);
-
-        initRecycler();
 
         if (defaultData != null) {//默认图标
             tv_head.setText(defaultData.getNameHead());
             tv_name.setText(defaultData.getName());
             tv_address.setText(defaultData.getAddressAll());
+            mTextdrawableUtils.setTextStyle(defaultData.getAddressAll(), tv_address); //添加一个标签
         }
+
+        mAdapter.setData(otherDatas);
+
     }
 
     @Override
@@ -109,7 +111,7 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
         recyclerView = $(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        mAdapter = new AddressAdapter(context, otherDatas);
+        mAdapter = new AddressAdapter(context, new ArrayList<AddressBean>());
         recyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(new AddressAdapter.OnItemClickListener() {
