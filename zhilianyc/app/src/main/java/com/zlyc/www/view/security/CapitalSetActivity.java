@@ -6,6 +6,9 @@ import android.widget.TextView;
 
 import com.zlyc.www.R;
 import com.zlyc.www.base.BaseActivity;
+import com.zlyc.www.bean.EmptyModel;
+import com.zlyc.www.mvp.account.PayPwdContract;
+import com.zlyc.www.mvp.account.PayPwdPresenter;
 import com.zlyc.www.util.LoginUtil;
 import com.zlyc.www.util.StringUtils;
 
@@ -19,9 +22,11 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
-public class CapitalSetActivity extends BaseActivity implements View.OnClickListener {
+public class CapitalSetActivity extends BaseActivity implements View.OnClickListener, PayPwdContract.View {
     EditText et_pwd, et_pwd2,et_verify;
     TextView tv_verify_code,btn_submit;
+
+    PayPwdPresenter mPresenter;
 
     @Override
     public int getLayoutId() {
@@ -44,7 +49,7 @@ public class CapitalSetActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initData() {
-
+        mPresenter = new PayPwdPresenter(context,this);
     }
 
     @Override
@@ -64,8 +69,8 @@ public class CapitalSetActivity extends BaseActivity implements View.OnClickList
                 if (!LoginUtil.verifyPasswordDouble(et_pwd.getText().toString(), et_pwd2.getText().toString()))
                     return;
 
-                showShortToast("设置成功");
-                finish();
+                mPresenter.payPwd(et_pwd.getText().toString(),et_verify.getText().toString());
+
                 break;
         }
     }
@@ -120,5 +125,16 @@ public class CapitalSetActivity extends BaseActivity implements View.OnClickList
         super.onDestroy();
         if (disposable != null && !disposable.isDisposed())
             disposable.dispose();
+    }
+
+    @Override
+    public void payPwdSuccess(EmptyModel data) {
+        showShortToast("设置成功");
+        finish();
+    }
+
+    @Override
+    public void payPwdFailed(String msg) {
+        showLongToast(msg);
     }
 }

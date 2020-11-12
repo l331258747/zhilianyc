@@ -57,7 +57,14 @@ public interface HttpService {
             @Body RequestBody body
     );
 
-
     //登录系列   end
 
+
+    //个人信息系列   start
+    //设置交易密码
+    @POST("account/pay_password")
+    Observable<BaseResponse<EmptyModel>> payPwd(
+            @Body RequestBody body
+    );
+    //个人信息系列   end
 }
