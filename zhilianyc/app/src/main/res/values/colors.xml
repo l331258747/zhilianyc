@@ -35,4 +35,7 @@
     <color name="color_368feb">#368FEB</color>
     <color name="color_f0f0f0">#f0f0f0</color>
 
+<!--    背景色-->
+    <color name="color_cc">#cccccc</color>
+
 </resources>

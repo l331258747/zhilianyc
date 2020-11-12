@@ -51,7 +51,7 @@ public class SecurityActivity extends BaseActivity implements View.OnClickListen
                 startActivity(new Intent(context,AuthenticationActivity.class));
                 break;
             case R.id.view_address:
-                showShortToast("地址");
+                startActivity(new Intent(context,AddressSetActivity.class));
                 break;
             case R.id.view_collection:
                 startActivity(new Intent(context,CollectionActivity.class));
