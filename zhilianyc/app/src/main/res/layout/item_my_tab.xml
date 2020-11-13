@@ -5,8 +5,8 @@
     android:id="@+id/cl_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:paddingTop="@dimen/dp_10"
-    android:paddingBottom="@dimen/dp_10"
+    android:paddingTop="@dimen/dp_20"
+    android:paddingBottom="@dimen/dp_20"
     android:orientation="vertical">
 
     <ImageView
@@ -25,7 +25,7 @@
         app:layout_constraintStart_toStartOf="@+id/iv_img"
         app:layout_constraintEnd_toEndOf="@+id/iv_img"
         app:layout_constraintTop_toBottomOf="@+id/iv_img"
-        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_10"
         tools:text="我的团队"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -65,6 +65,8 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_verify_code:
+                if (!LoginUtil.verifyPhone(et_phone.getText().toString()))
+                    return;
                 verifyEvent();
                 break;
             case R.id.btn_submit:

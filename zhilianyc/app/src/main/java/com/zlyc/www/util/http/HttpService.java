@@ -44,6 +44,11 @@ public interface HttpService {
     Observable<BaseResponse<MineBean>> mine(
             @Body RequestBody body
     );
+    //实名状态
+    @POST("user/real_name_status")
+    Observable<BaseResponse<String>> realNameStatus(
+            @Body RequestBody body
+    );
 
     //登录系列   start
     //登录

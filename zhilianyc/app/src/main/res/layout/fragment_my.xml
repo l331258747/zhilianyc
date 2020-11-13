@@ -59,6 +59,38 @@
         tools:text="名字名字" />
 
     <TextView
+        android:id="@+id/tv_authentication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="已实名"
+        android:textSize="@dimen/sp_10"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="@+id/tv_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        android:layout_marginStart="@dimen/dp_4"
+        android:paddingStart="@dimen/dp_5"
+        android:paddingEnd="@dimen/dp_5"
+        android:visibility="gone"
+        android:paddingTop="@dimen/dp_2"
+        android:paddingBottom="@dimen/dp_2"
+        android:background="@drawable/btn_61b53f_r1"/>
+
+    <TextView
+        android:id="@+id/tv_region"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="岳麓区"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/white"
+        android:drawableLeft="@mipmap/ic_region"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@+id/tv_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_authentication"
+        android:layout_marginStart="@dimen/dp_10"/>
+
+    <TextView
         android:id="@+id/tv_UID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -251,12 +283,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_30"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_20"
         app:layout_constraintEnd_toEndOf="parent"
         android:overScrollMode="never"
         android:scrollbars="none"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

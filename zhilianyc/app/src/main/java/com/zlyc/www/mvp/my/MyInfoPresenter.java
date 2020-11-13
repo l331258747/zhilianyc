@@ -39,4 +39,24 @@ public class MyInfoPresenter implements MyInfoContract.Presenter{
 
         MethodApi.mine(params, new OnSuccessAndFaultSub(listener, context,false));
     }
+
+    @Override
+    public void realNameStatus(String uid) {
+        ResponseCallback listener = new ResponseCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+                iView.realNameStatusSuccess(data);
+            }
+
+            @Override
+            public void onFault(String errorMsg) {
+                iView.realNameStatusFailed(errorMsg);
+            }
+        };
+
+        Map<String, String> params = new HashMap<>();
+        params.put("uid",uid);
+
+        MethodApi.realNameStatus(params, new OnSuccessAndFaultSub(listener, context,false));
+    }
 }

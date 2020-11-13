@@ -157,6 +157,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 startActivity(intent);
                 break;
             case R.id.tv_verify_code_rgt:
+                if (!LoginUtil.verifyPhone(et_phone_rgt.getText().toString()))
+                    return;
                 verifyEvent();
                 break;
             case R.id.btn_register:

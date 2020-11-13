@@ -1,6 +1,7 @@
 package com.zlyc.www.view.home.fragment;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,7 +33,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
     List<MyTabBean> datas;
 
     ImageView iv_head;
-    TextView tv_name, tv_UID, tv_data_all_num, tv_data_today_num, tv_data_use_num, tv_data_contribution_num, tv_data_labour_num;
+    TextView tv_name, tv_UID, tv_data_all_num, tv_data_today_num, tv_data_use_num, tv_data_contribution_num, tv_data_labour_num,tv_region,tv_authentication;
     View view_title;
 
     MyInfoPresenter mPresenter;
@@ -52,6 +53,11 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
         tv_data_use_num = $(R.id.tv_data_use_num);
         tv_data_contribution_num = $(R.id.tv_data_contribution_num);
         tv_data_labour_num = $(R.id.tv_data_labour_num);
+        tv_region = $(R.id.tv_region);
+        tv_authentication = $(R.id.tv_authentication);
+
+        tv_region.setVisibility(View.GONE);
+        tv_authentication.setVisibility(View.GONE);
 
         view_title = $(R.id.view_title);
 
@@ -123,10 +129,32 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
         tv_data_use_num.setText(data.getSellableBeans() + "");
         tv_data_contribution_num.setText(data.getContribution() + "");
         tv_data_labour_num.setText(data.getLabor() + "");
+
+        if(!TextUtils.isEmpty(data.getCityPartnerName())){
+            tv_region.setText(data.getCityPartnerName());
+        }
+
     }
 
     @Override
     public void mineFailed(String msg) {
+        showShortToast(msg);
+    }
+
+    @Override
+    public void realNameStatusSuccess(String data) {
+        tv_region.setVisibility(View.VISIBLE);
+        if(TextUtils.equals(data,"1")){
+            tv_region.setText("已认证");
+            tv_region.setBackgroundResource(R.drawable.btn_61b53f_r1);
+        }else{
+            tv_region.setText("未认证");
+            tv_region.setBackgroundResource(R.drawable.btn_red_r1);
+        }
+    }
+
+    @Override
+    public void realNameStatusFailed(String msg) {
         showShortToast(msg);
     }
 }
