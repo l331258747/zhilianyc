@@ -2,10 +2,13 @@ package com.zlyc.www.util.http;
 
 import com.zlyc.www.bean.BaseResponse;
 import com.zlyc.www.bean.EmptyModel;
+import com.zlyc.www.bean.address.AddressBean;
 import com.zlyc.www.bean.login.InfoBean;
 import com.zlyc.www.bean.login.LoginBean;
 import com.zlyc.www.bean.login.MineBean;
 import com.zlyc.www.bean.login.VerifyImageBean;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -33,6 +36,8 @@ public interface HttpService {
 //            @Field("loginType") int loginType
 //    );
 
+
+    //--------------------user start
     //个人中心
     @POST("user/usercenter")
     Observable<BaseResponse<InfoBean>> info(
@@ -96,15 +101,41 @@ public interface HttpService {
     Observable<BaseResponse<VerifyImageBean>> verifyImage(
             @Body RequestBody body
     );
+    //--------------------user end
 
-    //登录系列   end
 
 
-    //个人信息系列   start
+    //--------------------account start
     //设置交易密码
     @POST("account/pay_password")
     Observable<BaseResponse<EmptyModel>> payPwd(
             @Body RequestBody body
     );
-    //个人信息系列   end
+    //--------------------account end
+
+
+    //--------------------address start
+    //我的收获地址列表
+    @POST("address/list")
+    Observable<BaseResponse<List<AddressBean>>> addressList(
+            @Body RequestBody body
+    );
+    //添加我的收货地址
+    @POST("address/add")
+    Observable<BaseResponse<EmptyModel>> addressAdd(
+            @Body RequestBody body
+    );
+    //编辑我的收货地址
+    @POST("address/edit")
+    Observable<BaseResponse<EmptyModel>> addressEdit(
+            @Body RequestBody body
+    );
+    //删除我的收货地址
+    @POST("address/delete")
+    Observable<BaseResponse<EmptyModel>> addressDelete(
+            @Body RequestBody body
+    );
+
+
+    //--------------------address end
 }

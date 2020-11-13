@@ -7,11 +7,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.zlyc.www.R;
-import com.zlyc.www.bean.my.AddressBean;
+import com.zlyc.www.bean.address.AddressBean;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHolder> {
@@ -39,13 +40,21 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
 
         holder.tv_head.setText(data.getNameHead());
         holder.tv_name.setText(data.getName());
-        holder.tv_address.setText(data.getAddressDts());
+        holder.tv_address.setText(data.getAddressAll());
 
         if (mOnItemClickListener != null) {
             holder.btn_edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mOnItemClickListener.onClick(position);
+                }
+            });
+
+            holder.cl_parent.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    mOnItemClickListener.onLongClick(position);
+                    return false;
                 }
             });
         }
@@ -63,6 +72,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_head,tv_name,tv_address,btn_edit;
+        ConstraintLayout cl_parent;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,6 +81,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             tv_name = itemView.findViewById(R.id.tv_name);
             tv_address = itemView.findViewById(R.id.tv_address);
             btn_edit = itemView.findViewById(R.id.btn_edit);
+            cl_parent = itemView.findViewById(R.id.cl_parent);
         }
     }
 
@@ -78,6 +89,8 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
 
     public interface OnItemClickListener {
         void onClick(int position);
+        void onLongClick(int position);
+
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

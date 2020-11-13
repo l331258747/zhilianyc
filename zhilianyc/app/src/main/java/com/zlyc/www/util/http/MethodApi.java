@@ -17,6 +17,17 @@ import okhttp3.RequestBody;
 
 public class MethodApi {
 
+
+    //--------------------account start
+    //设置交易密码
+    public static void payPwd(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().payPwd(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    //--------------------account end
+
+
+    //--------------------user start
     public static void verifyImageConfirm(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().verifyImageConfirm(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -68,14 +79,26 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().resetPwd(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+    //--------------------user end
 
-    //设置交易密码
-    public static void payPwd(Map<String, String> params, DisposableObserver subscriber) {
-        Observable observable = HttpMethods.getInstance().getHttpService().payPwd(getRequestBody(params)); //在HttpServer中
+    //--------------------address start
+    public static void addressList(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().addressList(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
-
-
+    public static void addressAdd(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().addressAdd(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    public static void addressEdit(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().addressEdit(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    public static void addressDelete(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().addressDelete(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    //--------------------address end
 
     private static RequestBody getRequestBody(Map<String, String> params){
         RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"),

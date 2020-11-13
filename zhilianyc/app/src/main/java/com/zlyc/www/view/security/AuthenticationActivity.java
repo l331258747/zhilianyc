@@ -56,7 +56,12 @@ public class AuthenticationActivity extends BaseActivity implements AuthRealName
         view_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPickerCityHelp.showPickerView(tv_address);
+                mPickerCityHelp.showPickerView(new PickerCityHelp.OnItemClickListener() {
+                    @Override
+                    public void onClick(String str1, String str2, String str3) {
+                        tv_address.setText(str1 + " " + str2 + " " + str3);
+                    }
+                });
             }
         });
     }

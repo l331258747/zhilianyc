@@ -3,7 +3,6 @@ package com.zlyc.www.util.pickerView;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
-import android.widget.TextView;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
@@ -67,15 +66,12 @@ public class PickerCityHelp {
         }
     }
 
-    public void showPickerView(final TextView tv_address) {
+    public void showPickerView(final OnItemClickListener mOnItemClickListener) {
         OptionsPickerView pvOptions = new OptionsPickerBuilder(mContext, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                //返回的分别是三个级别的选中位置
-                tv_address.setText(options1Items.get(options1).getPickerViewText() + "  "
-                        + options2Items.get(options1).get(options2) + "  "
-                        + options3Items.get(options1).get(options2).get(options3));
-
+                mOnItemClickListener.onClick(options1Items.get(options1).getPickerViewText(),options2Items.get(options1).get(options2),
+                        options3Items.get(options1).get(options2).get(options3));
             }
         })
                 .setTitleText("城市选择")
@@ -102,4 +98,9 @@ public class PickerCityHelp {
         }
         return detail;
     }
+
+    public interface OnItemClickListener {
+        void onClick(String str1,String str2,String str3);
+    }
+
 }

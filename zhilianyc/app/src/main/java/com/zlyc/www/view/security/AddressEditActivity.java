@@ -7,13 +7,17 @@ import android.widget.TextView;
 
 import com.zlyc.www.R;
 import com.zlyc.www.base.BaseActivity;
-import com.zlyc.www.bean.my.AddressBean;
+import com.zlyc.www.bean.EmptyModel;
+import com.zlyc.www.bean.MySelfInfo;
+import com.zlyc.www.bean.address.AddressBean;
+import com.zlyc.www.mvp.address.AddressEditContract;
+import com.zlyc.www.mvp.address.AddressEditPresenter;
 import com.zlyc.www.util.LoginUtil;
 import com.zlyc.www.util.pickerView.PickerCityHelp;
 import com.zlyc.www.util.rxbus.RxBus2;
 import com.zlyc.www.util.rxbus.busEvent.AddressEditEvent;
 
-public class AddressEditActivity extends BaseActivity implements View.OnClickListener {
+public class AddressEditActivity extends BaseActivity implements View.OnClickListener, AddressEditContract.View {
 
     EditText et_name, et_phone, et_address_dts;
     TextView tv_address, btn_submit;
@@ -24,8 +28,12 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
 
     PickerCityHelp mPickerCityHelp;
 
-
     AddressBean mAddressBean;
+
+    AddressEditPresenter mPresenter;
+
+    int setType = 0;//0新增，1编辑
+    String province, city, region, address;
 
     @Override
     public int getLayoutId() {
@@ -36,8 +44,14 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void initView() {
         mAddressBean = (AddressBean) intent.getSerializableExtra("AddressBean");
+        setType = mAddressBean == null ? 0 : 1;
 
-        showLeftAndTitle("编辑地址");
+        if (setType == 1) {
+            showLeftAndTitle("编辑地址");
+        } else {
+            showLeftAndTitle("新增地址");
+        }
+
         et_name = $(R.id.et_name);
         et_phone = $(R.id.et_phone);
         et_address_dts = $(R.id.et_address_dts);
@@ -57,17 +71,23 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         mPickerCityHelp = new PickerCityHelp(context);
         mPickerCityHelp.initData();
 
-        if(mAddressBean != null){
+        if (mAddressBean != null) {
             setAddressData();
         }
+
+        mPresenter = new AddressEditPresenter(context, this);
     }
 
     private void setAddressData() {
+        province = mAddressBean.getProvince();
+        city = mAddressBean.getCity();
+        region = mAddressBean.getRegion();
+
         et_name.setText(mAddressBean.getName());
-        et_phone.setText(mAddressBean.getPhone());
-        tv_address.setText(mAddressBean.getAddress());
-        et_address_dts.setText(mAddressBean.getAddressDts());
-        isChecked = mAddressBean.isDefault();
+        et_phone.setText(mAddressBean.getMobile());
+        tv_address.setText(mAddressBean.getAddressDes());
+        et_address_dts.setText(mAddressBean.getAddress());
+        isChecked = mAddressBean.getType() == 1;
         iv_check.setImageResource(isChecked ? R.mipmap.ic_check_on : R.mipmap.ic_check_un);
     }
 
@@ -75,7 +95,16 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.view_address:
-                mPickerCityHelp.showPickerView(tv_address);
+                mPickerCityHelp.showPickerView(new PickerCityHelp.OnItemClickListener() {
+                    @Override
+                    public void onClick(String str1, String str2, String str3) {
+                        tv_address.setText(str1 + " " + str2 + " " + str3);
+
+                        province = str1;
+                        city = str2;
+                        region = str3;
+                    }
+                });
                 break;
             case R.id.view_default:
                 setChecked();
@@ -85,17 +114,28 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
                     return;
                 if (!LoginUtil.verifyPhone(et_phone.getText().toString()))
                     return;
-                if (!LoginUtil.verifyEmpty(tv_address.getText().toString(),"请选择地区"))
+                if (!LoginUtil.verifyEmpty(tv_address.getText().toString(), "请选择地区"))
                     return;
-                if (!LoginUtil.verifyEmpty(et_address_dts.getText().toString(),"请输入详细地址"))
+                if (!LoginUtil.verifyEmpty(et_address_dts.getText().toString(), "请输入详细地址"))
                     return;
 
 
-                RxBus2.getInstance().post(new AddressEditEvent());
-                showShortToast("编辑成功");
-                finish();
-
-
+                if (setType == 1) {
+                    mPresenter.addressEdit(mAddressBean.getId()
+                            , MySelfInfo.getInstance().getUserId()
+                            , et_name.getText().toString()
+                            , province, city, region
+                            , et_address_dts.getText().toString()
+                            , et_phone.getText().toString()
+                            , isChecked ? "1" : "0");
+                } else {
+                    mPresenter.addressAdd(MySelfInfo.getInstance().getUserId()
+                            , et_name.getText().toString()
+                            , province, city, region
+                            , et_address_dts.getText().toString()
+                            , et_phone.getText().toString()
+                            , isChecked ? "1" : "0");
+                }
                 //回去后刷新地址列表
 
                 break;
@@ -106,5 +146,29 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         isChecked = !isChecked;
         iv_check.setImageResource(isChecked ? R.mipmap.ic_check_on : R.mipmap.ic_check_un);
 
+    }
+
+    @Override
+    public void addressEditSuccess(EmptyModel data) {
+        RxBus2.getInstance().post(new AddressEditEvent());
+        showShortToast("提交成功");
+        finish();
+    }
+
+    @Override
+    public void addressEditFailed(String msg) {
+        showShortToast(msg);
+    }
+
+    @Override
+    public void addressAddSuccess(EmptyModel data) {
+        RxBus2.getInstance().post(new AddressEditEvent());
+        showShortToast("提交成功");
+        finish();
+    }
+
+    @Override
+    public void addressAddFailed(String msg) {
+        showShortToast(msg);
     }
 }

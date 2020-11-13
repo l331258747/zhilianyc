@@ -1,5 +1,6 @@
 package com.zlyc.www.view.security;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
@@ -7,7 +8,12 @@ import android.widget.TextView;
 import com.zlyc.www.R;
 import com.zlyc.www.adapter.my.AddressAdapter;
 import com.zlyc.www.base.BaseActivity;
-import com.zlyc.www.bean.my.AddressBean;
+import com.zlyc.www.bean.EmptyModel;
+import com.zlyc.www.bean.MySelfInfo;
+import com.zlyc.www.bean.address.AddressBean;
+import com.zlyc.www.dialog.DialogUtil;
+import com.zlyc.www.mvp.address.AddressSetContract;
+import com.zlyc.www.mvp.address.AddressSetPresenter;
 import com.zlyc.www.util.rxbus.RxBus2;
 import com.zlyc.www.util.rxbus.busEvent.AddressEditEvent;
 import com.zlyc.www.util.textdrawable.TextdrawableUtils;
@@ -20,7 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
-public class AddressSetActivity extends BaseActivity implements View.OnClickListener {
+public class AddressSetActivity extends BaseActivity implements View.OnClickListener, AddressSetContract.View {
 
     TextView tv_head, tv_name, tv_address, btn_edit, btn_submit;
     RecyclerView recyclerView;
@@ -33,11 +39,12 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
 
     TextdrawableUtils mTextdrawableUtils;
 
+    AddressSetPresenter mPresenter;
+
 
     @Override
     public int getLayoutId() {
         return R.layout.acitivty_address_set;
-
 
     }
 
@@ -61,19 +68,15 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
     public void initData() {
         mTextdrawableUtils = new TextdrawableUtils(context, "默认");
 
+        mPresenter = new AddressSetPresenter(context,this);
+        mPresenter.addressList(MySelfInfo.getInstance().getUserId());
+
         disposable = RxBus2.getInstance().toObservable(AddressEditEvent.class, new Consumer<AddressEditEvent>() {
             @Override
             public void accept(AddressEditEvent addressEditEvent) throws Exception {
-                AddressBean addressBean = new AddressBean();
-                List<AddressBean> datas = addressBean.getDatas2();
-                setDefaultView(datas);
+                mPresenter.addressList(MySelfInfo.getInstance().getUserId());
             }
         });
-
-        AddressBean addressBean = new AddressBean();
-        List<AddressBean> datas = addressBean.getDatas();
-        setDefaultView(datas);
-
     }
 
     public void setDefaultView(List<AddressBean> datas) {
@@ -121,12 +124,23 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
                 intent.putExtra("AddressBean", otherDatas.get(position));
                 startActivity(intent);
             }
+
+            @Override
+            public void onLongClick(final int position) {
+                DialogUtil.getInstance().getDefaultDialog(context, "确认删除", new DialogUtil.DialogCallBack() {
+                    @Override
+                    public void exectEvent(DialogInterface alterDialog) {
+                        mPresenter.addressDelete(MySelfInfo.getInstance().getUserId(),otherDatas.get(position).getId());
+                    }
+                }).show();
+
+            }
         });
     }
 
     public AddressBean getDefaultItem(List<AddressBean> datas) {
         for (int i = 0; i < datas.size(); i++) {
-            if (datas.get(i).isDefault()) {
+            if (datas.get(i).getType() == 1) {
                 return datas.get(i);
             }
         }
@@ -136,10 +150,31 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
     public List<AddressBean> getAddressList(List<AddressBean> datas) {
         List<AddressBean> items = new ArrayList<>();
         for (int i = 0; i < datas.size(); i++) {
-            if (!datas.get(i).isDefault()) {
+            if (datas.get(i).getType() != 1) {
                 items.add(datas.get(i));
             }
         }
         return items;
+    }
+
+    @Override
+    public void addressListSuccess(List<AddressBean> datas) {
+        setDefaultView(datas);
+    }
+
+    @Override
+    public void addressListFailed(String msg) {
+        showLongToast(msg);
+    }
+
+    @Override
+    public void addressDeleteSuccess(EmptyModel data) {
+        showLongToast("删除成功");
+        mPresenter.addressList(MySelfInfo.getInstance().getUserId());
+    }
+
+    @Override
+    public void addressDeleteFailed(String msg) {
+        showLongToast(msg);
     }
 }
