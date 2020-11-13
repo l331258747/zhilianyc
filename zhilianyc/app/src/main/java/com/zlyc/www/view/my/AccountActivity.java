@@ -1,6 +1,8 @@
 package com.zlyc.www.view.my;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -8,8 +10,10 @@ import android.widget.TextView;
 import com.zlyc.www.R;
 import com.zlyc.www.base.ActivityCollect;
 import com.zlyc.www.base.BaseActivity;
+import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.MySelfInfo;
 import com.zlyc.www.bean.login.InfoBean;
+import com.zlyc.www.dialog.EditDialog;
 import com.zlyc.www.mvp.my.AccountContract;
 import com.zlyc.www.mvp.my.AccountPresenter;
 import com.zlyc.www.util.glide.GlideUtil;
@@ -22,6 +26,8 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
     TextView tv_nickname, tv_phone, tv_recommend, btn_loginOff;
 
     AccountPresenter mPresenter;
+
+    String newNickname;
 
     @Override
     public int getLayoutId() {
@@ -54,11 +60,36 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
 
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.view_nickname:
-                showShortToast("昵称");
+                final String oldName = tv_nickname.getText().toString();
+
+                new EditDialog(context).setContent(tv_nickname.getText().toString())
+                        .setTitle("修改昵称").setSubmitListener(new EditDialog.OnItemClickListener() {
+                    @Override
+                    public void onClick(Dialog dialog,String content) {
+
+                        if(TextUtils.isEmpty(content)){
+                            showShortToast("昵称不能为空");
+                            return;
+                        }
+
+                        if(TextUtils.equals(oldName,content)){
+                            showShortToast("昵称相同");
+                            return;
+                        }
+
+                        mPresenter.resetNickname(MySelfInfo.getInstance().getUserId(),content);
+
+                        newNickname = content;
+
+                        dialog.dismiss();
+                    }
+                }).show();
+
                 break;
             case R.id.view_head:
                 showShortToast("头像");
@@ -82,6 +113,17 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void infoFailed(String msg) {
+        showShortToast(msg);
+    }
+
+    @Override
+    public void resetNicknameSuccess(EmptyModel data) {
+        showShortToast("修改成功");
+        tv_nickname.setText(newNickname);
+    }
+
+    @Override
+    public void resetNicknameFailed(String msg) {
         showShortToast(msg);
     }
 }

@@ -39,6 +39,12 @@ public interface HttpService {
             @Body RequestBody body
     );
 
+    //设置昵称
+    @POST("user/reset_nickname")
+    Observable<BaseResponse<EmptyModel>> resetNickname(
+            @Body RequestBody body
+    );
+
     //我的主页信息
     @POST("user/mine")
     Observable<BaseResponse<MineBean>> mine(
