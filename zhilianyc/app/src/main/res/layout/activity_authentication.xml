@@ -63,7 +63,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_type"
         app:layout_constraintStart_toStartOf="@+id/gl_start_120"
         app:layout_constraintTop_toTopOf="@+id/view_type"
-        tools:text="身份证" />
+        android:text="身份证" />
 
 
     <View
@@ -89,6 +89,7 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:hint="请输入真实姓名"
+        android:maxLength="8"
         app:layout_constraintBottom_toBottomOf="@+id/view_real_name"
         app:layout_constraintStart_toStartOf="@+id/gl_start_120"
         app:layout_constraintTop_toTopOf="@+id/view_real_name" />
@@ -115,6 +116,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="请输入证件号码"
+        android:maxLength="18"
+        android:inputType="number"
+        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:background="@null"
         app:layout_constraintBottom_toBottomOf="@+id/view_code"
         app:layout_constraintStart_toStartOf="@+id/gl_start_120"

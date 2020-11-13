@@ -6,16 +6,22 @@ import android.widget.TextView;
 
 import com.zlyc.www.R;
 import com.zlyc.www.base.BaseActivity;
+import com.zlyc.www.bean.EmptyModel;
+import com.zlyc.www.bean.MySelfInfo;
+import com.zlyc.www.mvp.my.AuthRealNameContract;
+import com.zlyc.www.mvp.my.AuthRealNamePresenter;
 import com.zlyc.www.util.LoginUtil;
 import com.zlyc.www.util.pickerView.PickerCityHelp;
 
-public class AuthenticationActivity extends BaseActivity {
+public class AuthenticationActivity extends BaseActivity implements AuthRealNameContract.View {
 
     EditText et_real_name,et_code;
     View view_address;
     TextView tv_address,btn_submit;
 
     PickerCityHelp mPickerCityHelp;
+
+    AuthRealNamePresenter mPresenter;
 
 
     @Override
@@ -43,8 +49,7 @@ public class AuthenticationActivity extends BaseActivity {
                 if (!LoginUtil.verifyEmpty(tv_address.getText().toString(),"请选择地区"))
                     return;
 
-                showShortToast("调用腾讯的几口，弹出一个框");
-
+                mPresenter.authRealName(MySelfInfo.getInstance().getUserId(),et_real_name.getText().toString(),et_code.getText().toString(),tv_address.getText().toString());
             }
         });
 
@@ -58,9 +63,19 @@ public class AuthenticationActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        mPresenter = new AuthRealNamePresenter(context,this);
         mPickerCityHelp = new PickerCityHelp(context);
         mPickerCityHelp.initData();
     }
 
 
+    @Override
+    public void authRealNameSuccess(EmptyModel data) {
+        showShortToast("调用腾讯的几口，弹出一个框");
+    }
+
+    @Override
+    public void authRealNameFailed(String msg) {
+
+    }
 }

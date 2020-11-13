@@ -45,6 +45,12 @@ public interface HttpService {
             @Body RequestBody body
     );
 
+    //启动 H5 人脸核身
+    @POST("user/auth_real_name")
+    Observable<BaseResponse<EmptyModel>> authRealName(
+            @Body RequestBody body
+    );
+
     //我的主页信息
     @POST("user/mine")
     Observable<BaseResponse<MineBean>> mine(

@@ -2,7 +2,6 @@ package com.zlyc.www.mvp.my;
 
 import android.content.Context;
 
-import com.zlyc.www.bean.login.MineBean;
 import com.zlyc.www.util.http.MethodApi;
 import com.zlyc.www.util.http.OnSuccessAndFaultSub;
 import com.zlyc.www.util.http.ResponseCallback;
@@ -10,34 +9,33 @@ import com.zlyc.www.util.http.ResponseCallback;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyInfoPresenter implements MyInfoContract.Presenter{
+public class RealNameStatusPresenter implements RealNameStatusContract.Presenter{
 
-    MyInfoContract.View iView;
+    RealNameStatusContract.View iView;
     Context context;
 
-    public MyInfoPresenter(Context context, MyInfoContract.View view) {
+    public RealNameStatusPresenter(Context context, RealNameStatusContract.View view) {
         this.iView = view;
         this.context = context;
     }
 
     @Override
-    public void mine(String uid) {
-        ResponseCallback listener = new ResponseCallback<MineBean>() {
+    public void realNameStatus(String uid) {
+        ResponseCallback listener = new ResponseCallback<String>() {
             @Override
-            public void onSuccess(MineBean data) {
-                iView.mineSuccess(data);
+            public void onSuccess(String data) {
+                iView.realNameStatusSuccess(data);
             }
 
             @Override
             public void onFault(String errorMsg) {
-                iView.mineFailed(errorMsg);
+                iView.realNameStatusFailed(errorMsg);
             }
         };
 
         Map<String, String> params = new HashMap<>();
         params.put("uid",uid);
 
-        MethodApi.mine(params, new OnSuccessAndFaultSub(listener, context,false));
+        MethodApi.realNameStatus(params, new OnSuccessAndFaultSub(listener, context,false));
     }
-
 }

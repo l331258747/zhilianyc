@@ -15,6 +15,8 @@ import com.zlyc.www.bean.my.MyTabBean;
 import com.zlyc.www.constant.Constant;
 import com.zlyc.www.mvp.my.MyInfoContract;
 import com.zlyc.www.mvp.my.MyInfoPresenter;
+import com.zlyc.www.mvp.my.RealNameStatusContract;
+import com.zlyc.www.mvp.my.RealNameStatusPresenter;
 import com.zlyc.www.util.ToastUtil;
 import com.zlyc.www.util.glide.GlideUtil;
 import com.zlyc.www.view.my.AccountActivity;
@@ -26,17 +28,18 @@ import java.util.List;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyFragment extends BaseFragment implements View.OnClickListener, MyInfoContract.View {
+public class MyFragment extends BaseFragment implements View.OnClickListener, MyInfoContract.View, RealNameStatusContract.View {
 
     RecyclerView recyclerView;
     MyTabAdapter mAdapter;
     List<MyTabBean> datas;
 
     ImageView iv_head;
-    TextView tv_name, tv_UID, tv_data_all_num, tv_data_today_num, tv_data_use_num, tv_data_contribution_num, tv_data_labour_num,tv_region,tv_authentication;
+    TextView tv_name, tv_UID, tv_data_all_num, tv_data_today_num, tv_data_use_num, tv_data_contribution_num, tv_data_labour_num, tv_region, tv_authentication;
     View view_title;
 
     MyInfoPresenter mPresenter;
+    RealNameStatusPresenter rnsPresenter;
 
     @Override
     public int getLayoutId() {
@@ -70,6 +73,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
     public void initData() {
         mPresenter = new MyInfoPresenter(context, this);
         mPresenter.mine(MySelfInfo.getInstance().getUserId());
+        rnsPresenter = new RealNameStatusPresenter(context, this);
+        rnsPresenter.realNameStatus(MySelfInfo.getInstance().getUserId());
     }
 
     //初始化recyclerview
@@ -130,7 +135,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
         tv_data_contribution_num.setText(data.getContribution() + "");
         tv_data_labour_num.setText(data.getLabor() + "");
 
-        if(!TextUtils.isEmpty(data.getCityPartnerName())){
+        if (!TextUtils.isEmpty(data.getCityPartnerName())) {
             tv_region.setText(data.getCityPartnerName());
         }
 
@@ -143,13 +148,21 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
 
     @Override
     public void realNameStatusSuccess(String data) {
-        tv_region.setVisibility(View.VISIBLE);
-        if(TextUtils.equals(data,"1")){
-            tv_region.setText("已认证");
-            tv_region.setBackgroundResource(R.drawable.btn_61b53f_r1);
-        }else{
-            tv_region.setText("未认证");
-            tv_region.setBackgroundResource(R.drawable.btn_red_r1);
+        tv_authentication.setVisibility(View.VISIBLE);
+        //0 审核不通过 1 已实名 2 审核中 3 未认证
+
+        if (TextUtils.equals(data, "1")) {
+            tv_authentication.setText("已认证");
+            tv_authentication.setBackgroundResource(R.drawable.btn_61b53f_r1);
+        } else if (TextUtils.equals(data, "2")) {
+            tv_authentication.setText("审核中");
+            tv_authentication.setBackgroundResource(R.drawable.btn_61b53f_r1);
+        } else if (TextUtils.equals(data, "0")) {
+            tv_authentication.setText("审核不通过");
+            tv_authentication.setBackgroundResource(R.drawable.btn_red_r1);
+        } else {
+            tv_authentication.setText("未认证");
+            tv_authentication.setBackgroundResource(R.drawable.btn_red_r1);
         }
     }
 
