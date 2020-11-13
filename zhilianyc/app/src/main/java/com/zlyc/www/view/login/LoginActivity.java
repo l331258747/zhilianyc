@@ -19,7 +19,8 @@ import com.zlyc.www.util.AppUtils;
 import com.zlyc.www.util.LoginUtil;
 import com.zlyc.www.util.StatusBarUtil;
 import com.zlyc.www.util.StringUtils;
-import com.zlyc.www.util.ToastUtil;
+import com.zlyc.www.util.rxbus.RxBus2;
+import com.zlyc.www.util.rxbus.busEvent.SetLoginMobileEvent;
 import com.zlyc.www.view.home.HomeActivity;
 
 import java.util.concurrent.TimeUnit;
@@ -50,6 +51,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     boolean isCheck;
 
     LoginPresenter mPresenter;
+
+    Disposable setMobileDisposable;
 
     @Override
     public int getLayoutId() {
@@ -120,6 +123,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             startActivity(new Intent(context, HomeActivity.class));
             finish();
         }
+
+        setMobileDisposable = RxBus2.getInstance().toObservable(SetLoginMobileEvent.class, new Consumer<SetLoginMobileEvent>() {
+            @Override
+            public void accept(SetLoginMobileEvent setLoginMobileEvent) throws Exception {
+                et_phone.setText(setLoginMobileEvent.getMobile());
+                et_password.setText("");
+            }
+        });
     }
 
     @Override
@@ -132,26 +143,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 setTab(false);
                 break;
             case R.id.btn_login:
-                //判断账号密码    请求
                 if (!LoginUtil.verifyPhone(et_phone.getText().toString()))
                     return;
                 if (!LoginUtil.verifyPassword(et_password.getText().toString()))
                     return;
-                //请求
 
                 mPresenter.login(et_phone.getText().toString(), et_password.getText().toString());
 
                 break;
             case R.id.btn_forget:
-                ToastUtil.showShortToast(context, "忘记密码");
-                //把手机号码带入
+                intent = new Intent(context,ForgetActivity.class);
+                intent.putExtra("mobile",et_phone.getText().toString());
+                startActivity(intent);
                 break;
-
             case R.id.tv_verify_code_rgt:
                 verifyEvent();
                 break;
             case R.id.btn_register:
-                //判断账号密码    请求
                 if (!LoginUtil.verifyPhone(et_phone_rgt.getText().toString()))
                     return;
                 if (!LoginUtil.verifyVerify(et_verify_rgt.getText().toString()))
@@ -289,6 +297,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         super.onDestroy();
         if (disposable != null && !disposable.isDisposed())
             disposable.dispose();
+        if (setMobileDisposable != null && !setMobileDisposable.isDisposed())
+            setMobileDisposable.dispose();
     }
 
 }

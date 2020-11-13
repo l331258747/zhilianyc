@@ -56,6 +56,11 @@ public interface HttpService {
     Observable<BaseResponse<EmptyModel>> register(
             @Body RequestBody body
     );
+    //忘记密码
+    @POST("user/forget_password")
+    Observable<BaseResponse<EmptyModel>> forgetPwd(
+            @Body RequestBody body
+    );
 
     //修改密码
     @POST("user/reset_password")

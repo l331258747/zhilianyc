@@ -58,6 +58,9 @@
         <activity
             android:name=".view.security.AddressSetActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.login.ForgetActivity"
+            android:windowSoftInputMode="adjustPan" />
 
     </application>
 
