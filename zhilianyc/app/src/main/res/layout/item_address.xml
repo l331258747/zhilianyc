@@ -52,6 +52,18 @@
         android:layout_marginTop="@dimen/dp_20"/>
 
     <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+        tools:text="1321251261"
+        android:textColor="@color/color_99"
+        android:layout_marginStart="@dimen/dp_10"
+        />
+
+    <TextView
         android:id="@+id/tv_address"
         android:layout_width="0dp"
         app:layout_constraintEnd_toStartOf="@+id/btn_edit"

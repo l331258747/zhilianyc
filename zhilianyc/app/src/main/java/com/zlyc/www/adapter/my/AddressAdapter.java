@@ -40,6 +40,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
 
         holder.tv_head.setText(data.getNameHead());
         holder.tv_name.setText(data.getName());
+        holder.tv_phone.setText(data.getMobile());
         holder.tv_address.setText(data.getAddressAll());
 
         if (mOnItemClickListener != null) {
@@ -71,7 +72,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_head,tv_name,tv_address,btn_edit;
+        TextView tv_head,tv_name,tv_address,btn_edit,tv_phone;
         ConstraintLayout cl_parent;
 
         public ViewHolder(@NonNull View itemView) {
@@ -82,6 +83,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             tv_address = itemView.findViewById(R.id.tv_address);
             btn_edit = itemView.findViewById(R.id.btn_edit);
             cl_parent = itemView.findViewById(R.id.cl_parent);
+            tv_phone = itemView.findViewById(R.id.tv_phone);
         }
     }
 

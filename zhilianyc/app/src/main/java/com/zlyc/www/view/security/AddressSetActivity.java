@@ -28,7 +28,7 @@ import io.reactivex.functions.Consumer;
 
 public class AddressSetActivity extends BaseActivity implements View.OnClickListener, AddressSetContract.View {
 
-    TextView tv_head, tv_name, tv_address, btn_edit, btn_submit;
+    TextView tv_head, tv_name, tv_address, btn_edit, btn_submit,tv_phone;
     RecyclerView recyclerView;
 
     AddressAdapter mAdapter;
@@ -54,6 +54,7 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
 
         tv_head = $(R.id.tv_head);
         tv_name = $(R.id.tv_name);
+        tv_phone = $(R.id.tv_phone);
         tv_address = $(R.id.tv_address);
         btn_edit = $(R.id.btn_edit);
         btn_submit = $(R.id.btn_submit);
@@ -87,6 +88,7 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
         if (defaultData != null) {//默认图标
             tv_head.setText(defaultData.getNameHead());
             tv_name.setText(defaultData.getName());
+            tv_phone.setText(defaultData.getMobile());
             tv_address.setText(defaultData.getAddressAll());
             mTextdrawableUtils.setTextStyle(defaultData.getAddressAll(), tv_address); //添加一个标签
         }
