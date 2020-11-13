@@ -5,6 +5,7 @@ import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.login.InfoBean;
 import com.zlyc.www.bean.login.LoginBean;
 import com.zlyc.www.bean.login.MineBean;
+import com.zlyc.www.bean.login.VerifyImageBean;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -54,6 +55,18 @@ public interface HttpService {
     //修改密码
     @POST("user/reset_password")
     Observable<BaseResponse<EmptyModel>> resetPwd(
+            @Body RequestBody body
+    );
+
+    //校验滑图确认信息
+    @POST("user/verify_image_confirm")
+    Observable<BaseResponse<EmptyModel>> verifyImageConfirm(
+            @Body RequestBody body
+    );
+
+    //生成图片滑块
+    @POST("user/verify_image")
+    Observable<BaseResponse<VerifyImageBean>> verifyImage(
             @Body RequestBody body
     );
 
