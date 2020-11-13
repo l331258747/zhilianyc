@@ -51,6 +51,11 @@ public interface HttpService {
     Observable<BaseResponse<LoginBean>> login(
             @Body RequestBody body
     );
+    //注册
+    @POST("user/register")
+    Observable<BaseResponse<EmptyModel>> register(
+            @Body RequestBody body
+    );
 
     //修改密码
     @POST("user/reset_password")

@@ -64,9 +64,9 @@ public class CapitalSetActivity extends BaseActivity implements View.OnClickList
                     return;
                 if (!LoginUtil.verifyPassword(et_pwd2.getText().toString()))
                     return;
-                if (!LoginUtil.verifyVerify(et_verify.getText().toString()))
-                    return;
                 if (!LoginUtil.verifyPasswordDouble(et_pwd.getText().toString(), et_pwd2.getText().toString()))
+                    return;
+                if (!LoginUtil.verifyVerify(et_verify.getText().toString()))
                     return;
 
                 mPresenter.payPwd(et_pwd.getText().toString(),et_verify.getText().toString());

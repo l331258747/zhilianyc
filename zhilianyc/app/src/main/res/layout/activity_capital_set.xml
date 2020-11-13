@@ -38,6 +38,7 @@
         android:layout_height="@dimen/dp_50"
         android:background="@color/white"
         android:hint="请输入验证码"
+        android:inputType="number"
         android:maxLines="1"
         android:layout_marginTop="@dimen/dp_10"
         android:paddingStart="@dimen/dp_15"
