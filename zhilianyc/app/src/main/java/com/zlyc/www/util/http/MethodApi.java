@@ -100,6 +100,15 @@ public class MethodApi {
     }
     //--------------------address end
 
+
+    //--------------------controller start
+    public static void getHotGoods(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().getHotGoods(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+
+    //--------------------controller end
+
     private static RequestBody getRequestBody(Map<String, String> params){
         RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"),
                 new JSONObject(params).toString());

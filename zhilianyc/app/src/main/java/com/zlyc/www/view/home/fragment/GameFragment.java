@@ -8,7 +8,7 @@ public class GameFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_game;
+        return R.layout.fragment_shop;
     }
 
     @Override

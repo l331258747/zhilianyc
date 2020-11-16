@@ -132,6 +132,14 @@
         app:layout_constraintStart_toEndOf="@+id/iv_pwd"
         app:layout_constraintTop_toTopOf="@+id/view_pwd" />
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/color_f0f0f0"
+        app:layout_constraintBottom_toBottomOf="@+id/et_pwd"
+        app:layout_constraintEnd_toEndOf="@+id/et_pwd"
+        app:layout_constraintStart_toStartOf="@+id/iv_pwd" />
+
 
     <TextView
         android:id="@+id/btn_submit"

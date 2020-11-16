@@ -34,9 +34,14 @@
 <!--    文字颜色-->
     <color name="color_368feb">#368FEB</color>
     <color name="color_f0f0f0">#f0f0f0</color>
+    <color name="color_FF4751">#FF4751</color>
 
 <!--    背景色-->
     <color name="color_cc">#cccccc</color>
     <color name="color_61B53F">#61B53F</color>
+
+<!--    阴影-->
+    <color name="color_1139638F">#1139638F</color>
+
 
 </resources>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/dp_10"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:background="@drawable/bg_card_shadow"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/view_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginEnd="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_5"/>
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_160"
+        app:layout_constraintEnd_toEndOf="@+id/view_card"
+        app:layout_constraintStart_toStartOf="@+id/view_card"
+        app:layout_constraintTop_toTopOf="@+id/view_card"
+        tools:src="@mipmap/ic_banner" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="@+id/view_card"
+        app:layout_constraintStart_toStartOf="@+id/view_card"
+        app:layout_constraintTop_toBottomOf="@+id/iv_img"
+        tools:text="懒得砍放懒得砍放酒柜懒得砍放酒柜" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="115"
+        android:textColor="@color/color_FF4751"
+        android:layout_marginStart="@dimen/dp_10"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/view_card"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_5"
+        android:text="京豆"
+        android:textColor="@color/color_99"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_price"
+        app:layout_constraintStart_toEndOf="@+id/tv_price" />
+
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_99"
+        android:layout_marginEnd="@dimen/dp_10"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_price"
+        app:layout_constraintEnd_toEndOf="@+id/view_card"
+        tools:text="剩余6" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_15"
+        app:layout_constraintTop_toBottomOf="@+id/tv_price"
+        app:layout_constraintStart_toStartOf="@+id/view_card"
+        app:layout_constraintBottom_toBottomOf="@+id/view_card"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

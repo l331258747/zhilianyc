@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:overScrollMode="never"
+    android:scrollbars="none">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_180"
+            android:src="@mipmap/ic_banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_tab"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_80"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_160"
+            android:layout_marginEnd="@dimen/dp_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/tab_electrical"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_tab"
+            app:layout_constraintEnd_toStartOf="@+id/tab_hot"
+            app:layout_constraintStart_toStartOf="@+id/view_tab"
+            app:layout_constraintTop_toTopOf="@+id/view_tab" />
+
+        <ImageView
+            android:id="@+id/iv_electrical"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:src="@mipmap/ic_shop_electrical"
+            app:layout_constraintEnd_toEndOf="@+id/tab_electrical"
+            app:layout_constraintStart_toStartOf="@+id/tab_electrical"
+            app:layout_constraintTop_toTopOf="@+id/tab_electrical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="家用电器"
+            app:layout_constraintEnd_toEndOf="@+id/iv_electrical"
+            app:layout_constraintStart_toStartOf="@+id/iv_electrical"
+            app:layout_constraintTop_toBottomOf="@+id/iv_electrical" />
+
+        <View
+            android:id="@+id/tab_hot"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_tab"
+            app:layout_constraintEnd_toStartOf="@+id/tab_studio"
+            app:layout_constraintStart_toEndOf="@+id/tab_electrical"
+            app:layout_constraintTop_toTopOf="@+id/view_tab" />
+
+        <ImageView
+            android:id="@+id/iv_hot"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:src="@mipmap/ic_shop_hot"
+            app:layout_constraintEnd_toEndOf="@+id/tab_hot"
+            app:layout_constraintStart_toStartOf="@+id/tab_hot"
+            app:layout_constraintTop_toTopOf="@+id/tab_hot" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="热门"
+            app:layout_constraintEnd_toEndOf="@+id/iv_hot"
+            app:layout_constraintStart_toStartOf="@+id/iv_hot"
+            app:layout_constraintTop_toBottomOf="@+id/iv_hot" />
+
+        <View
+            android:id="@+id/tab_studio"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_tab"
+            app:layout_constraintEnd_toStartOf="@+id/tab_foot"
+            app:layout_constraintStart_toEndOf="@+id/tab_hot"
+            app:layout_constraintTop_toTopOf="@+id/view_tab" />
+
+        <ImageView
+            android:id="@+id/iv_studio"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:src="@mipmap/ic_shop_studio"
+            app:layout_constraintEnd_toEndOf="@+id/tab_studio"
+            app:layout_constraintStart_toStartOf="@+id/tab_studio"
+            app:layout_constraintTop_toTopOf="@+id/tab_studio" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="学习"
+            app:layout_constraintEnd_toEndOf="@+id/iv_studio"
+            app:layout_constraintStart_toStartOf="@+id/iv_studio"
+            app:layout_constraintTop_toBottomOf="@+id/iv_studio" />
+
+
+        <View
+            android:id="@+id/tab_foot"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_tab"
+            app:layout_constraintEnd_toStartOf="@+id/tab_life"
+            app:layout_constraintStart_toEndOf="@+id/tab_studio"
+            app:layout_constraintTop_toTopOf="@+id/view_tab" />
+
+        <ImageView
+            android:id="@+id/iv_foot"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:src="@mipmap/ic_shop_foot"
+            app:layout_constraintEnd_toEndOf="@+id/tab_foot"
+            app:layout_constraintStart_toStartOf="@+id/tab_foot"
+            app:layout_constraintTop_toTopOf="@+id/tab_foot" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="学习"
+            app:layout_constraintEnd_toEndOf="@+id/iv_foot"
+            app:layout_constraintStart_toStartOf="@+id/iv_foot"
+            app:layout_constraintTop_toBottomOf="@+id/iv_foot" />
+
+        <View
+            android:id="@+id/tab_life"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_tab"
+            app:layout_constraintEnd_toEndOf="@+id/view_tab"
+            app:layout_constraintStart_toEndOf="@+id/tab_foot"
+            app:layout_constraintTop_toTopOf="@+id/view_tab" />
+
+        <ImageView
+            android:id="@+id/iv_life"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:src="@mipmap/ic_shop_life"
+            app:layout_constraintEnd_toEndOf="@+id/tab_life"
+            app:layout_constraintStart_toStartOf="@+id/tab_life"
+            app:layout_constraintTop_toTopOf="@+id/tab_life" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="学习"
+            app:layout_constraintEnd_toEndOf="@+id/iv_life"
+            app:layout_constraintStart_toStartOf="@+id/iv_life"
+            app:layout_constraintTop_toBottomOf="@+id/iv_life" />
+
+
+        <!--    热门商品-->
+
+        <TextView
+            android:id="@+id/tv_hot_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_40"
+            android:text="热门商品"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_tab" />
+
+        <View
+            android:id="@+id/line_hot_shop"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginStart="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:background="@color/color_ededed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hot_shop" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_5"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_hot_shop" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
