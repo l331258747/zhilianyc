@@ -1,6 +1,7 @@
 package com.zlyc.www.view.home.fragment;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 
 import com.zlyc.www.R;
@@ -22,6 +23,7 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View 
     View tab_electrical,tab_hot,tab_studio,tab_foot,tab_life;
     ScrollView scrollView;
     RecyclerView recyclerView;
+    ImageView iv_floating;
 
     HotGoodsAdapter mAdapter;
     List<HotGoodsBean> datas;
@@ -41,6 +43,7 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View 
         tab_studio = $(R.id.tab_studio);
         tab_foot = $(R.id.tab_foot);
         tab_life = $(R.id.tab_life);
+        iv_floating = $(R.id.iv_floating);
 
         initRecycler();
     }
