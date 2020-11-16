@@ -3,6 +3,7 @@ package com.zlyc.www.util.http;
 import com.zlyc.www.bean.BaseResponse;
 import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.address.AddressBean;
+import com.zlyc.www.bean.controller.GoodsDetailsBean;
 import com.zlyc.www.bean.controller.HotGoodsBean;
 import com.zlyc.www.bean.login.InfoBean;
 import com.zlyc.www.bean.login.LoginBean;
@@ -141,9 +142,15 @@ public interface HttpService {
     //--------------------address end
 
     //--------------------controller end
-    //删除我的收货地址
+    //获取热门商品
     @POST("shop/hot_goods")
     Observable<BaseResponse<List<HotGoodsBean>>> getHotGoods(
+            @Body RequestBody body
+    );
+
+    //查询商品详情
+    @POST("shop/goods_detail")
+    Observable<BaseResponse<GoodsDetailsBean>> getGoodsDetails(
             @Body RequestBody body
     );
     //--------------------controller end

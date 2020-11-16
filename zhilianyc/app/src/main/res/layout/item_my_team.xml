@@ -10,7 +10,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="@dimen/sp_20"
-        android:background="@drawable/bg_gradients_btn_yellow"
+        android:background="@drawable/bg_gradients_btn_fbae17"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tv_post"
         app:layout_constraintStart_toStartOf="parent"

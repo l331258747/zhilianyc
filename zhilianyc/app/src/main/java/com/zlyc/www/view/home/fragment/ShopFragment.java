@@ -1,5 +1,6 @@
 package com.zlyc.www.view.home.fragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -10,6 +11,7 @@ import com.zlyc.www.base.BaseFragment;
 import com.zlyc.www.bean.controller.HotGoodsBean;
 import com.zlyc.www.mvp.controller.HotGoodsContract;
 import com.zlyc.www.mvp.controller.HotGoodsPresenter;
+import com.zlyc.www.view.controller.GoodsDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,17 +65,21 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View 
         recyclerView.setAdapter(mAdapter);
         recyclerView.setNestedScrollingEnabled(false);
 
-//        mAdapter.setOnItemClickListener(new HotGoodsAdapter.OnItemClickListener() {
-//            @Override
-//            public void onClick(int position) {
-//                HotGoodsBean item = datas.get(position);
-//
-//            }
-//        });
+        mAdapter.setOnItemClickListener(new HotGoodsAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                HotGoodsBean item = datas.get(position);
+
+                Intent intent = new Intent(context, GoodsDetailsActivity.class);
+                intent.putExtra("id",item.getGoodsId());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public void getHotGoodsSuccess(List<HotGoodsBean> data) {
+        this.datas = data;
         mAdapter.setData(data);
     }
 

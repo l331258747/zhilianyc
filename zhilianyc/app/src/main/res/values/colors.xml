@@ -27,6 +27,7 @@
     <color name="color_69B3FF">#69B3FF</color>
     <color name="color_FBAE17">#FBAE17</color>
     <color name="color_F7C03F">#F7C03F</color>
+    <color name="color_FF666E">#FF666E</color>
 
 <!--    分割线-->
     <color name="color_ededed">#ededed</color>
@@ -42,6 +43,7 @@
 
 <!--    阴影-->
     <color name="color_1139638F">#1139638F</color>
+
 
 
 </resources>
