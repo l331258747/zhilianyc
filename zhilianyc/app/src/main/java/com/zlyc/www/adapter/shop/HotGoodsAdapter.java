@@ -1,4 +1,4 @@
-package com.zlyc.www.adapter.controller;
+package com.zlyc.www.adapter.shop;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zlyc.www.R;
-import com.zlyc.www.bean.controller.HotGoodsBean;
+import com.zlyc.www.bean.shop.HotGoodsBean;
 import com.zlyc.www.util.glide.GlideUtil;
 
 import java.util.List;

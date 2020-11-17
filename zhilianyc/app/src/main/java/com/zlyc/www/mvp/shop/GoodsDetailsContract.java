@@ -1,6 +1,6 @@
-package com.zlyc.www.mvp.controller;
+package com.zlyc.www.mvp.shop;
 
-import com.zlyc.www.bean.controller.GoodsDetailsBean;
+import com.zlyc.www.bean.shop.GoodsDetailsBean;
 
 public interface GoodsDetailsContract {
 

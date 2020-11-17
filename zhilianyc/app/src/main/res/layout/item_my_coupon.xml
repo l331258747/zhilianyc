@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_start_15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/dp_15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_end_15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/dp_15" />
+
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_15"
+        android:src="@mipmap/ic_coupon_xian"
+        app:layout_constraintStart_toStartOf="@id/gl_start_15"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="区县仓储"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintTop_toTopOf="@id/iv_img"
+        app:layout_constraintBottom_toBottomOf="@id/iv_img"
+        app:layout_constraintStart_toEndOf="@+id/iv_img"
+        android:layout_marginStart="@dimen/dp_10"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_totalCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/gl_end_15"
+        app:layout_constraintTop_toTopOf="@+id/iv_img"
+        app:layout_constraintBottom_toBottomOf="@id/iv_img"
+        android:textColor="@color/color_99"
+        android:textSize="@dimen/sp_12"
+        android:text="总产量120京豆"/>
+
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_99"
+        app:layout_constraintTop_toBottomOf="@+id/iv_img"
+        android:layout_marginTop="@dimen/dp_20"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toStartOf="@id/gl_start_15"
+        android:text="产出值"/>
+
+    <TextView
+        android:id="@+id/tv_dailyRelease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_1"
+        android:layout_marginTop="@dimen/dp_20"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toEndOf="@id/tv_1"
+        android:layout_marginStart="@dimen/dp_10"
+        tools:text="3.0京豆/天"/>
+
+    <TextView
+        android:id="@+id/tv_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_99"
+        app:layout_constraintTop_toBottomOf="@+id/tv_1"
+        android:layout_marginTop="@dimen/dp_15"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toStartOf="@id/gl_start_15"
+        android:text="劳动力"/>
+
+    <TextView
+        android:id="@+id/tv_labor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_2"
+        android:layout_marginTop="@dimen/dp_20"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toEndOf="@id/tv_2"
+        android:layout_marginStart="@dimen/dp_10"
+        tools:text="+10.0"/>
+
+    <TextView
+        android:id="@+id/tv_remainDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="剩余40天"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/color_368feb"
+        app:layout_constraintEnd_toEndOf="@id/gl_end_15"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_2"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_15"
+        app:layout_constraintTop_toBottomOf="@+id/tv_2"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -62,7 +62,7 @@
             android:name=".view.login.ForgetActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".view.controller.GoodsDetailsActivity"
+            android:name=".view.shop.GoodsDetailsActivity"
             android:windowSoftInputMode="adjustPan" />
 
     </application>

@@ -1,4 +1,4 @@
-package com.zlyc.www.bean.controller;
+package com.zlyc.www.bean.shop;
 
 import com.zlyc.www.util.StringUtils;
 

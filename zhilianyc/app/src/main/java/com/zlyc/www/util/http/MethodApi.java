@@ -101,7 +101,7 @@ public class MethodApi {
     //--------------------address end
 
 
-    //--------------------controller start
+    //--------------------shop start
     public static void getHotGoods(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().getHotGoods(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -111,7 +111,23 @@ public class MethodApi {
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
 
-    //--------------------controller end
+    //--------------------shop end
+
+    //--------------------coupon end
+    public static void getMyCoupon(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().getMyCoupon(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    public static void getShopCoupon(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().getShopCoupon(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    public static void buyShopCoupon(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().buyShopCoupon(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+
+    //--------------------coupon end
 
     private static RequestBody getRequestBody(Map<String, String> params){
         RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"),

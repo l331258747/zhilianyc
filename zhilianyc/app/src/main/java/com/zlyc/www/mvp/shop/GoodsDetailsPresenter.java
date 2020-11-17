@@ -1,8 +1,8 @@
-package com.zlyc.www.mvp.controller;
+package com.zlyc.www.mvp.shop;
 
 import android.content.Context;
 
-import com.zlyc.www.bean.controller.GoodsDetailsBean;
+import com.zlyc.www.bean.shop.GoodsDetailsBean;
 import com.zlyc.www.util.http.MethodApi;
 import com.zlyc.www.util.http.OnSuccessAndFaultSub;
 import com.zlyc.www.util.http.ResponseCallback;

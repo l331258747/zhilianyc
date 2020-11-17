@@ -6,12 +6,12 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 
 import com.zlyc.www.R;
-import com.zlyc.www.adapter.controller.HotGoodsAdapter;
+import com.zlyc.www.adapter.shop.HotGoodsAdapter;
 import com.zlyc.www.base.BaseFragment;
-import com.zlyc.www.bean.controller.HotGoodsBean;
-import com.zlyc.www.mvp.controller.HotGoodsContract;
-import com.zlyc.www.mvp.controller.HotGoodsPresenter;
-import com.zlyc.www.view.controller.GoodsDetailsActivity;
+import com.zlyc.www.bean.shop.HotGoodsBean;
+import com.zlyc.www.mvp.shop.HotGoodsContract;
+import com.zlyc.www.mvp.shop.HotGoodsPresenter;
+import com.zlyc.www.view.shop.GoodsDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;

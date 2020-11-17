@@ -3,12 +3,14 @@ package com.zlyc.www.util.http;
 import com.zlyc.www.bean.BaseResponse;
 import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.address.AddressBean;
-import com.zlyc.www.bean.controller.GoodsDetailsBean;
-import com.zlyc.www.bean.controller.HotGoodsBean;
+import com.zlyc.www.bean.coupon.MyCouponBean;
+import com.zlyc.www.bean.coupon.ShopCouponBean;
 import com.zlyc.www.bean.login.InfoBean;
 import com.zlyc.www.bean.login.LoginBean;
 import com.zlyc.www.bean.login.MineBean;
 import com.zlyc.www.bean.login.VerifyImageBean;
+import com.zlyc.www.bean.shop.GoodsDetailsBean;
+import com.zlyc.www.bean.shop.HotGoodsBean;
 
 import java.util.List;
 
@@ -141,7 +143,7 @@ public interface HttpService {
 
     //--------------------address end
 
-    //--------------------controller end
+    //--------------------shop start
     //获取热门商品
     @POST("shop/hot_goods")
     Observable<BaseResponse<List<HotGoodsBean>>> getHotGoods(
@@ -153,7 +155,31 @@ public interface HttpService {
     Observable<BaseResponse<GoodsDetailsBean>> getGoodsDetails(
             @Body RequestBody body
     );
-    //--------------------controller end
+    //--------------------shop end
+
+
+    //--------------------coupon start
+    //我的仓储列表
+    @POST("coupon/mine")
+    Observable<BaseResponse<MyCouponBean>> getMyCoupon(
+            @Body RequestBody body
+    );
+
+    //仓储商城
+    @POST("coupon/shop")
+    Observable<BaseResponse<List<ShopCouponBean>>> getShopCoupon(
+            @Body RequestBody body
+    );
+
+    //够买仓储
+    @POST("coupon/buy")
+    Observable<BaseResponse<EmptyModel>> buyShopCoupon(
+            @Body RequestBody body
+    );
+
+    //--------------------coupon end
+
+
 
 
 }

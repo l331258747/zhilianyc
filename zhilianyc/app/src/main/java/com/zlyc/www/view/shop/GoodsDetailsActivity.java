@@ -1,4 +1,4 @@
-package com.zlyc.www.view.controller;
+package com.zlyc.www.view.shop;
 
 import android.text.TextUtils;
 import android.view.View;
@@ -8,9 +8,9 @@ import android.widget.TextView;
 import com.zlyc.www.R;
 import com.zlyc.www.base.BaseActivity;
 import com.zlyc.www.bean.MySelfInfo;
-import com.zlyc.www.bean.controller.GoodsDetailsBean;
-import com.zlyc.www.mvp.controller.GoodsDetailsContract;
-import com.zlyc.www.mvp.controller.GoodsDetailsPresenter;
+import com.zlyc.www.bean.shop.GoodsDetailsBean;
+import com.zlyc.www.mvp.shop.GoodsDetailsContract;
+import com.zlyc.www.mvp.shop.GoodsDetailsPresenter;
 import com.zlyc.www.util.StringUtils;
 import com.zlyc.www.util.glide.GlideUtil;
 import com.zlyc.www.util.webview.LWebView;

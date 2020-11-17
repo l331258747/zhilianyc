@@ -1,6 +1,6 @@
-package com.zlyc.www.mvp.controller;
+package com.zlyc.www.mvp.shop;
 
-import com.zlyc.www.bean.controller.HotGoodsBean;
+import com.zlyc.www.bean.shop.HotGoodsBean;
 
 import java.util.List;
 
