@@ -8,7 +8,7 @@ import com.zlyc.www.base.BaseFragment;
 import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.MySelfInfo;
 import com.zlyc.www.bean.coupon.ShopCouponBean;
-import com.zlyc.www.dialog.DialogUtil;
+import com.zlyc.www.dialog.TextDialog;
 import com.zlyc.www.mvp.coupon.ShopCouponContract;
 import com.zlyc.www.mvp.coupon.ShopCouponPresenter;
 import com.zlyc.www.util.rxbus.RxBus2;
@@ -71,10 +71,12 @@ public class ShopCouponFragment extends BaseFragment implements ShopCouponContra
         mAdapter = new ShopCouponAdapter(activity, new ArrayList<>());
         recyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(position -> DialogUtil.getInstance().getDefaultDialog(context, "是否确认兑换？", alterDialog -> {
-            ShopCouponBean item = datas.get(position);
-            mPresenter.buyShopCoupon(MySelfInfo.getInstance().getUserId(),item.getType());
-        }).show());
+        mAdapter.setOnItemClickListener(position -> {
+            new TextDialog(context).setTitle("兑换").setContent("确认兑换吗？").setSubmitListener(v -> {
+                ShopCouponBean item = datas.get(position);
+                mPresenter.buyShopCoupon(MySelfInfo.getInstance().getUserId(),item.getType());
+            }).show();
+        });
     }
 
     @Override

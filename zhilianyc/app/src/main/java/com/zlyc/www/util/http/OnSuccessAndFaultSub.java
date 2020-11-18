@@ -2,7 +2,6 @@ package com.zlyc.www.util.http;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
@@ -122,13 +121,10 @@ public class OnSuccessAndFaultSub extends DisposableObserver<BaseResponse> imple
 
             if(t.getCode() == 401){
                 MySelfInfo.getInstance().loginOff();
-                DialogUtil.getInstance().getDefaultDialog(context, t.getMsg(), "去登录", new DialogUtil.DialogCallBack() {
-                    @Override
-                    public void exectEvent(DialogInterface alterDialog) {
-                        Intent intent = new Intent(new Intent(context, LoginActivity.class));
-                        intent.putExtra("LOGIN_PHONE",phone);
-                        context.startActivity(intent);
-                    }
+                DialogUtil.getInstance().getDefaultDialog(context, t.getMsg(), "去登录", alterDialog -> {
+                    Intent intent = new Intent(new Intent(context, LoginActivity.class));
+                    intent.putExtra("LOGIN_PHONE",phone);
+                    context.startActivity(intent);
                 }).show();
             }
         }
