@@ -87,30 +87,27 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
         mAdapter = new MyTabAdapter(context, datas);
         recyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new MyTabAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(int position) {
-                MyTabBean item = datas.get(position);
-                switch (item.getId()) {
-                    case Constant.MY_TAB_TEAM:
-                        startActivity(new Intent(context, MyTeamActivity.class));
-                        break;
-                    case Constant.MY_TAB_SECURITY:
-                        startActivity(new Intent(context, SecurityActivity.class));
-                        break;
-                    case Constant.MY_TAB_ORDER:
-                    case Constant.MY_TAB_TRANSACTION_DTS:
-                    case Constant.MY_TAB_INVITAT:
-                    case Constant.MY_TAB_STUDIO:
-                    case Constant.MY_TAB_NOTIFY:
-                    case Constant.MY_TAB_CHANGE:
-                    case Constant.MY_TAB_CLOUD:
-                    case Constant.MY_TAB_SHOP:
-                    case Constant.MY_TAB_RED_PACKAGE:
-                    case Constant.MY_TAB_TASK:
-                        ToastUtil.showShortToast(context, item.getName());
-                        break;
-                }
+        mAdapter.setOnItemClickListener(position -> {
+            MyTabBean item = datas.get(position);
+            switch (item.getId()) {
+                case Constant.MY_TAB_TEAM:
+                    startActivity(new Intent(context, MyTeamActivity.class));
+                    break;
+                case Constant.MY_TAB_SECURITY:
+                    startActivity(new Intent(context, SecurityActivity.class));
+                    break;
+                case Constant.MY_TAB_ORDER:
+                case Constant.MY_TAB_TRANSACTION_DTS:
+                case Constant.MY_TAB_INVITAT:
+                case Constant.MY_TAB_STUDIO:
+                case Constant.MY_TAB_NOTIFY:
+                case Constant.MY_TAB_CHANGE:
+                case Constant.MY_TAB_CLOUD:
+                case Constant.MY_TAB_SHOP:
+                case Constant.MY_TAB_RED_PACKAGE:
+                case Constant.MY_TAB_TASK:
+                    ToastUtil.showShortToast(context, item.getName());
+                    break;
             }
         });
     }

@@ -3,7 +3,6 @@ package com.zlyc.www.view.home.fragment;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 
 import com.zlyc.www.R;
 import com.zlyc.www.adapter.shop.HotGoodsAdapter;
@@ -23,7 +22,6 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View 
 
 
     View tab_electrical,tab_hot,tab_studio,tab_foot,tab_life;
-    ScrollView scrollView;
     RecyclerView recyclerView;
     ImageView iv_floating;
 
@@ -61,19 +59,16 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View 
         recyclerView = $(R.id.recycler_view);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
-        mAdapter = new HotGoodsAdapter(context, new ArrayList<HotGoodsBean>());
+        mAdapter = new HotGoodsAdapter(context, new ArrayList<>());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setNestedScrollingEnabled(false);
 
-        mAdapter.setOnItemClickListener(new HotGoodsAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(int position) {
-                HotGoodsBean item = datas.get(position);
+        mAdapter.setOnItemClickListener(position -> {
+            HotGoodsBean item = datas.get(position);
 
-                Intent intent = new Intent(context, GoodsDetailsActivity.class);
-                intent.putExtra("id",item.getGoodsId());
-                startActivity(intent);
-            }
+            Intent intent = new Intent(context, GoodsDetailsActivity.class);
+            intent.putExtra("id",item.getGoodsId());
+            startActivity(intent);
         });
     }
 

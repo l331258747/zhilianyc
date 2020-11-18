@@ -26,10 +26,11 @@
         android:id="@+id/iv_img"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_160"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="@+id/view_card"
         app:layout_constraintStart_toStartOf="@+id/view_card"
         app:layout_constraintTop_toTopOf="@+id/view_card"
-        tools:src="@mipmap/ic_banner" />
+        tools:src="@mipmap/ic_check_un" />
 
     <TextView
         android:id="@+id/tv_content"

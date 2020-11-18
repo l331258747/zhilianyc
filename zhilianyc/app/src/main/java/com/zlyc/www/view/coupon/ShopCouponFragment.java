@@ -1,6 +1,5 @@
 package com.zlyc.www.view.coupon;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.zlyc.www.R;
@@ -69,23 +68,13 @@ public class ShopCouponFragment extends BaseFragment implements ShopCouponContra
     private void initRecycler() {
         recyclerView = $(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        mAdapter = new ShopCouponAdapter(activity, new ArrayList<ShopCouponBean>());
+        mAdapter = new ShopCouponAdapter(activity, new ArrayList<>());
         recyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new ShopCouponAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(final int position) {
-                DialogUtil.getInstance().getDefaultDialog(context, "是否确认兑换？", new DialogUtil.DialogCallBack() {
-                    @Override
-                    public void exectEvent(DialogInterface alterDialog) {
-                        ShopCouponBean item = datas.get(position);
-                        mPresenter.buyShopCoupon(MySelfInfo.getInstance().getUserId(),item.getType());
-                    }
-                }).show();
-
-
-            }
-        });
+        mAdapter.setOnItemClickListener(position -> DialogUtil.getInstance().getDefaultDialog(context, "是否确认兑换？", alterDialog -> {
+            ShopCouponBean item = datas.get(position);
+            mPresenter.buyShopCoupon(MySelfInfo.getInstance().getUserId(),item.getType());
+        }).show());
     }
 
     @Override
