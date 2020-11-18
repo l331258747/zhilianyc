@@ -82,7 +82,15 @@
         <activity
             android:name=".view.shop.GoodsDetailsActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.team.InvitationActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.team.InvitationRankingActivity"
+            android:windowSoftInputMode="adjustPan" />
 
+
+<!--        新闻流-->
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false"/>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/bg_invitation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:id="@+id/view_title"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/title_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/left_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_centerVertical="true"
+        android:padding="10dp"
+        android:src="@mipmap/icon_back_white"
+        app:layout_constraintBottom_toBottomOf="@+id/view_title"
+        app:layout_constraintStart_toStartOf="@+id/view_title"
+        app:layout_constraintTop_toTopOf="@+id/view_title" />
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:inputType="text"
+        android:maxLines="1"
+        android:minHeight="@dimen/title_height"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/right_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_10"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="邀请排行榜"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/view_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view_title" />
+
+
+    <View
+        android:id="@+id/view_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_100"
+        android:layout_marginEnd="@dimen/dp_20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:text="邀请码"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view_content" />
+
+    <View
+        android:layout_width="@dimen/dp_70"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginEnd="@dimen/dp_5"
+        android:background="@color/color_ededed"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_1"
+        app:layout_constraintEnd_toStartOf="@+id/tv_1"
+        app:layout_constraintTop_toTopOf="@+id/tv_1" />
+
+    <View
+        android:layout_width="@dimen/dp_70"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginStart="@dimen/dp_5"
+        android:background="@color/color_ededed"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_1"
+        app:layout_constraintStart_toEndOf="@+id/tv_1"
+        app:layout_constraintTop_toTopOf="@+id/tv_1" />
+
+    <TextView
+        android:id="@+id/tv_invitation_code"
+        android:layout_width="@dimen/dp_160"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/color_FFF0F0"
+        android:gravity="center"
+        android:textColor="@color/color_FF4751"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_1"
+        tools:text="GDREDS" />
+
+
+    <TextView
+        android:id="@+id/tv_21"
+        android:layout_width="@dimen/dp_160"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@drawable/btn_0_fff0f0_r40"
+        android:gravity="center"
+        android:text="注册时请填写我的邀请码"
+        android:textColor="@color/color_FF4751"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_invitation_code" />
+
+
+    <ImageView
+        android:id="@+id/iv_invitation_code"
+        android:layout_width="@dimen/dp_160"
+        android:layout_height="@dimen/dp_160"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_21"
+        android:src="@color/color_1C81E9" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="扫描二维码立即注册"
+        android:textColor="@color/color_99"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_invitation_code" />
+
+
+    <View
+        android:id="@+id/view_bottom"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginBottom="@dimen/dp_40"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/dp_15"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp_15"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/btn_Invitation_code"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_bottom"
+        app:layout_constraintStart_toStartOf="@+id/view_bottom"
+        android:text="复制邀请码"
+        android:gravity="center"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="@+id/view_bottom"
+        android:background="@drawable/bg_gradients_btn_fbae17"
+        app:layout_constraintEnd_toStartOf="@+id/btn_qr_code"/>
+
+    <TextView
+        android:id="@+id/btn_qr_code"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/btn_link"
+        app:layout_constraintStart_toEndOf="@+id/btn_Invitation_code"
+        android:background="@drawable/bg_gradients_btn_fbae17"
+        android:text="保存二维码"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:gravity="center"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="@+id/view_bottom" />
+
+    <TextView
+        android:id="@+id/btn_link"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_bottom"
+        android:background="@drawable/bg_gradients_btn_fbae17"
+        app:layout_constraintEnd_toEndOf="@+id/view_bottom"
+        android:text="复制邀请链"
+        android:gravity="center"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/btn_qr_code"
+        app:layout_constraintTop_toTopOf="@+id/view_bottom" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

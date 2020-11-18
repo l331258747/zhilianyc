@@ -88,6 +88,7 @@ dependencies {
 
 //    implementation 'com.android.support:multidex:1.0.3'
 
+    //新闻流----------------start
 //    api('cn.vlion.inland:inlandmix:9.8.5') {
 //        exclude group: 'com.mintegral.msdk'
 //    }
@@ -96,4 +97,11 @@ dependencies {
 //            {exclude group: 'com.googlecode.android-query'}
     api 'cn.vlion.advlion:inlandgame:1.0.37'
     api 'com.github.bumptech.glide:glide:4.9.0'
+
+    //新闻流----------------end
+
+    //zxing二维码生成扫描
+    implementation 'com.google.zxing:core:3.3.3'
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
 }
