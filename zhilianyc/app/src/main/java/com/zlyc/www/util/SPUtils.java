@@ -20,7 +20,8 @@ public class SPUtils {
     public static final String SP_USER_ID = "sp_user_id";
     public static final String SP_USER_USERSTATE = "sp_user_userState";
     public static final String SP_USER_MOBILE = "sp_user_mobile";
-
+    public static final String SP_USER_INVITE_CODE = "sp_user_inviteCode";
+    public static final String SP_USER_SHARE_URL = "sp_user_shareUrl";
 
     public static final String SP_APP_VERSION = "sp_app_version";
 
@@ -154,5 +155,7 @@ public class SPUtils {
         remove(SP_USER_TOKEN);
         remove(SP_USER_ID);
         remove(SP_USER_USERSTATE);
+        remove(SP_USER_INVITE_CODE);
+        remove(SP_USER_SHARE_URL);
     }
 }
