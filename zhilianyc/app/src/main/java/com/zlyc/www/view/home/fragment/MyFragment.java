@@ -27,12 +27,15 @@ import java.util.List;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class MyFragment extends BaseFragment implements View.OnClickListener, MyInfoContract.View, RealNameStatusContract.View {
 
     RecyclerView recyclerView;
     MyTabAdapter mAdapter;
     List<MyTabBean> datas;
+
+    SwipeRefreshLayout swipe;
 
     ImageView iv_head;
     TextView tv_name, tv_UID, tv_data_all_num, tv_data_today_num, tv_data_use_num, tv_data_contribution_num, tv_data_labour_num, tv_region, tv_authentication;
@@ -48,6 +51,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
 
     @Override
     public void initView() {
+
         iv_head = $(R.id.iv_head);
         tv_name = $(R.id.tv_name);
         tv_UID = $(R.id.tv_UID);
@@ -64,9 +68,18 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
 
         view_title = $(R.id.view_title);
 
+        initSwipe();
         initRecycler();
 
         view_title.setOnClickListener(this);
+    }
+
+    private void initSwipe() {
+        swipe = $(R.id.swipe);
+        swipe.setColorSchemeResources(R.color.color_1C81E9);
+        swipe.setOnRefreshListener(() -> {
+            mPresenter.mine(MySelfInfo.getInstance().getUserId());
+        });
     }
 
     @Override
@@ -123,6 +136,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
 
     @Override
     public void mineSuccess(MineBean data) {
+        swipe.setRefreshing(false);
+
         GlideUtil.loadCircleImage(context, data.getHeadImg(), iv_head);
         tv_name.setText(data.getNickName());
         tv_UID.setText("UID:" + MySelfInfo.getInstance().getUserId());
@@ -140,6 +155,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
 
     @Override
     public void mineFailed(String msg) {
+        swipe.setRefreshing(false);
         showShortToast(msg);
     }
 
