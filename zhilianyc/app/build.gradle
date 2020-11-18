@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
 
-//    signingConfigs {
-//        debugConfig {
-//            storeFile file("zhilianyc.jks")
-//            storePassword "zhilianyc123"
-//            keyAlias "zhilianyc"
-//            keyPassword "zhilianyc123"
-//        }
-//    }
+    signingConfigs {
+        debugConfig {
+            storeFile file("zqlc.keystore")
+            storePassword "zqlc123456"
+            keyAlias "zqlc_alias"
+            keyPassword "zqlc123456"
+        }
+    }
 
 
     compileSdkVersion 29
@@ -20,30 +20,40 @@ android {
         targetSdkVersion 29
         versionCode 3030
         versionName "3.0.3"
+        multiDexEnabled true
+        manifestPlaceholders = [
+                "APPLICATION_ID": applicationId,
+        ]
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
     }
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
 
-        /**
-         debug {
-         minifyEnabled false
-         signingConfig signingConfigs.debugConfig
-         }
-         release {
-         // 混淆
-         minifyEnabled false
-         // Zipalign优化
-         zipAlignEnabled true
-         // 移除无用的resource文件
-         shrinkResources true
-         // 前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
-         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-         signingConfig signingConfigs.debugConfig
-         }
-         */
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debugConfig
+        }
+        release {
+            // 混淆
+            minifyEnabled true
+            // Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            // 前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debugConfig
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
 }
 
@@ -51,14 +61,12 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'com.android.support:support-v4:29+'
-    implementation 'com.android.support:appcompat-v7:29+'
 
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation "com.google.android.material:material:1.0.0"
 
     //图片
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
+//    implementation 'com.github.bumptech.glide:glide:3.7.0'
     //添加HttpLoggingInterceptor进行调试
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     //rxjava2
@@ -77,4 +85,15 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
     //textview标签
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+
+//    implementation 'com.android.support:multidex:1.0.3'
+
+//    api('cn.vlion.inland:inlandmix:9.8.5') {
+//        exclude group: 'com.mintegral.msdk'
+//    }
+    api 'cn.vlion.advlion:inlandbase:1.0.30'
+    api ('cn.vlion.advlion:inlandnewsX:1.0.27')
+//            {exclude group: 'com.googlecode.android-query'}
+    api 'cn.vlion.advlion:inlandgame:1.0.37'
+    api 'com.github.bumptech.glide:glide:4.9.0'
 }

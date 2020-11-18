@@ -121,7 +121,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onBackPressed() {
         if(activity instanceof HomeActivity){
             if ((System.currentTimeMillis() - mExitTime) > 2000) {
-                showLongToast("再按一次退出那就走旅行");
+                showLongToast("再按一次退出程序");
                 mExitTime = System.currentTimeMillis();
                 return;
             }

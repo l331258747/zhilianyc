@@ -1,15 +1,20 @@
 package com.zlyc.www.util.glide;
 
-import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.zlyc.www.R;
-import com.zlyc.www.util.HasActivity;
+
+import java.io.File;
 
 /**
  * Created by LGQ
@@ -43,102 +48,148 @@ public class GlideUtil {
      *
      */
 
-    //加载网络图片
-    public static void LoadImage(Context mContext, String path,
-                                 ImageView imageview) {
-        if(TextUtils.isEmpty(path)) path = "";
-        Glide.with(mContext).load(path).centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageview);
+
+    /**
+     * 加载gif图
+     * @param context
+     * @param url
+     * @param imageView
+     */
+    public static void loadGifImage(Context context, String url, ImageView imageView) {
+        Glide.with(context)
+                .load(url)
+                .into(imageView);
     }
 
-    public static void LoadImageFitCenter(Context mContext, String path,
-                                 ImageView imageview) {
-        if(TextUtils.isEmpty(path)) path = "";
-        Glide.with(mContext).load(path).fitCenter()
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageview);
+
+    /**
+     * 加载本地图片文件
+     *
+     * @param context
+     * @param file
+     * @param imageView
+     */
+    public static void loadFileImage(Context context, File file, ImageView imageView) {
+        RequestOptions requestOptions = new RequestOptions()
+                .priority(Priority.HIGH)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop();
+
+        Glide.with(context)
+                .load(file)
+                .apply(requestOptions)
+                .into(imageView);
+    }
+
+    /**
+     * 加载图片指定大小
+     *
+     * @param context
+     * @param url
+     * @param imageView
+     * @param width
+     * @param height
+     */
+    public static void loadSizeImage(Context context, String url, ImageView imageView, int width, int height) {
+        RequestOptions requestOptions = new RequestOptions()
+                .priority(Priority.HIGH)
+                .override(width, height)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+
+        Glide.with(context)
+                .load(url)
+                .apply(requestOptions)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(imageView);
     }
 
 
-    //加载本地图片
-    public static void LoadImageWithLocation(Context mContext, Integer path,
-                                             ImageView imageview) {
-        Glide.with(mContext).load(path).diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .into(imageview);
+    /**
+     * 加载圆角图片
+     * @param context
+     * @param url
+     * @param imageView
+     * @param radius 圆角大小
+     */
+    public static void loadRoundImage(Context context, String url, ImageView imageView, int radius) {
+        if(TextUtils.isEmpty(url)) url = "";
+        RequestOptions requestOptions = new RequestOptions()
+                .priority(Priority.HIGH)
+                .dontAnimate()
+                .error(R.mipmap.default_head)
+                .placeholder(R.mipmap.default_head)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .transforms(new CenterCrop(), new RoundedCorners(radius));
+
+        Glide.with(context)
+                .load(url)
+                .apply(requestOptions)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(imageView);
     }
 
-    //圆形加载
-    public static void LoadCircleImage(Context mContext, String path,
-                                       ImageView imageview) {
-        if(!HasActivity.isDestroy((Activity)mContext)){
-            if(TextUtils.isEmpty(path)) path = "";
-            Glide.with(mContext).load(path).centerCrop().error(R.mipmap.default_head)
-                    .transform(new GlideCircleTransform(mContext,0,mContext.getResources().getColor(R.color.white)))
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageview);
-        }
+
+    /**
+     * 加载圆形图片
+     *
+     * @param context
+     * @param url
+     * @param imageView
+     */
+    public static void loadCircleImage(Context context, String url, ImageView imageView) {
+        if(TextUtils.isEmpty(url)) url = "";
+        RequestOptions requestOptions = new RequestOptions()
+//                .priority(Priority.HIGH)
+                .dontAnimate()
+                .error(R.mipmap.default_head)
+                .placeholder(R.mipmap.default_head)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .bitmapTransform(new CircleCrop());
+
+        Glide.with(context)
+                .load(url)
+                .apply(requestOptions)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(imageView);
     }
 
-    //加载圆角图片
-    public static void LoadRoundImage(Context mContext, String path,
-                                       ImageView imageview,int radius) {
-        if(TextUtils.isEmpty(path)) path = "";
-        Glide.with(mContext).load(path).asBitmap().placeholder(R.mipmap.default_head)
-                .transform(new CenterCrop(mContext),new GlideRoundTransform(mContext, radius))
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageview);
 
+
+    /**
+     * 默认加载方式
+     *
+     * @param context
+     * @param url
+     * @param imageView
+     */
+    public static void loadImage(Context context, String url, ImageView imageView) {
+        if(TextUtils.isEmpty(url)) url = "";
+        RequestOptions requestOptions = new RequestOptions()
+                .priority(Priority.HIGH)
+                .error(R.mipmap.default_head)
+                .placeholder(R.mipmap.default_head)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .dontAnimate();
+
+        Glide.with(context)
+                .load(url)
+                .apply(requestOptions)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(imageView);
     }
 
-    //加载上边圆角图片
-    public static void LoadTopRoundImage(Context mContext, String path,
-                                      ImageView imageview,int radius) {
-        if(TextUtils.isEmpty(path)) path = "";
 
-        CornerTransform transformation = new CornerTransform(mContext, radius);
-        //只是绘制左上角和右上角圆角
-        transformation.setExceptCorner(false, false, true, true);//false表示为圆角
+    public static void loadTopImage(Context context, String url, ImageView imageView,int px){
+        if(TextUtils.isEmpty(url)) url = "";
+        RequestOptions options = new RequestOptions()
+                .fitCenter() /*处理源图片ScaleType*/
+                .priority(Priority.HIGH)
+                .error(R.mipmap.default_head)
+                .placeholder(R.mipmap.default_head)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .transform(new RoundedCornersTransform(px, px, 0, 0));
 
-        Glide.with(mContext).load(path).asBitmap().placeholder(R.mipmap.dynamic_default)
-                .transform(new CenterCrop(mContext),transformation)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageview);
-
-    }
-
-    public static void LoadLeftRoundImage(Context mContext, String path,
-                                         ImageView imageview,int radius) {
-        if(TextUtils.isEmpty(path)) path = "";
-
-        CornerTransform transformation = new CornerTransform(mContext, radius);
-        //只是绘制左上角和右上角圆角
-        transformation.setExceptCorner(false, true, false, true);//false表示为圆角
-
-        Glide.with(mContext).load(path).asBitmap().placeholder(R.mipmap.default_head)
-                .transform(new CenterCrop(mContext),transformation)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageview);
-
-    }
-
-    //----------默认图
-
-    //加载网络图片
-    public static void LoadDefaultImage(Context mContext, String path,
-                                 ImageView imageview,int defultImg) {
-        if(TextUtils.isEmpty(path)) path = "";
-        Glide.with(mContext).load(path).asBitmap().centerCrop().placeholder(defultImg).error(defultImg)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageview);
-    }
-
-    //加载上边圆角图片
-    public static void LoadTopRoundImage(Context mContext, String path,
-                                         ImageView imageview,int radius,int defultImg) {
-        if(TextUtils.isEmpty(path)) path = "";
-
-        CornerTransform transformation = new CornerTransform(mContext, radius);
-        //只是绘制左上角和右上角圆角
-        transformation.setExceptCorner(false, false, true, true);//false表示为圆角
-
-        Glide.with(mContext).load(path).asBitmap().placeholder(defultImg)
-                .transform(new CenterCrop(mContext),transformation)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageview);
-
+        Glide.with(context).load(url).apply(options).into(imageView);
     }
 
 }

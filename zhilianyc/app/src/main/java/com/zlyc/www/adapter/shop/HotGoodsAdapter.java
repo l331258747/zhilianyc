@@ -45,7 +45,7 @@ public class HotGoodsAdapter extends RecyclerView.Adapter<HotGoodsAdapter.ViewHo
         holder.tv_price.setText(data.getPriceStr());
         holder.tv_num.setText(data.getNumStr());
 
-        GlideUtil.LoadTopRoundImage(mContext,data.getImgUrl(),holder.iv_img,10);
+        GlideUtil.loadTopImage(mContext,data.getImgUrl(),holder.iv_img,20);
 
         if (mOnItemClickListener != null) {
             holder.view_card.setOnClickListener(new View.OnClickListener() {

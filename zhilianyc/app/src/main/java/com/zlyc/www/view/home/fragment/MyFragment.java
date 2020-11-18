@@ -126,7 +126,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
 
     @Override
     public void mineSuccess(MineBean data) {
-        GlideUtil.LoadCircleImage(context, data.getHeadImg(), iv_head);
+        GlideUtil.loadCircleImage(context, data.getHeadImg(), iv_head);
         tv_name.setText(data.getNickName());
         tv_UID.setText("UID:" + MySelfInfo.getInstance().getUserId());
         tv_data_all_num.setText(data.getBeans() + "");
