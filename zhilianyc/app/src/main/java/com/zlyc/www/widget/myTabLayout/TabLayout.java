@@ -1104,12 +1104,7 @@ public class TabLayout extends HorizontalScrollView {
             mScrollAnimator = new ValueAnimator();
             mScrollAnimator.setInterpolator(AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR);
             mScrollAnimator.setDuration(ANIMATION_DURATION);
-            mScrollAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animator) {
-                    scrollTo((int) animator.getAnimatedValue(), 0);
-                }
-            });
+            mScrollAnimator.addUpdateListener(animator -> scrollTo((int) animator.getAnimatedValue(), 0));
         }
     }
 
@@ -2013,14 +2008,11 @@ public class TabLayout extends HorizontalScrollView {
                 animator.setInterpolator(AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR);
                 animator.setDuration(duration);
                 animator.setFloatValues(0, 1);
-                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animator) {
-                        final float fraction = animator.getAnimatedFraction();
-                        setIndicatorPosition(
-                                AnimationUtils.lerp(startLeft, targetLeft, fraction),
-                                AnimationUtils.lerp(startRight, targetRight, fraction));
-                    }
+                animator.addUpdateListener(animator1 -> {
+                    final float fraction = animator1.getAnimatedFraction();
+                    setIndicatorPosition(
+                            AnimationUtils.lerp(startLeft, targetLeft, fraction),
+                            AnimationUtils.lerp(startRight, targetRight, fraction));
                 });
                 animator.addListener(new AnimatorListenerAdapter() {
                     @Override

@@ -70,12 +70,7 @@ public class ShopCouponAdapter extends RecyclerView.Adapter<ShopCouponAdapter.Vi
 
 
         if (mOnItemClickListener != null) {
-            holder.btn_exchange.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemClickListener.onClick(position);
-                }
-            });
+            holder.btn_exchange.setOnClickListener(v -> mOnItemClickListener.onClick(position));
         }
 
     }

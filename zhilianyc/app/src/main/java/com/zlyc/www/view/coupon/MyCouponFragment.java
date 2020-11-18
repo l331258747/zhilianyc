@@ -82,7 +82,7 @@ public class MyCouponFragment extends BaseFragment implements MyCouponContract.V
     private void initRecycler() {
         recyclerView = $(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        mAdapter = new MyCouponAdapter(activity, new ArrayList<MyCouponList>());
+        mAdapter = new MyCouponAdapter(activity, new ArrayList<>());
         recyclerView.setAdapter(mAdapter);
         ((SimpleItemAnimator)recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);//itemChanged 闪烁问题
 

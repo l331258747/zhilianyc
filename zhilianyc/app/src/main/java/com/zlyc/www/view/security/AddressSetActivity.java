@@ -116,7 +116,7 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
         recyclerView = $(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        mAdapter = new AddressAdapter(context, new ArrayList<AddressBean>());
+        mAdapter = new AddressAdapter(context, new ArrayList<>());
         recyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(new AddressAdapter.OnItemClickListener() {

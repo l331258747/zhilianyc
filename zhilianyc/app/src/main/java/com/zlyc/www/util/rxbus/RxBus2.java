@@ -3,8 +3,6 @@ package com.zlyc.www.util.rxbus;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 import io.reactivex.processors.FlowableProcessor;
 import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
@@ -90,18 +88,8 @@ public class RxBus2 {
      */
     public <T> Disposable toObservable(final int code, final Class<T> eventType, Consumer<T> consumer) {
         return bus.ofType(RxBusBaseMessage.class)
-                .filter(new Predicate<RxBusBaseMessage>() {
-                    @Override
-                    public boolean test(RxBusBaseMessage o) throws Exception {
-                        return o.getCode() == code && eventType.isInstance(o.getObject());
-                    }
-                })
-                .map(new Function<RxBusBaseMessage, Object>() {
-                    @Override
-                    public Object apply(RxBusBaseMessage o) throws Exception {
-                        return o.getObject();
-                    }
-                })
+                .filter(o -> o.getCode() == code && eventType.isInstance(o.getObject()))
+                .map(o -> o.getObject())
                 .cast(eventType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

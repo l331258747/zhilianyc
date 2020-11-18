@@ -39,31 +39,18 @@ public class AuthenticationActivity extends BaseActivity implements AuthRealName
         tv_address = $(R.id.tv_address);
         btn_submit = $(R.id.btn_submit);
 
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!LoginUtil.verifyName(et_real_name.getText().toString()))
-                    return;
-                if (!LoginUtil.verifyID(et_code.getText().toString()))
-                    return;
-                if (!LoginUtil.verifyEmpty(tv_address.getText().toString(),"请选择地区"))
-                    return;
+        btn_submit.setOnClickListener(v -> {
+            if (!LoginUtil.verifyName(et_real_name.getText().toString()))
+                return;
+            if (!LoginUtil.verifyID(et_code.getText().toString()))
+                return;
+            if (!LoginUtil.verifyEmpty(tv_address.getText().toString(),"请选择地区"))
+                return;
 
-                mPresenter.authRealName(MySelfInfo.getInstance().getUserId(),et_real_name.getText().toString(),et_code.getText().toString(),tv_address.getText().toString());
-            }
+            mPresenter.authRealName(MySelfInfo.getInstance().getUserId(),et_real_name.getText().toString(),et_code.getText().toString(),tv_address.getText().toString());
         });
 
-        view_address.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPickerCityHelp.showPickerView(new PickerCityHelp.OnItemClickListener() {
-                    @Override
-                    public void onClick(String str1, String str2, String str3) {
-                        tv_address.setText(str1 + " " + str2 + " " + str3);
-                    }
-                });
-            }
-        });
+        view_address.setOnClickListener(v -> mPickerCityHelp.showPickerView((str1, str2, str3) -> tv_address.setText(str1 + " " + str2 + " " + str3)));
     }
 
     @Override

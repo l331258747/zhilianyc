@@ -72,14 +72,11 @@ public class HttpMethods {
         //--------设置头信息 end----------
 
         //-------设置log模式 start-------
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                if (StringUtils.isJson(message)) {
-                    LogUtil.d(message);
-                } else {
-                    LogUtil.d(message);
-                }
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> {
+            if (StringUtils.isJson(message)) {
+                LogUtil.d(message);
+            } else {
+                LogUtil.d(message);
             }
         });
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

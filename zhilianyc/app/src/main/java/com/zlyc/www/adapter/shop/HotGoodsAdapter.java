@@ -48,12 +48,7 @@ public class HotGoodsAdapter extends RecyclerView.Adapter<HotGoodsAdapter.ViewHo
         GlideUtil.loadTopImage(mContext,data.getImgUrl(),holder.iv_img,20);
 
         if (mOnItemClickListener != null) {
-            holder.view_card.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemClickListener.onClick(position);
-                }
-            });
+            holder.view_card.setOnClickListener(v -> mOnItemClickListener.onClick(position));
 
         }
     }

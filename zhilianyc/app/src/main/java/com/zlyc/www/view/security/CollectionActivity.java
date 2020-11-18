@@ -26,15 +26,12 @@ public class CollectionActivity extends BaseActivity {
         et_collection = $(R.id.et_collection);
         btn_submit = $(R.id.btn_submit);
 
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!LoginUtil.verifyEmpty(et_collection.getText().toString(),"请输入收款账号"))
-                    return;
+        btn_submit.setOnClickListener(v -> {
+            if (!LoginUtil.verifyEmpty(et_collection.getText().toString(),"请输入收款账号"))
+                return;
 
-                showShortToast("设置成功");
-                finish();
-            }
+            showShortToast("设置成功");
+            finish();
         });
     }
 

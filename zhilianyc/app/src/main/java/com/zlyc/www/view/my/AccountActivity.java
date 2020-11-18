@@ -1,6 +1,5 @@
 package com.zlyc.www.view.my;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -68,27 +67,24 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
                 final String oldName = tv_nickname.getText().toString();
 
                 new EditDialog(context).setContent(tv_nickname.getText().toString())
-                        .setTitle("修改昵称").setSubmitListener(new EditDialog.OnItemClickListener() {
-                    @Override
-                    public void onClick(Dialog dialog,String content) {
+                        .setTitle("修改昵称").setSubmitListener((dialog, content) -> {
 
-                        if(TextUtils.isEmpty(content)){
-                            showShortToast("昵称不能为空");
-                            return;
-                        }
+                            if(TextUtils.isEmpty(content)){
+                                showShortToast("昵称不能为空");
+                                return;
+                            }
 
-                        if(TextUtils.equals(oldName,content)){
-                            showShortToast("昵称相同");
-                            return;
-                        }
+                            if(TextUtils.equals(oldName,content)){
+                                showShortToast("昵称相同");
+                                return;
+                            }
 
-                        mPresenter.resetNickname(MySelfInfo.getInstance().getUserId(),content);
+                            mPresenter.resetNickname(MySelfInfo.getInstance().getUserId(),content);
 
-                        newNickname = content;
+                            newNickname = content;
 
-                        dialog.dismiss();
-                    }
-                }).show();
+                            dialog.dismiss();
+                        }).show();
 
                 break;
             case R.id.view_head:

@@ -108,12 +108,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         rightIv = $(R.id.right_iv);
         line = $(R.id.line);
 
-        leftIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        leftIv.setOnClickListener(v -> onBackPressed());
     }
 
     private long mExitTime;

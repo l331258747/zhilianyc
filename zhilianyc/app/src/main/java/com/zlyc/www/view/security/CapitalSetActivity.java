@@ -19,8 +19,6 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 public class CapitalSetActivity extends BaseActivity implements View.OnClickListener, PayPwdContract.View {
     EditText et_pwd, et_pwd2,et_verify;
@@ -80,18 +78,10 @@ public class CapitalSetActivity extends BaseActivity implements View.OnClickList
         final int count = 60;//倒计时10秒
         Observable.interval(0, 1, TimeUnit.SECONDS)//设置0延迟，每隔一秒发送一条数据
                 .take(count + 1)//设置循环次数
-                .map(new Function<Long, Long>() {
-                    @Override
-                    public Long apply(Long aLong) throws Exception {
-                        return count - aLong;
-                    }
-                })
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        tv_verify_code.setEnabled(false);//在发送数据的时候设置为不能点击
-                        tv_verify_code.setTextColor(ContextCompat.getColor(context, R.color.color_66));
-                    }
+                .map(aLong -> count - aLong)
+                .doOnSubscribe(disposable -> {
+                    tv_verify_code.setEnabled(false);//在发送数据的时候设置为不能点击
+                    tv_verify_code.setTextColor(ContextCompat.getColor(context, R.color.color_66));
                 })
                 .observeOn(AndroidSchedulers.mainThread())//ui线程中进行控件更新
                 .subscribe(new Observer<Long>() {

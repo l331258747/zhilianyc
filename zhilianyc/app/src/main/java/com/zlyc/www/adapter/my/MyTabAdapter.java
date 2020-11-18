@@ -45,12 +45,7 @@ public class MyTabAdapter extends RecyclerView.Adapter<MyTabAdapter.ViewHolder> 
         holder.iv_img.setImageResource(data.getImgId());
 
         if (mOnItemClickListener != null) {
-            holder.cl_parent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemClickListener.onClick(position);
-                }
-            });
+            holder.cl_parent.setOnClickListener(v -> mOnItemClickListener.onClick(position));
         }
 
     }

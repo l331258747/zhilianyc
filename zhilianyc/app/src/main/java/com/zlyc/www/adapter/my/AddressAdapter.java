@@ -44,19 +44,11 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
         holder.tv_address.setText(data.getAddressAll());
 
         if (mOnItemClickListener != null) {
-            holder.btn_edit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemClickListener.onClick(position);
-                }
-            });
+            holder.btn_edit.setOnClickListener(v -> mOnItemClickListener.onClick(position));
 
-            holder.cl_parent.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    mOnItemClickListener.onLongClick(position);
-                    return false;
-                }
+            holder.cl_parent.setOnLongClickListener(v -> {
+                mOnItemClickListener.onLongClick(position);
+                return false;
             });
         }
     }

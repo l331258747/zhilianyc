@@ -1,6 +1,5 @@
 package com.zlyc.www.view.security;
 
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -32,22 +31,19 @@ public class ModifyPwdActivity extends BaseActivity implements ResetPwdContract.
         et_new_pwd2 = $(R.id.et_new_pwd2);
         btn_submit = $(R.id.btn_submit);
 
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!LoginUtil.verifyPassword(et_old_pwd.getText().toString()))
-                    return;
-                if (!LoginUtil.verifyPassword(et_new_pwd.getText().toString()))
-                    return;
-                if (!LoginUtil.verifyPassword(et_new_pwd2.getText().toString()))
-                    return;
-                if (!LoginUtil.verifyPasswordDouble(et_new_pwd.getText().toString(), et_new_pwd2.getText().toString()))
-                    return;
+        btn_submit.setOnClickListener(v -> {
+            if (!LoginUtil.verifyPassword(et_old_pwd.getText().toString()))
+                return;
+            if (!LoginUtil.verifyPassword(et_new_pwd.getText().toString()))
+                return;
+            if (!LoginUtil.verifyPassword(et_new_pwd2.getText().toString()))
+                return;
+            if (!LoginUtil.verifyPasswordDouble(et_new_pwd.getText().toString(), et_new_pwd2.getText().toString()))
+                return;
 
-                mPresenter.resetPwd(et_old_pwd.getText().toString(),et_new_pwd.getText().toString());
+            mPresenter.resetPwd(et_old_pwd.getText().toString(),et_new_pwd.getText().toString());
 
 
-            }
         });
     }
 

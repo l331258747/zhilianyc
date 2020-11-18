@@ -48,25 +48,19 @@ public class EditDialog extends Dialog {
         }
 
 
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(submitListener != null){
-                    submitListener.onClick(EditDialog.this,et_content.getText().toString());
-                }
-//                dismiss();
+        btn_submit.setOnClickListener(view -> {
+            if(submitListener != null){
+                submitListener.onClick(EditDialog.this,et_content.getText().toString());
             }
+//                dismiss();
         });
 
 
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(cancelListener != null){
-                    cancelListener.onClick(view);
-                }
-                dismiss();
+        btn_cancel.setOnClickListener(view -> {
+            if(cancelListener != null){
+                cancelListener.onClick(view);
             }
+            dismiss();
         });
     }
 

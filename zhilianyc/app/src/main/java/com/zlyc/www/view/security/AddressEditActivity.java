@@ -95,15 +95,12 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.view_address:
-                mPickerCityHelp.showPickerView(new PickerCityHelp.OnItemClickListener() {
-                    @Override
-                    public void onClick(String str1, String str2, String str3) {
-                        tv_address.setText(str1 + " " + str2 + " " + str3);
+                mPickerCityHelp.showPickerView((str1, str2, str3) -> {
+                    tv_address.setText(str1 + " " + str2 + " " + str3);
 
-                        province = str1;
-                        city = str2;
-                        region = str3;
-                    }
+                    province = str1;
+                    city = str2;
+                    region = str3;
                 });
                 break;
             case R.id.view_default:
