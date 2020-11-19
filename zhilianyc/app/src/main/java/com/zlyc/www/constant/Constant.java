@@ -17,7 +17,7 @@ public class Constant {
     public static final int BANNER_RUNNING_TIME = 4000;
 
     //分页默认参数
-    public static final int DEFAULT_LIMIT = 10;
+    public static final int DEFAULT_SIZE = 10;
     public static final int DEFAULT_PAGE = 1;
 
     //我的-tab
@@ -36,5 +36,7 @@ public class Constant {
     public static final int MY_TAB_RED_PACKAGE = 11;
     public static final int MY_TAB_TASK = 12;
 
+
+    //realName 0:审核不通过,1：已实名,2：审核中,3：未实名
 
 }

@@ -14,7 +14,7 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_height="@dimen/dp_190"
+            android:layout_height="@dimen/dp_280"
             android:background="@drawable/bg_gradients_90"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
             android:id="@+id/view_content"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_170"
+            android:layout_marginTop="@dimen/dp_240"
             android:background="@drawable/btn_00_r20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -122,7 +122,7 @@
         <View
             android:id="@+id/view_data"
             android:layout_width="0dp"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="@dimen/dp_120"
             android:layout_marginTop="@dimen/dp_20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -131,8 +131,9 @@
         <View
             android:id="@+id/view_data_all"
             android:layout_width="0dp"
+            
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/view_data"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_data_all"
             app:layout_constraintEnd_toStartOf="@+id/view_data_today"
             app:layout_constraintStart_toStartOf="@+id/view_data"
             app:layout_constraintTop_toTopOf="@+id/view_data" />
@@ -164,7 +165,8 @@
             android:id="@+id/view_data_today"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/view_data"
+            
+            app:layout_constraintBottom_toBottomOf="@+id/tv_data_today"
             app:layout_constraintEnd_toStartOf="@+id/view_data_use"
             app:layout_constraintStart_toEndOf="@+id/view_data_all"
             app:layout_constraintTop_toTopOf="@+id/view_data" />
@@ -195,9 +197,10 @@
         <View
             android:id="@+id/view_data_use"
             android:layout_width="0dp"
+            
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/view_data"
-            app:layout_constraintEnd_toStartOf="@+id/view_data_contribution"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_data_use"
+            app:layout_constraintEnd_toEndOf="@+id/view_data"
             app:layout_constraintStart_toEndOf="@+id/view_data_today"
             app:layout_constraintTop_toTopOf="@+id/view_data" />
 
@@ -229,10 +232,12 @@
             android:id="@+id/view_data_contribution"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/view_data"
-            app:layout_constraintEnd_toStartOf="@+id/view_data_labour"
-            app:layout_constraintStart_toEndOf="@+id/view_data_use"
-            app:layout_constraintTop_toTopOf="@+id/view_data" />
+            
+            app:layout_constraintEnd_toEndOf="@+id/view_data_all"
+            app:layout_constraintStart_toStartOf="@+id/view_data_all"
+            android:layout_marginTop="@dimen/dp_20"
+            app:layout_constraintTop_toBottomOf="@+id/view_data_all"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_data_contribution"/>
 
         <TextView
             android:id="@+id/tv_data_contribution_num"
@@ -261,10 +266,12 @@
             android:id="@+id/view_data_labour"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/view_data"
-            app:layout_constraintEnd_toEndOf="@+id/view_data"
-            app:layout_constraintStart_toEndOf="@+id/view_data_contribution"
-            app:layout_constraintTop_toTopOf="@+id/view_data" />
+            
+            app:layout_constraintEnd_toEndOf="@+id/view_data_today"
+            android:layout_marginTop="@dimen/dp_20"
+            app:layout_constraintStart_toStartOf="@+id/view_data_today"
+            app:layout_constraintTop_toBottomOf="@+id/view_data_today"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_data_labour"/>
 
         <TextView
             android:id="@+id/tv_data_labour_num"

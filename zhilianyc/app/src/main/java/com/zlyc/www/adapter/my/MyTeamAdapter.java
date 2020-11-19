@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zlyc.www.R;
-import com.zlyc.www.bean.my.MyTeamBean;
+import com.zlyc.www.bean.team.TeamInviteListBean;
 import com.zlyc.www.util.glide.GlideUtil;
 
 import java.util.List;
@@ -20,9 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.ViewHolder> {
 
     Context mContext;
-    List<MyTeamBean> datas;
+    List<TeamInviteListBean> datas;
 
-    public MyTeamAdapter(Context context, List<MyTeamBean> datas) {
+    public MyTeamAdapter(Context context, List<TeamInviteListBean> datas) {
         mContext = context;
         this.datas = datas;
     }
@@ -39,18 +39,34 @@ public class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         if (holder == null) return;
-        final MyTeamBean data = datas.get(position);
+        final TeamInviteListBean data = datas.get(position);
         if (data == null) return;
 
-        if(TextUtils.isEmpty(data.getImgUrl())){
+        if(TextUtils.isEmpty(data.getHeadImg())){
             holder.iv_head.setImageResource(R.mipmap.default_head);
         }else{
-            GlideUtil.loadCircleImage(mContext,data.getImgUrl(),holder.iv_head);
+            GlideUtil.loadCircleImage(mContext,data.getHeadImg(),holder.iv_head);
         }
 
-        holder.tv_post.setText(data.getPost());
-        holder.tv_people.setText(data.getLaborPersonal() + "");
-        holder.tv_team.setText(data.getLaborTeam() + "");
+        holder.tv_post.setText(data.getRank());
+
+        holder.tv_people.setText(data.getLabor() + "");
+        holder.tv_team.setText(data.getTeamLabor() + "");
+        holder.tv_name.setText(data.getRank());
+
+        if(data.getRealName() == 0){
+            holder.tv_realName.setText("审核不通过");
+            holder.tv_realName.setBackgroundResource(R.color.color_FF4751);
+        }else if(data.getRealName() == 1){
+            holder.tv_realName.setText("已实名");
+            holder.tv_realName.setBackgroundResource(R.color.color_61B53F);
+        }else if(data.getRealName() == 2){
+            holder.tv_realName.setText("审核中");
+            holder.tv_realName.setBackgroundResource(R.color.color_61B53F);
+        }else{
+            holder.tv_realName.setText("未实名");
+            holder.tv_realName.setBackgroundResource(R.color.color_FF4751);
+        }
 
     }
 
@@ -59,7 +75,7 @@ public class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.ViewHolder
         return datas.size();
     }
 
-    public void setData(List<MyTeamBean> datas) {
+    public void setData(List<TeamInviteListBean> datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
@@ -68,7 +84,7 @@ public class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_head;
-        TextView tv_post,tv_people,tv_team;
+        TextView tv_post,tv_people,tv_team,tv_realName,tv_name;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -78,6 +94,8 @@ public class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.ViewHolder
             tv_post = itemView.findViewById(R.id.tv_post);
             tv_people = itemView.findViewById(R.id.tv_people);
             tv_team = itemView.findViewById(R.id.tv_team);
+            tv_realName = itemView.findViewById(R.id.tv_realName);
+            tv_name = itemView.findViewById(R.id.tv_name);
 
         }
     }

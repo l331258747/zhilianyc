@@ -13,7 +13,9 @@ import com.zlyc.www.bean.shop.GoodsDetailsBean;
 import com.zlyc.www.bean.shop.HotGoodsBean;
 import com.zlyc.www.bean.shop.OrderDetailBean;
 import com.zlyc.www.bean.shop.OrderListBean;
+import com.zlyc.www.bean.team.MyTeamDetailBean;
 import com.zlyc.www.bean.team.RankingBean;
+import com.zlyc.www.bean.team.TeamInviteBean;
 
 import java.util.List;
 
@@ -201,6 +203,17 @@ public interface HttpService {
             @Body RequestBody body
     );
 
+    //团队详情
+    @POST("team/detail")
+    Observable<BaseResponse<MyTeamDetailBean>> getTeamDetail(
+            @Body RequestBody body
+    );
+
+    //我的直推用户
+    @POST("team/myinvite")
+    Observable<BaseResponse<TeamInviteBean>> getTeamInvite(
+            @Body RequestBody body
+    );
 
     //--------------------team end
 
