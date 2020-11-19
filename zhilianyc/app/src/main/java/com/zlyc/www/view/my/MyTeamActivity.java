@@ -3,16 +3,20 @@ package com.zlyc.www.view.my;
 import android.widget.TextView;
 
 import com.zlyc.www.R;
+import com.zlyc.www.adapter.base.EndlessRecyclerOnScrollListener;
+import com.zlyc.www.adapter.base.LoadMoreWrapper;
 import com.zlyc.www.adapter.my.MyTeamAdapter;
 import com.zlyc.www.base.BaseActivity;
 import com.zlyc.www.bean.MySelfInfo;
 import com.zlyc.www.bean.team.MyTeamDetailBean;
 import com.zlyc.www.bean.team.TeamInviteBean;
+import com.zlyc.www.bean.team.TeamInviteListBean;
 import com.zlyc.www.constant.Constant;
 import com.zlyc.www.mvp.team.MyTeamContract;
 import com.zlyc.www.mvp.team.MyTeamPresenter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +33,9 @@ public class MyTeamActivity extends BaseActivity implements MyTeamContract.View 
     MyTeamPresenter mPresenter;
 
     int page;
+    LoadMoreWrapper loadMoreWrapper;
+    int isLoadType = 1;//1下拉刷新，2上拉加载
+    boolean isLoad = false;//是否在加载，重复加载问题
 
     @Override
     public int getLayoutId() {
@@ -65,7 +72,7 @@ public class MyTeamActivity extends BaseActivity implements MyTeamContract.View 
 
         mPresenter = new MyTeamPresenter(context,this);
         mPresenter.getTeamDetail(MySelfInfo.getInstance().getUserId());
-        mPresenter.getTeamInvite(MySelfInfo.getInstance().getUserId(), page);
+        getRefreshData();
     }
 
     //初始化recyclerview
@@ -74,8 +81,31 @@ public class MyTeamActivity extends BaseActivity implements MyTeamContract.View 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         mAdapter = new MyTeamAdapter(context, new ArrayList<>());
-        recyclerView.setAdapter(mAdapter);
+        loadMoreWrapper = new LoadMoreWrapper(mAdapter);
+        recyclerView.setAdapter(loadMoreWrapper);
 
+        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                if (isLoad || loadMoreWrapper.getLoadState() == LoadMoreWrapper.LOADING_END) return;
+                loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING);
+                getMoreData();
+            }
+        });
+    }
+
+    public void getRefreshData() {
+        page = Constant.DEFAULT_PAGE;
+        isLoad = true;
+        isLoadType = 1;
+        mPresenter.getTeamInvite(MySelfInfo.getInstance().getUserId(), page);
+    }
+
+    public void getMoreData() {
+        isLoad = true;
+        page = page + 1;
+        isLoadType = 2;
+        mPresenter.getTeamInvite(MySelfInfo.getInstance().getUserId(), page);
     }
 
     @Override
@@ -105,11 +135,27 @@ public class MyTeamActivity extends BaseActivity implements MyTeamContract.View 
         tv_invite_people.setText(data.getTotalNum() + "");
         tv_invite_valid.setText(data.getInviteNum() + "");
 
-        mAdapter.setData(data.getTeams());
+        List<TeamInviteListBean> datas = data.getTeams();
+
+        if (isLoadType == 1) {
+            mAdapter.setData(datas);
+        } else {
+            mAdapter.addData(datas);
+        }
+        isLoad = false;
+
+        if (datas.size() >= Constant.DEFAULT_SIZE) {
+            loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING_COMPLETE);
+        } else {
+            // 显示加载到底的提示
+            loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING_END);
+        }
     }
 
     @Override
     public void getTeamInviteFailed(String msg) {
         showShortToast(msg);
+        isLoad = false;
+        loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING_COMPLETE);
     }
 }
