@@ -2,6 +2,7 @@ package com.zlyc.www.util.http;
 
 import com.zlyc.www.bean.BaseResponse;
 import com.zlyc.www.bean.EmptyModel;
+import com.zlyc.www.bean.account.MyBillBean;
 import com.zlyc.www.bean.address.AddressBean;
 import com.zlyc.www.bean.coupon.MyCouponBean;
 import com.zlyc.www.bean.coupon.ShopCouponBean;
@@ -118,6 +119,27 @@ public interface HttpService {
     //设置交易密码
     @POST("account/pay_password")
     Observable<BaseResponse<EmptyModel>> payPwd(
+            @Body RequestBody body
+    );
+
+    //京豆账单
+    @POST("account/beans_record")
+    Observable<BaseResponse<MyBillBean>> beansRecord(
+            @Body RequestBody body
+    );
+    //可售额度账单
+    @POST("account/sellable_beans_record")
+    Observable<BaseResponse<MyBillBean>> sellableBeansRecord(
+            @Body RequestBody body
+    );
+    //劳动值账单
+    @POST("account/labor_record")
+    Observable<BaseResponse<MyBillBean>> laborRecord(
+            @Body RequestBody body
+    );
+    //贡献度账单
+    @POST("account/contribution_record")
+    Observable<BaseResponse<MyBillBean>> contributionRecord(
             @Body RequestBody body
     );
     //--------------------account end

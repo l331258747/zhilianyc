@@ -24,6 +24,22 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().payPwd(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+    public static void beansRecord(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().beansRecord(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    public static void sellableBeansRecord(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().sellableBeansRecord(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    public static void laborRecord(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().laborRecord(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    public static void contributionRecord(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().contributionRecord(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
     //--------------------account end
 
 

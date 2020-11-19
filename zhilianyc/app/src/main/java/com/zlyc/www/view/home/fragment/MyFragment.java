@@ -17,8 +17,8 @@ import com.zlyc.www.mvp.my.MyInfoContract;
 import com.zlyc.www.mvp.my.MyInfoPresenter;
 import com.zlyc.www.mvp.my.RealNameStatusContract;
 import com.zlyc.www.mvp.my.RealNameStatusPresenter;
-import com.zlyc.www.util.ToastUtil;
 import com.zlyc.www.util.glide.GlideUtil;
+import com.zlyc.www.view.account.MyBillActivity;
 import com.zlyc.www.view.my.AccountActivity;
 import com.zlyc.www.view.my.MyTeamActivity;
 import com.zlyc.www.view.security.SecurityActivity;
@@ -111,18 +111,26 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
                     startActivity(new Intent(context, SecurityActivity.class));
                     break;
                 case Constant.MY_TAB_ORDER:
+                    startActivity(new Intent(context, MyBillActivity.class));
+                    break;
                 case Constant.MY_TAB_TRANSACTION_DTS:
+                    break;
                 case Constant.MY_TAB_INVITAT:
                     startActivity(new Intent(context, InvitationActivity.class));
                     break;
                 case Constant.MY_TAB_STUDIO:
+                    break;
                 case Constant.MY_TAB_NOTIFY:
+                    break;
                 case Constant.MY_TAB_CHANGE:
+                    break;
                 case Constant.MY_TAB_CLOUD:
+                    break;
                 case Constant.MY_TAB_SHOP:
+                    break;
                 case Constant.MY_TAB_RED_PACKAGE:
+                    break;
                 case Constant.MY_TAB_TASK:
-                    ToastUtil.showShortToast(context, item.getName());
                     break;
             }
         });
@@ -141,9 +149,9 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
     public void mineSuccess(MineBean data) {
         swipe.setRefreshing(false);
 
-        if(TextUtils.isEmpty(data.getHeadImg())){
+        if (TextUtils.isEmpty(data.getHeadImg())) {
             iv_head.setImageResource(R.mipmap.default_head);
-        }else{
+        } else {
             GlideUtil.loadCircleImage(context, data.getHeadImg(), iv_head);
         }
 
