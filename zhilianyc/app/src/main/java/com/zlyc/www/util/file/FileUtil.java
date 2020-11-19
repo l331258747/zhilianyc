@@ -1,8 +1,9 @@
-package com.zlyc.www.util;
+package com.zlyc.www.util.file;
 
 import android.os.Environment;
 
 import com.zlyc.www.constant.Constant;
+import com.zlyc.www.util.AppUtils;
 
 import java.io.File;
 import java.io.IOException;

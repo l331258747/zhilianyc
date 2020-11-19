@@ -6,7 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 
 import com.zlyc.www.constant.Constant;
-import com.zlyc.www.util.FileUtil;
+import com.zlyc.www.util.file.FileUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;

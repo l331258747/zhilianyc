@@ -11,6 +11,7 @@ import com.zlyc.www.R;
 import com.zlyc.www.base.BaseActivity;
 import com.zlyc.www.bean.MySelfInfo;
 import com.zlyc.www.util.StatusBarUtil;
+import com.zlyc.www.util.file.ImageBitmapUtil;
 import com.zlyc.www.util.zxing.ZxingUtils;
 
 import androidx.core.content.ContextCompat;
@@ -20,6 +21,8 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
     TextView tv_invitation_code,btn_Invitation_code,btn_qr_code,btn_link;
 
     ImageView iv_invitation_code;
+
+    Bitmap qrCode;
 
     @Override
     public int getLayoutId() {
@@ -44,7 +47,7 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
         btn_link.setOnClickListener(this);
 
 
-        Bitmap qrCode = ZxingUtils.createQRCode(MySelfInfo.getInstance().getShareUrl());
+        qrCode = ZxingUtils.createQRCode(MySelfInfo.getInstance().getShareUrl());
         iv_invitation_code.setImageBitmap(qrCode);
 
     }
@@ -65,8 +68,7 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
                 });
                 break;
             case R.id.btn_qr_code:
-                showShortToast("保存二维码");
-
+                ImageBitmapUtil.saveBitmap2file(qrCode, getApplicationContext());
                 break;
             case R.id.btn_link:
                 runOnUiThread(() -> {
