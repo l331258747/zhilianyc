@@ -13,6 +13,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.zlyc.www.R;
+import com.zlyc.www.util.AppUtils;
 
 import java.io.File;
 
@@ -113,6 +114,9 @@ public class GlideUtil {
      */
     public static void loadRoundImage(Context context, String url, ImageView imageView, int radius) {
         if(TextUtils.isEmpty(url)) url = "";
+
+        radius = AppUtils.dip2px(radius);
+
         RequestOptions requestOptions = new RequestOptions()
                 .priority(Priority.HIGH)
                 .dontAnimate()

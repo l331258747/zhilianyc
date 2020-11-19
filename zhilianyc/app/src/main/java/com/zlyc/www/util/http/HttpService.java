@@ -11,6 +11,8 @@ import com.zlyc.www.bean.login.MineBean;
 import com.zlyc.www.bean.login.VerifyImageBean;
 import com.zlyc.www.bean.shop.GoodsDetailsBean;
 import com.zlyc.www.bean.shop.HotGoodsBean;
+import com.zlyc.www.bean.shop.OrderDetailBean;
+import com.zlyc.www.bean.shop.OrderListBean;
 import com.zlyc.www.bean.team.RankingBean;
 
 import java.util.List;
@@ -154,6 +156,18 @@ public interface HttpService {
     //查询商品详情
     @POST("shop/goods_detail")
     Observable<BaseResponse<GoodsDetailsBean>> getGoodsDetails(
+            @Body RequestBody body
+    );
+
+    //查看订单列表
+    @POST("shop/order")
+    Observable<BaseResponse<List<OrderListBean>>> getOrderList(
+            @Body RequestBody body
+    );
+
+    //获取订单详情
+    @POST("shop/order_detail")
+    Observable<BaseResponse<OrderDetailBean>> getOrderDetail(
             @Body RequestBody body
     );
     //--------------------shop end

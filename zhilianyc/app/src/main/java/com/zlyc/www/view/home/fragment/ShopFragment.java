@@ -11,6 +11,7 @@ import com.zlyc.www.bean.shop.HotGoodsBean;
 import com.zlyc.www.mvp.shop.HotGoodsContract;
 import com.zlyc.www.mvp.shop.HotGoodsPresenter;
 import com.zlyc.www.view.shop.GoodsDetailsActivity;
+import com.zlyc.www.view.shop.OrderListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ShopFragment extends BaseFragment implements HotGoodsContract.View {
+public class ShopFragment extends BaseFragment implements HotGoodsContract.View, View.OnClickListener {
 
 
     View tab_electrical,tab_hot,tab_studio,tab_foot,tab_life;
@@ -44,6 +45,8 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View 
         tab_foot = $(R.id.tab_foot);
         tab_life = $(R.id.tab_life);
         iv_floating = $(R.id.iv_floating);
+
+        iv_floating.setOnClickListener(this);
 
         initRecycler();
     }
@@ -81,5 +84,15 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View 
     @Override
     public void getHotGoodsFailed(String msg) {
         showShortToast(msg);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_floating:
+                startActivity(new Intent(context, OrderListActivity.class));
+                break;
+
+        }
     }
 }

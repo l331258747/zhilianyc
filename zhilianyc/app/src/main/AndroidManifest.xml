@@ -88,6 +88,12 @@
         <activity
             android:name=".view.team.InvitationRankingActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.shop.OrderListActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.shop.OrderDetailActivity"
+            android:windowSoftInputMode="adjustPan" />
 
 
 <!--        新闻流-->
