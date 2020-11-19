@@ -129,6 +129,14 @@ public class MethodApi {
 
     //--------------------coupon end
 
+    //--------------------team end
+    public static void inviteRanking(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().inviteRanking(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+
+    //--------------------team end
+
     private static RequestBody getRequestBody(Map<String, String> params){
         RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"),
                 new JSONObject(params).toString());

@@ -67,7 +67,13 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodsDetailsCo
 
     @Override
     public void getGoodsDetailsSuccess(GoodsDetailsBean data) {
-        GlideUtil.loadImage(context,data.getImgUrl(),iv_img);
+
+        if(TextUtils.isEmpty(data.getImgUrl())){
+            iv_img.setImageResource(R.mipmap.default_head);
+        }else{
+            GlideUtil.loadImage(context,data.getImgUrl(),iv_img);
+        }
+
         tv_price.setText(data.getPriceStr());
         tv_title.setText(data.getName());
         if(data.getPostage() == 0){

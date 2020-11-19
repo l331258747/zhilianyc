@@ -1,6 +1,7 @@
 package com.zlyc.www.adapter.shop;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,12 @@ public class HotGoodsAdapter extends RecyclerView.Adapter<HotGoodsAdapter.ViewHo
         holder.tv_price.setText(data.getPriceStr());
         holder.tv_num.setText(data.getNumStr());
 
-        GlideUtil.loadTopImage(mContext,data.getImgUrl(),holder.iv_img,20);
+        if(TextUtils.isEmpty(data.getImgUrl())){
+            holder.iv_img.setImageResource(R.mipmap.default_head);
+        }else{
+            GlideUtil.loadTopImage(mContext,data.getImgUrl(),holder.iv_img,20);
+        }
+
 
         if (mOnItemClickListener != null) {
             holder.view_card.setOnClickListener(v -> mOnItemClickListener.onClick(position));

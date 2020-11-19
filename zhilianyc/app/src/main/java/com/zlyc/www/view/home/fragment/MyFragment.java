@@ -141,7 +141,12 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
     public void mineSuccess(MineBean data) {
         swipe.setRefreshing(false);
 
-        GlideUtil.loadCircleImage(context, data.getHeadImg(), iv_head);
+        if(TextUtils.isEmpty(data.getHeadImg())){
+            iv_head.setImageResource(R.mipmap.default_head);
+        }else{
+            GlideUtil.loadCircleImage(context, data.getHeadImg(), iv_head);
+        }
+
         tv_name.setText(data.getNickName());
         tv_UID.setText("UID:" + MySelfInfo.getInstance().getUserId());
         tv_data_all_num.setText(data.getBeans() + "");

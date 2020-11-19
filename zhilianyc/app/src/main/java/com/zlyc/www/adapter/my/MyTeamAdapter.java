@@ -1,6 +1,7 @@
 package com.zlyc.www.adapter.my;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,12 @@ public class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.ViewHolder
         final MyTeamBean data = datas.get(position);
         if (data == null) return;
 
-        GlideUtil.loadCircleImage(mContext,data.getImgUrl(),holder.iv_head);
+        if(TextUtils.isEmpty(data.getImgUrl())){
+            holder.iv_head.setImageResource(R.mipmap.default_head);
+        }else{
+            GlideUtil.loadCircleImage(mContext,data.getImgUrl(),holder.iv_head);
+        }
+
         holder.tv_post.setText(data.getPost());
         holder.tv_people.setText(data.getLaborPersonal() + "");
         holder.tv_team.setText(data.getLaborTeam() + "");

@@ -27,7 +27,7 @@
 
 
     <ImageView
-        android:id="@+id/left_iv"
+        android:id="@+id/iv_back"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_centerVertical="true"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="@+id/view_title" />
 
     <TextView
-        android:id="@+id/title_tv"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_centerHorizontal="true"
@@ -57,9 +57,9 @@
         android:text="邀请好友" />
 
     <TextView
-        android:id="@+id/right_tv"
+        android:id="@+id/tv_ranking"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/dp_10"

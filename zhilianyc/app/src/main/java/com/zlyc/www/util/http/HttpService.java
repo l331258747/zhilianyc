@@ -11,6 +11,7 @@ import com.zlyc.www.bean.login.MineBean;
 import com.zlyc.www.bean.login.VerifyImageBean;
 import com.zlyc.www.bean.shop.GoodsDetailsBean;
 import com.zlyc.www.bean.shop.HotGoodsBean;
+import com.zlyc.www.bean.team.RankingBean;
 
 import java.util.List;
 
@@ -178,6 +179,16 @@ public interface HttpService {
     );
 
     //--------------------coupon end
+
+    //--------------------team start
+    //获取邀请排名
+    @POST("team/invite_ranking")
+    Observable<BaseResponse<List<RankingBean>>> inviteRanking(
+            @Body RequestBody body
+    );
+
+
+    //--------------------team end
 
 
 

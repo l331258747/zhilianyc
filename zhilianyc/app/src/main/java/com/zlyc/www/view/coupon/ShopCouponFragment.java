@@ -56,11 +56,6 @@ public class ShopCouponFragment extends BaseFragment implements ShopCouponContra
     @Override
     public void initData() {
         mPresenter = new ShopCouponPresenter(context,this);
-
-        getRefreshData();
-    }
-
-    private void getRefreshData() {
         mPresenter.getShopCoupon(MySelfInfo.getInstance().getUserId());
     }
 

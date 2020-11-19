@@ -101,7 +101,12 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void infoSuccess(InfoBean data) {
-        GlideUtil.loadCircleImage(context, data.getHeadImg(), iv_head);
+        if(TextUtils.isEmpty(data.getHeadImg())){
+            iv_head.setImageResource(R.mipmap.default_head);
+        }else{
+            GlideUtil.loadCircleImage(context, data.getHeadImg(), iv_head);
+        }
+
         tv_nickname.setText(data.getNickName());
         tv_phone.setText(data.getMobile());
         tv_recommend.setText(data.getPmobile());

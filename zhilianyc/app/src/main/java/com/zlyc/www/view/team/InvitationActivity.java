@@ -2,6 +2,7 @@ package com.zlyc.www.view.team;
 
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,9 +19,9 @@ import androidx.core.content.ContextCompat;
 
 public class InvitationActivity extends BaseActivity implements View.OnClickListener {
 
-    TextView tv_invitation_code,btn_Invitation_code,btn_qr_code,btn_link;
+    TextView tv_invitation_code,btn_Invitation_code,btn_qr_code,btn_link,tv_ranking;
 
-    ImageView iv_invitation_code;
+    ImageView iv_invitation_code,iv_back;
 
     Bitmap qrCode;
 
@@ -40,11 +41,15 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
         btn_qr_code = $(R.id.btn_qr_code);
         btn_link = $(R.id.btn_link);
         iv_invitation_code = $(R.id.iv_invitation_code);
+        tv_ranking = $(R.id.tv_ranking);
+        iv_back = $(R.id.iv_back);
 
 
         btn_Invitation_code.setOnClickListener(this);
         btn_qr_code.setOnClickListener(this);
         btn_link.setOnClickListener(this);
+        iv_back.setOnClickListener(this);
+        tv_ranking.setOnClickListener(this);
 
 
         qrCode = ZxingUtils.createQRCode(MySelfInfo.getInstance().getShareUrl());
@@ -77,7 +82,12 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
                     showShortToast("复制邀请链成功");
                 });
                 break;
-
+            case R.id.iv_back:
+                onBackPressed();
+                break;
+            case R.id.tv_ranking:
+                startActivity(new Intent(context,InvitationRankingActivity.class));
+                break;
         }
     }
 }
