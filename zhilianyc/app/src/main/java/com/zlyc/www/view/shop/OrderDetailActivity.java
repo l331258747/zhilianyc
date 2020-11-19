@@ -120,6 +120,11 @@ public class OrderDetailActivity extends BaseActivity implements OrderDetailCont
         } else {
             GlideUtil.loadRoundImage(context, data.getImgUrl(), iv_img, 5);
         }
+
+        ll_btn.setVisibility(View.GONE);
+        if(data.getType() == 1){
+            ll_btn.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
