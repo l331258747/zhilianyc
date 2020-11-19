@@ -72,7 +72,7 @@ public class OrderListBean {
     public String getTypeStr() {
         switch (type){
             case 1:
-                return "待发货";
+                return "待付款";
             case 2:
                 return "待发货";
             case 3:

@@ -1,5 +1,6 @@
 package com.zlyc.www.view.shop;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.zlyc.www.R;
@@ -30,6 +31,7 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
     private RecyclerView recyclerView;
     private OrderListAdapter mAdapter;
     private OrderListPresenter mPresenter;
+    List<OrderListBean> datas;
 
     public static Fragment newInstance(int orderType) {
         OrderListFragment fragment = new OrderListFragment();
@@ -85,7 +87,9 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
 
             @Override
             public void onItemClick(int position) {
-                showShortToast("订单详情");
+                Intent intent = new Intent(context,OrderDetailActivity.class);
+                intent.putExtra("orderId",datas.get(position).getId());
+                startActivity(intent);
             }
         });
     }
@@ -93,6 +97,7 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
 
     @Override
     public void getOrderListSuccess(List<OrderListBean> data) {
+        this.datas = data;
         mAdapter.setData(data);
     }
 

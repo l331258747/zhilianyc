@@ -1,5 +1,7 @@
 package com.zlyc.www.bean.shop;
 
+import com.zlyc.www.util.StringUtils;
+
 public class OrderDetailBean {
 
 
@@ -32,11 +34,11 @@ public class OrderDetailBean {
     private String imgUrl;
     private String name;
     private int num;
-    private int price;
-    private int sum;
-    private int totalSum;
+    private float price;
+    private float sum;
+    private float totalSum;
     private int type;
-    private int postage;
+    private float postage;
     private String receiveName;
     private String receiveMobile;
     private String receiveAddress;
@@ -67,24 +69,37 @@ public class OrderDetailBean {
         return num;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public int getSum() {
-        return sum;
-    }
-
-    public int getTotalSum() {
-        return totalSum;
-    }
 
     public int getType() {
         return type;
     }
 
-    public int getPostage() {
+    public float getPrice() {
+        return price;
+    }
+
+    public float getSum() {
+        return sum;
+    }
+
+    public String getSumStr() {
+        return StringUtils.getStringNum(sum);
+    }
+
+    public float getTotalSum() {
+        return totalSum;
+    }
+
+    public String getTotalSumStr() {
+        return StringUtils.getStringNum(totalSum);
+    }
+
+    public float getPostage() {
         return postage;
+    }
+
+    public String getPostageStr() {
+        return StringUtils.getStringNum(postage);
     }
 
     public String getReceiveName() {
@@ -137,5 +152,25 @@ public class OrderDetailBean {
 
     public int getAutoReceive() {
         return autoReceive;
+    }
+
+    public String getTypeStr() {
+        switch (type){
+            case 1:
+                return "待付款";
+            case 2:
+                return "待发货";
+            case 3:
+                return "待收货";
+        }
+        return "" + type;
+    }
+
+    public String getNumStr() {
+        return "数量："+num+"件";
+    }
+
+    public String getPriceStr() {
+        return "单价："+ StringUtils.getStringNum(price) +"京豆";
     }
 }
