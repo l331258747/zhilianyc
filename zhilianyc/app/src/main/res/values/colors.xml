@@ -37,6 +37,7 @@
 
 <!--    文字颜色-->
     <color name="color_368feb">#368FEB</color>
+    <color name="color_368feb_99">#99368FEB</color>
     <color name="color_f0f0f0">#f0f0f0</color>
     <color name="color_FF4751">#FF4751</color>
 

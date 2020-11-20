@@ -23,6 +23,7 @@ allprojects {
         maven {
             url "https://dl.bintray.com/sunjiangrong/maven"
         }
+        maven { url 'https://jitpack.io' }
     }
 }
 

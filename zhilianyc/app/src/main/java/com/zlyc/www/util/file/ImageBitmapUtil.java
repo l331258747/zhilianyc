@@ -46,7 +46,7 @@ public class ImageBitmapUtil {
         return UUID.randomUUID().toString();
     }
  
-    private static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/OA头像/";
+    public static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/OA头像/";
  
     public static void saveBitmap2file(Bitmap bmp, Context context) {
  

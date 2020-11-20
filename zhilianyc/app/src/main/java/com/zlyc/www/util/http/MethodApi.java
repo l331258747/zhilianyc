@@ -28,18 +28,22 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().payPwd(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void beansRecord(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().beansRecord(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void sellableBeansRecord(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().sellableBeansRecord(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void laborRecord(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().laborRecord(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void contributionRecord(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().contributionRecord(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -62,6 +66,7 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().mine(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void realNameStatus(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().realNameStatus(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -71,10 +76,12 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().info(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void resetNickname(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().resetNickname(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void authRealName(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().authRealName(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -85,10 +92,12 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().login(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void register(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().register(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void forgetPwd(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().forgetPwd(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -106,14 +115,17 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().addressList(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void addressAdd(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().addressAdd(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void addressEdit(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().addressEdit(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void addressDelete(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().addressDelete(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -126,14 +138,17 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().getHotGoods(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void getGoodsDetails(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().getGoodsDetails(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void getOrderList(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().getOrderList(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void getOrderDetail(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().getOrderDetail(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -146,10 +161,12 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().getMyCoupon(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void getShopCoupon(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().getShopCoupon(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void buyShopCoupon(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().buyShopCoupon(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -162,10 +179,12 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().inviteRanking(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void getTeamDetail(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().getTeamDetail(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void getTeamInvite(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().getTeamInvite(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -179,28 +198,47 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().getMyOtcList(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void getOtcDetail(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().getOtcDetail(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
-    public static void getOtcVoucher(String uid,String beansSendId, File file, DisposableObserver subscriber) {
+
+    public static void getOtcVoucher(String uid, String beansSendId, String file, DisposableObserver subscriber) {
         MultipartBody.Part part = fileToMultipartBodyParts(file);
-        Observable observable = HttpMethods.getInstance().getHttpService().getOtcVoucher(getStringPart(uid),getStringPart(beansSendId),part); //在HttpServer中
+        Observable observable = HttpMethods.getInstance().getHttpService().getOtcVoucher(getStringPart(uid), getStringPart(beansSendId), part); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void getOtcCheck(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().getOtcCheck(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+
     public static void getOtcHandle(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().getOtcHandle(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+
+    public static void getOtcInfo(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().getOtcInfo(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+
+    public static void getOtcList(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().getOtcList(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+
+    public static void getOtcOpen(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().getOtcOpen(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
 
 
     //--------------------otc end
 
-    private static RequestBody getRequestBody(Map<String, String> params){
+    private static RequestBody getRequestBody(Map<String, String> params) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"),
                 new JSONObject(params).toString());
         return requestBody;
@@ -217,13 +255,14 @@ public class MethodApi {
         return parts;
     }
 
-    private static MultipartBody.Part fileToMultipartBodyParts(File file) {
-            RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), file);
-            MultipartBody.Part part = MultipartBody.Part.createFormData("files", file.getName(), requestBody);
+    private static MultipartBody.Part fileToMultipartBodyParts(String fileStr) {
+        File file = new File(fileStr);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), file);
+        MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
         return part;
     }
 
-    private static RequestBody getStringPart(String str){
+    private static RequestBody getStringPart(String str) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), str);
         return requestBody;
     }

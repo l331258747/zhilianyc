@@ -13,6 +13,8 @@ import com.zlyc.www.bean.login.MineBean;
 import com.zlyc.www.bean.login.VerifyImageBean;
 import com.zlyc.www.bean.otc.MyOtcListBean;
 import com.zlyc.www.bean.otc.OtcDetailBean;
+import com.zlyc.www.bean.otc.OtcInfoBean;
+import com.zlyc.www.bean.otc.OtcListBean;
 import com.zlyc.www.bean.shop.GoodsDetailsBean;
 import com.zlyc.www.bean.shop.HotGoodsBean;
 import com.zlyc.www.bean.shop.OrderDetailBean;
@@ -77,6 +79,7 @@ public interface HttpService {
     Observable<BaseResponse<MineBean>> mine(
             @Body RequestBody body
     );
+
     //实名状态
     @POST("user/real_name_status")
     Observable<BaseResponse<String>> realNameStatus(
@@ -89,11 +92,13 @@ public interface HttpService {
     Observable<BaseResponse<LoginBean>> login(
             @Body RequestBody body
     );
+
     //注册
     @POST("user/register")
     Observable<BaseResponse<EmptyModel>> register(
             @Body RequestBody body
     );
+
     //忘记密码
     @POST("user/forget_password")
     Observable<BaseResponse<EmptyModel>> forgetPwd(
@@ -120,7 +125,6 @@ public interface HttpService {
     //--------------------user end
 
 
-
     //--------------------account start
     //设置交易密码
     @POST("account/pay_password")
@@ -133,16 +137,19 @@ public interface HttpService {
     Observable<BaseResponse<MyBillBean>> beansRecord(
             @Body RequestBody body
     );
+
     //可售额度账单
     @POST("account/sellable_beans_record")
     Observable<BaseResponse<MyBillBean>> sellableBeansRecord(
             @Body RequestBody body
     );
+
     //劳动值账单
     @POST("account/labor_record")
     Observable<BaseResponse<MyBillBean>> laborRecord(
             @Body RequestBody body
     );
+
     //贡献度账单
     @POST("account/contribution_record")
     Observable<BaseResponse<MyBillBean>> contributionRecord(
@@ -157,16 +164,19 @@ public interface HttpService {
     Observable<BaseResponse<List<AddressBean>>> addressList(
             @Body RequestBody body
     );
+
     //添加我的收货地址
     @POST("address/add")
     Observable<BaseResponse<EmptyModel>> addressAdd(
             @Body RequestBody body
     );
+
     //编辑我的收货地址
     @POST("address/edit")
     Observable<BaseResponse<EmptyModel>> addressEdit(
             @Body RequestBody body
     );
+
     //删除我的收货地址
     @POST("address/delete")
     Observable<BaseResponse<EmptyModel>> addressDelete(
@@ -251,11 +261,13 @@ public interface HttpService {
     Observable<BaseResponse<BasePageModel<MyOtcListBean>>> getMyOtcList(
             @Body RequestBody body
     );
+
     //查询订单详情
     @POST("otc/order_detail")
     Observable<BaseResponse<OtcDetailBean>> getOtcDetail(
             @Body RequestBody body
     );
+
     //上传付款凭证
     @Multipart
     @POST("otc/payproof_uploads")
@@ -278,9 +290,30 @@ public interface HttpService {
     );
 
 
+    //获取当前OTC交易的整体信息
+    @POST("otc/info")
+    Observable<BaseResponse<OtcInfoBean>> getOtcInfo(
+            @Body RequestBody body
+    );
+
+    //处理OTC订单
+    @POST("otc/list")
+    Observable<BaseResponse<BasePageModel<OtcListBean>>> getOtcList(
+            @Body RequestBody body
+    );
+
+    //获取当前开放的渠道 当前otc可以的交易方式，
+    // 0 只开求购通道
+    // 1 只开转让通道
+    // 2 两个通道都开
+    // 当为0时候、app前端只开放求购渠道 当为1时候、app前端只开放转让渠道 当为2时候、app前端转让和求购的渠道都开放创
+    @POST("otc/open")
+    Observable<BaseResponse<String>> getOtcOpen(
+            @Body RequestBody body
+    );
+
+
     //--------------------otc end
-
-
 
 
 }

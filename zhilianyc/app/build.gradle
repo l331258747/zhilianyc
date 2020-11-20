@@ -85,6 +85,8 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
     //textview标签
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    //mpandroichart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 //    implementation 'com.android.support:multidex:1.0.3'
 

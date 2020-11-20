@@ -70,6 +70,7 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
     public void getOtcDetailSuccess(OtcDetailBean data) {
         tv_status.setText(data.getSendStatusStr());
         tv_count_down.setText("倒计时。。。");
+
         tv_No.setText(data.getId());
         tv_seller.setText(data.getSendName());
         tv_buyer.setText(data.getReceiveName());
@@ -211,7 +212,8 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
 
     //上传凭证 TODO
     private void sendVoucher() {
-//        mPresenter.getOtcVoucher(MySelfInfo.getInstance().getUserId(),beansSendId,);
+//        mPresenter.getOtcVoucher(MySelfInfo.getInstance().getUserId(),beansSendId, ImageBitmapUtil.SD_PATH + "111.JPG");
+
     }
 
     //otc sendStatus 0已成交1订单已发起2订单已锁定3卖方已放豆4买方已付款5卖方确认7卖方申诉中9用户撤回10系统撤回11系统解除申诉
