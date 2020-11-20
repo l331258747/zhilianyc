@@ -100,6 +100,9 @@
         <activity
             android:name=".view.otc.MyOtcListActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.otc.OtcDetailActivity"
+            android:windowSoftInputMode="adjustPan" />
 
 
 <!--        新闻流-->

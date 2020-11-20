@@ -12,6 +12,7 @@ import com.zlyc.www.bean.login.LoginBean;
 import com.zlyc.www.bean.login.MineBean;
 import com.zlyc.www.bean.login.VerifyImageBean;
 import com.zlyc.www.bean.otc.MyOtcListBean;
+import com.zlyc.www.bean.otc.OtcDetailBean;
 import com.zlyc.www.bean.shop.GoodsDetailsBean;
 import com.zlyc.www.bean.shop.HotGoodsBean;
 import com.zlyc.www.bean.shop.OrderDetailBean;
@@ -245,6 +246,11 @@ public interface HttpService {
     //我的OTC订单列表
     @POST("otc/my_otc_list")
     Observable<BaseResponse<BasePageModel<MyOtcListBean>>> getMyOtcList(
+            @Body RequestBody body
+    );
+    //查询订单详情
+    @POST("otc/order_detail")
+    Observable<BaseResponse<OtcDetailBean>> getOtcDetail(
             @Body RequestBody body
     );
 

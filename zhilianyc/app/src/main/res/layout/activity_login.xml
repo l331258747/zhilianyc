@@ -349,6 +349,14 @@
                     app:layout_constraintEnd_toEndOf="@+id/et_invite"
                     app:layout_constraintStart_toStartOf="@+id/iv_invite" />
 
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_50"
+                    app:layout_constraintTop_toBottomOf="@+id/et_invite"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -1,5 +1,7 @@
 package com.zlyc.www.view.otc;
 
+import android.content.Intent;
+
 import com.zlyc.www.R;
 import com.zlyc.www.adapter.base.EndlessRecyclerOnScrollListener;
 import com.zlyc.www.adapter.base.LoadMoreWrapper;
@@ -24,6 +26,7 @@ public class MyOtcListActivity extends BaseActivity implements MyOtcListContract
     public SwipeRefreshLayout swipeRefreshLayout;
     private MyOtcListAdapter mAdapter;
     private MyOtcListPresenter mPresenter;
+    List<MyOtcListBean> datas;
 
     int page;
     LoadMoreWrapper loadMoreWrapper;
@@ -73,7 +76,12 @@ public class MyOtcListActivity extends BaseActivity implements MyOtcListContract
         recyclerView.setAdapter(loadMoreWrapper);
 
         mAdapter.setOnItemClickListener(position -> {
+            MyOtcListBean item = datas.get(position);
 
+            intent = new Intent(context,OtcDetailActivity.class);
+            intent.putExtra("orderType",item.getOrderType());
+            intent.putExtra("beansSendId",item.getId());
+            startActivity(intent);
         });
 
         recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
@@ -98,7 +106,7 @@ public class MyOtcListActivity extends BaseActivity implements MyOtcListContract
 
     @Override
     public void getMyOtcListSuccess(List<MyOtcListBean> data) {
-        List<MyOtcListBean> datas = data;
+        this.datas = data;
 
         swipeRefreshLayout.setRefreshing(false);
 
