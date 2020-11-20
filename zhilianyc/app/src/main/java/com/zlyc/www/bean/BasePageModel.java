@@ -10,58 +10,30 @@ import java.util.List;
 
 public class BasePageModel<T> {
 
-    private int totalCount;
-    private int pageSize;
-    private int totalPage;
-    private int currPage;
+    private  int total;
+    private int current;
+    private int pages;
+    private int size;
     private List<T> list;
-    private List<T> data;
 
-    public List<T> getData() {
-        return data;
+
+    public int getTotal() {
+        return total;
     }
 
-    public void setData(List<T> data) {
-        this.data = data;
+    public int getCurrent() {
+        return current;
     }
 
-    public int getTotalCount() {
-        return totalCount;
+    public int getPages() {
+        return pages;
     }
 
-    public void setTotalCount(int totalCount) {
-        this.totalCount = totalCount;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public int getTotalPage() {
-        return totalPage;
-    }
-
-    public void setTotalPage(int totalPage) {
-        this.totalPage = totalPage;
-    }
-
-    public int getCurrPage() {
-        return currPage;
-    }
-
-    public void setCurrPage(int currPage) {
-        this.currPage = currPage;
+    public int getSize() {
+        return size;
     }
 
     public List<T> getList() {
         return list;
-    }
-
-    public void setList(List<T> list) {
-        this.list = list;
     }
 }

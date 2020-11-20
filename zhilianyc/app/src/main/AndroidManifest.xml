@@ -97,6 +97,9 @@
         <activity
             android:name=".view.account.MyBillActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.otc.MyOtcListActivity"
+            android:windowSoftInputMode="adjustPan" />
 
 
 <!--        新闻流-->

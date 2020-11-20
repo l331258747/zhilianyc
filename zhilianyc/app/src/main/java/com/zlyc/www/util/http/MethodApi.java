@@ -167,7 +167,15 @@ public class MethodApi {
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
 
+
     //--------------------team end
+
+    //--------------------otc end
+    public static void getMyOtcList(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().getMyOtcList(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    //--------------------otc end
 
     private static RequestBody getRequestBody(Map<String, String> params){
         RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"),

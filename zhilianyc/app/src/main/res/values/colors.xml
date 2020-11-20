@@ -18,6 +18,7 @@
 
     <color name="color_99">#999999</color>
     <color name="color_66">#666666</color>
+    <color name="color_66_33">#33666666</color>
     <color name="color_4b">#4b4b4b</color>
     <color name="color_4b_66">#664b4b4b</color>
     <color name="color_red">#FF0000</color>
@@ -42,7 +43,9 @@
 <!--    背景色-->
     <color name="color_cc">#cccccc</color>
     <color name="color_61B53F">#61B53F</color>
+    <color name="color_61B53F_33">#3361B53F</color>
     <color name="color_FFF0F0">#FFF0F0</color>
+    <color name="color_E5F2FF">#E5F2FF</color>
 
 <!--    阴影-->
     <color name="color_1139638F">#1139638F</color>
