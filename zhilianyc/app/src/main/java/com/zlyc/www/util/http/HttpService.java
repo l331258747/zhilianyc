@@ -24,9 +24,12 @@ import com.zlyc.www.bean.team.TeamInviteBean;
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 /**
  * Created by LGQ
@@ -251,6 +254,26 @@ public interface HttpService {
     //查询订单详情
     @POST("otc/order_detail")
     Observable<BaseResponse<OtcDetailBean>> getOtcDetail(
+            @Body RequestBody body
+    );
+    //上传付款凭证
+    @Multipart
+    @POST("otc/payproof_uploads")
+    Observable<BaseResponse<EmptyModel>> getOtcVoucher(
+            @Part("uid") RequestBody uid,
+            @Part("beansSendId") RequestBody beansSendId,
+            @Part MultipartBody.Part file
+    );
+
+    //在点击买卖时校验订单是否有效
+    @POST("otc/capture_order")
+    Observable<BaseResponse<EmptyModel>> getOtcCheck(
+            @Body RequestBody body
+    );
+
+    //处理OTC订单
+    @POST("otc/deal_otc")
+    Observable<BaseResponse<EmptyModel>> getOtcHandle(
             @Body RequestBody body
     );
 

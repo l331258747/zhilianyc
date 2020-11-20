@@ -2,11 +2,15 @@ package com.zlyc.www.util.http;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 /**
@@ -179,11 +183,48 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().getOtcDetail(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+    public static void getOtcVoucher(String uid,String beansSendId, File file, DisposableObserver subscriber) {
+        MultipartBody.Part part = fileToMultipartBodyParts(file);
+        Observable observable = HttpMethods.getInstance().getHttpService().getOtcVoucher(getStringPart(uid),getStringPart(beansSendId),part); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    public static void getOtcCheck(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().getOtcCheck(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    public static void getOtcHandle(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().getOtcHandle(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+
+
     //--------------------otc end
 
     private static RequestBody getRequestBody(Map<String, String> params){
         RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"),
                 new JSONObject(params).toString());
+        return requestBody;
+    }
+
+    private static List<MultipartBody.Part> filesToMultipartBodyParts(List<String> files) {
+        List<MultipartBody.Part> parts = new ArrayList<>(files.size());
+        for (String fileStr : files) {
+            File file = new File(fileStr);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), file);
+            MultipartBody.Part part = MultipartBody.Part.createFormData("files", file.getName(), requestBody);
+            parts.add(part);
+        }
+        return parts;
+    }
+
+    private static MultipartBody.Part fileToMultipartBodyParts(File file) {
+            RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), file);
+            MultipartBody.Part part = MultipartBody.Part.createFormData("files", file.getName(), requestBody);
+        return part;
+    }
+
+    private static RequestBody getStringPart(String str){
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), str);
         return requestBody;
     }
 
