@@ -124,7 +124,7 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
     public void setBtn(TextView btn, int max, int num){
         if(max <= num){
             btn.setText("已完成");
-            btn.setBackgroundResource(R.color.color_cc);
+            btn.setBackgroundResource(R.drawable.btn_cc_r40);
         }else{
             btn.setText("去完成");
             btn.setBackgroundResource(R.drawable.bg_gradients_btn_368feb);
