@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class OrderListFragment  extends BaseFragment implements OrderListContract.View {
 
@@ -27,6 +28,8 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
     public static final int ORDER_RECEIVING = 3;
 
     private int orderType;
+
+    SwipeRefreshLayout swipe;
 
     private RecyclerView recyclerView;
     private OrderListAdapter mAdapter;
@@ -57,13 +60,30 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
 
     @Override
     public void initView() {
+        swipe = $(R.id.swipe);
+
+        initSwipe();
         initRecycler();
+
+    }
+
+    private void initSwipe() {
+        swipe = $(R.id.swipe);
+        swipe.setColorSchemeResources(R.color.color_1C81E9);
+        swipe.setOnRefreshListener(() -> {
+            getRefreshData();
+        });
+    }
+
+    public void getRefreshData() {
+        swipe.setRefreshing(true);
+        mPresenter.getOrderList(MySelfInfo.getInstance().getUserId(),orderType);
     }
 
     @Override
     public void initData() {
         mPresenter = new OrderListPresenter(context,this);
-        mPresenter.getOrderList(MySelfInfo.getInstance().getUserId(),orderType);
+        getRefreshData();
     }
 
 
@@ -100,10 +120,13 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
         if(data == null) data = new ArrayList<>();
         this.datas = data;
         mAdapter.setData(data);
+
+        swipe.setRefreshing(false);
     }
 
     @Override
     public void getOrderListFailed(String msg) {
         showLongToast(msg);
+        swipe.setRefreshing(false);
     }
 }

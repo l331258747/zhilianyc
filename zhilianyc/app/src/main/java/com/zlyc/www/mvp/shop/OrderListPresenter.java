@@ -39,6 +39,6 @@ public class OrderListPresenter implements OrderListContract.Presenter {
         params.put("uid",uid);
         params.put("type",type+"");
 
-        MethodApi.getOrderList(params, new OnSuccessAndFaultSub(listener, context));
+        MethodApi.getOrderList(params, new OnSuccessAndFaultSub(listener, context,false));
     }
 }
