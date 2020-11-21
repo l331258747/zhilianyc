@@ -97,6 +97,7 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
 
     @Override
     public void getOrderListSuccess(List<OrderListBean> data) {
+        if(data == null) data = new ArrayList<>();
         this.datas = data;
         mAdapter.setData(data);
     }

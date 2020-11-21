@@ -1,5 +1,6 @@
 package com.zlyc.www.bean.account;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyBillBean {
@@ -25,6 +26,7 @@ public class MyBillBean {
     }
 
     public List<MyBillListBean> getList() {
+        if(list == null) return new ArrayList<>();
         return list;
     }
 }

@@ -76,6 +76,7 @@ public class ShopCouponFragment extends BaseFragment implements ShopCouponContra
 
     @Override
     public void getShopCouponSuccess(List<ShopCouponBean> data) {
+        if(data == null) data = new ArrayList<>();
         datas = data;
         mAdapter.setData(datas);
     }

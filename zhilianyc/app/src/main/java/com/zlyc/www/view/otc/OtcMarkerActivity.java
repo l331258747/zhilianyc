@@ -286,6 +286,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
 
     @Override
     public void getOtcListSuccess(List<OtcListBean> datas) {
+        if(datas == null) datas = new ArrayList<>();
         this.datas = datas;
 
         swipe.setRefreshing(false);

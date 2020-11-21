@@ -77,6 +77,7 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View,
 
     @Override
     public void getHotGoodsSuccess(List<HotGoodsBean> data) {
+        if(data == null) data = new ArrayList<>();
         this.datas = data;
         mAdapter.setData(data);
     }

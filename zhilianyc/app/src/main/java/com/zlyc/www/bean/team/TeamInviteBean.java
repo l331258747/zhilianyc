@@ -1,5 +1,6 @@
 package com.zlyc.www.bean.team;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TeamInviteBean {
@@ -29,6 +30,7 @@ public class TeamInviteBean {
     }
 
     public List<TeamInviteListBean> getTeams() {
+        if(teams == null) return new ArrayList<>();
         return teams;
     }
 }

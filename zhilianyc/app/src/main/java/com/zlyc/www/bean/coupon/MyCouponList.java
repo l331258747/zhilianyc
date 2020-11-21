@@ -14,17 +14,29 @@ public class MyCouponList {
      * type : 2
      */
 
-    private int totalCount;
+    private float totalCount;
     private String time;
-    private int dailyRelease;
-    private int labor;
+    private float dailyRelease;
+    private float labor;
     private int remainDay;
-    private int beans;
+    private float beans;
     private String name;
     private int type;
 
-    public int getTotalCount() {
+    public float getTotalCount() {
         return totalCount;
+    }
+
+    public float getDailyRelease() {
+        return dailyRelease;
+    }
+
+    public float getLabor() {
+        return labor;
+    }
+
+    public float getBeans() {
+        return beans;
     }
 
     public String getTotalCountStr() {
@@ -35,16 +47,10 @@ public class MyCouponList {
         return time;
     }
 
-    public int getDailyRelease() {
-        return dailyRelease;
-    }
     public String getDailyReleaseStr() {
         return dailyRelease + "京豆/天";
     }
 
-    public int getLabor() {
-        return labor;
-    }
     public String getLaborStr() {
         if(labor > 0){
             return "+" + labor;
@@ -62,9 +68,6 @@ public class MyCouponList {
         return "剩余" + remainDay + "天";
     }
 
-    public int getBeans() {
-        return beans;
-    }
 
     public String getName() {
         return name;

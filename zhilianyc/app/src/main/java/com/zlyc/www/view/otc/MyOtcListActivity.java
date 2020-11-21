@@ -106,6 +106,7 @@ public class MyOtcListActivity extends BaseActivity implements MyOtcListContract
 
     @Override
     public void getMyOtcListSuccess(List<MyOtcListBean> data) {
+        if(data == null) data = new ArrayList<>();
         this.datas = data;
 
         swipeRefreshLayout.setRefreshing(false);

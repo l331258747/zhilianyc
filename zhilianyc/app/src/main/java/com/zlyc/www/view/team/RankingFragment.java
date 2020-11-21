@@ -71,6 +71,7 @@ public class RankingFragment extends BaseFragment implements RankingContract.Vie
 
     @Override
     public void inviteRankingSuccess(List<RankingBean> data) {
+        if(data == null) data = new ArrayList<>();
         mAdapter.setData(data);
     }
 
