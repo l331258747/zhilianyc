@@ -42,6 +42,6 @@ public class OtcSellPresenter implements OtcSellContract.Presenter {
         params.put("payPassword", payPassword);
         params.put("vcode", vcode);
 
-        MethodApi.sendOtcBuy(params, new OnSuccessAndFaultSub(listener, context));
+        MethodApi.sendOtcSell(params, new OnSuccessAndFaultSub(listener, context));
     }
 }

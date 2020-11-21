@@ -25,6 +25,7 @@ import com.zlyc.www.view.otc.MyOtcListActivity;
 import com.zlyc.www.view.otc.OtcMarkerActivity;
 import com.zlyc.www.view.security.SecurityActivity;
 import com.zlyc.www.view.team.InvitationActivity;
+import com.zlyc.www.view.user.MyTaskActivity;
 
 import java.util.List;
 
@@ -46,6 +47,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
 
     MyInfoPresenter mPresenter;
     RealNameStatusPresenter rnsPresenter;
+
+    MineBean data;
 
     @Override
     public int getLayoutId() {
@@ -135,6 +138,15 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
                 case Constant.MY_TAB_RED_PACKAGE:
                     break;
                 case Constant.MY_TAB_TASK:
+                    Intent intent = new Intent(context, MyTaskActivity.class);
+
+                    if(data != null){
+                        intent.putExtra("beans",data.getBeans());
+                        intent.putExtra("todayBeans",data.getTodayBeans());
+                        intent.putExtra("sellableBeans",data.getSellableBeans());
+                        startActivity(intent);
+                    }
+
                     break;
             }
         });
@@ -153,6 +165,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
     public void mineSuccess(MineBean data) {
         swipe.setRefreshing(false);
 
+        this.data = data;
+
         if (TextUtils.isEmpty(data.getHeadImg())) {
             iv_head.setImageResource(R.mipmap.default_head);
         } else {
@@ -161,11 +175,11 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
 
         tv_name.setText(data.getNickName());
         tv_UID.setText("UID:" + MySelfInfo.getInstance().getUserId());
-        tv_data_all_num.setText(data.getBeans() + "");
-        tv_data_today_num.setText(data.getTodayBeans() + "");
-        tv_data_use_num.setText(data.getSellableBeans() + "");
-        tv_data_contribution_num.setText(data.getContribution() + "");
-        tv_data_labour_num.setText(data.getLabor() + "");
+        tv_data_all_num.setText(data.getBeans());
+        tv_data_today_num.setText(data.getTodayBeans());
+        tv_data_use_num.setText(data.getSellableBeans());
+        tv_data_contribution_num.setText(data.getContribution());
+        tv_data_labour_num.setText(data.getLabor());
 
         if (!TextUtils.isEmpty(data.getCityPartnerName())) {
             tv_region.setText(data.getCityPartnerName());

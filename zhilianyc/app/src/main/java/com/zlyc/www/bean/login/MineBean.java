@@ -1,5 +1,7 @@
 package com.zlyc.www.bean.login;
 
+import com.zlyc.www.util.StringUtils;
+
 public class MineBean {
 
 
@@ -58,32 +60,32 @@ public class MineBean {
         return cityPartnerName;
     }
 
-    public int getContribution() {
-        return new Double(contribution).intValue();
+    public String getContribution() {
+        return StringUtils.getStringNum(contribution);
     }
 
     public String getContributionRank() {
         return contributionRank;
     }
 
-    public int getLabor() {
-        return new Double(labor).intValue();
+    public String getLabor() {
+        return StringUtils.getStringNum(labor);
     }
 
-    public int getExtraLabor() {
-        return new Double(extraLabor).intValue();
+    public String getExtraLabor() {
+        return StringUtils.getStringNum(extraLabor);
     }
 
-    public int getBeans() {
-        return new Double(beans).intValue();
+    public String getBeans() {
+        return StringUtils.getStringNum(beans);
     }
 
-    public int getSellableBeans() {
-        return new Double(sellableBeans).intValue();
+    public String getSellableBeans() {
+        return StringUtils.getStringNum(sellableBeans);
     }
 
-    public int getTodayBeans() {
-        return new Double(todayBeans).intValue();
+    public String getTodayBeans() {
+        return StringUtils.getStringNum(todayBeans);
     }
 
     public int getMiddleman() {

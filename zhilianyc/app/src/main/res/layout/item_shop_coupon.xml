@@ -63,7 +63,7 @@
         android:text="1/8"/>
 
     <TextView
-        android:id="@+id/tv_1"
+        android:id="@+id/tv_task_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/color_99"
@@ -77,9 +77,9 @@
         android:id="@+id/tv_dailyRelease"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_1"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_task_all"
         android:textSize="@dimen/sp_12"
-        app:layout_constraintStart_toEndOf="@id/tv_1"
+        app:layout_constraintStart_toEndOf="@id/tv_task_all"
         android:layout_marginStart="@dimen/dp_10"
         tools:text="3.0京豆/天"/>
 
@@ -89,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/color_99"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_1"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_task_all"
         android:layout_marginTop="@dimen/dp_20"
         android:textSize="@dimen/sp_12"
         app:layout_constraintStart_toStartOf="@id/gl_end_140"
@@ -110,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/color_99"
-        app:layout_constraintTop_toBottomOf="@+id/tv_1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_task_all"
         android:layout_marginTop="@dimen/dp_15"
         android:textSize="@dimen/sp_12"
         app:layout_constraintStart_toStartOf="@id/gl_start_15"

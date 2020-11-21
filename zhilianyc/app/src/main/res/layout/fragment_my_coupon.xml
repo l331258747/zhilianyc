@@ -31,7 +31,7 @@
 
 
     <TextView
-        android:id="@+id/tv_1"
+        android:id="@+id/tv_task_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_12"
@@ -46,8 +46,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_12"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_1"
-        app:layout_constraintStart_toEndOf="@+id/tv_1"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_task_all"
+        app:layout_constraintStart_toEndOf="@+id/tv_task_all"
         android:layout_marginStart="@dimen/dp_10"
         tools:text="3.0京豆/天"/>
 
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_12"
         android:textColor="@color/color_cc"
-        app:layout_constraintBottom_toBottomOf="@id/tv_1"
+        app:layout_constraintBottom_toBottomOf="@id/tv_task_all"
         app:layout_constraintStart_toEndOf="@+id/tv_output"
         android:text="（通过每日浏览任务分3次释放）"/>
 
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:text="增加劳动值"
-        app:layout_constraintTop_toBottomOf="@+id/tv_1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_task_all"
         app:layout_constraintStart_toStartOf="@id/gl_start_15"
         android:textSize="@dimen/sp_12"
         android:textColor="@color/color_99"/>

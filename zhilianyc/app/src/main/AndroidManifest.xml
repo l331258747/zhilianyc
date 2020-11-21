@@ -106,6 +106,9 @@
         <activity
             android:name=".view.otc.OtcMarkerActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.user.MyTaskActivity"
+            android:windowSoftInputMode="adjustPan" />
 
 
 <!--        新闻流-->

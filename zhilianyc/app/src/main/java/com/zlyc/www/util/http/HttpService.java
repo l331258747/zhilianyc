@@ -22,6 +22,7 @@ import com.zlyc.www.bean.shop.OrderListBean;
 import com.zlyc.www.bean.team.MyTeamDetailBean;
 import com.zlyc.www.bean.team.RankingBean;
 import com.zlyc.www.bean.team.TeamInviteBean;
+import com.zlyc.www.bean.user.TaskBean;
 
 import java.util.List;
 
@@ -326,6 +327,14 @@ public interface HttpService {
 
 
     //--------------------otc end
+
+    //--------------------user end
+    @POST("user/mission")
+    Observable<BaseResponse<TaskBean>> getTask(
+            @Body RequestBody body
+    );
+
+    //--------------------user end
 
 
 }

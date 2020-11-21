@@ -243,7 +243,15 @@ public class MethodApi {
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
 
+
     //--------------------otc end
+
+    //--------------------user end
+    public static void getTask(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().getTask(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    //--------------------user end
 
     private static RequestBody getRequestBody(Map<String, String> params) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"),
