@@ -64,36 +64,34 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_todayTradeNum"
                     tools:text="求购单" />
 
-                <View
+                <LinearLayout
                     android:id="@+id/view_change"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_change"
-                    app:layout_constraintEnd_toEndOf="@id/tv_change"
-                    app:layout_constraintStart_toStartOf="@+id/iv_change"
-                    app:layout_constraintTop_toTopOf="@id/iv_change" />
-
-                <TextView
-                    android:id="@+id/tv_change"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/sp_15"
-                    android:textColor="@color/color_99"
-                    android:textSize="@dimen/sp_12"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@id/iv_img"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/iv_img"
-                    tools:text="我要转让" />
+                    tools:visibility="visible">
 
-                <ImageView
-                    android:id="@+id/iv_change"
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="@dimen/dp_30"
-                    android:src="@mipmap/ic_otc_radio"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_change"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_change"
-                    app:layout_constraintTop_toTopOf="@id/tv_change" />
+                    <ImageView
+                        android:id="@+id/iv_change"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_30"
+                        android:src="@mipmap/ic_otc_radio" />
 
+                    <TextView
+                        android:id="@+id/tv_change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_99"
+                        android:textSize="@dimen/sp_12"
+                        tools:text="我要转让" />
+
+                </LinearLayout>
 
                 <View
                     android:id="@+id/view_tab"
@@ -131,11 +129,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
                     android:includeFontPadding="false"
-                    android:text="25"
                     android:textSize="@dimen/sp_18"
                     app:layout_constraintEnd_toEndOf="@id/view_height"
                     app:layout_constraintStart_toStartOf="@+id/view_height"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_height_tlt" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_height_tlt"
+                    tools:text="25" />
 
                 <View
                     android:id="@+id/view_low"
@@ -163,11 +161,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
                     android:includeFontPadding="false"
-                    android:text="25"
                     android:textSize="@dimen/sp_18"
                     app:layout_constraintEnd_toEndOf="@id/view_low"
                     app:layout_constraintStart_toStartOf="@+id/view_low"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_low_tlt" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_low_tlt"
+                    tools:text="25" />
 
                 <View
                     android:id="@+id/view_amount"
@@ -195,21 +193,35 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
                     android:includeFontPadding="false"
-                    android:text="25"
                     android:textSize="@dimen/sp_18"
                     app:layout_constraintEnd_toEndOf="@id/view_amount"
                     app:layout_constraintStart_toStartOf="@+id/view_amount"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_amount_tlt" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_amount_tlt"
+                    tools:text="25" />
 
+
+                <View
+                    android:id="@+id/view_lineChart"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_200"
+                    android:layout_marginTop="@dimen/sp_20"
+                    android:background="@color/color_f5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view_tab" />
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChart"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_200"
-                    android:layout_marginTop="@dimen/sp_20"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view_tab" />
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:layout_marginStart="@dimen/dp_50"
+                    android:layout_marginEnd="@dimen/dp_50"
+                    app:layout_constraintBottom_toBottomOf="@+id/view_lineChart"
+                    app:layout_constraintEnd_toEndOf="@+id/view_lineChart"
+                    app:layout_constraintStart_toStartOf="@+id/view_lineChart"
+                    app:layout_constraintTop_toTopOf="@+id/view_lineChart" />
 
 
                 <View
@@ -221,18 +233,18 @@
                     app:layout_constraintTop_toBottomOf="@id/lineChart" />
 
                 <LinearLayout
-                    android:id="@+id/tab_login"
+                    android:id="@+id/tab_bulk"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
                     android:layout_marginStart="@dimen/dp_15"
                     android:layout_marginBottom="@dimen/dp_8"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="@+id/tabs"
                     app:layout_constraintStart_toStartOf="@+id/tabs">
 
                     <TextView
-                        android:id="@+id/tv_login"
+                        android:id="@+id/tv_bulk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="散货区"
@@ -240,7 +252,7 @@
                         android:textSize="@dimen/sp_16" />
 
                     <View
-                        android:id="@+id/line_login"
+                        android:id="@+id/line_bulk"
                         android:layout_width="@dimen/dp_15"
                         android:layout_height="@dimen/dp_3"
                         android:layout_marginTop="@dimen/dp_5"
@@ -250,26 +262,26 @@
 
 
                 <LinearLayout
-                    android:id="@+id/tab_register"
+                    android:id="@+id/tab_pack"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginStart="@dimen/dp_100"
+                    android:layout_marginBottom="@dimen/dp_8"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:layout_marginBottom="@dimen/dp_8"
                     app:layout_constraintBottom_toBottomOf="@+id/tabs"
                     app:layout_constraintStart_toStartOf="@+id/tabs">
 
                     <TextView
-                        android:id="@+id/tv_register"
+                        android:id="@+id/tv_pack"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="整货区"
-                        android:textSize="@dimen/sp_16"
-                        android:textColor="@color/color_99" />
+                        android:textColor="@color/color_99"
+                        android:textSize="@dimen/sp_16" />
 
                     <View
-                        android:id="@+id/line_register"
+                        android:id="@+id/line_pack"
                         android:layout_width="@dimen/dp_15"
                         android:layout_height="@dimen/dp_3"
                         android:layout_marginTop="@dimen/dp_5"

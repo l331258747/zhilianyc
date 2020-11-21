@@ -13,67 +13,39 @@ public class OtcInfoBean {
      * ndayMaxNum : 200
      */
 
-    private int todayBuyNum;
-    private int todaySellNum;
-    private int todayTradeNum;
-    private int todayMaxPrice;
-    private int todayMinPrice;
+    private float todayBuyNum;
+    private float todaySellNum;
+    private float todayTradeNum;
+    private float todayMaxPrice;
+    private float todayMinPrice;
     private OtcLineBean lineData;
-    private int ndayMaxNum;
+    private float ndayMaxNum;
 
-    public int getTodayBuyNum() {
+    public float getTodayBuyNum() {
         return todayBuyNum;
     }
 
-    public void setTodayBuyNum(int todayBuyNum) {
-        this.todayBuyNum = todayBuyNum;
-    }
-
-    public int getTodaySellNum() {
+    public float getTodaySellNum() {
         return todaySellNum;
     }
 
-    public void setTodaySellNum(int todaySellNum) {
-        this.todaySellNum = todaySellNum;
-    }
-
-    public int getTodayTradeNum() {
+    public float getTodayTradeNum() {
         return todayTradeNum;
     }
 
-    public void setTodayTradeNum(int todayTradeNum) {
-        this.todayTradeNum = todayTradeNum;
-    }
-
-    public int getTodayMaxPrice() {
+    public float getTodayMaxPrice() {
         return todayMaxPrice;
     }
 
-    public void setTodayMaxPrice(int todayMaxPrice) {
-        this.todayMaxPrice = todayMaxPrice;
-    }
-
-    public int getTodayMinPrice() {
+    public float getTodayMinPrice() {
         return todayMinPrice;
-    }
-
-    public void setTodayMinPrice(int todayMinPrice) {
-        this.todayMinPrice = todayMinPrice;
     }
 
     public OtcLineBean getLineData() {
         return lineData;
     }
 
-    public void setLineData(OtcLineBean lineData) {
-        this.lineData = lineData;
-    }
-
-    public int getNdayMaxNum() {
+    public float getNdayMaxNum() {
         return ndayMaxNum;
-    }
-
-    public void setNdayMaxNum(int ndayMaxNum) {
-        this.ndayMaxNum = ndayMaxNum;
     }
 }

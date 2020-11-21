@@ -1,5 +1,7 @@
 package com.zlyc.www.bean.otc;
 
+import com.zlyc.www.util.StringUtils;
+
 public class OtcListBean {
 
 
@@ -92,9 +94,15 @@ public class OtcListBean {
     public double getUnitPrice() {
         return unitPrice;
     }
+    public String getUnitPriceStr() {
+        return "单价：¥" + StringUtils.getStringNum(unitPrice);
+    }
 
     public int getCount() {
         return count;
+    }
+    public String getCountStr() {
+        return "数量：x" + count;
     }
 
     public String getFee() {
