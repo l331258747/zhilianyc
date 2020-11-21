@@ -68,6 +68,10 @@ public class HotGoodsAdapter extends RecyclerView.Adapter<HotGoodsAdapter.ViewHo
         this.datas = datas;
         notifyDataSetChanged();
     }
+    public void addData(List<HotGoodsBean> datas) {
+        this.datas.addAll(datas);
+        notifyDataSetChanged();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

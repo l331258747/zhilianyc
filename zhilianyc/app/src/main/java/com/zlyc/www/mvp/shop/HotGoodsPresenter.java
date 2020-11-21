@@ -2,13 +2,14 @@ package com.zlyc.www.mvp.shop;
 
 import android.content.Context;
 
+import com.zlyc.www.bean.BasePageModel;
 import com.zlyc.www.bean.shop.HotGoodsBean;
+import com.zlyc.www.constant.Constant;
 import com.zlyc.www.util.http.MethodApi;
 import com.zlyc.www.util.http.OnSuccessAndFaultSub;
 import com.zlyc.www.util.http.ResponseCallback;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class HotGoodsPresenter implements HotGoodsContract.Presenter {
@@ -22,11 +23,11 @@ public class HotGoodsPresenter implements HotGoodsContract.Presenter {
     }
 
     @Override
-    public void getHotGoods() {
-        ResponseCallback listener = new ResponseCallback<List<HotGoodsBean>>() {
+    public void getHotGoods(int page) {
+        ResponseCallback listener = new ResponseCallback<BasePageModel<HotGoodsBean>>() {
             @Override
-            public void onSuccess(List<HotGoodsBean> data) {
-                iView.getHotGoodsSuccess(data);
+            public void onSuccess(BasePageModel<HotGoodsBean> data) {
+                iView.getHotGoodsSuccess(data.getList());
             }
 
             @Override
@@ -36,7 +37,9 @@ public class HotGoodsPresenter implements HotGoodsContract.Presenter {
         };
 
         Map<String, String> params = new HashMap<>();
+        params.put("page",page + "");
+        params.put("size", Constant.DEFAULT_SIZE + "");
 
-        MethodApi.getHotGoods(params, new OnSuccessAndFaultSub(listener, context));
+        MethodApi.getHotGoods(params, new OnSuccessAndFaultSub(listener, context,false));
     }
 }

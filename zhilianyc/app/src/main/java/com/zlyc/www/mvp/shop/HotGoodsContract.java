@@ -7,7 +7,7 @@ import java.util.List;
 public interface HotGoodsContract {
 
     interface Presenter {
-        void getHotGoods();
+        void getHotGoods(int page);
     }
 
     interface View {

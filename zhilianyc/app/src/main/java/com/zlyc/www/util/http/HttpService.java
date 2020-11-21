@@ -190,7 +190,7 @@ public interface HttpService {
     //--------------------shop start
     //获取热门商品
     @POST("shop/hot_goods")
-    Observable<BaseResponse<List<HotGoodsBean>>> getHotGoods(
+    Observable<BaseResponse<BasePageModel<HotGoodsBean>>> getHotGoods(
             @Body RequestBody body
     );
 
