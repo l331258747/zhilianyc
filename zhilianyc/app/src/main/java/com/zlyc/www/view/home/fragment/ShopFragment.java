@@ -7,8 +7,10 @@ import android.widget.ImageView;
 import com.zlyc.www.R;
 import com.zlyc.www.adapter.base.EndLessScrollOnScrollListener;
 import com.zlyc.www.adapter.base.LoadMoreWrapper;
+import com.zlyc.www.adapter.shop.GoodsClassAdapter;
 import com.zlyc.www.adapter.shop.HotGoodsAdapter;
 import com.zlyc.www.base.BaseFragment;
+import com.zlyc.www.bean.shop.GoodsClassBean;
 import com.zlyc.www.bean.shop.HotGoodsBean;
 import com.zlyc.www.constant.Constant;
 import com.zlyc.www.mvp.shop.HotGoodsContract;
@@ -21,13 +23,16 @@ import java.util.List;
 
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class ShopFragment extends BaseFragment implements HotGoodsContract.View, View.OnClickListener {
 
+    RecyclerView view_tab;
+    GoodsClassAdapter mAdapterH;
+    List<GoodsClassBean> datasH;
 
-    View tab_electrical, tab_hot, tab_studio, tab_foot, tab_life;
     RecyclerView recyclerView;
     ImageView iv_floating;
     NestedScrollView scrollView;
@@ -52,23 +57,23 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View,
     @Override
     public void initView() {
         scrollView = $(R.id.scrollView);
-        tab_electrical = $(R.id.tab_electrical);
-        tab_hot = $(R.id.tab_hot);
-        tab_studio = $(R.id.tab_studio);
-        tab_foot = $(R.id.tab_foot);
-        tab_life = $(R.id.tab_life);
+        view_tab = $(R.id.view_tab);
         iv_floating = $(R.id.iv_floating);
 
         iv_floating.setOnClickListener(this);
 
         initSwipe();
         initRecycler();
+
+        initRecyclerH();
     }
 
     @Override
     public void initData() {
         mPresenter = new HotGoodsPresenter(context, this);
         getRefreshData();
+
+        mPresenter.getGoodsClass();
     }
 
     private void initSwipe() {
@@ -78,6 +83,22 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View,
             getRefreshData();
         });
     }
+
+    private void initRecyclerH() {
+        view_tab = $(R.id.view_tab);
+
+        view_tab = $(R.id.view_tab);
+        view_tab.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        mAdapterH = new GoodsClassAdapter(activity, new ArrayList<>());
+        view_tab.setAdapter(mAdapterH);
+        view_tab.setNestedScrollingEnabled(false);
+        mAdapterH.setOnItemClickListener(position -> {
+            //TODO 进入商品列表，分类选择
+
+        });
+
+    }
+
 
     //初始化recyclerview
     public void initRecycler() {
@@ -154,6 +175,19 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View,
         isLoad = false;
         loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING_COMPLETE);
         swipe.setRefreshing(false);
+    }
+
+    @Override
+    public void getGoodsClassSuccess(List<GoodsClassBean> data) {
+        if(data == null) data = new ArrayList<>();
+        datasH = data;
+
+        mAdapterH.setData(datasH);
+    }
+
+    @Override
+    public void getGoodsClassFailed(String msg) {
+        showShortToast(msg);
     }
 
     @Override

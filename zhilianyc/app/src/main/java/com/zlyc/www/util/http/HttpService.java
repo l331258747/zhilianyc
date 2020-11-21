@@ -15,6 +15,7 @@ import com.zlyc.www.bean.otc.MyOtcListBean;
 import com.zlyc.www.bean.otc.OtcDetailBean;
 import com.zlyc.www.bean.otc.OtcInfoBean;
 import com.zlyc.www.bean.otc.OtcListBean;
+import com.zlyc.www.bean.shop.GoodsClassBean;
 import com.zlyc.www.bean.shop.GoodsDetailsBean;
 import com.zlyc.www.bean.shop.HotGoodsBean;
 import com.zlyc.www.bean.shop.OrderDetailBean;
@@ -191,6 +192,12 @@ public interface HttpService {
     //获取热门商品
     @POST("shop/hot_goods")
     Observable<BaseResponse<BasePageModel<HotGoodsBean>>> getHotGoods(
+            @Body RequestBody body
+    );
+
+    //获取商品分类
+    @POST("shop/category")
+    Observable<BaseResponse<List<GoodsClassBean>>> getGoodsClass(
             @Body RequestBody body
     );
 
