@@ -236,7 +236,6 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
 
         if (TextUtils.equals("2", data)) {
             view_change.setVisibility(View.VISIBLE);
-            tv_change.setText("我要转让");
             orderType = 0;
         } else if (TextUtils.equals("1", data)) {
             view_change.setVisibility(View.GONE);
@@ -246,21 +245,39 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
             orderType = 0;
         }
 
-        if (orderType == 1) {
-            iv_img.setImageResource(R.mipmap.ic_otc_change);
-            tv_name.setText("转让单");
-            btn_submit.setText("发布转让单");
-            btn_submit.setBackgroundResource(R.drawable.bg_gradients_btn_ff4751);
-        } else {
-            iv_img.setImageResource(R.mipmap.ic_otc_buy);
-            tv_name.setText("求购单");
-            btn_submit.setText("发布求购单");
-            btn_submit.setBackgroundResource(R.drawable.bg_gradients_btn_368feb);
-        }
+        setOrderTypeView();
 
         mPresenter.getOtcInfo();
         getRefreshData();
     }
+
+    public void setOrderTypeView(){
+        if (orderType == 1) {
+            iv_img.setImageResource(R.mipmap.ic_otc_change);
+            tv_name.setText("转让单");
+            tv_change.setText("我要求购");
+            if(infoData != null)
+                tv_todayTradeNum.setText(StringUtils.getStringNum(infoData.getTodayBuyNum()));
+            btn_submit.setText("发布转让单");
+            btn_submit.setBackgroundResource(R.drawable.bg_gradients_btn_ff4751);
+
+            tv_todayTradeNum.setTextColor(ContextCompat.getColor(context,R.color.color_FF4751));
+            tv_name.setTextColor(ContextCompat.getColor(context,R.color.color_FF4751_99));
+
+        } else {
+            iv_img.setImageResource(R.mipmap.ic_otc_buy);
+            tv_name.setText("求购单");
+            tv_change.setText("我要转让");
+            if(infoData != null)
+                tv_todayTradeNum.setText(StringUtils.getStringNum(infoData.getTodaySellNum()));
+            btn_submit.setText("发布求购单");
+            btn_submit.setBackgroundResource(R.drawable.bg_gradients_btn_368feb);
+
+            tv_todayTradeNum.setTextColor(ContextCompat.getColor(context,R.color.color_368feb));
+            tv_name.setTextColor(ContextCompat.getColor(context,R.color.color_368feb_99));
+        }
+    }
+
 
     @Override
     public void getOtcOpenFailed(String msg) {
@@ -316,21 +333,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
             case R.id.view_change:
                 orderType = orderType == 0 ? 1 : 0;
 
-                if (orderType == 1) {
-                    iv_img.setImageResource(R.mipmap.ic_otc_change);
-                    tv_name.setText("转让单");
-                    tv_change.setText("我要求购");
-                    tv_todayTradeNum.setText(StringUtils.getStringNum(infoData.getTodayBuyNum()));
-                    btn_submit.setText("发布转让单");
-                    btn_submit.setBackgroundResource(R.drawable.bg_gradients_btn_ff4751);
-                } else {
-                    iv_img.setImageResource(R.mipmap.ic_otc_buy);
-                    tv_name.setText("求购单");
-                    tv_change.setText("我要转让");
-                    tv_todayTradeNum.setText(StringUtils.getStringNum(infoData.getTodaySellNum()));
-                    btn_submit.setText("发布求购单");
-                    btn_submit.setBackgroundResource(R.drawable.bg_gradients_btn_368feb);
-                }
+                setOrderTypeView();
 
                 getRefreshData();
                 break;
