@@ -411,6 +411,13 @@
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/view_pop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_alignParentBottom="true"
+        />
+
 
 </RelativeLayout>
 

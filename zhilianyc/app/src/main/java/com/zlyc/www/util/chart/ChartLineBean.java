@@ -1,6 +1,6 @@
 package com.zlyc.www.util.chart;
 
-public class RankAgeListBean {
+public class ChartLineBean {
 
 
     /**

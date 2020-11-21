@@ -34,10 +34,10 @@ public class ChartHelp {
      * @param datas 数据集合
      * @param name     曲线名称
      */
-    public void showLineChart(String name,List<RankAgeListBean> datas) {
+    public void showLineChart(String name,List<ChartLineBean> datas) {
         List<Entry> entries = new ArrayList<>();
         for (int i = 0; i < datas.size(); i++) {
-            RankAgeListBean data = datas.get(i);
+            ChartLineBean data = datas.get(i);
             Entry entry = new Entry(i, data.getNum());
             entries.add(entry);
         }
@@ -48,7 +48,7 @@ public class ChartHelp {
         lineChart.setData(lineData);
     }
 
-    public void initLineChart(List<RankAgeListBean> datas) {
+    public void initLineChart(List<ChartLineBean> datas) {
         /***图表设置***/
         //是否展示网格线
         lineChart.setDrawGridBackground(false);

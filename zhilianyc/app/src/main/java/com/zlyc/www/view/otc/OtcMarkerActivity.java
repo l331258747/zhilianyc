@@ -21,7 +21,11 @@ import com.zlyc.www.mvp.otc.OtcMarkerContract;
 import com.zlyc.www.mvp.otc.OtcMarkerPresenter;
 import com.zlyc.www.util.StringUtils;
 import com.zlyc.www.util.chart.ChartHelp;
-import com.zlyc.www.util.chart.RankAgeListBean;
+import com.zlyc.www.util.chart.ChartLineBean;
+import com.zlyc.www.util.popupwindow.PopOtcBuy;
+import com.zlyc.www.util.popupwindow.PopOtcSell;
+import com.zlyc.www.util.rxbus.RxBus2;
+import com.zlyc.www.util.rxbus.busEvent.OtcMarkerEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +35,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import io.reactivex.disposables.Disposable;
 
 public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract.View, View.OnClickListener {
 
@@ -44,7 +49,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
 
     LinearLayout tab_bulk, tab_pack, view_change;
     TextView tv_bulk, tv_pack;
-    View line_bulk, line_pack;
+    View line_bulk, line_pack,view_pop;
 
     OtcMarkerPresenter mPresenter;
     OtcListAdapter mAdapter;
@@ -55,9 +60,12 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
     private int isLoadType = 1;//1下拉刷新，2上拉加载
     private boolean isLoad = false;//是否在加载，重复加载问题
 
-    OtcInfoBean infoData;
+    private OtcInfoBean infoData;
+    private ChartHelp mChartHelp;
+    private Disposable disposable;
 
-    ChartHelp mChartHelp;
+    private PopOtcBuy mPopOtcBuy;
+    private PopOtcSell mPopOtcSell;
 
     @Override
     public int getLayoutId() {
@@ -68,6 +76,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
     public void initView() {
         showLeftAndTitle("置换中心");
 
+        view_pop = $(R.id.view_pop);
         tab_bulk = $(R.id.tab_bulk);
         tab_pack = $(R.id.tab_pack);
         tv_bulk = $(R.id.tv_bulk);
@@ -118,6 +127,10 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
         iv_order_price.setImageResource(priceSort == 1 ? R.mipmap.ic_order_down : R.mipmap.ic_order_up);
         iv_order_num.setImageResource(numSort == 1 ? R.mipmap.ic_order_down : R.mipmap.ic_order_up);
         setTab(numType == 0 ? true : false);
+
+        disposable = RxBus2.getInstance().toObservable(OtcMarkerEvent.class, otcMarkerEvent -> {
+            getRefreshData();
+        });
     }
 
     private void initSwipeLayout() {
@@ -198,9 +211,9 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
         tv_amount.setText(StringUtils.getStringNum(data.getTodayTradeNum()));
 
         if(infoData.getLineData() != null && infoData.getLineData().getCategories() != null && infoData.getLineData().getTradeNums() != null){
-            List<RankAgeListBean> lineDatas = new ArrayList<>();
+            List<ChartLineBean> lineDatas = new ArrayList<>();
             for (int i=0;i<infoData.getLineData().getCategories().size();i++){
-                RankAgeListBean item = new RankAgeListBean();
+                ChartLineBean item = new ChartLineBean();
                 item.setName(infoData.getLineData().getCategories().get(i));
                 item.setNum(infoData.getLineData().getTradeNums().get(i));
                 lineDatas.add(item);
@@ -236,9 +249,13 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
         if (orderType == 1) {
             iv_img.setImageResource(R.mipmap.ic_otc_change);
             tv_name.setText("转让单");
+            btn_submit.setText("发布转让单");
+            btn_submit.setBackgroundResource(R.drawable.bg_gradients_btn_ff4751);
         } else {
             iv_img.setImageResource(R.mipmap.ic_otc_buy);
             tv_name.setText("求购单");
+            btn_submit.setText("发布求购单");
+            btn_submit.setBackgroundResource(R.drawable.bg_gradients_btn_368feb);
         }
 
         mPresenter.getOtcInfo();
@@ -304,18 +321,28 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
                     tv_name.setText("转让单");
                     tv_change.setText("我要求购");
                     tv_todayTradeNum.setText(StringUtils.getStringNum(infoData.getTodayBuyNum()));
+                    btn_submit.setText("发布转让单");
+                    btn_submit.setBackgroundResource(R.drawable.bg_gradients_btn_ff4751);
                 } else {
                     iv_img.setImageResource(R.mipmap.ic_otc_buy);
                     tv_name.setText("求购单");
                     tv_change.setText("我要转让");
                     tv_todayTradeNum.setText(StringUtils.getStringNum(infoData.getTodaySellNum()));
+                    btn_submit.setText("发布求购单");
+                    btn_submit.setBackgroundResource(R.drawable.bg_gradients_btn_368feb);
                 }
 
                 getRefreshData();
                 break;
             case R.id.btn_submit:
                 //TODO popupwindow
-
+                if(orderType == 1){
+                    mPopOtcSell = new PopOtcSell(activity, view_pop);
+                    mPopOtcSell.showPopupWindow(view_pop);
+                }else{
+                    mPopOtcBuy = new PopOtcBuy(activity, view_pop);
+                    mPopOtcBuy.showPopupWindow(view_pop);
+                }
                 break;
             case R.id.view_order_price:
                 priceSort = priceSort == 0 ? 1 : 0;
@@ -349,5 +376,12 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
             tv_pack.setTextColor(ContextCompat.getColor(context, R.color.color_368feb));
             line_pack.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposable != null && !disposable.isDisposed())
+            disposable.dispose();
     }
 }

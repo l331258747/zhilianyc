@@ -312,6 +312,18 @@ public interface HttpService {
             @Body RequestBody body
     );
 
+    //发布买单
+    @POST("otc/publish_buy")
+    Observable<BaseResponse<String>> sendOtcBuy(
+            @Body RequestBody body
+    );
+
+    //发布卖单
+    @POST("otc/publish_sell")
+    Observable<BaseResponse<String>> sendOtcSell(
+            @Body RequestBody body
+    );
+
 
     //--------------------otc end
 

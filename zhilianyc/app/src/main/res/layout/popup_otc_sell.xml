@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@drawable/btn_f7_r20_top"
+    android:paddingLeft="@dimen/dp_15"
+    android:paddingTop="@dimen/sp_20"
+    android:paddingRight="@dimen/dp_15"
+    android:paddingBottom="@dimen/sp_15">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="转让确认"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:text="手续费：25.00"
+        android:textColor="@color/color_99"
+        android:textSize="@dimen/sp_10"
+        app:layout_constraintBottom_toTopOf="@id/view_all"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/view_all"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/btn_00_r10"
+        app:layout_constraintBottom_toBottomOf="@id/view_account"
+        app:layout_constraintEnd_toEndOf="@id/view_price"
+        app:layout_constraintStart_toStartOf="@+id/view_price"
+        app:layout_constraintTop_toTopOf="@id/view_price" />
+
+    <View
+        android:id="@+id/view_price"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_15"
+        android:text="单价（¥）"
+        app:layout_constraintBottom_toBottomOf="@id/view_price"
+        app:layout_constraintStart_toStartOf="@id/view_price"
+        app:layout_constraintTop_toTopOf="@id/view_price" />
+
+    <EditText
+        android:id="@+id/et_price"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/dp_100"
+        android:layout_marginEnd="@dimen/dp_15"
+        android:background="@null"
+        android:hint="请输入单价"
+        android:inputType="numberDecimal"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/view_price"
+        app:layout_constraintEnd_toEndOf="@id/view_price"
+        app:layout_constraintStart_toStartOf="@id/view_price"
+        app:layout_constraintTop_toTopOf="@id/view_price" />
+
+    <View
+        android:id="@+id/view_num"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_price" />
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_15"
+        android:text="数量"
+        app:layout_constraintBottom_toBottomOf="@id/view_num"
+        app:layout_constraintStart_toStartOf="@id/view_num"
+        app:layout_constraintTop_toTopOf="@id/view_num" />
+
+    <EditText
+        android:id="@+id/et_num"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/dp_100"
+        android:layout_marginEnd="@dimen/dp_15"
+        android:background="@null"
+        android:hint="请输入数量，最低1个"
+        android:inputType="number"
+        android:maxLength="9"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/view_num"
+        app:layout_constraintEnd_toEndOf="@id/view_num"
+        app:layout_constraintStart_toStartOf="@id/view_num"
+        app:layout_constraintTop_toTopOf="@id/view_num" />
+
+    <View
+        android:id="@+id/view_account"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_num" />
+
+    <TextView
+        android:id="@+id/tv_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_15"
+        android:text="应付款"
+        app:layout_constraintBottom_toBottomOf="@id/view_account"
+        app:layout_constraintStart_toStartOf="@id/view_account"
+        app:layout_constraintTop_toTopOf="@id/view_account" />
+
+    <TextView
+        android:id="@+id/et_account"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/dp_100"
+        android:layout_marginEnd="@dimen/dp_15"
+        android:hint="请输入应付款"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/view_account"
+        app:layout_constraintEnd_toEndOf="@id/view_account"
+        app:layout_constraintStart_toStartOf="@id/view_account"
+        app:layout_constraintTop_toTopOf="@id/view_account" />
+
+    <View
+        android:id="@+id/view_password"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@drawable/btn_00_r10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_all" />
+
+    <TextView
+        android:id="@+id/tv_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_15"
+        android:text="交易密码"
+        app:layout_constraintBottom_toBottomOf="@id/view_password"
+        app:layout_constraintStart_toStartOf="@id/view_password"
+        app:layout_constraintTop_toTopOf="@id/view_password" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/dp_100"
+        android:layout_marginEnd="@dimen/dp_15"
+        android:background="@null"
+        android:hint="请输入交易密码"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/view_password"
+        app:layout_constraintEnd_toEndOf="@id/view_password"
+        app:layout_constraintStart_toStartOf="@id/view_password"
+        app:layout_constraintTop_toTopOf="@id/view_password" />
+
+
+    <View
+        android:id="@+id/view_verify"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@drawable/btn_00_r10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_password" />
+
+    <TextView
+        android:id="@+id/tv_verify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_15"
+        android:text="验证码"
+        app:layout_constraintBottom_toBottomOf="@id/view_verify"
+        app:layout_constraintStart_toStartOf="@id/view_verify"
+        app:layout_constraintTop_toTopOf="@id/view_verify" />
+
+
+    <EditText
+        android:id="@+id/et_verify"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/dp_100"
+        android:layout_marginEnd="@dimen/dp_5"
+        android:background="@null"
+        android:hint="请输入验证码"
+        android:inputType="number"
+        android:maxLength="6"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/view_verify"
+        app:layout_constraintEnd_toEndOf="@id/view_verify"
+        app:layout_constraintStart_toStartOf="@id/view_verify"
+        app:layout_constraintTop_toTopOf="@id/view_verify" />
+
+    <TextView
+        android:id="@+id/tv_verify_code"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/btn_368feb_r40"
+        app:layout_constraintTop_toTopOf="@+id/et_verify"
+        android:textColor="@color/white"
+        android:paddingTop="@dimen/dp_8"
+        android:paddingBottom="@dimen/dp_8"
+        app:layout_constraintBottom_toBottomOf="@+id/et_verify"
+        app:layout_constraintEnd_toEndOf="@+id/et_verify"
+        android:text="发送验证码"/>
+
+    <TextView
+        android:id="@+id/btn_submit"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_50"
+        android:background="@drawable/bg_gradients_btn_1c81e9"
+        android:gravity="center"
+        android:text="发布"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_verify" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
