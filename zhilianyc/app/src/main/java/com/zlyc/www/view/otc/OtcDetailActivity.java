@@ -1,7 +1,10 @@
 package com.zlyc.www.view.otc;
 
+import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zlyc.www.R;
@@ -12,6 +15,17 @@ import com.zlyc.www.bean.otc.OtcDetailBean;
 import com.zlyc.www.mvp.otc.OtcDetailContract;
 import com.zlyc.www.mvp.otc.OtcDetailPresenter;
 import com.zlyc.www.util.StringUtils;
+import com.zlyc.www.util.accessory.ImageUtils;
+import com.zlyc.www.util.dialog.LoadingDialog;
+import com.zlyc.www.util.glide.GlideUtil;
+import com.zlyc.www.util.photo.TackPicturesUtil;
+import com.zlyc.www.util.rxbus.RxBus2;
+import com.zlyc.www.util.rxbus.busEvent.UpLoadPhotos;
+import com.zlyc.www.util.thread.MyThreadPool;
+
+import java.io.File;
+
+import io.reactivex.disposables.Disposable;
 
 public class OtcDetailActivity extends BaseActivity implements OtcDetailContract.View {
 
@@ -23,6 +37,9 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
     TextView btn_1, btn_2, btn_text;
 
     boolean isCheck;
+
+    ImageView iv_camera;
+    String filePath;
 
     @Override
     public int getLayoutId() {
@@ -43,6 +60,7 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
         btn_text = $(R.id.btn_text);
         btn_1 = $(R.id.btn_1);
         btn_2 = $(R.id.btn_2);
+        iv_camera = $(R.id.iv_camera);
 
         tv_status = $(R.id.tv_status);
         tv_count_down = $(R.id.tv_count_down);
@@ -56,14 +74,25 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
         tv_collection_code = $(R.id.tv_collection_code);
         tv_voucher = $(R.id.tv_voucher);
 
+
+        iv_camera.setVisibility(View.GONE);
+        tv_voucher.setVisibility(View.GONE);
+
+        getPicPermission(context);
+
     }
 
     @Override
     public void initData() {
+        tackPicUtil = new TackPicturesUtil(activity);
+        loadingDialog = new LoadingDialog(context);
+
         mPresenter = new OtcDetailPresenter(context, this);
         mPresenter.getOtcDetail(MySelfInfo.getInstance().getUserId(), beansSendId);
 
         mPresenter.getOtcCheck(MySelfInfo.getInstance().getUserId(), beansSendId);
+
+
     }
 
     @Override
@@ -80,9 +109,15 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
         tv_order_time.setText(data.getCreateTime());
         tv_collection_code.setText(data.getSendAccount());
 
-        //TODO 上传图片处理 有图片显示图片，没图片显示文字
-        tv_voucher.setVisibility(View.VISIBLE);
-        tv_voucher.setText("没有上传付款凭证");
+        if (TextUtils.isEmpty(data.getPayImgUrl())) {
+            iv_camera.setVisibility(View.GONE);
+            tv_voucher.setVisibility(View.VISIBLE);
+            tv_voucher.setText("没有上传付款凭证");
+        } else {
+            iv_camera.setVisibility(View.VISIBLE);
+            tv_voucher.setVisibility(View.GONE);
+            GlideUtil.loadImage(context, data.getPayImgUrl(), iv_camera);
+        }
 
         btn_1.setVisibility(View.GONE);
         btn_2.setVisibility(View.GONE);
@@ -212,13 +247,12 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
 
     //上传凭证 TODO
     private void sendVoucher() {
-//        mPresenter.getOtcVoucher(MySelfInfo.getInstance().getUserId(),beansSendId, ImageBitmapUtil.SD_PATH + "111.JPG");
-
+        tackPicUtil.showDialog(context);
     }
 
-    //otc sendStatus 0已成交1订单已发起2订单已锁定3卖方已放豆4买方已付款5卖方确认7卖方申诉中9用户撤回10系统撤回11系统解除申诉
-    public void getOtcHandle(int sendStatus){
-        mPresenter.getOtcHandle(MySelfInfo.getInstance().getUserId(),sendStatus,beansSendId);
+    //otc sendStatus 0已成交1订单已发起2订单已锁定卖方已放豆4买方已付款5卖方确认7卖方申诉中9用户撤回10系统撤回11系统解除申诉
+    public void getOtcHandle(int sendStatus) {
+        mPresenter.getOtcHandle(MySelfInfo.getInstance().getUserId(), sendStatus, beansSendId);
     }
 
     public boolean isCheck() {
@@ -235,6 +269,7 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
     @Override
     public void getOtcVoucherSuccess(EmptyModel data) {
         //支付凭证
+        mPresenter.getOtcDetail(MySelfInfo.getInstance().getUserId(),beansSendId);
     }
 
     @Override
@@ -244,7 +279,7 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
 
     @Override
     public void getOtcCheckSuccess(EmptyModel data) {
-        //校验
+        //校验是否占用
         isCheck = true;
     }
 
@@ -257,10 +292,76 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
     @Override
     public void getOtcHandleSuccess(EmptyModel data) {
         //处理
+
     }
 
     @Override
     public void getOtcHandleFailed(String msg) {
         showShortToast(msg);
     }
+
+
+    //图片
+    private TackPicturesUtil tackPicUtil;
+    private String headpath;// 头像地址
+    private String headCompressPath;
+    private Disposable disposable;
+    private LoadingDialog loadingDialog;
+    //-----------start 拍照-----------
+
+    //拍照，存储权限
+    public void getPicPermission(Context context) {
+        tackPicUtil.checkPermission(context);
+    }
+
+
+    /**
+     * 获取图片回调
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case TackPicturesUtil.CHOOSE_PIC:
+            case TackPicturesUtil.TACK_PIC:
+            case TackPicturesUtil.CROP_PIC:
+                String path = tackPicUtil.getPicture(requestCode, resultCode, data, false);
+                if (path == null)
+                    return;
+                headpath = path;
+                upFile();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void upFile() {
+        disposable = RxBus2.getInstance().toObservable(UpLoadPhotos.class, upLoadPhotos -> {
+            sendHead();
+            disposable.dispose();
+        });
+
+        loadingDialog.showDialog("上传头像...");
+        loadingDialog.setCancelable(false);
+        compressImage();
+    }
+
+    public void sendHead() {
+        //构建要上传的文件
+        File file = new File(headCompressPath);
+        mPresenter.getOtcVoucher(MySelfInfo.getInstance().getUserId(), beansSendId, file);
+    }
+
+    private void compressImage() {
+        MyThreadPool.getInstance().submit(() -> {
+            File file = new File(headpath);
+            String savePath = TackPicturesUtil.IMAGE_CACHE_PATH + "crop" + file.getName();
+            ImageUtils.getImage(headpath, savePath);
+            headCompressPath = savePath;
+            RxBus2.getInstance().post(new UpLoadPhotos());
+        });
+    }
+
+    //----------------end 拍照
 }

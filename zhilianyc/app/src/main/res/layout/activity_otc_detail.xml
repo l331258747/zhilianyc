@@ -126,9 +126,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
+            android:textColor="@color/color_368feb"
             app:layout_constraintStart_toStartOf="@+id/tv_No"
             app:layout_constraintTop_toBottomOf="@id/line_No"
-            android:textColor="@color/color_368feb"
             tools:text="13246546546" />
 
         <TextView
@@ -145,9 +145,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
+            android:textColor="@color/color_FBAE17"
             app:layout_constraintStart_toStartOf="@+id/tv_No"
             app:layout_constraintTop_toBottomOf="@id/tv_seller"
-            android:textColor="@color/color_FBAE17"
             tools:text="13246546546" />
 
         <TextView
@@ -203,9 +203,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
+            android:textColor="@color/color_FF4751"
             app:layout_constraintStart_toStartOf="@+id/tv_No"
             app:layout_constraintTop_toBottomOf="@id/tv_number"
-            android:textColor="@color/color_FF4751"
             tools:text="6" />
 
         <TextView
@@ -242,9 +242,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
+            android:textColor="@color/color_368feb"
             app:layout_constraintStart_toStartOf="@+id/tv_No"
             app:layout_constraintTop_toBottomOf="@id/tv_order_time"
-            android:textColor="@color/color_368feb"
             tools:text="6" />
 
         <TextView
@@ -262,9 +262,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/tv_No"
             app:layout_constraintTop_toBottomOf="@id/tv_collection_code"
-            tools:text="没有上传付款凭证" />
+            tools:text="没有上传付款凭证"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/iv_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_80"
+            android:layout_marginTop="@dimen/dp_20"
+            android:overScrollMode="never"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/default_head"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/tv_No"
+            app:layout_constraintTop_toBottomOf="@id/tv_collection_code"
+            tools:visibility="visible"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -280,69 +296,69 @@
             android:id="@+id/line_bottom"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_40"
+            app:layout_goneMarginTop="@dimen/dp_40"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_voucher" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_camera" />
 
 
         <View
             android:id="@+id/view_btn"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_50"
-            android:layout_marginTop="@dimen/dp_30"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="@dimen/sp_15"
+            android:layout_marginTop="@dimen/dp_30"
             android:layout_marginEnd="@dimen/sp_15"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_content"
-            />
+            app:layout_constraintTop_toBottomOf="@id/view_content" />
 
         <TextView
             android:id="@+id/btn_2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="@+id/view_btn"
-            app:layout_constraintTop_toTopOf="@+id/view_btn"
-            android:gravity="center"
-            android:background="@drawable/bg_gradients_btn_fbae17"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toStartOf="@id/btn_1"
             android:layout_marginEnd="@dimen/dp_10"
+            android:background="@drawable/bg_gradients_btn_fbae17"
+            android:gravity="center"
+            android:text="占位"
+            android:textColor="@color/white"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/view_btn"
-            android:text="占位"/>
+            app:layout_constraintEnd_toStartOf="@id/btn_1"
+            app:layout_constraintStart_toStartOf="@+id/view_btn"
+            app:layout_constraintTop_toTopOf="@+id/view_btn" />
 
 
         <TextView
             android:id="@+id/btn_1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toEndOf="@+id/btn_2"
-            app:layout_constraintTop_toTopOf="@+id/view_btn"
-            android:gravity="center"
             android:background="@drawable/bg_gradients_btn_368feb"
+            android:gravity="center"
+            android:text="占位"
             android:textColor="@color/white"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@id/view_btn"
             app:layout_constraintBottom_toBottomOf="@id/view_btn"
-            android:text="占位"/>
+            app:layout_constraintEnd_toEndOf="@id/view_btn"
+            app:layout_constraintStart_toEndOf="@+id/btn_2"
+            app:layout_constraintTop_toTopOf="@+id/view_btn" />
 
         <TextView
             android:id="@+id/btn_text"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="@+id/view_btn"
-            app:layout_constraintTop_toTopOf="@+id/view_btn"
             android:gravity="center"
+            android:text="等待对方放豆"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@id/view_btn"
             app:layout_constraintBottom_toBottomOf="@id/view_btn"
-            android:text="等待对方放豆"/>
+            app:layout_constraintEnd_toEndOf="@id/view_btn"
+            app:layout_constraintStart_toStartOf="@+id/view_btn"
+            app:layout_constraintTop_toTopOf="@+id/view_btn" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_100"
-            app:layout_constraintTop_toBottomOf="@+id/view_btn"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

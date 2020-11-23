@@ -44,7 +44,7 @@ public class OtcFeedbackActivity extends BaseActivity implements OtcFeedbackCont
     ImageView iv_camera;
 
     List<String> filePaths = new ArrayList<>();
-
+    ImageAdapter mAdapter;
     String beansSendId;
 
     @Override
@@ -81,7 +81,7 @@ public class OtcFeedbackActivity extends BaseActivity implements OtcFeedbackCont
 
     }
 
-    ImageAdapter mAdapter;
+
 
     private void initRecycler() {
         recyclerView = $(R.id.recycler_view);
