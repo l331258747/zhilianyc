@@ -1,5 +1,6 @@
 package com.zlyc.www.view.shop;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,6 +32,8 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodsDetailsCo
     GoodsDetailsPresenter mPresenter;
 
     String id;
+
+    GoodsDetailsBean data;
 
     @Override
     public int getLayoutId() {
@@ -67,7 +70,7 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodsDetailsCo
 
     @Override
     public void getGoodsDetailsSuccess(GoodsDetailsBean data) {
-
+        this.data = data;
         if(TextUtils.isEmpty(data.getImgUrl())){
             iv_img.setImageResource(R.mipmap.default_head);
         }else{
@@ -106,6 +109,16 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodsDetailsCo
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_submit:
+                int num = numberView.getNum();
+                if(num == 0) {
+                    showShortToast("请选择数量");
+                    return;
+                }
+
+                intent = new Intent(context,CreateOrderActivity.class);
+                intent.putExtra("num",num);
+                intent.putExtra("goods", data);
+                startActivity(intent);
 
                 break;
         }

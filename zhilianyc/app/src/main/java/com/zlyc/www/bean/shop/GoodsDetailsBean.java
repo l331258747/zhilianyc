@@ -2,7 +2,9 @@ package com.zlyc.www.bean.shop;
 
 import com.zlyc.www.util.StringUtils;
 
-public class GoodsDetailsBean {
+import java.io.Serializable;
+
+public class GoodsDetailsBean implements Serializable {
 
 
     /**
@@ -21,7 +23,7 @@ public class GoodsDetailsBean {
     private String goodsId;
     private String name;
     private String imgUrl;
-    private double price;
+    private float price;
     private int sellNum;
     private int leftNum;
     private String content;
@@ -41,7 +43,7 @@ public class GoodsDetailsBean {
         return imgUrl;
     }
 
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 

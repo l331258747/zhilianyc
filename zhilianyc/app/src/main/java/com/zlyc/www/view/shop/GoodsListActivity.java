@@ -1,4 +1,4 @@
-package com.zlyc.www.view.home.fragment;
+package com.zlyc.www.view.shop;
 
 import android.content.Intent;
 import android.widget.TextView;
@@ -14,7 +14,6 @@ import com.zlyc.www.bean.shop.GoodsListBean;
 import com.zlyc.www.constant.Constant;
 import com.zlyc.www.mvp.shop.GoodsListContract;
 import com.zlyc.www.mvp.shop.GoodsListPresenter;
-import com.zlyc.www.view.shop.GoodsDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;

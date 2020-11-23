@@ -21,15 +21,16 @@ import com.zlyc.www.util.textdrawable.TextdrawableUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 public class AddressSetActivity extends BaseActivity implements View.OnClickListener, AddressSetContract.View {
 
     TextView tv_head, tv_name, tv_address, btn_edit, btn_submit,tv_phone;
     RecyclerView recyclerView;
+    ConstraintLayout default_address;
 
     AddressAdapter mAdapter;
     List<AddressBean> otherDatas;
@@ -58,6 +59,7 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
         tv_address = $(R.id.tv_address);
         btn_edit = $(R.id.btn_edit);
         btn_submit = $(R.id.btn_submit);
+        default_address = $(R.id.default_address);
 
         btn_submit.setOnClickListener(this);
         btn_edit.setOnClickListener(this);
@@ -72,12 +74,9 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
         mPresenter = new AddressSetPresenter(context,this);
         mPresenter.addressList(MySelfInfo.getInstance().getUserId());
 
-        disposable = RxBus2.getInstance().toObservable(AddressEditEvent.class, new Consumer<AddressEditEvent>() {
-            @Override
-            public void accept(AddressEditEvent addressEditEvent) throws Exception {
-                mPresenter.addressList(MySelfInfo.getInstance().getUserId());
-            }
-        });
+        disposable = RxBus2.getInstance().toObservable(AddressEditEvent.class, addressEditEvent ->
+                mPresenter.addressList(MySelfInfo.getInstance().getUserId())
+        );
     }
 
     public void setDefaultView(List<AddressBean> datas) {
@@ -91,6 +90,9 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
             tv_phone.setText(defaultData.getMobile());
             tv_address.setText(defaultData.getAddressAll());
             mTextdrawableUtils.setTextStyle(defaultData.getAddressAll(), tv_address); //添加一个标签
+            default_address.setVisibility(View.VISIBLE);
+        }else{
+            default_address.setVisibility(View.GONE);
         }
 
         mAdapter.setData(otherDatas);
@@ -161,6 +163,7 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void addressListSuccess(List<AddressBean> datas) {
+        if(datas == null) datas = new ArrayList<>();
         setDefaultView(datas);
     }
 
@@ -178,5 +181,12 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
     @Override
     public void addressDeleteFailed(String msg) {
         showLongToast(msg);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposable != null && !disposable.isDisposed())
+            disposable.dispose();
     }
 }

@@ -16,6 +16,7 @@ import com.zlyc.www.constant.Constant;
 import com.zlyc.www.mvp.shop.HotGoodsContract;
 import com.zlyc.www.mvp.shop.HotGoodsPresenter;
 import com.zlyc.www.view.shop.GoodsDetailsActivity;
+import com.zlyc.www.view.shop.GoodsListActivity;
 import com.zlyc.www.view.shop.OrderListActivity;
 
 import java.io.Serializable;

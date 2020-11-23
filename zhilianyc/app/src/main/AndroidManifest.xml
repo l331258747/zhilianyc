@@ -110,7 +110,10 @@
             android:name=".view.user.MyTaskActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".view.home.fragment.GoodsListActivity"
+            android:name=".view.shop.GoodsListActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.shop.CreateOrderActivity"
             android:windowSoftInputMode="adjustPan" />
 
 

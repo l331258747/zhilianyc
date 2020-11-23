@@ -208,6 +208,12 @@ public interface HttpService {
             @Body RequestBody body
     );
 
+    //创建订单
+    @POST("shop/create_order")
+    Observable<BaseResponse<EmptyModel>> createOrder(
+            @Body RequestBody body
+    );
+
     //查询商品详情
     @POST("shop/goods_detail")
     Observable<BaseResponse<GoodsDetailsBean>> getGoodsDetails(

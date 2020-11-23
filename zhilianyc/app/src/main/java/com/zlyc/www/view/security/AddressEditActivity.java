@@ -159,9 +159,9 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void addressAddSuccess(EmptyModel data) {
+        finish();
         RxBus2.getInstance().post(new AddressEditEvent());
         showShortToast("提交成功");
-        finish();
     }
 
     @Override
