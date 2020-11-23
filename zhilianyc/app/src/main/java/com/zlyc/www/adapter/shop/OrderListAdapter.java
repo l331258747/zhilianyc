@@ -52,14 +52,20 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
 
         holder.ll_btn.setVisibility(View.GONE);
         holder.btn_text.setVisibility(View.GONE);
+        holder.btn_cancel.setVisibility(View.GONE);
+        holder.btn_pay.setVisibility(View.GONE);
+        holder.btn_receive.setVisibility(View.GONE);
+
         if(data.getType() == 1){
             holder.ll_btn.setVisibility(View.VISIBLE);
+            holder.btn_cancel.setVisibility(View.VISIBLE);
+            holder.btn_pay.setVisibility(View.VISIBLE);
         }else if(data.getType() == 2){
             holder.btn_text.setVisibility(View.VISIBLE);
             holder.btn_text.setText("等待商家发货");
         }else if(data.getType() == 3){
-            holder.btn_text.setVisibility(View.VISIBLE);
-            holder.btn_text.setText("等待客户收货");
+            holder.ll_btn.setVisibility(View.VISIBLE);
+            holder.btn_receive.setVisibility(View.VISIBLE);
         }
 
         if(TextUtils.isEmpty(data.getImgUrl())){
@@ -71,6 +77,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
         if (mOnItemClickListener != null) {
             holder.btn_cancel.setOnClickListener(v -> mOnItemClickListener.onCancelClick(position));
             holder.btn_pay.setOnClickListener(v -> mOnItemClickListener.onPayClick(position));
+            holder.btn_receive.setOnClickListener(v -> mOnItemClickListener.onReceiveClick(position));
             holder.cl_parent.setOnClickListener( v -> mOnItemClickListener.onItemClick(position));
         }
     }
@@ -87,7 +94,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tv_order_no,tv_status,tv_name,tv_num,tv_price,tv_price_all,btn_text,btn_cancel,btn_pay;
+        TextView tv_order_no,tv_status,tv_name,tv_num,tv_price,tv_price_all,btn_text,btn_cancel,btn_pay,btn_receive;
         ImageView iv_img;
         ConstraintLayout cl_parent;
         LinearLayout ll_btn;
@@ -107,6 +114,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
             iv_img = itemView.findViewById(R.id.iv_img);
             ll_btn = itemView.findViewById(R.id.ll_btn);
             cl_parent = itemView.findViewById(R.id.cl_parent);
+            btn_receive = itemView.findViewById(R.id.btn_receive);
 
         }
     }
@@ -117,6 +125,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
         void onCancelClick(int position);
         void onPayClick(int position);
         void onItemClick(int position);
+        void onReceiveClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

@@ -172,6 +172,7 @@
             android:id="@+id/ll_btn"
             android:layout_width="wrap_content"
             android:visibility="gone"
+            tools:visibility="visible"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
@@ -198,6 +199,18 @@
                 android:textSize="@dimen/sp_12"
                 android:text="付款"/>
 
+            <TextView
+                android:id="@+id/btn_receive"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:minWidth="@dimen/dp_70"
+                android:background="@drawable/bg_gradients_btn_ff4751"
+                android:textColor="@color/white"
+                android:layout_marginStart="@dimen/dp_10"
+                android:textSize="@dimen/sp_12"
+                android:text="确认收货"/>
+
         </LinearLayout>
 
         <TextView
@@ -206,6 +219,8 @@
             android:layout_height="match_parent"
             android:text="等待商家发货"
             android:textSize="@dimen/sp_12"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:textColor="@color/color_99"
             android:gravity="right|center_vertical"/>
 

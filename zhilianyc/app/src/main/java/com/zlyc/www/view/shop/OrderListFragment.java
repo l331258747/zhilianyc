@@ -2,12 +2,19 @@ package com.zlyc.www.view.shop;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.zlyc.www.R;
 import com.zlyc.www.adapter.shop.OrderListAdapter;
 import com.zlyc.www.base.BaseFragment;
+import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.MySelfInfo;
+import com.zlyc.www.bean.login.MineBean;
 import com.zlyc.www.bean.shop.OrderListBean;
+import com.zlyc.www.dialog.OrderPayDialog;
+import com.zlyc.www.dialog.TextDialog;
+import com.zlyc.www.mvp.my.MyInfoContract;
+import com.zlyc.www.mvp.my.MyInfoPresenter;
 import com.zlyc.www.mvp.shop.OrderListContract;
 import com.zlyc.www.mvp.shop.OrderListPresenter;
 
@@ -20,7 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-public class OrderListFragment  extends BaseFragment implements OrderListContract.View {
+public class OrderListFragment  extends BaseFragment implements OrderListContract.View, MyInfoContract.View {
 
     public static final int ORDER_ALL = 0;
     public static final int ORDER_PAYMENT = 1;
@@ -35,6 +42,11 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
     private OrderListAdapter mAdapter;
     private OrderListPresenter mPresenter;
     List<OrderListBean> datas;
+
+    MyInfoPresenter mInfoPresenter;
+
+    private boolean isViewCreated;
+    boolean isLoad = false;
 
     public static Fragment newInstance(int orderType) {
         OrderListFragment fragment = new OrderListFragment();
@@ -51,7 +63,18 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
         if (bundle != null) {
             orderType = bundle.getInt("orderType");
         }
+        isViewCreated = true;
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);//比oncreate先执行
+        if (isVisibleToUser && isViewCreated && !isLoad) {
+            getRefreshData();
+        }
+    }
+
+
 
     @Override
     public int getLayoutId() {
@@ -71,22 +94,29 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
         swipe = $(R.id.swipe);
         swipe.setColorSchemeResources(R.color.color_1C81E9);
         swipe.setOnRefreshListener(() -> {
+            if (isLoad) return;
             getRefreshData();
         });
     }
 
     public void getRefreshData() {
         swipe.setRefreshing(true);
+        isLoad = true;
         mPresenter.getOrderList(MySelfInfo.getInstance().getUserId(),orderType);
     }
 
     @Override
     public void initData() {
+        mInfoPresenter = new MyInfoPresenter(context,this);
         mPresenter = new OrderListPresenter(context,this);
-        getRefreshData();
+
+        if (getUserVisibleHint()) {
+            getRefreshData();
+        }
     }
 
 
+    int payPosition;
     //初始化recyclerview
     private void initRecycler() {
         recyclerView = $(R.id.recycler_view);
@@ -97,12 +127,15 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
         mAdapter.setOnItemClickListener(new OrderListAdapter.OnItemClickListener() {
             @Override
             public void onCancelClick(int position) {
-                showShortToast("取消订单");
+                new TextDialog(context).setContent("是否确认取消订单？").setSubmitListener(v1 -> {
+                    mPresenter.cancelOrder(MySelfInfo.getInstance().getUserId(),datas.get(position).getId());
+                }).show();
             }
 
             @Override
             public void onPayClick(int position) {
-                showShortToast("付款");
+                payPosition = position;
+                mInfoPresenter.mine(MySelfInfo.getInstance().getUserId(),true);
             }
 
             @Override
@@ -110,6 +143,13 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
                 Intent intent = new Intent(context,OrderDetailActivity.class);
                 intent.putExtra("orderId",datas.get(position).getId());
                 startActivity(intent);
+            }
+
+            @Override
+            public void onReceiveClick(int position) {
+                new TextDialog(context).setContent("是否确认收货？").setSubmitListener(v1 -> {
+                    mPresenter.receiveOrder(MySelfInfo.getInstance().getUserId(),datas.get(position).getId());
+                }).show();
             }
         });
     }
@@ -121,12 +161,70 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
         this.datas = data;
         mAdapter.setData(data);
 
+        isLoad = false;
         swipe.setRefreshing(false);
     }
 
     @Override
     public void getOrderListFailed(String msg) {
         showLongToast(msg);
+        isLoad = false;
         swipe.setRefreshing(false);
+    }
+
+    @Override
+    public void receiveOrderSuccess(EmptyModel data) {
+        showShortToast("确认收货成功");
+        getRefreshData();
+    }
+
+    @Override
+    public void receiveOrderFailed(String msg) {
+        showShortToast(msg);
+    }
+
+    @Override
+    public void cancelOrderSuccess(EmptyModel data) {
+        showShortToast("取消成功");
+        getRefreshData();
+    }
+
+    @Override
+    public void cancelOrderFailed(String msg) {
+        showShortToast(msg);
+    }
+
+    @Override
+    public void payOrderSuccess(EmptyModel data) {
+        showShortToast("支付成功");
+        getRefreshData();
+        mOrderPayDialog.dismiss();
+    }
+
+    @Override
+    public void payOrderFailed(String msg) {
+        showShortToast(msg);
+    }
+
+    OrderPayDialog mOrderPayDialog;
+    @Override
+    public void mineSuccess(MineBean data) {
+        mOrderPayDialog = new OrderPayDialog(context,this.datas.get(payPosition).getTotalSum(),data.getBeans()).setSubmitListener((dialog, content) -> {
+            if(TextUtils.isEmpty(content)){
+                showShortToast("请输入密码");
+                return;
+            }
+            if(data.getBeans() < this.datas.get(payPosition).getTotalSum()){
+                showShortToast("支付京豆不足");
+                return;
+            }
+            mPresenter.payOrder(MySelfInfo.getInstance().getUserId(),this.datas.get(payPosition).getId(),content);
+        });
+        mOrderPayDialog.show();
+    }
+
+    @Override
+    public void mineFailed(String msg) {
+        showShortToast(msg);
     }
 }

@@ -167,6 +167,12 @@ public class OrderDetailBean {
                 return "待发货";
             case 3:
                 return "待收货";
+            case 4:
+                return "已收货";
+            case 5:
+                return "已取消";
+            case 6:
+                return "已退款";
         }
         return "" + type;
     }

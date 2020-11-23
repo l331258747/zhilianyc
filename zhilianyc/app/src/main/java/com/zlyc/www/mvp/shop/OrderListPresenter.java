@@ -2,6 +2,7 @@ package com.zlyc.www.mvp.shop;
 
 import android.content.Context;
 
+import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.shop.OrderListBean;
 import com.zlyc.www.util.http.MethodApi;
 import com.zlyc.www.util.http.OnSuccessAndFaultSub;
@@ -40,5 +41,69 @@ public class OrderListPresenter implements OrderListContract.Presenter {
         params.put("type",type+"");
 
         MethodApi.getOrderList(params, new OnSuccessAndFaultSub(listener, context,false));
+    }
+
+    @Override
+    public void receiveOrder(String uid, String orderId) {
+        ResponseCallback listener = new ResponseCallback<EmptyModel>() {
+            @Override
+            public void onSuccess(EmptyModel data) {
+                iView.receiveOrderSuccess(data);
+            }
+
+            @Override
+            public void onFault(String errorMsg) {
+                iView.receiveOrderFailed(errorMsg);
+            }
+        };
+
+        Map<String, String> params = new HashMap<>();
+        params.put("uid",uid);
+        params.put("orderId",orderId);
+
+        MethodApi.receiveOrder(params, new OnSuccessAndFaultSub(listener, context));
+    }
+
+    @Override
+    public void cancelOrder(String uid, String orderId) {
+        ResponseCallback listener = new ResponseCallback<EmptyModel>() {
+            @Override
+            public void onSuccess(EmptyModel data) {
+                iView.cancelOrderSuccess(data);
+            }
+
+            @Override
+            public void onFault(String errorMsg) {
+                iView.cancelOrderFailed(errorMsg);
+            }
+        };
+
+        Map<String, String> params = new HashMap<>();
+        params.put("uid",uid);
+        params.put("orderId",orderId);
+
+        MethodApi.cancelOrder(params, new OnSuccessAndFaultSub(listener, context));
+    }
+
+    @Override
+    public void payOrder(String uid, String orderId, String fundPassword) {
+        ResponseCallback listener = new ResponseCallback<EmptyModel>() {
+            @Override
+            public void onSuccess(EmptyModel data) {
+                iView.payOrderSuccess(data);
+            }
+
+            @Override
+            public void onFault(String errorMsg) {
+                iView.payOrderFailed(errorMsg);
+            }
+        };
+
+        Map<String, String> params = new HashMap<>();
+        params.put("uid",uid);
+        params.put("orderId",orderId);
+        params.put("fundPassword",fundPassword);
+
+        MethodApi.payOrder(params, new OnSuccessAndFaultSub(listener, context));
     }
 }
