@@ -3,11 +3,13 @@ package com.zlyc.www.mvp.otc;
 import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.otc.OtcDetailBean;
 
+import java.io.File;
+
 public interface OtcDetailContract {
 
     interface Presenter {
         void getOtcDetail(String uid,String beansSendId);
-        void getOtcVoucher(String uid, String beansSendId, String file);
+        void getOtcVoucher(String uid, String beansSendId, File file);
         void getOtcCheck(String uid,String beansSendId);
         void getOtcHandle(String uid,int sendStatus,String beansSendId);
     }

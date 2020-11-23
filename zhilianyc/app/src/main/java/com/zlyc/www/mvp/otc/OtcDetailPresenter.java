@@ -8,6 +8,7 @@ import com.zlyc.www.util.http.MethodApi;
 import com.zlyc.www.util.http.OnSuccessAndFaultSub;
 import com.zlyc.www.util.http.ResponseCallback;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class OtcDetailPresenter implements OtcDetailContract.Presenter {
     }
 
     @Override
-    public void getOtcVoucher(String uid, String beansSendId, String file) {
+    public void getOtcVoucher(String uid, String beansSendId, File file) {
         ResponseCallback listener = new ResponseCallback<EmptyModel>() {
             @Override
             public void onSuccess(EmptyModel data) {

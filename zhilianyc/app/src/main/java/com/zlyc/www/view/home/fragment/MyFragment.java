@@ -22,6 +22,7 @@ import com.zlyc.www.view.account.MyBillActivity;
 import com.zlyc.www.view.my.AccountActivity;
 import com.zlyc.www.view.my.MyTeamActivity;
 import com.zlyc.www.view.otc.MyOtcListActivity;
+import com.zlyc.www.view.otc.OtcFeedbackActivity;
 import com.zlyc.www.view.otc.OtcMarkerActivity;
 import com.zlyc.www.view.security.SecurityActivity;
 import com.zlyc.www.view.team.InvitationActivity;
@@ -132,6 +133,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
                     startActivity(new Intent(context, OtcMarkerActivity.class));
                     break;
                 case Constant.MY_TAB_CLOUD:
+                    startActivity(new Intent(context, OtcFeedbackActivity.class));
                     break;
                 case Constant.MY_TAB_SHOP:
                     break;

@@ -9,7 +9,7 @@ package com.zlyc.www.constant;
 public class Constant {
 
     //文件路径
-    public static final String BASE_PATH = "letsgoapp";
+    public static final String BASE_PATH = "zhilianyc";
     public static final String LOG_PATH = "log";
     public static final String IMAGE_PATH = "image";
 

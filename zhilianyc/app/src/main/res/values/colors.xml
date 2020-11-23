@@ -23,6 +23,7 @@
     <color name="color_f5">#f5f5f5</color>
     <color name="color_4b_66">#664b4b4b</color>
     <color name="color_red">#FF0000</color>
+    <color name="black_33">#33000000</color>
 
 <!--    渐变色 -->
     <color name="color_1C81E9">#1C81E9</color>

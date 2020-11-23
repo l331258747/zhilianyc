@@ -317,7 +317,7 @@ public interface HttpService {
             @Body RequestBody body
     );
 
-    //处理OTC订单
+    //获取OTC订单列表
     @POST("otc/list")
     Observable<BaseResponse<BasePageModel<OtcListBean>>> getOtcList(
             @Body RequestBody body
@@ -346,6 +346,7 @@ public interface HttpService {
     );
 
     //上传申诉图片
+    @Multipart
     @POST("otc/uploads")
     Observable<BaseResponse<String>> otcFeedback(
             @Part("uid") RequestBody uid,

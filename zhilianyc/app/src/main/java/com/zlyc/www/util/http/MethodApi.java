@@ -3,8 +3,6 @@ package com.zlyc.www.util.http;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -217,7 +215,7 @@ public class MethodApi {
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
 
-    public static void getOtcVoucher(String uid, String beansSendId, String file, DisposableObserver subscriber) {
+    public static void getOtcVoucher(String uid, String beansSendId, File file, DisposableObserver subscriber) {
         MultipartBody.Part part = fileToMultipartBodyParts(file);
         Observable observable = HttpMethods.getInstance().getHttpService().getOtcVoucher(getStringPart(uid), getStringPart(beansSendId), part); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -255,7 +253,7 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().sendOtcSell(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
-    public static void otcFeedback(String uid, String file, DisposableObserver subscriber) {
+    public static void otcFeedback(String uid, File file, DisposableObserver subscriber) {
         MultipartBody.Part part = fileToMultipartBodyParts(file);
         Observable observable = HttpMethods.getInstance().getHttpService().otcFeedback(getStringPart(uid), part); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -277,19 +275,7 @@ public class MethodApi {
         return requestBody;
     }
 
-    private static List<MultipartBody.Part> filesToMultipartBodyParts(List<String> files) {
-        List<MultipartBody.Part> parts = new ArrayList<>(files.size());
-        for (String fileStr : files) {
-            File file = new File(fileStr);
-            RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), file);
-            MultipartBody.Part part = MultipartBody.Part.createFormData("files", file.getName(), requestBody);
-            parts.add(part);
-        }
-        return parts;
-    }
-
-    private static MultipartBody.Part fileToMultipartBodyParts(String fileStr) {
-        File file = new File(fileStr);
+    private static MultipartBody.Part fileToMultipartBodyParts(File file) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
         return part;

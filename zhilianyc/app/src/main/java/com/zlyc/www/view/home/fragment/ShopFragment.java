@@ -89,7 +89,6 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View,
     private void initRecyclerH() {
         view_tab = $(R.id.view_tab);
 
-        view_tab = $(R.id.view_tab);
         view_tab.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         mAdapterH = new GoodsClassAdapter(activity, new ArrayList<>());
         view_tab.setAdapter(mAdapterH);
