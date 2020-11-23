@@ -39,5 +39,12 @@ public class Constant {
 
     //realName 0:审核不通过,1：已实名,2：审核中,3：未实名
     //otc sendStatus 0已成交1订单已发起2订单已锁定3卖方已放豆4买方已付款5卖方确认7卖方申诉中9用户撤回10系统撤回11系统解除申诉
+    //orderType
+    //TYPE_CREATE(1, "待付款"),
+    //TYPE_PAID(2, "已支付待发货"),
+    //TYPE_DELIVER(3, "已发货待收货"),
+    //TYPE_RECEIVE(4, "已收货"),
+    //TYPE_CANCEL(5, "已取消"),
+    //TYPE_REFUND(6, "已退款");
 
 }

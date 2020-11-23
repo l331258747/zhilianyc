@@ -1,5 +1,7 @@
 package com.zlyc.www.bean.shop;
 
+import android.text.TextUtils;
+
 import com.zlyc.www.util.StringUtils;
 
 public class OrderDetailBean {
@@ -127,14 +129,17 @@ public class OrderDetailBean {
     }
 
     public String getPayTime() {
+        if(TextUtils.isEmpty(payTime)) return "未付款";
         return payTime;
     }
 
     public String getDeliverTime() {
+        if(TextUtils.isEmpty(deliverTime)) return "未发货";
         return deliverTime;
     }
 
     public String getReceiveTime() {
+        if(TextUtils.isEmpty(receiveTime)) return "未确认收货";
         return receiveTime;
     }
 

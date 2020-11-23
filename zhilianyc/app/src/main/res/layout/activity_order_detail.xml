@@ -414,6 +414,8 @@
         android:background="@color/white"
         android:gravity="right|center_vertical"
         android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:padding="@dimen/dp_5">
 
         <TextView
@@ -425,6 +427,8 @@
             android:gravity="center"
             android:minWidth="@dimen/dp_100"
             android:text="取消订单"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:textColor="@color/color_66"
             android:textSize="@dimen/sp_12" />
 
@@ -437,6 +441,22 @@
             android:gravity="center"
             android:minWidth="@dimen/dp_100"
             android:text="去付款"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/btn_receive"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@drawable/bg_gradients_btn_ff4751"
+            android:gravity="center"
+            android:minWidth="@dimen/dp_100"
+            android:text="确认收货"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_12" />
 

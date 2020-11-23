@@ -32,8 +32,8 @@ public class StringUtils {
         return (null == str || "".equals(str)) ? true : false;
     }
 
-    public static String hidePhone(String str){
-        if(TextUtils.isEmpty(str)) return "";
+    public static String hidePhone(String str) {
+        if (TextUtils.isEmpty(str)) return "";
         return str.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
     }
 
@@ -54,7 +54,7 @@ public class StringUtils {
      * @return
      */
     public static boolean isMobileNO(String mobiles) {
-        if(isNullorEmpty(mobiles)) return false;
+        if (isNullorEmpty(mobiles)) return false;
 
         Pattern p = Pattern
                 .compile("^((1[3-9][0-9]))\\d{8}$");
@@ -297,26 +297,43 @@ public class StringUtils {
         return formatAddress;
     }
 
-    public static void setHtml(TextView tv,String content){
+    public static void setHtml(TextView tv, String content) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            tv.setText(Html.fromHtml(content,Html.FROM_HTML_MODE_LEGACY));
+            tv.setText(Html.fromHtml(content, Html.FROM_HTML_MODE_LEGACY));
         } else {
             tv.setText(Html.fromHtml(content));
         }
     }
 
-    public static String getStringNum(float f){
-        if((f * 100) % 100 == 0){
+    public static String getStringNum(float f) {
+        if ((f * 100) % 100 == 0) {
             return ((int) f) + "";
-        }else{
-            return f+"";
+        } else {
+            return f + "";
         }
     }
-    public static String getStringNum(double f){
-        if((f * 100) % 100 == 0){
+
+    public static String getStringNum(double f) {
+        if ((f * 100) % 100 == 0) {
             return ((int) f) + "";
-        }else{
-            return f+"";
+        } else {
+            return f + "";
+        }
+    }
+
+    //Util.java
+    public static String getHour(long date) {
+        if (date<60) {
+            return date+"秒";
+        }else if (date>60&&date<3600) {
+            long m = date/60;
+            long s = date%60;
+            return m+"分"+s+"秒";
+        }else {
+            long h = date/3600;
+            long m = (date%3600)/60;
+            long s = (date%3600)%60;
+            return h+"小时"+m+"分"+s+"秒";
         }
     }
 
