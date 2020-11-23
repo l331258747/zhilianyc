@@ -85,14 +85,14 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
         swipe = $(R.id.swipe);
         swipe.setColorSchemeResources(R.color.color_1C81E9);
         swipe.setOnRefreshListener(() -> {
-            mPresenter.mine(MySelfInfo.getInstance().getUserId());
+            mPresenter.mine(MySelfInfo.getInstance().getUserId(),false);
         });
     }
 
     @Override
     public void initData() {
         mPresenter = new MyInfoPresenter(context, this);
-        mPresenter.mine(MySelfInfo.getInstance().getUserId());
+        mPresenter.mine(MySelfInfo.getInstance().getUserId(),false);
         rnsPresenter = new RealNameStatusPresenter(context, this);
         rnsPresenter.realNameStatus(MySelfInfo.getInstance().getUserId());
     }
@@ -143,7 +143,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
                     Intent intent = new Intent(context, MyTaskActivity.class);
 
                     if(data != null){
-                        intent.putExtra("beans",data.getBeans());
+                        intent.putExtra("beans",data.getBeansStr());
                         intent.putExtra("todayBeans",data.getTodayBeans());
                         intent.putExtra("sellableBeans",data.getSellableBeans());
                         startActivity(intent);
@@ -177,7 +177,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
 
         tv_name.setText(data.getNickName());
         tv_UID.setText("UID:" + MySelfInfo.getInstance().getUserId());
-        tv_data_all_num.setText(data.getBeans());
+        tv_data_all_num.setText(data.getBeansStr());
         tv_data_today_num.setText(data.getTodayBeans());
         tv_data_use_num.setText(data.getSellableBeans());
         tv_data_contribution_num.setText(data.getContribution());

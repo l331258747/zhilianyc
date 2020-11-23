@@ -1,6 +1,5 @@
 package com.zlyc.www.view.security;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
@@ -131,12 +130,7 @@ public class AddressSetActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void onLongClick(final int position) {
-                DialogUtil.getInstance().getDefaultDialog(context, "确认删除", new DialogUtil.DialogCallBack() {
-                    @Override
-                    public void exectEvent(DialogInterface alterDialog) {
-                        mPresenter.addressDelete(MySelfInfo.getInstance().getUserId(),otherDatas.get(position).getId());
-                    }
-                }).show();
+                DialogUtil.getInstance().getDefaultDialog(context, "确认删除", alterDialog -> mPresenter.addressDelete(MySelfInfo.getInstance().getUserId(),otherDatas.get(position).getId())).show();
 
             }
         });

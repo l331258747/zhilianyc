@@ -5,7 +5,7 @@ import com.zlyc.www.bean.login.MineBean;
 public interface MyInfoContract {
 
     interface Presenter {
-        void mine(String uid);
+        void mine(String uid,boolean isShow);
     }
 
     interface View {

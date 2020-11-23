@@ -26,13 +26,13 @@ public class MineBean {
     private String rank;
     private int cityPartner;
     private String cityPartnerName;
-    private double contribution;
+    private float contribution;
     private String contributionRank;
-    private double labor;
-    private double extraLabor;
-    private double beans;
-    private double sellableBeans;
-    private double todayBeans;
+    private float labor;
+    private float extraLabor;
+    private float beans;
+    private float sellableBeans;
+    private float todayBeans;
     private int middleman;
     private String headImg;
 
@@ -76,7 +76,12 @@ public class MineBean {
         return StringUtils.getStringNum(extraLabor);
     }
 
-    public String getBeans() {
+
+    public float getBeans() {
+        return beans;
+    }
+
+    public String getBeansStr() {
         return StringUtils.getStringNum(beans);
     }
 

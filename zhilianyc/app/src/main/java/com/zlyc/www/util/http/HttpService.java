@@ -239,6 +239,22 @@ public interface HttpService {
     Observable<BaseResponse<OrderDetailBean>> getOrderDetail(
             @Body RequestBody body
     );
+
+    //支付订单
+    @POST("shop/pay_order")
+    Observable<BaseResponse<EmptyModel>> payOrder(
+            @Body RequestBody body
+    );
+    //取消订单
+    @POST("shop/cancel_order")
+    Observable<BaseResponse<EmptyModel>> cancelOrder(
+            @Body RequestBody body
+    );
+    //确认收货
+    @POST("shop/receive_order")
+    Observable<BaseResponse<EmptyModel>> receiveOrder(
+            @Body RequestBody body
+    );
     //--------------------shop end
 
 

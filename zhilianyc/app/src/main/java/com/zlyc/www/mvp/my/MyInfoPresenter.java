@@ -21,7 +21,7 @@ public class MyInfoPresenter implements MyInfoContract.Presenter{
     }
 
     @Override
-    public void mine(String uid) {
+    public void mine(String uid,boolean isShow) {
         ResponseCallback listener = new ResponseCallback<MineBean>() {
             @Override
             public void onSuccess(MineBean data) {
@@ -37,7 +37,7 @@ public class MyInfoPresenter implements MyInfoContract.Presenter{
         Map<String, String> params = new HashMap<>();
         params.put("uid",uid);
 
-        MethodApi.mine(params, new OnSuccessAndFaultSub(listener, context,false));
+        MethodApi.mine(params, new OnSuccessAndFaultSub(listener, context,isShow));
     }
 
 }

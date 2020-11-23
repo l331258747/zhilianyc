@@ -11,8 +11,14 @@ import android.widget.TextView;
 
 import com.zlyc.www.R;
 import com.zlyc.www.base.BaseActivity;
+import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.MySelfInfo;
+import com.zlyc.www.bean.login.MineBean;
 import com.zlyc.www.bean.shop.OrderDetailBean;
+import com.zlyc.www.dialog.OrderPayDialog;
+import com.zlyc.www.dialog.TextDialog;
+import com.zlyc.www.mvp.my.MyInfoContract;
+import com.zlyc.www.mvp.my.MyInfoPresenter;
 import com.zlyc.www.mvp.shop.OrderDetailContract;
 import com.zlyc.www.mvp.shop.OrderDetailPresenter;
 import com.zlyc.www.util.glide.GlideUtil;
@@ -22,9 +28,10 @@ import com.zlyc.www.view.security.AddressSetActivity;
 
 import io.reactivex.disposables.Disposable;
 
-public class OrderDetailActivity extends BaseActivity implements OrderDetailContract.View, View.OnClickListener {
+public class OrderDetailActivity extends BaseActivity implements OrderDetailContract.View, MyInfoContract.View, View.OnClickListener {
 
     OrderDetailPresenter mPresenter;
+    MyInfoPresenter mInfoPresenter;
 
     TextView tv_status, tv_address_name, tv_address_phone, tv_address_detail, tv_address_edit, tv_name, tv_num, tv_price, tv_price_goods,
             tv_freight, tv_price_all, tv_word_NO, tv_word_NO_copy, tv_word_createTime, tv_word_payTime, tv_word_deliverTime, tv_word_receivingTime,
@@ -89,6 +96,8 @@ public class OrderDetailActivity extends BaseActivity implements OrderDetailCont
 
         mPresenter = new OrderDetailPresenter(context, this);
         mPresenter.getOrderDetail(MySelfInfo.getInstance().getUserId(), orderId);
+
+        mInfoPresenter = new MyInfoPresenter(context,this);
     }
 
     @Override
@@ -133,13 +142,48 @@ public class OrderDetailActivity extends BaseActivity implements OrderDetailCont
     }
 
     @Override
+    public void receiveOrderSuccess(EmptyModel data) {
+        showShortToast("确认收货");
+        mPresenter.getOrderDetail(MySelfInfo.getInstance().getUserId(),orderId);
+    }
+
+    @Override
+    public void receiveOrderFailed(String msg) {
+        showShortToast(msg);
+    }
+
+    @Override
+    public void cancelOrderSuccess(EmptyModel data) {
+        showShortToast("取消成功");
+        mPresenter.getOrderDetail(MySelfInfo.getInstance().getUserId(),orderId);
+    }
+
+    @Override
+    public void cancelOrderFailed(String msg) {
+        showShortToast(msg);
+    }
+
+    @Override
+    public void payOrderSuccess(EmptyModel data) {
+        showShortToast("支付成功");
+        mPresenter.getOrderDetail(MySelfInfo.getInstance().getUserId(),orderId);
+    }
+
+    @Override
+    public void payOrderFailed(String msg) {
+        showShortToast(msg);
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_cancel:
-                showShortToast("取消");
+                new TextDialog(context).setContent("是否确认取消订单？").setSubmitListener(v1 -> {
+                    mPresenter.cancelOrder(MySelfInfo.getInstance().getUserId(),orderId);
+                }).show();
                 break;
             case R.id.btn_pay:
-                showShortToast("付款");
+                mInfoPresenter.mine(MySelfInfo.getInstance().getUserId(),true);
                 break;
             case R.id.tv_address_edit:
                 startActivity(new Intent(context, AddressSetActivity.class));
@@ -158,5 +202,25 @@ public class OrderDetailActivity extends BaseActivity implements OrderDetailCont
         super.onDestroy();
         if (disposable != null && !disposable.isDisposed())
             disposable.dispose();
+    }
+
+    @Override
+    public void mineSuccess(MineBean data) {
+        new OrderPayDialog(context,this.data.getTotalSum(),data.getBeans()).setSubmitListener((dialog, content) -> {
+            if(TextUtils.isEmpty(content)){
+                showShortToast("请输入密码");
+                return;
+            }
+            if(data.getBeans() < this.data.getTotalSum()){
+                showShortToast("支付京豆不足");
+                return;
+            }
+            mPresenter.payOrder(MySelfInfo.getInstance().getUserId(),orderId,content);
+        }).show();
+    }
+
+    @Override
+    public void mineFailed(String msg) {
+        showShortToast(msg);
     }
 }

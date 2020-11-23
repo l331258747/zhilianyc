@@ -70,6 +70,7 @@
     <dimen name="sp_22">22sp</dimen>
     <dimen name="sp_24">24sp</dimen>
     <dimen name="sp_26">26sp</dimen>
+    <dimen name="sp_40">40sp</dimen>
 
     <dimen name="custom_section_height">36dp</dimen>
     <dimen name="title_height">42dp</dimen>

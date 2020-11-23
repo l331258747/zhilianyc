@@ -94,7 +94,6 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View,
         view_tab.setAdapter(mAdapterH);
         view_tab.setNestedScrollingEnabled(false);
         mAdapterH.setOnItemClickListener(position -> {
-            //TODO 进入商品列表，分类选择
             Intent intent = new Intent(context, GoodsListActivity.class);
             intent.putExtra("categoryId", datasH.get(position).getId());
             intent.putExtra("goodsClass", (Serializable) datasH);

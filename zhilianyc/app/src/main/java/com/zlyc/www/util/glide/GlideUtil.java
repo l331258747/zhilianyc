@@ -121,7 +121,6 @@ public class GlideUtil {
                 .priority(Priority.HIGH)
                 .dontAnimate()
                 .error(R.mipmap.default_head)
-                .placeholder(R.mipmap.default_head)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .transforms(new CenterCrop(), new RoundedCorners(radius));
 
@@ -146,7 +145,6 @@ public class GlideUtil {
 //                .priority(Priority.HIGH)
                 .dontAnimate()
                 .error(R.mipmap.default_head)
-                .placeholder(R.mipmap.default_head)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .bitmapTransform(new CircleCrop());
 
@@ -171,7 +169,6 @@ public class GlideUtil {
         RequestOptions requestOptions = new RequestOptions()
                 .priority(Priority.HIGH)
                 .error(R.mipmap.default_head)
-                .placeholder(R.mipmap.default_head)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate();
 
@@ -189,7 +186,6 @@ public class GlideUtil {
                 .fitCenter() /*处理源图片ScaleType*/
                 .priority(Priority.HIGH)
                 .error(R.mipmap.default_head)
-                .placeholder(R.mipmap.default_head)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .transform(new RoundedCornersTransform(px, px, 0, 0));
 
