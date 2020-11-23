@@ -109,6 +109,9 @@
         <activity
             android:name=".view.user.MyTaskActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.home.fragment.GoodsListActivity"
+            android:windowSoftInputMode="adjustPan" />
 
 
 <!--        新闻流-->

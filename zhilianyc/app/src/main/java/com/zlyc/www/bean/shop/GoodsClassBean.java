@@ -1,6 +1,8 @@
 package com.zlyc.www.bean.shop;
 
-public class GoodsClassBean {
+import java.io.Serializable;
+
+public class GoodsClassBean implements Serializable {
 
     String id;
     String name;

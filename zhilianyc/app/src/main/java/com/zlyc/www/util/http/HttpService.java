@@ -17,6 +17,7 @@ import com.zlyc.www.bean.otc.OtcInfoBean;
 import com.zlyc.www.bean.otc.OtcListBean;
 import com.zlyc.www.bean.shop.GoodsClassBean;
 import com.zlyc.www.bean.shop.GoodsDetailsBean;
+import com.zlyc.www.bean.shop.GoodsListBean;
 import com.zlyc.www.bean.shop.HotGoodsBean;
 import com.zlyc.www.bean.shop.OrderDetailBean;
 import com.zlyc.www.bean.shop.OrderListBean;
@@ -198,6 +199,12 @@ public interface HttpService {
     //获取商品分类
     @POST("shop/category")
     Observable<BaseResponse<List<GoodsClassBean>>> getGoodsClass(
+            @Body RequestBody body
+    );
+
+    //按分类获取商品
+    @POST("shop/category_goods")
+    Observable<BaseResponse<BasePageModel<GoodsListBean>>> getGoodsList(
             @Body RequestBody body
     );
 

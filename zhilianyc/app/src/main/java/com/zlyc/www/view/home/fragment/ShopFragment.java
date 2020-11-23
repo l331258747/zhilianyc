@@ -18,6 +18,7 @@ import com.zlyc.www.mvp.shop.HotGoodsPresenter;
 import com.zlyc.www.view.shop.GoodsDetailsActivity;
 import com.zlyc.www.view.shop.OrderListActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,7 +95,11 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View,
         view_tab.setNestedScrollingEnabled(false);
         mAdapterH.setOnItemClickListener(position -> {
             //TODO 进入商品列表，分类选择
-
+            Intent intent = new Intent(context, GoodsListActivity.class);
+            intent.putExtra("categoryId", datasH.get(position).getId());
+            intent.putExtra("goodsClass", (Serializable) datasH);
+            intent.putExtra("categoryName", datasH.get(position).getName());
+            startActivity(intent);
         });
 
     }
