@@ -276,7 +276,7 @@ public interface HttpService {
 
     //--------------------team end
 
-    //--------------------otc end
+    //--------------------otc start
     //我的OTC订单列表
     @POST("otc/my_otc_list")
     Observable<BaseResponse<BasePageModel<MyOtcListBean>>> getMyOtcList(
@@ -343,6 +343,13 @@ public interface HttpService {
     @POST("otc/publish_sell")
     Observable<BaseResponse<String>> sendOtcSell(
             @Body RequestBody body
+    );
+
+    //上传申诉图片
+    @POST("otc/uploads")
+    Observable<BaseResponse<String>> otcFeedback(
+            @Part("uid") RequestBody uid,
+            @Part MultipartBody.Part file
     );
 
 

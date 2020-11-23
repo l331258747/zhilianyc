@@ -255,6 +255,11 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().sendOtcSell(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+    public static void otcFeedback(String uid, String file, DisposableObserver subscriber) {
+        MultipartBody.Part part = fileToMultipartBodyParts(file);
+        Observable observable = HttpMethods.getInstance().getHttpService().otcFeedback(getStringPart(uid), part); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
 
 
     //--------------------otc end
