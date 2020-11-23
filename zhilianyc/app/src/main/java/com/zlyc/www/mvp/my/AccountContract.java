@@ -3,10 +3,13 @@ package com.zlyc.www.mvp.my;
 import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.login.InfoBean;
 
+import java.io.File;
+
 public interface AccountContract {
     interface Presenter {
         void info(String uid);
         void resetNickname(String uid,String nickname);
+        void resetHead(String uid, File headImg);
     }
 
     interface View {
@@ -15,5 +18,8 @@ public interface AccountContract {
 
         void resetNicknameSuccess(EmptyModel data);
         void resetNicknameFailed(String msg);
+
+        void resetHeadSuccess(String data);
+        void resetHeadFailed(String msg);
     }
 }

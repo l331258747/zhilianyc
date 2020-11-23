@@ -8,6 +8,7 @@ import com.zlyc.www.util.http.MethodApi;
 import com.zlyc.www.util.http.OnSuccessAndFaultSub;
 import com.zlyc.www.util.http.ResponseCallback;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,5 +61,22 @@ public class AccountPresenter implements AccountContract.Presenter{
         params.put("nickname",nickname);
 
         MethodApi.resetNickname(params, new OnSuccessAndFaultSub(listener, context));
+    }
+
+    @Override
+    public void resetHead(String uid, File headImg) {
+        ResponseCallback listener = new ResponseCallback<String>() {
+            @Override
+            public void onSuccess(String data) {
+                iView.resetHeadSuccess(data);
+            }
+
+            @Override
+            public void onFault(String errorMsg) {
+                iView.resetHeadFailed(errorMsg);
+            }
+        };
+
+        MethodApi.resetHead(uid,headImg, new OnSuccessAndFaultSub(listener, context));
     }
 }

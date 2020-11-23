@@ -1,5 +1,6 @@
 package com.zlyc.www.view.my;
 
+import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,8 +16,18 @@ import com.zlyc.www.bean.login.InfoBean;
 import com.zlyc.www.dialog.EditDialog;
 import com.zlyc.www.mvp.my.AccountContract;
 import com.zlyc.www.mvp.my.AccountPresenter;
+import com.zlyc.www.util.accessory.ImageUtils;
+import com.zlyc.www.util.dialog.LoadingDialog;
 import com.zlyc.www.util.glide.GlideUtil;
+import com.zlyc.www.util.photo.TackPicturesUtil;
+import com.zlyc.www.util.rxbus.RxBus2;
+import com.zlyc.www.util.rxbus.busEvent.UpLoadPhotos;
+import com.zlyc.www.util.thread.MyThreadPool;
 import com.zlyc.www.view.login.LoginActivity;
+
+import java.io.File;
+
+import io.reactivex.disposables.Disposable;
 
 public class AccountActivity extends BaseActivity implements View.OnClickListener, AccountContract.View {
 
@@ -49,13 +60,17 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
         view_head.setOnClickListener(this);
         view_nickname.setOnClickListener(this);
         btn_loginOff.setOnClickListener(this);
+
+        getPicPermission(context);
     }
 
     @Override
     public void initData() {
+        tackPicUtil = new TackPicturesUtil(activity);
+        loadingDialog = new LoadingDialog(context);
+
         mPresenter = new AccountPresenter(context, this);
         mPresenter.info(MySelfInfo.getInstance().getUserId());
-
 
     }
 
@@ -88,7 +103,7 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
 
                 break;
             case R.id.view_head:
-                showShortToast("头像");
+                tackPicUtil.showDialog(context);
                 break;
             case R.id.btn_loginOff:
                 MySelfInfo.getInstance().loginOff();
@@ -127,4 +142,81 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
     public void resetNicknameFailed(String msg) {
         showShortToast(msg);
     }
+
+    @Override
+    public void resetHeadSuccess(String data) {
+        loadingDialog.dismiss();
+        showShortToast("头像上传成功");
+        GlideUtil.loadCircleImage(context, headpath, iv_head);
+    }
+
+    @Override
+    public void resetHeadFailed(String msg) {
+        loadingDialog.dismiss();
+        showShortToast(msg);
+    }
+
+    //图片
+    private TackPicturesUtil tackPicUtil;
+    private String headpath;// 头像地址
+    private String headCompressPath;
+    private Disposable disposable;
+    private LoadingDialog loadingDialog;
+    //-----------start 拍照-----------
+
+    //拍照，存储权限
+    public void getPicPermission(Context context) {
+        tackPicUtil.checkPermission(context);
+    }
+
+
+    /**
+     * 获取图片回调
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case TackPicturesUtil.CHOOSE_PIC:
+            case TackPicturesUtil.TACK_PIC:
+            case TackPicturesUtil.CROP_PIC:
+                String path = tackPicUtil.getPicture(requestCode, resultCode, data, false);
+                if (path == null)
+                    return;
+                headpath = path;
+                upFile();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void upFile() {
+        disposable = RxBus2.getInstance().toObservable(UpLoadPhotos.class, upLoadPhotos -> {
+            sendHead();
+            disposable.dispose();
+        });
+
+        loadingDialog.showDialog("上传头像...");
+        loadingDialog.setCancelable(false);
+        compressImage();
+    }
+
+    public void sendHead() {
+        //构建要上传的文件
+        File file = new File(headCompressPath);
+        mPresenter.resetHead(MySelfInfo.getInstance().getUserId(), file);
+    }
+
+    private void compressImage() {
+        MyThreadPool.getInstance().submit(() -> {
+            File file = new File(headpath);
+            String savePath = TackPicturesUtil.IMAGE_CACHE_PATH + "crop" + file.getName();
+            ImageUtils.getImage(headpath, savePath);
+            headCompressPath = savePath;
+            RxBus2.getInstance().post(new UpLoadPhotos());
+        });
+    }
+
+    //----------------end 拍照
 }

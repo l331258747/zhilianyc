@@ -75,6 +75,12 @@ public class MethodApi {
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
 
+    public static void resetHead(String uid, File headImg, DisposableObserver subscriber) {
+        MultipartBody.Part part = fileToMultipartBodyParts(headImg,"headImg");
+        Observable observable = HttpMethods.getInstance().getHttpService().resetHead(getStringPart(uid), part); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+
     public static void resetNickname(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().resetNickname(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -276,8 +282,11 @@ public class MethodApi {
     }
 
     private static MultipartBody.Part fileToMultipartBodyParts(File file) {
+        return fileToMultipartBodyParts(file,"file");
+    }
+    private static MultipartBody.Part fileToMultipartBodyParts(File file,String name) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), file);
-        MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+        MultipartBody.Part part = MultipartBody.Part.createFormData(name, file.getName(), requestBody);
         return part;
     }
 

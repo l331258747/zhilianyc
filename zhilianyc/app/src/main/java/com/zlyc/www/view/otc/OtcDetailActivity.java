@@ -39,7 +39,6 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
     boolean isCheck;
 
     ImageView iv_camera;
-    String filePath;
 
     @Override
     public int getLayoutId() {

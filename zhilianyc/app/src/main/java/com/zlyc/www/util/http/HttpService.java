@@ -65,6 +65,14 @@ public interface HttpService {
             @Body RequestBody body
     );
 
+    //修改用户头像
+    @Multipart
+    @POST("user/reset_head_img")
+    Observable<BaseResponse<String>> resetHead(
+            @Part("uid") RequestBody uid,
+            @Part MultipartBody.Part headImg
+    );
+
     //设置昵称
     @POST("user/reset_nickname")
     Observable<BaseResponse<EmptyModel>> resetNickname(
