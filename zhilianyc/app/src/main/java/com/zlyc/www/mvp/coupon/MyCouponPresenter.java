@@ -37,6 +37,6 @@ public class MyCouponPresenter implements MyCouponContract.Presenter{
         Map<String, String> params = new HashMap<>();
         params.put("uid",uid);
 
-        MethodApi.getMyCoupon(params, new OnSuccessAndFaultSub(listener, context));
+        MethodApi.getMyCoupon(params, new OnSuccessAndFaultSub(listener, context,false));
     }
 }

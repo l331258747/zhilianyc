@@ -1,96 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/swipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_start_15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/dp_15" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_end_15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/dp_15" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/dp_15" />
 
-    <View
-        android:id="@+id/view_title"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/dp_70"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/dp_15" />
 
 
-    <TextView
-        android:id="@+id/tv_task_all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_12"
-        android:textColor="@color/color_99"
-        android:layout_marginTop="@dimen/dp_15"
-        app:layout_constraintStart_toStartOf="@+id/gl_start_15"
-        app:layout_constraintTop_toTopOf="@+id/view_title"
-        android:text="当前产量"/>
-
-    <TextView
-        android:id="@+id/tv_output"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_12"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_task_all"
-        app:layout_constraintStart_toEndOf="@+id/tv_task_all"
-        android:layout_marginStart="@dimen/dp_10"
-        tools:text="3.0京豆/天"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_12"
-        android:textColor="@color/color_cc"
-        app:layout_constraintBottom_toBottomOf="@id/tv_task_all"
-        app:layout_constraintStart_toEndOf="@+id/tv_output"
-        android:text="（通过每日浏览任务分3次释放）"/>
+        <View
+            android:id="@+id/view_title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_70"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
-        android:id="@+id/tv_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
-        android:text="增加劳动值"
-        app:layout_constraintTop_toBottomOf="@+id/tv_task_all"
-        app:layout_constraintStart_toStartOf="@id/gl_start_15"
-        android:textSize="@dimen/sp_12"
-        android:textColor="@color/color_99"/>
+        <TextView
+            android:id="@+id/tv_task_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:text="当前产量"
+            android:textColor="@color/color_99"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintStart_toStartOf="@+id/gl_start_15"
+            app:layout_constraintTop_toTopOf="@+id/view_title" />
 
-    <TextView
-        android:id="@+id/tv_labor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_12"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_3"
-        app:layout_constraintStart_toEndOf="@+id/tv_3"
-        android:layout_marginStart="@dimen/dp_10"
-        tools:text="+10.0"/>
+        <TextView
+            android:id="@+id/tv_output"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_task_all"
+            app:layout_constraintStart_toEndOf="@+id/tv_task_all"
+            tools:text="3.0京豆/天" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_15"
-        android:overScrollMode="never"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_title" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="（通过每日浏览任务分3次释放）"
+            android:textColor="@color/color_cc"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/tv_task_all"
+            app:layout_constraintStart_toEndOf="@+id/tv_output" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="增加劳动值"
+            android:textColor="@color/color_99"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintStart_toStartOf="@id/gl_start_15"
+            app:layout_constraintTop_toBottomOf="@+id/tv_task_all" />
+
+        <TextView
+            android:id="@+id/tv_labor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_3"
+            app:layout_constraintStart_toEndOf="@+id/tv_3"
+            tools:text="+10.0" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -39,7 +39,7 @@ public class ShopCouponPresenter implements ShopCouponContract.Presenter{
         Map<String, String> params = new HashMap<>();
         params.put("uid",uid);
 
-        MethodApi.getShopCoupon(params, new OnSuccessAndFaultSub(listener, context));
+        MethodApi.getShopCoupon(params, new OnSuccessAndFaultSub(listener, context,false));
     }
 
     @Override

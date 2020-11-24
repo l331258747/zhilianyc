@@ -21,9 +21,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class ShopCouponFragment extends BaseFragment implements ShopCouponContract.View {
 
+    SwipeRefreshLayout swipe;
     RecyclerView recyclerView;
 
     private ShopCouponAdapter mAdapter;
@@ -31,6 +33,9 @@ public class ShopCouponFragment extends BaseFragment implements ShopCouponContra
     ShopCouponPresenter mPresenter;
 
     List<ShopCouponBean> datas;
+
+    private boolean isViewCreated;
+    boolean isLoad = false;
 
 
     public static Fragment newInstance() {
@@ -41,6 +46,15 @@ public class ShopCouponFragment extends BaseFragment implements ShopCouponContra
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isViewCreated = true;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);//比oncreate先执行
+        if (isVisibleToUser && isViewCreated && !isLoad) {
+            getRefreshData();
+        }
     }
 
     @Override
@@ -50,13 +64,31 @@ public class ShopCouponFragment extends BaseFragment implements ShopCouponContra
 
     @Override
     public void initView() {
+        initSwipe();
         initRecycler();
+    }
+
+    private void getRefreshData() {
+        swipe.setRefreshing(true);
+        isLoad = true;
+        mPresenter.getShopCoupon(MySelfInfo.getInstance().getUserId());
+    }
+
+    private void initSwipe() {
+        swipe = $(R.id.swipe);
+        swipe.setColorSchemeResources(R.color.color_1C81E9);
+        swipe.setOnRefreshListener(() -> {
+            if (isLoad) return;
+            getRefreshData();
+        });
     }
 
     @Override
     public void initData() {
         mPresenter = new ShopCouponPresenter(context,this);
-        mPresenter.getShopCoupon(MySelfInfo.getInstance().getUserId());
+        if (getUserVisibleHint()) {
+            getRefreshData();
+        }
     }
 
     //初始化recyclerview
@@ -79,11 +111,17 @@ public class ShopCouponFragment extends BaseFragment implements ShopCouponContra
         if(data == null) data = new ArrayList<>();
         datas = data;
         mAdapter.setData(datas);
+
+        isLoad = false;
+        swipe.setRefreshing(false);
     }
 
     @Override
     public void getShopCouponFailed(String msg) {
         showLongToast(msg);
+
+        isLoad = false;
+        swipe.setRefreshing(false);
     }
 
     @Override
