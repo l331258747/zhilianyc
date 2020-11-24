@@ -13,6 +13,7 @@ import com.zlyc.www.bean.MySelfInfo;
 import com.zlyc.www.bean.login.MineBean;
 import com.zlyc.www.bean.my.MyTabBean;
 import com.zlyc.www.constant.Constant;
+import com.zlyc.www.dialog.TextDialog;
 import com.zlyc.www.mvp.my.MyInfoContract;
 import com.zlyc.www.mvp.my.MyInfoPresenter;
 import com.zlyc.www.mvp.my.RealNameStatusContract;
@@ -24,7 +25,6 @@ import com.zlyc.www.view.my.MyTeamActivity;
 import com.zlyc.www.view.news.MyNoticeActivity;
 import com.zlyc.www.view.news.MyStudyActivity;
 import com.zlyc.www.view.otc.MyOtcListActivity;
-import com.zlyc.www.view.otc.OtcFeedbackActivity;
 import com.zlyc.www.view.otc.OtcMarkerActivity;
 import com.zlyc.www.view.security.SecurityActivity;
 import com.zlyc.www.view.team.InvitationActivity;
@@ -137,9 +137,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
                     startActivity(new Intent(context, OtcMarkerActivity.class));
                     break;
                 case Constant.MY_TAB_CLOUD:
-                    startActivity(new Intent(context, OtcFeedbackActivity.class));
-                    break;
                 case Constant.MY_TAB_SHOP:
+                    new TextDialog(context).setContent("功能完善中，敬请期待！").show();
                     break;
                 case Constant.MY_TAB_RED_PACKAGE:
                     break;

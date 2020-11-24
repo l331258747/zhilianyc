@@ -4,11 +4,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zlyc.www.R;
+import com.zlyc.www.base.ActivityCollect;
 import com.zlyc.www.base.BaseActivity;
 import com.zlyc.www.bean.MySelfInfo;
 import com.zlyc.www.bean.user.TaskBean;
 import com.zlyc.www.mvp.user.TaskContract;
 import com.zlyc.www.mvp.user.TaskPresenter;
+import com.zlyc.www.view.home.HomeActivity;
 
 public class MyTaskActivity extends BaseActivity implements View.OnClickListener , TaskContract.View {
 
@@ -86,13 +88,21 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
 
                 break;
             case R.id.btn_game:
-
+                ActivityCollect.getAppCollect().finishAllNotHome();
+                HomeActivity activity1 = (HomeActivity) ActivityCollect.getAppCollect().findActivity(HomeActivity.class);
+                if(activity1!=null){
+                    activity1.setTabIndex(1);
+                }
                 break;
             case R.id.btn_read:
-
+                ActivityCollect.getAppCollect().finishAllNotHome();
+                HomeActivity activity0 = (HomeActivity) ActivityCollect.getAppCollect().findActivity(HomeActivity.class);
+                if(activity0!=null){
+                    activity0.setTabIndex(0);
+                }
                 break;
             case R.id.btn_luck:
-
+                
                 break;
 
         }
