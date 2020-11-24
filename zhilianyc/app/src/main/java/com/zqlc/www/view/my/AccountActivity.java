@@ -14,6 +14,7 @@ import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.bean.login.InfoBean;
 import com.zqlc.www.dialog.EditDialog;
+import com.zqlc.www.dialog.TextDialog;
 import com.zqlc.www.mvp.my.AccountContract;
 import com.zqlc.www.mvp.my.AccountPresenter;
 import com.zqlc.www.util.accessory.ImageUtils;
@@ -84,31 +85,33 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
                 new EditDialog(context).setContent(tv_nickname.getText().toString())
                         .setTitle("修改昵称").setSubmitListener((dialog, content) -> {
 
-                            if(TextUtils.isEmpty(content)){
-                                showShortToast("昵称不能为空");
-                                return;
-                            }
+                    if (TextUtils.isEmpty(content)) {
+                        showShortToast("昵称不能为空");
+                        return;
+                    }
 
-                            if(TextUtils.equals(oldName,content)){
-                                showShortToast("昵称相同");
-                                return;
-                            }
+                    if (TextUtils.equals(oldName, content)) {
+                        showShortToast("昵称相同");
+                        return;
+                    }
 
-                            mPresenter.resetNickname(MySelfInfo.getInstance().getUserId(),content);
+                    mPresenter.resetNickname(MySelfInfo.getInstance().getUserId(), content);
 
-                            newNickname = content;
+                    newNickname = content;
 
-                            dialog.dismiss();
-                        }).show();
+                    dialog.dismiss();
+                }).show();
 
                 break;
             case R.id.view_head:
                 tackPicUtil.showDialog(context);
                 break;
             case R.id.btn_loginOff:
-                MySelfInfo.getInstance().loginOff();
-                ActivityCollect.getAppCollect().finishAllActivity();
-                startActivity(new Intent(context, LoginActivity.class));
+                new TextDialog(context).setContent("是否确认退出APP？").setSubmitListener(v1 -> {
+                    MySelfInfo.getInstance().loginOff();
+                    ActivityCollect.getAppCollect().finishAllActivity();
+                    startActivity(new Intent(context, LoginActivity.class));
+                }).show();
                 break;
 
         }
@@ -116,9 +119,9 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void infoSuccess(InfoBean data) {
-        if(TextUtils.isEmpty(data.getHeadImg())){
+        if (TextUtils.isEmpty(data.getHeadImg())) {
             iv_head.setImageResource(R.mipmap.default_head);
-        }else{
+        } else {
             GlideUtil.loadCircleImage(context, data.getHeadImg(), iv_head);
         }
 

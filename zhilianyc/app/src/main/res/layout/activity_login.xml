@@ -334,7 +334,6 @@
                     android:layout_marginStart="@dimen/sp_10"
                     android:background="@null"
                     android:hint="请输入邀请码(必填)"
-                    android:inputType="textPassword"
                     android:maxLength="12"
                     app:layout_constraintBottom_toBottomOf="@+id/view_invite"
                     app:layout_constraintEnd_toEndOf="@+id/view_invite"
