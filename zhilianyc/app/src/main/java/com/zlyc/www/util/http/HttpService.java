@@ -397,6 +397,11 @@ public interface HttpService {
     Observable<BaseResponse<List<BannerBean>>> getBanner(
             @Body RequestBody body
     );
+    //签到回调 (奖励额外金豆)
+    @POST("ad/signin_callback")
+    Observable<BaseResponse<EmptyModel>> signin(
+            @Body RequestBody body
+    );
     //--------------------ad end
 
     //--------------------news start

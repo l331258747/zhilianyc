@@ -2,6 +2,7 @@ package com.zlyc.www.mvp.user;
 
 import android.content.Context;
 
+import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.user.TaskBean;
 import com.zlyc.www.util.http.MethodApi;
 import com.zlyc.www.util.http.OnSuccessAndFaultSub;
@@ -39,5 +40,25 @@ public class TaskPresenter implements TaskContract.Presenter {
         params.put("uid",uid);
 
         MethodApi.getTask(params, new OnSuccessAndFaultSub(listener, context));
+    }
+
+    @Override
+    public void signin(String uid) {
+        ResponseCallback listener = new ResponseCallback<EmptyModel>() {
+            @Override
+            public void onSuccess(EmptyModel data) {
+                iView.signinSuccess(data);
+            }
+
+            @Override
+            public void onFault(String errorMsg) {
+                iView.signinFailed(errorMsg);
+            }
+        };
+
+        Map<String, String> params = new HashMap<>();
+        params.put("uid",uid);
+
+        MethodApi.signin(params, new OnSuccessAndFaultSub(listener, context));
     }
 }

@@ -38,13 +38,13 @@ public class MyBillPresenter implements MybillContract.Presenter{
         params.put("uid",uid);
 
         if(type == 1){
-            MethodApi.contributionRecord(params, new OnSuccessAndFaultSub(listener, context));
+            MethodApi.contributionRecord(params, new OnSuccessAndFaultSub(listener, context,false));
         }else if(type == 2){
-            MethodApi.laborRecord(params, new OnSuccessAndFaultSub(listener, context));
+            MethodApi.laborRecord(params, new OnSuccessAndFaultSub(listener, context,false));
         }else if(type == 3){
-            MethodApi.sellableBeansRecord(params, new OnSuccessAndFaultSub(listener, context));
+            MethodApi.sellableBeansRecord(params, new OnSuccessAndFaultSub(listener, context,false));
         }else{
-            MethodApi.beansRecord(params, new OnSuccessAndFaultSub(listener, context));
+            MethodApi.beansRecord(params, new OnSuccessAndFaultSub(listener, context,false));
         }
 
     }

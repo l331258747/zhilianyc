@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class MyBillFragment extends BaseFragment implements MybillContract.View {
 
@@ -28,9 +29,13 @@ public class MyBillFragment extends BaseFragment implements MybillContract.View 
 
     private int billType;
 
+    SwipeRefreshLayout swipe;
     private RecyclerView recyclerView;
     private BillListAdapter mAdapter;
     private MyBillPresenter mPresenter;
+
+    private boolean isViewCreated;
+    boolean isLoad = false;
 
 
     public static Fragment newInstance(int billType) {
@@ -48,6 +53,15 @@ public class MyBillFragment extends BaseFragment implements MybillContract.View 
         if (bundle != null) {
             billType = bundle.getInt("billType");
         }
+        isViewCreated = true;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);//比oncreate先执行
+        if (isVisibleToUser && isViewCreated && !isLoad) {
+            getRefreshData();
+        }
     }
 
 
@@ -58,13 +72,32 @@ public class MyBillFragment extends BaseFragment implements MybillContract.View 
 
     @Override
     public void initView() {
+        initSwipe();
         initRecycler();
+    }
+
+    private void initSwipe() {
+        swipe = $(R.id.swipe);
+        swipe.setColorSchemeResources(R.color.color_1C81E9);
+        swipe.setOnRefreshListener(() -> {
+            if (isLoad) return;
+            getRefreshData();
+        });
+    }
+
+    public void getRefreshData() {
+        swipe.setRefreshing(true);
+        isLoad = true;
+        mPresenter.getBill(MySelfInfo.getInstance().getUserId(),billType);
     }
 
     @Override
     public void initData() {
         mPresenter = new MyBillPresenter(context,this);
-        mPresenter.getBill(MySelfInfo.getInstance().getUserId(),billType);
+
+        if (getUserVisibleHint()) {
+            getRefreshData();
+        }
     }
 
     //初始化recyclerview
@@ -81,10 +114,15 @@ public class MyBillFragment extends BaseFragment implements MybillContract.View 
     public void getBillSuccess(MyBillBean data) {
         List<MyBillListBean> datas = data.getList();
         mAdapter.setData(datas);
+
+        isLoad = false;
+        swipe.setRefreshing(false);
     }
 
     @Override
     public void getBillFailed(String msg) {
         showLongToast(msg);
+        isLoad = false;
+        swipe.setRefreshing(false);
     }
 }
