@@ -287,6 +287,14 @@ public class MethodApi {
     }
     //--------------------user end
 
+    //--------------------ad start
+    public static void getBanner(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().getBanner(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+
+    //--------------------ad end
+
     private static RequestBody getRequestBody(Map<String, String> params) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"),
                 new JSONObject(params).toString());

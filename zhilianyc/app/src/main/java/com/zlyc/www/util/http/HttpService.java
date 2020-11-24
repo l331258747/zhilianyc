@@ -4,6 +4,7 @@ import com.zlyc.www.bean.BasePageModel;
 import com.zlyc.www.bean.BaseResponse;
 import com.zlyc.www.bean.EmptyModel;
 import com.zlyc.www.bean.account.MyBillBean;
+import com.zlyc.www.bean.ad.BannerBean;
 import com.zlyc.www.bean.address.AddressBean;
 import com.zlyc.www.bean.coupon.MyCouponBean;
 import com.zlyc.www.bean.coupon.ShopCouponBean;
@@ -386,7 +387,15 @@ public interface HttpService {
             @Body RequestBody body
     );
 
+
     //--------------------user end
+
+    //--------------------ad start
+    @POST("ad/index")
+    Observable<BaseResponse<List<BannerBean>>> getBanner(
+            @Body RequestBody body
+    );
+    //--------------------ad end
 
 
 }

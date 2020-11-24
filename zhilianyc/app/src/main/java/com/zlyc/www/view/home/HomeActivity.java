@@ -1,8 +1,17 @@
 package com.zlyc.www.view.home;
 
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 import com.zlyc.www.R;
 import com.zlyc.www.base.BaseActivity;
 import com.zlyc.www.base.BaseFragment;
+import com.zlyc.www.bean.ad.BannerBean;
+import com.zlyc.www.mvp.ad.BannerContract;
+import com.zlyc.www.mvp.ad.BannerPresenter;
 import com.zlyc.www.util.StatusBarUtil;
 import com.zlyc.www.view.home.fragment.GameFragment;
 import com.zlyc.www.view.home.fragment.MyFragment;
@@ -14,12 +23,13 @@ import com.zlyc.www.widget.tab.TabLayout;
 import com.zlyc.www.widget.tab.TabView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickListener {
+public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickListener, BannerContract.View {
 
     private TabLayout tabLayout;
     private ArrayList<TabItem> tabItems;
@@ -27,6 +37,10 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
     private Class[] fragmentCls = new Class[5];
     private Fragment[] fragments = new Fragment[5];
 
+    LinearLayout ll_gif;
+    TextView tv_location;
+    ImageView iv_poster,iv_gif;
+    BannerPresenter mPresenter;
 
     @Override
     public int getLayoutId() {
@@ -36,10 +50,25 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
     @Override
     public void initView() {
         tabLayout = $(R.id.cus_tab_layout);
+
+        ll_gif = $(R.id.ll_gif);
+        tv_location = $(R.id.tv_location);
+        iv_poster = $(R.id.iv_poster);
+        iv_gif = $(R.id.iv_gif);
+
+        ll_gif.setVisibility(View.VISIBLE);
+        tv_location.setText("岳麓区");
+
+        //assets资产目录 home_gif.gif
+        Glide.with(this).load("file:///android_asset/home_gif.gif").into(iv_gif);
+
     }
 
     @Override
     public void initData() {
+
+        mPresenter = new BannerPresenter(context,this);
+        mPresenter.getBanner();
 
         // 初始化页面
         try {
@@ -69,7 +98,7 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
         tabLayout.initData(tabItems, this);
 
         // 点击事件处理
-        onTabItemClick(tabItems.get(4));
+//        onTabItemClick(tabItems.get(4));
     }
 
 //    //防止fragment混淆
@@ -107,6 +136,8 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
 
     @Override
     public void onTabItemClick(TabItem tabItem) {
+        ll_gif.setVisibility(View.GONE);
+
         int index = tabItems.indexOf(tabItem);
 
         switch (index) {
@@ -154,5 +185,15 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void getBannerSuccess(List<BannerBean> datas) {
+
+    }
+
+    @Override
+    public void getBannerFailed(String msg) {
+
     }
 }
