@@ -162,7 +162,7 @@
                 app:layout_constraintTop_toTopOf="@+id/view_num" />
 
 
-            <com.zlyc.www.widget.NumberView
+            <com.zqlc.www.widget.NumberView
                 android:id="@+id/numberView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -217,7 +217,7 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_title2"
                 app:layout_constraintTop_toTopOf="@+id/tv_title2" />
 
-            <com.zlyc.www.util.webview.LWebView
+            <com.zqlc.www.util.webview.LWebView
                 android:id="@+id/tv_content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
 
-        <com.zlyc.www.widget.myTabLayout.TabLayout
+        <com.zqlc.www.widget.myTabLayout.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
