@@ -6,6 +6,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.youth.banner.Banner;
+import com.youth.banner.adapter.BannerImageAdapter;
+import com.youth.banner.holder.BannerImageHolder;
+import com.youth.banner.indicator.CircleIndicator;
 import com.zlyc.www.R;
 import com.zlyc.www.base.BaseActivity;
 import com.zlyc.www.base.BaseFragment;
@@ -13,6 +17,7 @@ import com.zlyc.www.bean.ad.BannerBean;
 import com.zlyc.www.mvp.ad.BannerContract;
 import com.zlyc.www.mvp.ad.BannerPresenter;
 import com.zlyc.www.util.StatusBarUtil;
+import com.zlyc.www.util.glide.GlideUtil;
 import com.zlyc.www.view.home.fragment.GameFragment;
 import com.zlyc.www.view.home.fragment.MyFragment;
 import com.zlyc.www.view.home.fragment.NewFragment;
@@ -39,7 +44,8 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
 
     LinearLayout ll_gif;
     TextView tv_location;
-    ImageView iv_poster,iv_gif;
+    ImageView iv_gif;
+    Banner banner;
     BannerPresenter mPresenter;
 
     @Override
@@ -53,22 +59,30 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
 
         ll_gif = $(R.id.ll_gif);
         tv_location = $(R.id.tv_location);
-        iv_poster = $(R.id.iv_poster);
+        banner = $(R.id.iv_poster);
         iv_gif = $(R.id.iv_gif);
 
-        ll_gif.setVisibility(View.VISIBLE);
-        tv_location.setText("岳麓区");
+        setDefaultView();
+    }
 
+    public void setDefaultView(){
+        hideTitleLayout();
+        ll_gif.setVisibility(View.VISIBLE);
         //assets资产目录 home_gif.gif
         Glide.with(this).load("file:///android_asset/home_gif.gif").into(iv_gif);
+    }
 
+    public void setDefaultData(){
+        //TODO 定位
+        tv_location.setText("岳麓区");
+
+        mPresenter = new BannerPresenter(context, this);
+        mPresenter.getBanner();
     }
 
     @Override
     public void initData() {
-
-        mPresenter = new BannerPresenter(context,this);
-        mPresenter.getBanner();
+        setDefaultData();
 
         // 初始化页面
         try {
@@ -160,10 +174,10 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
                 break;
         }
 
-        if(index == 4){
-            StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context,R.color.color_1C81E9));
-        }else{
-            StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context,R.color.white));
+        if (index == 4) {
+            StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context, R.color.color_1C81E9));
+        } else {
+            StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context, R.color.white));
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -189,11 +203,23 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
 
     @Override
     public void getBannerSuccess(List<BannerBean> datas) {
-
+        if (datas == null) datas = new ArrayList<>();
+        setBanner(datas);
     }
 
     @Override
     public void getBannerFailed(String msg) {
+        showShortToast(msg);
+    }
 
+
+    public void setBanner(List<BannerBean> datas) {
+        banner.setAdapter(new BannerImageAdapter<BannerBean>(datas) {
+            @Override
+            public void onBindView(BannerImageHolder holder, BannerBean data, int position, int size) {
+                GlideUtil.loadRoundImage(context, data.getImgUrl(), holder.imageView, 10);
+            }
+        }).addBannerLifecycleObserver(this)//添加生命周期观察者
+          .setIndicator(new CircleIndicator(this));
     }
 }
