@@ -37,6 +37,6 @@ public class BannerPresenter implements BannerContract.Presenter{
 
         Map<String, String> params = new HashMap<>();
 
-        MethodApi.getBanner(params, new OnSuccessAndFaultSub(listener, context));
+        MethodApi.getBanner(params, new OnSuccessAndFaultSub(listener, context,false));
     }
 }

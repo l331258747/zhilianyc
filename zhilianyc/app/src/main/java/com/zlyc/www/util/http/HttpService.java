@@ -12,6 +12,8 @@ import com.zlyc.www.bean.login.InfoBean;
 import com.zlyc.www.bean.login.LoginBean;
 import com.zlyc.www.bean.login.MineBean;
 import com.zlyc.www.bean.login.VerifyImageBean;
+import com.zlyc.www.bean.news.AnnouncementBean;
+import com.zlyc.www.bean.news.StudyCentreBean;
 import com.zlyc.www.bean.otc.MyOtcListBean;
 import com.zlyc.www.bean.otc.OtcDetailBean;
 import com.zlyc.www.bean.otc.OtcInfoBean;
@@ -395,6 +397,21 @@ public interface HttpService {
     Observable<BaseResponse<List<BannerBean>>> getBanner(
             @Body RequestBody body
     );
+    //--------------------ad end
+
+    //--------------------news start
+    //公告中心
+    @POST("news/study_centre")
+    Observable<BaseResponse<BasePageModel<StudyCentreBean>>> getStudyCentre(
+            @Body RequestBody body
+    );
+
+    //学习中心
+    @POST("news/announcement")
+    Observable<BaseResponse<BasePageModel<AnnouncementBean>>> getAnnouncement(
+            @Body RequestBody body
+    );
+
     //--------------------ad end
 
 

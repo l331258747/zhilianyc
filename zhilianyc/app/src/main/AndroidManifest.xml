@@ -125,6 +125,15 @@
         <activity
             android:name=".view.otc.OtcFeedbackActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.news.MyNoticeActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.news.MyStudyActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.news.WebTextActivity"
+            android:windowSoftInputMode="adjustPan" />
 
 
 <!--        新闻流-->

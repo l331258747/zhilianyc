@@ -56,7 +56,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
 
     private List<OtcListBean> datas;
     private LoadMoreWrapper loadMoreWrapper;
-    private int page;
+    private int page = Constant.DEFAULT_PAGE;
     private int isLoadType = 1;//1下拉刷新，2上拉加载
     private boolean isLoad = false;//是否在加载，重复加载问题
 

@@ -21,6 +21,8 @@ import com.zlyc.www.util.glide.GlideUtil;
 import com.zlyc.www.view.account.MyBillActivity;
 import com.zlyc.www.view.my.AccountActivity;
 import com.zlyc.www.view.my.MyTeamActivity;
+import com.zlyc.www.view.news.MyNoticeActivity;
+import com.zlyc.www.view.news.MyStudyActivity;
 import com.zlyc.www.view.otc.MyOtcListActivity;
 import com.zlyc.www.view.otc.OtcFeedbackActivity;
 import com.zlyc.www.view.otc.OtcMarkerActivity;
@@ -126,8 +128,10 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
                     startActivity(new Intent(context, InvitationActivity.class));
                     break;
                 case Constant.MY_TAB_STUDIO:
+                    startActivity(new Intent(context, MyStudyActivity.class));
                     break;
                 case Constant.MY_TAB_NOTIFY:
+                    startActivity(new Intent(context, MyNoticeActivity.class));
                     break;
                 case Constant.MY_TAB_CHANGE:
                     startActivity(new Intent(context, OtcMarkerActivity.class));

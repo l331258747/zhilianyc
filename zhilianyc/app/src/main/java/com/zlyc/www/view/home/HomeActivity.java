@@ -80,6 +80,12 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
         mPresenter.getBanner();
     }
 
+    public void closeDefault(){
+        ll_gif.setVisibility(View.GONE);
+        if(banner != null)
+            banner.stop();
+    }
+
     @Override
     public void initData() {
         setDefaultData();
@@ -150,7 +156,8 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
 
     @Override
     public void onTabItemClick(TabItem tabItem) {
-        ll_gif.setVisibility(View.GONE);
+        closeDefault();
+
 
         int index = tabItems.indexOf(tabItem);
 

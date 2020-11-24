@@ -1,17 +1,16 @@
-package com.zlyc.www.view.otc;
+package com.zlyc.www.view.news;
 
 import android.content.Intent;
 
 import com.zlyc.www.R;
 import com.zlyc.www.adapter.base.EndlessRecyclerOnScrollListener;
 import com.zlyc.www.adapter.base.LoadMoreWrapper;
-import com.zlyc.www.adapter.otc.MyOtcListAdapter;
+import com.zlyc.www.adapter.news.MyStudyAdapter;
 import com.zlyc.www.base.BaseActivity;
-import com.zlyc.www.bean.MySelfInfo;
-import com.zlyc.www.bean.otc.MyOtcListBean;
+import com.zlyc.www.bean.news.StudyCentreBean;
 import com.zlyc.www.constant.Constant;
-import com.zlyc.www.mvp.otc.MyOtcListContract;
-import com.zlyc.www.mvp.otc.MyOtcListPresenter;
+import com.zlyc.www.mvp.news.MyStudyContract;
+import com.zlyc.www.mvp.news.MyStudyPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +19,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-public class MyOtcListActivity extends BaseActivity implements MyOtcListContract.View {
+public class MyStudyActivity extends BaseActivity implements MyStudyContract.View {
 
-    private RecyclerView recyclerView;
-    public SwipeRefreshLayout swipeRefreshLayout;
-    private MyOtcListAdapter mAdapter;
-    private MyOtcListPresenter mPresenter;
-    List<MyOtcListBean> datas;
+    SwipeRefreshLayout swipe;
+    RecyclerView recyclerView;
+
+    private MyStudyAdapter mAdapter;
+
+    MyStudyPresenter mPresenter;
+
+    List<StudyCentreBean> datas;
 
     int page = Constant.DEFAULT_PAGE;
     LoadMoreWrapper loadMoreWrapper;
@@ -35,12 +37,12 @@ public class MyOtcListActivity extends BaseActivity implements MyOtcListContract
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_transaction_list;
+        return R.layout.activity_my_study;
     }
 
     @Override
     public void initView() {
-        showLeftAndTitle("交易明细");
+        showLeftAndTitle("学习中心");
         initSwipeLayout();
         initRecycler();
     }
@@ -48,40 +50,39 @@ public class MyOtcListActivity extends BaseActivity implements MyOtcListContract
     @Override
     public void initData() {
         page = Constant.DEFAULT_PAGE;
-        mPresenter = new MyOtcListPresenter(context,this);
+        mPresenter = new MyStudyPresenter(context,this);
         getRefreshData();
     }
 
     public void getRefreshData() {
-        swipeRefreshLayout.setRefreshing(true);
+        swipe.setRefreshing(true);
         page = Constant.DEFAULT_PAGE;
         isLoad = true;
         isLoadType = 1;
-        mPresenter.getMyOtcList(MySelfInfo.getInstance().getUserId(),page);
+        mPresenter.getStudyCentre(page);
     }
 
     public void getMoreData() {
         isLoad = true;
         page = page + 1;
         isLoadType = 2;
-        mPresenter.getMyOtcList(MySelfInfo.getInstance().getUserId(),page);
+        mPresenter.getStudyCentre(page);
     }
 
     //初始化recyclerview
     private void initRecycler() {
         recyclerView = $(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        mAdapter = new MyOtcListAdapter(activity, new ArrayList<>());
+        mAdapter = new MyStudyAdapter(activity, new ArrayList<>());
         loadMoreWrapper = new LoadMoreWrapper(mAdapter);
         recyclerView.setAdapter(loadMoreWrapper);
 
         mAdapter.setOnItemClickListener(position -> {
-            MyOtcListBean item = datas.get(position);
-
-            intent = new Intent(context,OtcDetailActivity.class);
-            intent.putExtra("orderType",item.getOrderType());
-            intent.putExtra("beansSendId",item.getId());
+            StudyCentreBean item = datas.get(position);
+            intent = new Intent(context,WebTextActivity.class);
+            intent.putExtra("web_text", item.getContent());
             startActivity(intent);
+
         });
 
         recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
@@ -96,20 +97,20 @@ public class MyOtcListActivity extends BaseActivity implements MyOtcListContract
 
     //初始化SwipeLayout
     public void initSwipeLayout() {
-        swipeRefreshLayout = $(R.id.swipe_refresh_layout);
-        swipeRefreshLayout.setColorSchemeColors(getResColor(R.color.color_368feb));
-        swipeRefreshLayout.setOnRefreshListener(() -> {
+        swipe = $(R.id.swipe);
+        swipe.setColorSchemeColors(getResColor(R.color.color_368feb));
+        swipe.setOnRefreshListener(() -> {
             if (isLoad) return;
             getRefreshData();
         });
     }
 
     @Override
-    public void getMyOtcListSuccess(List<MyOtcListBean> data) {
+    public void getStudyCentreSuccess(List<StudyCentreBean> data) {
         if(data == null) data = new ArrayList<>();
         this.datas = data;
 
-        swipeRefreshLayout.setRefreshing(false);
+        swipe.setRefreshing(false);
 
         if (isLoadType == 1) {
             mAdapter.setData(datas);
@@ -127,9 +128,9 @@ public class MyOtcListActivity extends BaseActivity implements MyOtcListContract
     }
 
     @Override
-    public void getMyOtcListFailed(String msg) {
+    public void getStudyCentreFailed(String msg) {
         showShortToast(msg);
-        swipeRefreshLayout.setRefreshing(false);
+        swipe.setRefreshing(false);
         loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING_COMPLETE);
         isLoad = false;
     }

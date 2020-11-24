@@ -32,7 +32,7 @@ public class MyTeamActivity extends BaseActivity implements MyTeamContract.View 
 
     MyTeamPresenter mPresenter;
 
-    int page;
+    int page = Constant.DEFAULT_PAGE;
     LoadMoreWrapper loadMoreWrapper;
     int isLoadType = 1;//1下拉刷新，2上拉加载
     boolean isLoad = false;//是否在加载，重复加载问题
