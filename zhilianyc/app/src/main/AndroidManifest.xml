@@ -136,6 +136,12 @@
             android:windowSoftInputMode="adjustPan" />
 
 
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="hxm7REwDPUVfwOsh9BIdfTmp4sHytHiW" >
+        </meta-data>
+        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"> </service>
+
 <!--        新闻流-->
         <uses-library
             android:name="org.apache.http.legacy"

@@ -18,6 +18,7 @@ import com.zqlc.www.mvp.ad.BannerContract;
 import com.zqlc.www.mvp.ad.BannerPresenter;
 import com.zqlc.www.util.StatusBarUtil;
 import com.zqlc.www.util.glide.GlideUtil;
+import com.zqlc.www.util.location.LocationUtil;
 import com.zqlc.www.view.home.fragment.GameFragment;
 import com.zqlc.www.view.home.fragment.MyFragment;
 import com.zqlc.www.view.home.fragment.NewFragment;
@@ -72,9 +73,14 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
         Glide.with(this).load("file:///android_asset/home_gif.gif").into(iv_gif);
     }
 
+    LocationUtil locationUtil;
     public void setDefaultData(){
         //TODO 定位
         tv_location.setText("岳麓区");
+        locationUtil = new LocationUtil();
+
+        locationUtil.startLocation(adress -> tv_location.setText(adress.getCityChild()));
+
 
         mPresenter = new BannerPresenter(context, this);
         mPresenter.getBanner();
@@ -84,6 +90,7 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
         ll_gif.setVisibility(View.GONE);
         if(banner != null)
             banner.stop();
+        locationUtil.stopLocation();
     }
 
     @Override
