@@ -117,11 +117,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
         mPresenter = new LoginPresenter(context, this);
 
-        if (MySelfInfo.getInstance().isLogin()) {
-            startActivity(new Intent(context, HomeActivity.class));
-            finish();
-        }
-
         setMobileDisposable = RxBus2.getInstance().toObservable(SetLoginMobileEvent.class, setLoginMobileEvent -> {
             et_phone.setText(setLoginMobileEvent.getMobile());
             et_password.setText("");
