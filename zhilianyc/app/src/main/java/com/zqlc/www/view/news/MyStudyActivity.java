@@ -11,6 +11,7 @@ import com.zqlc.www.bean.news.StudyCentreBean;
 import com.zqlc.www.constant.Constant;
 import com.zqlc.www.mvp.news.MyStudyContract;
 import com.zqlc.www.mvp.news.MyStudyPresenter;
+import com.zqlc.www.view.web.WebTextActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +80,7 @@ public class MyStudyActivity extends BaseActivity implements MyStudyContract.Vie
 
         mAdapter.setOnItemClickListener(position -> {
             StudyCentreBean item = datas.get(position);
-            intent = new Intent(context,WebTextActivity.class);
+            intent = new Intent(context, WebTextActivity.class);
             intent.putExtra("web_text", item.getContent());
             startActivity(intent);
 

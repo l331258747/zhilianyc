@@ -132,7 +132,10 @@
             android:name=".view.news.MyStudyActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".view.news.WebTextActivity"
+            android:name=".view.web.WebTextActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.web.WebViewActivity"
             android:windowSoftInputMode="adjustPan" />
 
 

@@ -47,4 +47,11 @@ public class Constant {
     //TYPE_CANCEL(5, "已取消"),
     //TYPE_REFUND(6, "已退款");
 
+    /**
+     * url 跳转链接
+     **/
+    public static final String EXTRA_URL = "url";
+    public static final String EXTRA_TITLE = "title";
+    public static final String IS_USE_WIDE_VIEW_PORT = "isUseWideViewPort";
+
 }

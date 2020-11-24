@@ -1,4 +1,4 @@
-package com.zqlc.www.view.news;
+package com.zqlc.www.view.web;
 
 import android.text.TextUtils;
 

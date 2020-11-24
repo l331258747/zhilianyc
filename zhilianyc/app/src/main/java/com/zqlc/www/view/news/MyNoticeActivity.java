@@ -11,6 +11,7 @@ import com.zqlc.www.bean.news.AnnouncementBean;
 import com.zqlc.www.constant.Constant;
 import com.zqlc.www.mvp.news.MyNotifyContract;
 import com.zqlc.www.mvp.news.MyNotifyPresenter;
+import com.zqlc.www.view.web.WebTextActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +80,7 @@ public class MyNoticeActivity extends BaseActivity implements MyNotifyContract.V
 
         mAdapter.setOnItemClickListener(position -> {
             AnnouncementBean item = datas.get(position);
-            intent = new Intent(context,WebTextActivity.class);
+            intent = new Intent(context, WebTextActivity.class);
             intent.putExtra("web_text", item.getContent());
             startActivity(intent);
 
