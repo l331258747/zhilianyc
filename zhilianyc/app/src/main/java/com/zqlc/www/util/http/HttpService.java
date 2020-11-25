@@ -13,6 +13,7 @@ import com.zqlc.www.bean.login.InfoBean;
 import com.zqlc.www.bean.login.LoginBean;
 import com.zqlc.www.bean.login.MineBean;
 import com.zqlc.www.bean.login.VerifyImageBean;
+import com.zqlc.www.bean.message.AppUpdateBean;
 import com.zqlc.www.bean.news.AnnouncementBean;
 import com.zqlc.www.bean.news.StudyCentreBean;
 import com.zqlc.www.bean.otc.MyOtcListBean;
@@ -463,6 +464,14 @@ public interface HttpService {
     );
 
     //--------------------ad end
+
+    //--------------------message start
+
+    @POST("message/update")
+    Observable<BaseResponse<AppUpdateBean>> getAppUpdate(
+            @Body RequestBody body
+    );
+    //--------------------message end
 
 
 }

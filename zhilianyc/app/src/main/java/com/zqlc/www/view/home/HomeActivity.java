@@ -14,8 +14,12 @@ import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.base.BaseFragment;
 import com.zqlc.www.bean.ad.BannerBean;
+import com.zqlc.www.bean.message.AppUpdateBean;
+import com.zqlc.www.dialog.TipDialog;
 import com.zqlc.www.mvp.ad.BannerContract;
 import com.zqlc.www.mvp.ad.BannerPresenter;
+import com.zqlc.www.mvp.message.AppUpdateContract;
+import com.zqlc.www.mvp.message.AppUpdatePresenter;
 import com.zqlc.www.util.StatusBarUtil;
 import com.zqlc.www.util.glide.GlideUtil;
 import com.zqlc.www.util.location.LocationUtil;
@@ -35,7 +39,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickListener, BannerContract.View {
+public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickListener, BannerContract.View, AppUpdateContract.View {
 
     private TabLayout tabLayout;
     private ArrayList<TabItem> tabItems;
@@ -48,6 +52,7 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
     ImageView iv_gif;
     Banner banner;
     BannerPresenter mPresenter;
+    AppUpdatePresenter mPresenterApp;
 
     @Override
     public int getLayoutId() {
@@ -84,6 +89,9 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
 
         mPresenter = new BannerPresenter(context, this);
         mPresenter.getBanner();
+
+        mPresenterApp = new AppUpdatePresenter(context,this);
+        mPresenterApp.getAppUpdate();
     }
 
     public void closeDefault(){
@@ -239,5 +247,17 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
             }
         }).addBannerLifecycleObserver(this)//添加生命周期观察者
           .setIndicator(new CircleIndicator(this));
+    }
+
+    @Override
+    public void getAppUpdateSuccess(AppUpdateBean data) {
+        if(data != null){
+            new TipDialog(context).setTitle("更新提示").setContent(data.getFeatures()).show();
+        }
+    }
+
+    @Override
+    public void getAppUpdateFailed(String msg) {
+
     }
 }
