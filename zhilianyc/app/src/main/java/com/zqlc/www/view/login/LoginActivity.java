@@ -107,7 +107,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     public void testLogin() {
-        et_phone.setText("15616397868");
+        et_phone.setText("18565390456");
         et_password.setText("123456");
     }
 
@@ -209,8 +209,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void loginSuccess(LoginBean data) {
         MySelfInfo.getInstance().setLoginData(data, et_phone.getText().toString());
-        startActivity(new Intent(context, HomeActivity.class));
         finish();
+        startActivity(new Intent(context, HomeActivity.class));
     }
 
     @Override

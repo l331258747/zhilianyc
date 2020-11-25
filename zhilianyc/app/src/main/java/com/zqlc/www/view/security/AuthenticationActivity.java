@@ -137,7 +137,6 @@ public class AuthenticationActivity extends BaseActivity implements AuthRealName
             intentRed.putExtra(Constant.EXTRA_URL,data.getAuthRealNameVO().getPayUrl());
             startActivity(intentRed);
 
-
 //            //从其他浏览器打开
 //            Intent intent = new Intent();
 //            intent.setAction(Intent.ACTION_VIEW);

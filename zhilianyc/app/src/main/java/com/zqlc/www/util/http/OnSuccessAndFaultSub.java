@@ -113,13 +113,7 @@ public class OnSuccessAndFaultSub extends DisposableObserver<BaseResponse> imple
 
             final String phone = MySelfInfo.getInstance().getUserMobile();
 
-            //{ //TODO
-            //  "code": 20004,
-            //  "data": null,
-            //  "msg": "登录信息已过期"
-            //}
-
-            if(t.getCode() == 401){
+            if(t.getCode() == 20004){
                 MySelfInfo.getInstance().loginOff();
                 DialogUtil.getInstance().getDefaultDialog(context, t.getMsg(), "去登录", alterDialog -> {
                     Intent intent = new Intent(new Intent(context, LoginActivity.class));
