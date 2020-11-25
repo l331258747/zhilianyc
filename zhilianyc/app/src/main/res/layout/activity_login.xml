@@ -389,6 +389,7 @@
                 android:textColor="@color/color_66" />
 
             <TextView
+                android:id="@+id/tv_agreement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="《智链云仓用户隐私协议》"
