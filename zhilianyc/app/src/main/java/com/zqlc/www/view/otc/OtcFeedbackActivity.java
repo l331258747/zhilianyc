@@ -70,9 +70,9 @@ public class OtcFeedbackActivity extends BaseActivity implements OtcFeedbackCont
             @Override
             public void afterTextChanged(Editable s) {
                 if (TextUtils.isEmpty(s))
-                    tv_words.setText("0/500");
+                    tv_words.setText("0/100");
                 else
-                    tv_words.setText("(" + s.length() + "/500)");
+                    tv_words.setText("(" + s.length() + "/100)");
             }
         });
 
@@ -80,8 +80,6 @@ public class OtcFeedbackActivity extends BaseActivity implements OtcFeedbackCont
         iv_camera.setOnClickListener(this);
 
     }
-
-
 
     private void initRecycler() {
         recyclerView = $(R.id.recycler_view);

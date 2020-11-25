@@ -146,6 +146,10 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
         String receiveId = data.getReceiveId();
         String sendId = data.getSendId();
 
+        //撤回订单 9
+        //上传凭证 7
+        //确认提交 4
+        //确认放豆 5
         if (orderType == 0) {
             //求购单
             //uid 和 receiveId 相同
@@ -154,7 +158,6 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
                     btn_1.setVisibility(View.VISIBLE);
                     btn_1.setText("撤回订单");
                     btn_1.setOnClickListener(v -> {
-                        //TODO
                         if (!isCheck()) return;
                         getOtcHandle(9);
                     });
@@ -165,16 +168,14 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
                     btn_1.setVisibility(View.VISIBLE);
                     btn_1.setText("上传凭证");
                     btn_1.setOnClickListener(v -> {
-                        //TODO
                         if (!isCheck()) return;
                         sendVoucher();
                     });
                     btn_2.setVisibility(View.VISIBLE);
                     btn_2.setText("确认提交");
                     btn_2.setOnClickListener(v -> {
-                        //TODO
                         if (!isCheck()) return;
-                        getOtcHandle(2);
+                        getOtcHandle(4);
                     });
                 }
             } else {//卖方
@@ -182,24 +183,23 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
                     btn_1.setVisibility(View.VISIBLE);
                     btn_1.setText("我要转让");
                     btn_1.setOnClickListener(v -> {
-                        //TODO
                         if (!isCheck()) return;
-                        getOtcHandle(5);
+                        getOtcHandle(2);
                     });
                 } else if (sendStatus == 4) {
                     btn_1.setVisibility(View.VISIBLE);
                     btn_1.setText("确认放豆");
                     btn_1.setOnClickListener(v -> {
-                        //TODO
                         if (!isCheck()) return;
-                        getOtcHandle(3);
+                        getOtcHandle(5);
                     });
                     btn_2.setVisibility(View.VISIBLE);
                     btn_2.setText("我要申诉");
                     btn_2.setOnClickListener(v -> {
-                        //TODO
                         if (!isCheck()) return;
-                        getOtcHandle(7);
+                        intent  = new Intent(context,OtcFeedbackActivity.class);
+                        intent.putExtra("beansSendId",beansSendId);
+                        startActivity(intent);
                     });
                 }
             }
@@ -210,7 +210,6 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
                     btn_1.setVisibility(View.VISIBLE);
                     btn_1.setText("撤回订单");
                     btn_1.setOnClickListener(v -> {
-                        //TODO
                         if (!isCheck()) return;
                         getOtcHandle(9);
                     });
@@ -218,16 +217,16 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
                     btn_1.setVisibility(View.VISIBLE);
                     btn_1.setText("确认放豆");
                     btn_1.setOnClickListener(v -> {
-                        //TODO
                         if (!isCheck()) return;
-                        getOtcHandle(3);
+                        getOtcHandle(5);
                     });
                     btn_2.setVisibility(View.VISIBLE);
                     btn_2.setText("我要申诉");
                     btn_2.setOnClickListener(v -> {
-                        //TODO
                         if (!isCheck()) return;
-                        getOtcHandle(7);
+                        intent  = new Intent(context,OtcFeedbackActivity.class);
+                        intent.putExtra("beansSendId",beansSendId);
+                        startActivity(intent);
                     });
                 }
             } else {//卖方
@@ -235,7 +234,6 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
                     btn_1.setVisibility(View.VISIBLE);
                     btn_1.setText("我要求购");
                     btn_1.setOnClickListener(v -> {
-                        //TODO
                         if (!isCheck()) return;
                         getOtcHandle(2);
                     });
@@ -245,16 +243,14 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
                     btn_1.setVisibility(View.VISIBLE);
                     btn_1.setText("上传凭证");
                     btn_1.setOnClickListener(v -> {
-                        //TODO
                         if (!isCheck()) return;
                         sendVoucher();
                     });
                     btn_2.setVisibility(View.VISIBLE);
                     btn_2.setText("确认提交");
                     btn_2.setOnClickListener(v -> {
-                        //TODO
                         if (!isCheck()) return;
-                        getOtcHandle(2);
+                        getOtcHandle(4);
 
                     });
                 }
