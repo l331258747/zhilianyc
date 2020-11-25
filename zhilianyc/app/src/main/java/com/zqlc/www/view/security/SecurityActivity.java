@@ -68,7 +68,8 @@ public class SecurityActivity extends BaseActivity implements View.OnClickListen
                 startActivity(new Intent(context, CapitalSetActivity.class));
                 break;
             case R.id.view_authentication:
-                //TODO data为3 进入
+                if (TextUtils.equals(data, "1"))
+                    return;
                 startActivity(new Intent(context,AuthenticationActivity.class));
                 break;
             case R.id.view_address:
