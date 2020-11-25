@@ -140,6 +140,9 @@
         <activity
             android:name=".view.user.ListRegionActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.otc.BigImgActivity"
+            android:windowSoftInputMode="adjustPan" />
 
 
         <meta-data

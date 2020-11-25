@@ -25,7 +25,7 @@ public class DialogUtil {
     }
 
 
-    public AlertDialog getDefaultDialog(Context context, String title, String content, String positiveName, final DialogCallBack callBack) {
+    public AlertDialog getDefaultDialog(Context context, String title, String content, String positiveName, final DialogCallBack callBack,final DialogCallBack callBack2) {
         AlertDialog alterDialog = new AlertDialog.Builder(context)
                 .setMessage(content)
                 .setPositiveButton(positiveName, new DialogInterface.OnClickListener() {
@@ -41,7 +41,11 @@ public class DialogUtil {
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                        if(callBack2 == null){
+                            dialog.cancel();
+                        }else{
+                            callBack2.exectEvent(dialog);
+                        }
                     }
                 }).create();
 
@@ -49,15 +53,15 @@ public class DialogUtil {
     }
 
     public AlertDialog getDefaultDialog(Context context, String content) {
-        return this.getDefaultDialog(context,"提示",content,"确定",null);
+        return this.getDefaultDialog(context,"提示",content,"确定",null,null);
     }
 
     public AlertDialog getDefaultDialog(Context context, String content,final DialogCallBack callBack) {
-        return this.getDefaultDialog(context,"提示",content,"确定",callBack);
+        return this.getDefaultDialog(context,"提示",content,"确定",callBack,null);
     }
 
     public AlertDialog getDefaultDialog(Context context, String content,String positiveName,final DialogCallBack callBack) {
-        return this.getDefaultDialog(context,"提示",content,positiveName,callBack);
+        return this.getDefaultDialog(context,"提示",content,positiveName,callBack,null);
     }
 
     public interface DialogCallBack {

@@ -43,7 +43,7 @@ public class OtcDetailBean {
     private int version;
     private int orderType;
     private String lockUid;
-    private long countDownTime;
+    private int countDownTime;
 
     public String getId() {
         return id;
@@ -117,7 +117,7 @@ public class OtcDetailBean {
         return lockUid;
     }
 
-    public long getCountDownTime() {
+    public int getCountDownTime() {
         return countDownTime;
     }
 

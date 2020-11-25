@@ -47,18 +47,19 @@ public class OnSuccessAndFaultSub extends DisposableObserver<BaseResponse> imple
 
     /**
      * 有对话框
+     *
      * @param mResponseCallback 成功回调监听
-     * @param context                    上下文
+     * @param context           上下文
      */
     public OnSuccessAndFaultSub(ResponseCallback mResponseCallback, Context context) {
-        this(mResponseCallback,context,true);
+        this(mResponseCallback, context, true);
     }
 
     public OnSuccessAndFaultSub(ResponseCallback mResponseCallback, Context context, boolean showDialog) {
         this.mResponseCallback = mResponseCallback;
         this.context = context;
         showProgress = showDialog;
-        if(showProgress){
+        if (showProgress) {
             progressDialog = new LoadingDialog(context);
             progressDialog.setCancelable(false);
         }
@@ -71,7 +72,7 @@ public class OnSuccessAndFaultSub extends DisposableObserver<BaseResponse> imple
     }
 
     private void dismissProgressDialog() {
-        if(!HasActivity.isDestroy((Activity) context)){
+        if (!HasActivity.isDestroy((Activity) context)) {
             if (showProgress && null != progressDialog) {
                 progressDialog.dismiss();
             }
@@ -98,26 +99,30 @@ public class OnSuccessAndFaultSub extends DisposableObserver<BaseResponse> imple
 
     @Override
     public void onNext(@NonNull BaseResponse t) {
-        LogUtil.e("code:"+t.getCode());
-        LogUtil.e("msg:"+t.getMsg());
-        LogUtil.e("data:"+t.getData());
+        LogUtil.e("code:" + t.getCode());
+        LogUtil.e("msg:" + t.getMsg());
+        LogUtil.e("data:" + t.getData());
 
-        if(t.getCode()==0){
+        if (t.getCode() == 0) {
             mResponseCallback.onSuccess(t.getData());
-        }else{
-            if(!TextUtils.isEmpty(t.getMsg())){
+        } else {
+            if (!TextUtils.isEmpty(t.getMsg())) {
                 mResponseCallback.onFault(t.getMsg());
-            }else{
+            } else {
                 mResponseCallback.onFault("--");
             }
 
             final String phone = MySelfInfo.getInstance().getUserMobile();
 
-            if(t.getCode() == 20004){
+            if (t.getCode() == 20004) {
                 MySelfInfo.getInstance().loginOff();
-                DialogUtil.getInstance().getDefaultDialog(context, t.getMsg(), "去登录", alterDialog -> {
+                DialogUtil.getInstance().getDefaultDialog(context,"提示", t.getMsg(), "去登陆", alterDialog -> {
                     Intent intent = new Intent(new Intent(context, LoginActivity.class));
-                    intent.putExtra("LOGIN_PHONE",phone);
+                    intent.putExtra("LOGIN_PHONE", phone);
+                    context.startActivity(intent);
+                }, alterDialog2 -> {
+                    Intent intent = new Intent(new Intent(context, LoginActivity.class));
+                    intent.putExtra("LOGIN_PHONE", phone);
                     context.startActivity(intent);
                 }).show();
             }
@@ -162,7 +167,7 @@ public class OnSuccessAndFaultSub extends DisposableObserver<BaseResponse> imple
         }
     }
 
-    public String decompress(InputStream inputStream){
+    public String decompress(InputStream inputStream) {
         String result = "";
         try {
             StringBuilder sb = new StringBuilder();
@@ -173,7 +178,7 @@ public class OnSuccessAndFaultSub extends DisposableObserver<BaseResponse> imple
                 sb.append(line);
             }
             result = sb.toString();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         LogUtil.e(result);

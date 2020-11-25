@@ -24,7 +24,11 @@ import com.zqlc.www.util.rxbus.busEvent.UpLoadPhotos;
 import com.zqlc.www.util.thread.MyThreadPool;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
 public class OtcDetailActivity extends BaseActivity implements OtcDetailContract.View {
@@ -96,9 +100,17 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
 
     @Override
     public void getOtcDetailSuccess(OtcDetailBean data) {
-        tv_status.setText(data.getSendStatusStr());
-        tv_count_down.setText("倒计时。。。");
+        if (disposableDown != null && !disposableDown.isDisposed())
+            disposableDown.dispose();
 
+        if (data.getCountDownTime() > 0) {
+            tv_count_down.setVisibility(View.VISIBLE);
+            verifyEvent(data.getCountDownTime(), "自动取消");
+        } else {
+            tv_count_down.setVisibility(View.GONE);
+        }
+
+        tv_status.setText(data.getSendStatusStr());
         tv_No.setText(data.getId());
         tv_seller.setText(data.getSendName());
         tv_buyer.setText(data.getReceiveName());
@@ -116,6 +128,12 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
             iv_camera.setVisibility(View.VISIBLE);
             tv_voucher.setVisibility(View.GONE);
             GlideUtil.loadImage(context, data.getPayImgUrl(), iv_camera);
+
+            iv_camera.setOnClickListener(v -> {
+                intent = new Intent(context, BigImgActivity.class);
+                intent.putExtra("imgUrl", data.getPayImgUrl());
+                startActivity(intent);
+            });
         }
 
         btn_1.setVisibility(View.GONE);
@@ -268,7 +286,7 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
     @Override
     public void getOtcVoucherSuccess(EmptyModel data) {
         //支付凭证
-        mPresenter.getOtcDetail(MySelfInfo.getInstance().getUserId(),beansSendId);
+        mPresenter.getOtcDetail(MySelfInfo.getInstance().getUserId(), beansSendId);
     }
 
     @Override
@@ -363,4 +381,44 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
     }
 
     //----------------end 拍照
+
+
+    Disposable disposableDown;
+
+    public void verifyEvent(int count, String str) {
+        Observable.interval(0, 1, TimeUnit.SECONDS)//设置0延迟，每隔一秒发送一条数据
+                .take(count + 1)//设置循环次数
+                .map(aLong -> count - aLong)
+                .doOnSubscribe(disposable -> {
+                })
+                .observeOn(AndroidSchedulers.mainThread())//ui线程中进行控件更新
+                .subscribe(new Observer<Long>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        disposableDown = d;
+                    }
+
+                    @Override
+                    public void onNext(Long num) {
+                        tv_count_down.setText("剩" + StringUtils.getHour(num) + str);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mPresenter.getOtcDetail(MySelfInfo.getInstance().getUserId(), beansSendId);
+                    }
+                });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposableDown != null && !disposableDown.isDisposed())
+            disposableDown.dispose();
+    }
 }

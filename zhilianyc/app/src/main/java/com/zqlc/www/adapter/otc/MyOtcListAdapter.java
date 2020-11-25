@@ -44,17 +44,13 @@ public class MyOtcListAdapter extends RecyclerView.Adapter<MyOtcListAdapter.View
 
         holder.tv_status.setText(data.getSendStatusStr());
         holder.tv_value.setText(data.getCount() + "");
-        holder.tv_status.setBackgroundResource(R.color.color_E5F2FF);
+        holder.tv_status.setBackgroundResource(R.color.color_368feb_33);
         holder.tv_status.setTextColor(ContextCompat.getColor(mContext,R.color.color_368feb));
-        holder.tv_value.setTextColor(ContextCompat.getColor(mContext,R.color.color_368feb));
-        if(data.getSendStatus() == 0){
-            holder.tv_status.setBackgroundResource(R.color.color_61B53F_33);
-            holder.tv_status.setTextColor(ContextCompat.getColor(mContext,R.color.color_61B53F));
-            holder.tv_value.setTextColor(ContextCompat.getColor(mContext,R.color.color_61B53F));
-        }else if(data.getSendStatus() == 9 || data.getSendStatus() == 10){
-            holder.tv_status.setBackgroundResource(R.color.color_66_33);
-            holder.tv_status.setTextColor(ContextCompat.getColor(mContext,R.color.color_66));
-            holder.tv_value.setTextColor(ContextCompat.getColor(mContext,R.color.color_66));
+        holder.tv_value.setTextColor(ContextCompat.getColor(mContext,R.color.color_text));
+        if(data.getSendStatus() == 9 || data.getSendStatus() == 10){
+            holder.tv_status.setBackgroundResource(R.color.color_FBAE17_33);
+            holder.tv_status.setTextColor(ContextCompat.getColor(mContext,R.color.color_FBAE17));
+            holder.tv_value.setTextColor(ContextCompat.getColor(mContext,R.color.color_FBAE17));
         }
 
         holder.tv_time.setText(data.getCreateTime());

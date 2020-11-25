@@ -60,6 +60,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:text="2134654654"
             android:textColor="@color/white_66"
+            android:visibility="gone"
             android:textSize="@dimen/sp_12"
             app:layout_constraintStart_toStartOf="@id/tv_task_all"
             app:layout_constraintTop_toBottomOf="@+id/tv_task_all" />
@@ -270,7 +271,7 @@
 
         <ImageView
             android:id="@+id/iv_camera"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_80"
             android:layout_height="@dimen/dp_80"
             android:layout_marginTop="@dimen/dp_20"
             android:overScrollMode="never"

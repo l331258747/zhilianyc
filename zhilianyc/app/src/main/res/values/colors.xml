@@ -30,6 +30,7 @@
     <color name="color_69B3FF">#69B3FF</color>
     <color name="color_47A3FF">#47A3FF</color>
     <color name="color_FBAE17">#FBAE17</color>
+    <color name="color_FBAE17_33">#33FBAE17</color>
     <color name="color_F7C03F">#F7C03F</color>
     <color name="color_FF666E">#FF666E</color>
 
@@ -39,6 +40,7 @@
 
 <!--    文字颜色-->
     <color name="color_368feb">#368FEB</color>
+    <color name="color_368feb_33">#33368FEB</color>
     <color name="color_368feb_99">#99368FEB</color>
     <color name="color_f0f0f0">#f0f0f0</color>
     <color name="color_FF4751">#FF4751</color>

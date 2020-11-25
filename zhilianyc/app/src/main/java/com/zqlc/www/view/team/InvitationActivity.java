@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.bean.MySelfInfo;
+import com.zqlc.www.dialog.TipDialog;
 import com.zqlc.www.util.StatusBarUtil;
 import com.zqlc.www.util.file.ImageBitmapUtil;
 import com.zqlc.www.util.zxing.ZxingUtils;
@@ -70,6 +71,7 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
                     ClipboardManager copy = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
                     copy.setText(MySelfInfo.getInstance().getInviteCode());
                     showShortToast("复制邀请码成功");
+                    new TipDialog(context).setContent("复制成功，快去微信粘贴发送给好友").show();
                 });
                 break;
             case R.id.btn_qr_code:
@@ -79,7 +81,7 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
                 runOnUiThread(() -> {
                     ClipboardManager copy = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
                     copy.setText(MySelfInfo.getInstance().getShareUrl());
-                    showShortToast("复制邀请链成功");
+                    new TipDialog(context).setContent("复制成功，快去微信粘贴发送给好友").show();
                 });
                 break;
             case R.id.iv_back:

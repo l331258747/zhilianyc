@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zqlc.www.util.ToastUtil;
+import com.zqlc.www.util.log.LogUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,7 +47,7 @@ public class ImageBitmapUtil {
         return UUID.randomUUID().toString();
     }
  
-    public static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/OA头像/";
+    public static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/智链二维码/";
  
     public static void saveBitmap2file(Bitmap bmp, Context context) {
  
@@ -70,7 +71,8 @@ public class ImageBitmapUtil {
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
             fos.close();
-            ToastUtil.showLongToast(context, "保存成功,位置:" + filePic.getAbsolutePath());
+            LogUtil.e("保存成功,位置:" + filePic.getAbsolutePath());
+            ToastUtil.showLongToast(context, "保存成功，可以去相册发送给好友了");
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
