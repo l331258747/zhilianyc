@@ -73,6 +73,10 @@ public class HotGoodsAdapter extends RecyclerView.Adapter<HotGoodsAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public List<HotGoodsBean> getData() {
+        return this.datas;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         View view_card;

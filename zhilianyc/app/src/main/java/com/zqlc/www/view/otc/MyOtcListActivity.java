@@ -26,7 +26,7 @@ public class MyOtcListActivity extends BaseActivity implements MyOtcListContract
     public SwipeRefreshLayout swipeRefreshLayout;
     private MyOtcListAdapter mAdapter;
     private MyOtcListPresenter mPresenter;
-    List<MyOtcListBean> datas;
+    List<MyOtcListBean> list;
 
     int page = Constant.DEFAULT_PAGE;
     LoadMoreWrapper loadMoreWrapper;
@@ -76,7 +76,7 @@ public class MyOtcListActivity extends BaseActivity implements MyOtcListContract
         recyclerView.setAdapter(loadMoreWrapper);
 
         mAdapter.setOnItemClickListener(position -> {
-            MyOtcListBean item = datas.get(position);
+            MyOtcListBean item = list.get(position);
 
             intent = new Intent(context,OtcDetailActivity.class);
             intent.putExtra("orderType",item.getOrderType());
@@ -107,18 +107,20 @@ public class MyOtcListActivity extends BaseActivity implements MyOtcListContract
     @Override
     public void getMyOtcListSuccess(List<MyOtcListBean> data) {
         if(data == null) data = new ArrayList<>();
-        this.datas = data;
 
         swipeRefreshLayout.setRefreshing(false);
 
         if (isLoadType == 1) {
-            mAdapter.setData(datas);
+            mAdapter.setData(data);
         } else {
-            mAdapter.addData(datas);
+            mAdapter.addData(data);
         }
+
+        this.list = mAdapter.getData();
+
         isLoad = false;
 
-        if (datas.size() >= Constant.DEFAULT_SIZE) {
+        if (data.size() >= Constant.DEFAULT_SIZE) {
             loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING_COMPLETE);
         } else {
             // 显示加载到底的提示

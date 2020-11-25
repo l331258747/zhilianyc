@@ -60,6 +60,10 @@ public class MyStudyAdapter extends RecyclerView.Adapter<MyStudyAdapter.ViewHold
         notifyDataSetChanged();
     }
 
+    public List<StudyCentreBean> getData() {
+        return this.datas;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title;
 

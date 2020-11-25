@@ -64,6 +64,10 @@ public class MyNoticeAdapter extends RecyclerView.Adapter<MyNoticeAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public List<AnnouncementBean> getData() {
+        return this.datas;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_img;

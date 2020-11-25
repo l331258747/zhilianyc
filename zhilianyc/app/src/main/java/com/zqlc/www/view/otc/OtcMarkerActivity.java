@@ -54,7 +54,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
     OtcMarkerPresenter mPresenter;
     OtcListAdapter mAdapter;
 
-    private List<OtcListBean> datas;
+    private List<OtcListBean> list;
     private LoadMoreWrapper loadMoreWrapper;
     private int page = Constant.DEFAULT_PAGE;
     private int isLoadType = 1;//1下拉刷新，2上拉加载
@@ -155,7 +155,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
         recyclerView.setNestedScrollingEnabled(false);
 
         mAdapter.setOnItemClickListener(position -> {
-            OtcListBean item = datas.get(position);
+            OtcListBean item = list.get(position);
 
             intent = new Intent(context, OtcDetailActivity.class);
             intent.putExtra("orderType", item.getOrderType());
@@ -287,7 +287,6 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
     @Override
     public void getOtcListSuccess(List<OtcListBean> datas) {
         if(datas == null) datas = new ArrayList<>();
-        this.datas = datas;
 
         swipe.setRefreshing(false);
 
@@ -296,6 +295,9 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
         } else {
             mAdapter.addData(datas);
         }
+
+        this.list = mAdapter.getData();
+
         isLoad = false;
 
         if (datas.size() >= Constant.DEFAULT_SIZE) {

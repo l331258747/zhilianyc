@@ -27,7 +27,7 @@ public class GoodsListActivity extends BaseActivity implements GoodsListContract
     String categoryId;
     String categoryName;
     List<GoodsClassBean> dataH;
-    List<GoodsListBean> datas;
+    List<GoodsListBean> list;
 
     GoodsListPresenter mPresenter;
 
@@ -94,7 +94,7 @@ public class GoodsListActivity extends BaseActivity implements GoodsListContract
 
         mGoodsAdapter.setOnItemClickListener(position -> {
             intent = new Intent(context, GoodsDetailsActivity.class);
-            intent.putExtra("id", datas.get(position).getGoodsId());
+            intent.putExtra("id", list.get(position).getGoodsId());
             startActivity(intent);
         });
     }
@@ -141,18 +141,20 @@ public class GoodsListActivity extends BaseActivity implements GoodsListContract
     @Override
     public void getGoodsListSuccess(List<GoodsListBean> data) {
         if(data == null) data = new ArrayList<>();
-        this.datas = data;
 
         swipe.setRefreshing(false);
 
         if (isLoadType == 1) {
-            mGoodsAdapter.setData(datas);
+            mGoodsAdapter.setData(data);
         } else {
-            mGoodsAdapter.addData(datas);
+            mGoodsAdapter.addData(data);
         }
+
+        this.list = mGoodsAdapter.getData();
+
         isLoad = false;
 
-        if (datas.size() >= Constant.DEFAULT_SIZE) {
+        if (data.size() >= Constant.DEFAULT_SIZE) {
             loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING_COMPLETE);
         } else {
             // 显示加载到底的提示

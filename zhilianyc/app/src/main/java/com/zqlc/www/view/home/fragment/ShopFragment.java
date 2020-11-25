@@ -40,7 +40,7 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View,
     NestedScrollView scrollView;
 
     HotGoodsAdapter mAdapter;
-    List<HotGoodsBean> datas;
+    List<HotGoodsBean> list;
 
     HotGoodsPresenter mPresenter;
 
@@ -115,7 +115,7 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View,
         recyclerView.setNestedScrollingEnabled(false);
 
         mAdapter.setOnItemClickListener(position -> {
-            HotGoodsBean item = datas.get(position);
+            HotGoodsBean item = list.get(position);
 
             Intent intent = new Intent(context, GoodsDetailsActivity.class);
             intent.putExtra("id", item.getGoodsId());
@@ -155,17 +155,20 @@ public class ShopFragment extends BaseFragment implements HotGoodsContract.View,
     @Override
     public void getHotGoodsSuccess(List<HotGoodsBean> data) {
         if (data == null) data = new ArrayList<>();
-        this.datas = data;
+
         swipe.setRefreshing(false);
 
         if (isLoadType == 1) {
-            mAdapter.setData(datas);
+            mAdapter.setData(data);
         } else {
-            mAdapter.addData(datas);
+            mAdapter.addData(data);
         }
+
+        this.list = mAdapter.getData();
+
         isLoad = false;
 
-        if (datas.size() >= Constant.DEFAULT_SIZE) {
+        if (data.size() >= Constant.DEFAULT_SIZE) {
             loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING_COMPLETE);
         } else {
             // 显示加载到底的提示

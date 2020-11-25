@@ -86,6 +86,10 @@ public class OtcListAdapter extends RecyclerView.Adapter<OtcListAdapter.ViewHold
         setData(this.datas);
     }
 
+    public List<OtcListBean> getData() {
+        return this.datas;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView btn_send,tv_price,tv_num,tv_name;
         ImageView iv_img;

@@ -73,6 +73,10 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
         notifyDataSetChanged();
     }
 
+    public List<GoodsListBean> getData() {
+        return this.datas;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_img;

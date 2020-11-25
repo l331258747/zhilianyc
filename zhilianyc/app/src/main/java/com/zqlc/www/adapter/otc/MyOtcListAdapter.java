@@ -72,7 +72,11 @@ public class MyOtcListAdapter extends RecyclerView.Adapter<MyOtcListAdapter.View
 
     public void addData(List<MyOtcListBean> datas) {
         this.datas.addAll(datas);
-        setData(this.datas);
+        notifyDataSetChanged();
+    }
+
+    public List<MyOtcListBean> getData() {
+        return this.datas;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

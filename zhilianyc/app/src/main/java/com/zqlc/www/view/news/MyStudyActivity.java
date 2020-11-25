@@ -29,7 +29,7 @@ public class MyStudyActivity extends BaseActivity implements MyStudyContract.Vie
 
     MyStudyPresenter mPresenter;
 
-    List<StudyCentreBean> datas;
+    List<StudyCentreBean> list;
 
     int page = Constant.DEFAULT_PAGE;
     LoadMoreWrapper loadMoreWrapper;
@@ -79,7 +79,7 @@ public class MyStudyActivity extends BaseActivity implements MyStudyContract.Vie
         recyclerView.setAdapter(loadMoreWrapper);
 
         mAdapter.setOnItemClickListener(position -> {
-            StudyCentreBean item = datas.get(position);
+            StudyCentreBean item = list.get(position);
             intent = new Intent(context, WebTextActivity.class);
             intent.putExtra("web_text", item.getContent());
             startActivity(intent);
@@ -109,18 +109,20 @@ public class MyStudyActivity extends BaseActivity implements MyStudyContract.Vie
     @Override
     public void getStudyCentreSuccess(List<StudyCentreBean> data) {
         if(data == null) data = new ArrayList<>();
-        this.datas = data;
 
         swipe.setRefreshing(false);
 
         if (isLoadType == 1) {
-            mAdapter.setData(datas);
+            mAdapter.setData(data);
         } else {
-            mAdapter.addData(datas);
+            mAdapter.addData(data);
         }
+
+        this.list = mAdapter.getData();
+
         isLoad = false;
 
-        if (datas.size() >= Constant.DEFAULT_SIZE) {
+        if (data.size() >= Constant.DEFAULT_SIZE) {
             loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING_COMPLETE);
         } else {
             // 显示加载到底的提示
