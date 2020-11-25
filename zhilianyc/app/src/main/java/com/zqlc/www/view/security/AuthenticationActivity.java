@@ -21,9 +21,14 @@ import com.zqlc.www.mvp.my.RealNameStatusContract;
 import com.zqlc.www.mvp.my.RealNameStatusPresenter;
 import com.zqlc.www.util.LoginUtil;
 import com.zqlc.www.util.pickerView.PickerCityHelp;
+import com.zqlc.www.util.rxbus.RxBus2;
+import com.zqlc.www.util.rxbus.busEvent.RegionSelEvent;
+import com.zqlc.www.view.user.ListRegionActivity;
 import com.zqlc.www.view.web.WebViewActivity;
 
 import java.net.URLEncoder;
+
+import io.reactivex.disposables.Disposable;
 
 public class AuthenticationActivity extends BaseActivity implements AuthRealNameContract.View, RealNameStatusContract.View {
 
@@ -35,7 +40,7 @@ public class AuthenticationActivity extends BaseActivity implements AuthRealName
 
     AuthRealNamePresenter mPresenter;
     RealNameStatusPresenter mPresenterStatus;
-
+    Disposable disposable;
 
     @Override
     public int getLayoutId() {
@@ -63,10 +68,9 @@ public class AuthenticationActivity extends BaseActivity implements AuthRealName
             mPresenter.authRealPay(MySelfInfo.getInstance().getUserId(), et_real_name.getText().toString(), et_code.getText().toString(), locationCode);
         });
 
-        view_address.setOnClickListener(v -> mPickerCityHelp.showPickerView((str1, str2, str3) -> {
-            locationCode = str1 + " " + str2 + " " + str3;
-            tv_address.setText(str1 + " " + str2 + " " + str3);
-        }));
+        view_address.setOnClickListener(v -> {
+            startActivity(new Intent(context, ListRegionActivity.class));
+        });
     }
 
     @Override
@@ -76,6 +80,11 @@ public class AuthenticationActivity extends BaseActivity implements AuthRealName
         mPresenterStatus = new RealNameStatusPresenter(context, this);
         mPickerCityHelp = new PickerCityHelp(context);
         mPickerCityHelp.initData();
+
+        disposable = RxBus2.getInstance().toObservable(RegionSelEvent.class, regionSelEvent -> {
+            tv_address.setText(regionSelEvent.getAddressDes());
+            locationCode = regionSelEvent.getpCode();
+        });
     }
 
 
@@ -219,5 +228,12 @@ public class AuthenticationActivity extends BaseActivity implements AuthRealName
     @Override
     public void realNameStatusFailed(String msg) {
         showShortToast(msg);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposable != null && !disposable.isDisposed())
+            disposable.dispose();
     }
 }

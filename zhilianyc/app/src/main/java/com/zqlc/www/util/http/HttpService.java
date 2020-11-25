@@ -31,6 +31,7 @@ import com.zqlc.www.bean.team.TeamInviteBean;
 import com.zqlc.www.bean.user.AuthRealInfoBean;
 import com.zqlc.www.bean.user.AuthRealNameBean;
 import com.zqlc.www.bean.user.AuthRealPayBean;
+import com.zqlc.www.bean.user.ListReginBean;
 import com.zqlc.www.bean.user.TaskBean;
 
 import java.util.List;
@@ -144,6 +145,11 @@ public interface HttpService {
     //生成图片滑块
     @POST("user/real_name_info")
     Observable<BaseResponse<AuthRealInfoBean>> realNameInfo(
+            @Body RequestBody body
+    );
+    //根据上级区域代码获取下级区域列表集合
+    @POST("user/list_region")
+    Observable<BaseResponse<List<ListReginBean>>> listRegion(
             @Body RequestBody body
     );
     //--------------------user end

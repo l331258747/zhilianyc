@@ -1,5 +1,6 @@
 package com.zqlc.www.view.security;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,6 +17,10 @@ import com.zqlc.www.util.LoginUtil;
 import com.zqlc.www.util.pickerView.PickerCityHelp;
 import com.zqlc.www.util.rxbus.RxBus2;
 import com.zqlc.www.util.rxbus.busEvent.AddressEditEvent;
+import com.zqlc.www.util.rxbus.busEvent.RegionSelEvent;
+import com.zqlc.www.view.user.ListRegionActivity;
+
+import io.reactivex.disposables.Disposable;
 
 public class AddressEditActivity extends BaseActivity implements View.OnClickListener, AddressEditContract.View {
 
@@ -34,6 +39,8 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
 
     int setType = 0;//0新增，1编辑
     String province, city, region, address;
+
+    Disposable disposable;
 
     @Override
     public int getLayoutId() {
@@ -76,6 +83,16 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
         }
 
         mPresenter = new AddressEditPresenter(context, this);
+
+        disposable = RxBus2.getInstance().toObservable(RegionSelEvent.class, regionSelEvent -> {
+            tv_address.setText(regionSelEvent.getAddressDes());
+
+            tv_address.setText(regionSelEvent.getAddressDes());
+
+            province = regionSelEvent.getProvince();
+            city = regionSelEvent.getCity();
+            region = regionSelEvent.getRegion();
+        });
     }
 
     private void setAddressData() {
@@ -95,13 +112,7 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.view_address:
-                mPickerCityHelp.showPickerView((str1, str2, str3) -> {
-                    tv_address.setText(str1 + " " + str2 + " " + str3);
-
-                    province = str1;
-                    city = str2;
-                    region = str3;
-                });
+                startActivity(new Intent(context, ListRegionActivity.class));
                 break;
             case R.id.view_default:
                 setChecked();
@@ -167,5 +178,13 @@ public class AddressEditActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void addressAddFailed(String msg) {
         showShortToast(msg);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposable != null && !disposable.isDisposed())
+            disposable.dispose();
     }
 }

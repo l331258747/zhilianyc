@@ -137,6 +137,9 @@
         <activity
             android:name=".view.web.WebViewActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.user.ListRegionActivity"
+            android:windowSoftInputMode="adjustPan" />
 
 
         <meta-data
