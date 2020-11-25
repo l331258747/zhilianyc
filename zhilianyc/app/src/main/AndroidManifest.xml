@@ -143,6 +143,9 @@
         <activity
             android:name=".view.otc.BigImgActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.user.ExcitationActivity"
+            android:windowSoftInputMode="adjustPan" />
 
 
         <meta-data
@@ -150,6 +153,18 @@
             android:value="hxm7REwDPUVfwOsh9BIdfTmp4sHytHiW" >
         </meta-data>
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"> </service>
+
+
+        <!-- 推啊appkey和appSecret从媒体管理后台获取 咨询运营人员 记得替换成自己的-->
+        <!-- 推啊appkey-->
+        <meta-data
+            android:name="TUIA_APPKEY"
+            android:value="kEzAJT4iRMMag29Z7yWcJGfcVgG" />
+        <!-- 推啊appSecret -->
+        <meta-data
+            android:name="TUIA_APPSECRET"
+            android:value="3Wq4afvvdPhyHBR29LgRwEC16gkrrFXZ5BRoL2E" />
+
 
 <!--        新闻流-->
         <uses-library

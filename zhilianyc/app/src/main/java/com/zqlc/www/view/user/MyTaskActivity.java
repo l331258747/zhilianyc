@@ -1,5 +1,6 @@
 package com.zqlc.www.view.user;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -103,7 +104,7 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
                 }
                 break;
             case R.id.btn_luck:
-
+                startActivity(new Intent(context,ExcitationActivity.class));
                 break;
 
         }

@@ -3,6 +3,7 @@ package com.zqlc.www;
 import android.app.Application;
 import android.content.Context;
 
+import com.mediamain.android.view.base.FoxSDK;
 import com.zqlc.www.util.AppUtils;
 import com.zqlc.www.util.SPUtils;
 import com.zqlc.www.util.log.LogUtil;
@@ -63,6 +64,20 @@ public class MyApplication extends Application {
         LogUtil.setShowLog(true);
 
         initRuishi();
+
+
+        rewardInit();
+    }
+
+    //抽奖 TODO key
+    // android:value="kEzAJT4iRMMag29Z7yWcJGfcVgG"
+    // FoxSDK.init(this,"","");
+    //s:appkey s1：slotId  s2:userId  s3:deviceId
+    private void rewardInit() {
+        //在自定义的Application 的onCreate方法中，调用以下方法：（详细内容请参考demo中的代码示例）
+        //基础SDK初始化
+//        FoxSDK.init(this,appKey,appSecret);
+        FoxSDK.init(this,"","");
     }
 
     private void initRuishi() {
