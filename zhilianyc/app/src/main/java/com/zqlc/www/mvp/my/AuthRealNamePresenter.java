@@ -3,6 +3,9 @@ package com.zqlc.www.mvp.my;
 import android.content.Context;
 
 import com.zqlc.www.bean.EmptyModel;
+import com.zqlc.www.bean.user.AuthRealInfoBean;
+import com.zqlc.www.bean.user.AuthRealNameBean;
+import com.zqlc.www.bean.user.AuthRealPayBean;
 import com.zqlc.www.util.http.MethodApi;
 import com.zqlc.www.util.http.OnSuccessAndFaultSub;
 import com.zqlc.www.util.http.ResponseCallback;
@@ -22,9 +25,9 @@ public class AuthRealNamePresenter implements AuthRealNameContract.Presenter{
 
     @Override
     public void authRealName(String uid, String name, String idCard, String cityCode) {
-        ResponseCallback listener = new ResponseCallback<EmptyModel>() {
+        ResponseCallback listener = new ResponseCallback<AuthRealNameBean>() {
             @Override
-            public void onSuccess(EmptyModel data) {
+            public void onSuccess(AuthRealNameBean data) {
                 iView.authRealNameSuccess(data);
             }
 
@@ -36,7 +39,53 @@ public class AuthRealNamePresenter implements AuthRealNameContract.Presenter{
 
         Map<String, String> params = new HashMap<>();
         params.put("uid",uid);
+        params.put("name",name);
+        params.put("idCard",idCard);
+        params.put("cityCode",cityCode);
 
-        MethodApi.authRealName(params, new OnSuccessAndFaultSub(listener, context,false));
+        MethodApi.authRealName(params, new OnSuccessAndFaultSub(listener, context));
+    }
+
+    @Override
+    public void authRealPay(String uid, String name, String idCard, String cityCode) {
+        ResponseCallback listener = new ResponseCallback<AuthRealPayBean>() {
+            @Override
+            public void onSuccess(AuthRealPayBean data) {
+                iView.authRealPaySuccess(data);
+            }
+
+            @Override
+            public void onFault(String errorMsg) {
+                iView.authRealPayFailed(errorMsg);
+            }
+        };
+
+        Map<String, String> params = new HashMap<>();
+        params.put("uid",uid);
+        params.put("name",name);
+        params.put("idCard",idCard);
+        params.put("cityCode",cityCode);
+
+        MethodApi.authRealPay(params, new OnSuccessAndFaultSub(listener, context));
+    }
+
+    @Override
+    public void realNameInfo(String uid) {
+        ResponseCallback listener = new ResponseCallback<AuthRealInfoBean>() {
+            @Override
+            public void onSuccess(AuthRealInfoBean data) {
+                iView.realNameInfoSuccess(data);
+            }
+
+            @Override
+            public void onFault(String errorMsg) {
+                iView.realNameInfoFailed(errorMsg);
+            }
+        };
+
+        Map<String, String> params = new HashMap<>();
+        params.put("uid",uid);
+
+        MethodApi.realNameInfo(params, new OnSuccessAndFaultSub(listener, context));
     }
 }

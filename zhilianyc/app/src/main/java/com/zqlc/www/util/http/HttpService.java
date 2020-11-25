@@ -28,6 +28,9 @@ import com.zqlc.www.bean.shop.OrderListBean;
 import com.zqlc.www.bean.team.MyTeamDetailBean;
 import com.zqlc.www.bean.team.RankingBean;
 import com.zqlc.www.bean.team.TeamInviteBean;
+import com.zqlc.www.bean.user.AuthRealInfoBean;
+import com.zqlc.www.bean.user.AuthRealNameBean;
+import com.zqlc.www.bean.user.AuthRealPayBean;
 import com.zqlc.www.bean.user.TaskBean;
 
 import java.util.List;
@@ -85,7 +88,7 @@ public interface HttpService {
 
     //启动 H5 人脸核身
     @POST("user/auth_real_name")
-    Observable<BaseResponse<EmptyModel>> authRealName(
+    Observable<BaseResponse<AuthRealNameBean>> authRealName(
             @Body RequestBody body
     );
 
@@ -137,10 +140,22 @@ public interface HttpService {
     Observable<BaseResponse<VerifyImageBean>> verifyImage(
             @Body RequestBody body
     );
+
+    //生成图片滑块
+    @POST("user/real_name_info")
+    Observable<BaseResponse<AuthRealInfoBean>> realNameInfo(
+            @Body RequestBody body
+    );
     //--------------------user end
 
 
     //--------------------account start
+
+    @POST("account/real_name_pay")
+    Observable<BaseResponse<AuthRealPayBean>> authRealPay(
+            @Body RequestBody body
+    );
+
     //设置交易密码
     @POST("account/pay_password")
     Observable<BaseResponse<EmptyModel>> payPwd(

@@ -98,6 +98,14 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().authRealName(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+    public static void realNameInfo(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().realNameInfo(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    public static void authRealPay(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().authRealPay(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
 
     //登录
     public static void login(Map<String, String> params, DisposableObserver subscriber) {

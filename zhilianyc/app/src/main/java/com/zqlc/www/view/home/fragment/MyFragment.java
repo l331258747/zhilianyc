@@ -19,6 +19,8 @@ import com.zqlc.www.mvp.my.MyInfoPresenter;
 import com.zqlc.www.mvp.my.RealNameStatusContract;
 import com.zqlc.www.mvp.my.RealNameStatusPresenter;
 import com.zqlc.www.util.glide.GlideUtil;
+import com.zqlc.www.util.rxbus.RxBus2;
+import com.zqlc.www.util.rxbus.busEvent.InformationEvent;
 import com.zqlc.www.view.account.MyBillActivity;
 import com.zqlc.www.view.my.AccountActivity;
 import com.zqlc.www.view.my.MyTeamActivity;
@@ -36,6 +38,7 @@ import java.util.List;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import io.reactivex.disposables.Disposable;
 
 public class MyFragment extends BaseFragment implements View.OnClickListener, MyInfoContract.View, RealNameStatusContract.View {
 
@@ -53,6 +56,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
     RealNameStatusPresenter rnsPresenter;
 
     MineBean data;
+
+    Disposable disposable;
 
     @Override
     public int getLayoutId() {
@@ -98,6 +103,10 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
         mPresenter.mine(MySelfInfo.getInstance().getUserId(),false);
         rnsPresenter = new RealNameStatusPresenter(context, this);
         rnsPresenter.realNameStatus(MySelfInfo.getInstance().getUserId());
+
+        disposable = RxBus2.getInstance().toObservable(InformationEvent.class, realNameStatusEvent -> {
+            rnsPresenter.realNameStatus(MySelfInfo.getInstance().getUserId());
+        });
     }
 
     //初始化recyclerview
@@ -226,5 +235,12 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
     @Override
     public void realNameStatusFailed(String msg) {
         showShortToast(msg);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (disposable != null && !disposable.isDisposed())
+            disposable.dispose();
     }
 }

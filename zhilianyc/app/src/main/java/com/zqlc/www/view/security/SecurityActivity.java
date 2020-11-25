@@ -10,8 +10,11 @@ import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.mvp.my.RealNameStatusContract;
 import com.zqlc.www.mvp.my.RealNameStatusPresenter;
+import com.zqlc.www.util.rxbus.RxBus2;
+import com.zqlc.www.util.rxbus.busEvent.InformationEvent;
 
 import androidx.core.content.ContextCompat;
+import io.reactivex.disposables.Disposable;
 
 public class SecurityActivity extends BaseActivity implements View.OnClickListener, RealNameStatusContract.View {
 
@@ -20,6 +23,7 @@ public class SecurityActivity extends BaseActivity implements View.OnClickListen
     TextView tv_status;
 
     RealNameStatusPresenter mPresenter;
+    Disposable disposable;
 
     @Override
     public int getLayoutId() {
@@ -48,6 +52,10 @@ public class SecurityActivity extends BaseActivity implements View.OnClickListen
     public void initData() {
         mPresenter = new RealNameStatusPresenter(context,this);
         mPresenter.realNameStatus(MySelfInfo.getInstance().getUserId());
+
+        disposable = RxBus2.getInstance().toObservable(InformationEvent.class, realNameStatusEvent -> {
+            mPresenter.realNameStatus(MySelfInfo.getInstance().getUserId());
+        });
     }
 
     @Override
@@ -60,6 +68,7 @@ public class SecurityActivity extends BaseActivity implements View.OnClickListen
                 startActivity(new Intent(context, CapitalSetActivity.class));
                 break;
             case R.id.view_authentication:
+                //TODO data为3 进入
                 startActivity(new Intent(context,AuthenticationActivity.class));
                 break;
             case R.id.view_address:
@@ -71,8 +80,10 @@ public class SecurityActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+    String data;
     @Override
     public void realNameStatusSuccess(String data) {
+        this.data = data;
         if (TextUtils.equals(data, "1")) {
             tv_status.setText("已认证");
             tv_status.setTextColor(ContextCompat.getColor(context, R.color.color_61B53F));
@@ -91,5 +102,12 @@ public class SecurityActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void realNameStatusFailed(String msg) {
         showShortToast(msg);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposable != null && !disposable.isDisposed())
+            disposable.dispose();
     }
 }
