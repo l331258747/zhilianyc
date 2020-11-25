@@ -71,7 +71,7 @@ public class NewFragment extends BaseFragment implements ReadNewsContract.View {
 
     @Override
     public void readNewsCallbackSuccess(EmptyModel datas) {
-        
+
     }
 
     @Override

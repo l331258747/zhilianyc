@@ -434,6 +434,10 @@ public interface HttpService {
     Observable<BaseResponse<EmptyModel>> readNewsCallback(
             @Body RequestBody body
     );
+    @POST("ad/play_game_callback")
+    Observable<BaseResponse<EmptyModel>> playGameCallback(
+            @Body RequestBody body
+    );
     //签到回调 (奖励额外金豆)
     @POST("ad/signin_callback")
     Observable<BaseResponse<EmptyModel>> signin(
