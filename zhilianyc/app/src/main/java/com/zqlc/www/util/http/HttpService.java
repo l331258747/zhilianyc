@@ -4,6 +4,7 @@ import com.zqlc.www.bean.BasePageModel;
 import com.zqlc.www.bean.BaseResponse;
 import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.bean.account.MyBillBean;
+import com.zqlc.www.bean.account.UserAccountBean;
 import com.zqlc.www.bean.ad.BannerBean;
 import com.zqlc.www.bean.address.AddressBean;
 import com.zqlc.www.bean.coupon.MyCouponBean;
@@ -143,6 +144,17 @@ public interface HttpService {
     //设置交易密码
     @POST("account/pay_password")
     Observable<BaseResponse<EmptyModel>> payPwd(
+            @Body RequestBody body
+    );
+
+    //获取用户账户
+    @POST("account/get_user_account")
+    Observable<BaseResponse<UserAccountBean>> getUserAccount(
+            @Body RequestBody body
+    );
+    //设置交易密码
+    @POST("account/update_account_no")
+    Observable<BaseResponse<EmptyModel>> updateAccountNo(
             @Body RequestBody body
     );
 
@@ -383,7 +395,7 @@ public interface HttpService {
 
     //--------------------otc end
 
-    //--------------------user end
+    //--------------------user start
     @POST("user/mission")
     Observable<BaseResponse<TaskBean>> getTask(
             @Body RequestBody body

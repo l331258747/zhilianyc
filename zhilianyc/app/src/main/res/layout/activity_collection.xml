@@ -5,6 +5,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:text="收款账号只能设置一次，提交后将不能修改，要修改请联系官方客服"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_15"
+        android:paddingEnd="@dimen/dp_15"
+        android:textColor="@color/color_99"
+        android:textSize="@dimen/sp_10"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <EditText
         android:id="@+id/et_collection"
         android:layout_width="0dp"
@@ -16,7 +29,7 @@
         android:paddingStart="@dimen/dp_15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_tip" />
 
 
     <TextView
