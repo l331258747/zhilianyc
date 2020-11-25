@@ -316,6 +316,10 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().signin(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+    public static void readNewsCallback(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().readNewsCallback(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
 
     //--------------------ad end
 

@@ -2,14 +2,19 @@ package com.zqlc.www.view.home.fragment;
 
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseFragment;
+import com.zqlc.www.bean.EmptyModel;
+import com.zqlc.www.mvp.ad.ReadNewsContract;
+import com.zqlc.www.mvp.ad.ReadNewsPresenter;
 
 import androidx.fragment.app.Fragment;
 import vlion.cn.news.VlionWebFragment;
 import vlion.cn.news.core.VlionNewsManager;
 import vlion.cn.news.interfaces.LoadH5OrNativeInterface;
 
-public class NewFragment extends BaseFragment {
+public class NewFragment extends BaseFragment implements ReadNewsContract.View {
     private VlionWebFragment vlionWebFragment;
+
+    ReadNewsPresenter mPresenter;
 
     @Override
     public int getLayoutId() {
@@ -24,6 +29,7 @@ public class NewFragment extends BaseFragment {
 
     @Override
     public void initData() {
+        mPresenter = new ReadNewsPresenter(context,this);
 
         VlionNewsManager.getInstance().startWebOrNetive(context, "default", new LoadH5OrNativeInterface() { //scence场景必选参数，瑞狮提供
             @Override
@@ -38,9 +44,18 @@ public class NewFragment extends BaseFragment {
                     vlionWebFragment = (VlionWebFragment) fragment;
                 }
             }
+
             @Override
             public void loadFail(String s) {//失败的回调
 
+            }
+        });
+
+
+        //表示点击列表是否进入到了详情页面。
+        VlionNewsManager.getInstance().setVlionIncomeDetailCallBack(isDetail -> {
+            if(isDetail){
+                mPresenter.readNewsCallback();
             }
         });
 
@@ -54,4 +69,13 @@ public class NewFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void readNewsCallbackSuccess(EmptyModel datas) {
+        
+    }
+
+    @Override
+    public void readNewsCallbackFailed(String msg) {
+
+    }
 }

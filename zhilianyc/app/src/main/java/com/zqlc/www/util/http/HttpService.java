@@ -430,6 +430,10 @@ public interface HttpService {
     Observable<BaseResponse<List<BannerBean>>> getBanner(
             @Body RequestBody body
     );
+    @POST("ad/read_news_callback")
+    Observable<BaseResponse<EmptyModel>> readNewsCallback(
+            @Body RequestBody body
+    );
     //签到回调 (奖励额外金豆)
     @POST("ad/signin_callback")
     Observable<BaseResponse<EmptyModel>> signin(
