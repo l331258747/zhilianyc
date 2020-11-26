@@ -47,7 +47,7 @@ public class HotGoodsAdapter extends RecyclerView.Adapter<HotGoodsAdapter.ViewHo
         holder.tv_num.setText(data.getNumStr());
 
         if(TextUtils.isEmpty(data.getImgUrl())){
-            holder.iv_img.setImageResource(R.mipmap.default_head);
+            holder.iv_img.setImageResource(R.color.color_cc);
         }else{
             GlideUtil.loadTopImage(mContext,data.getImgUrl(),holder.iv_img,20);
         }

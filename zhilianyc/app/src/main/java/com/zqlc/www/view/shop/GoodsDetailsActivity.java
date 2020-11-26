@@ -72,7 +72,7 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodsDetailsCo
     public void getGoodsDetailsSuccess(GoodsDetailsBean data) {
         this.data = data;
         if(TextUtils.isEmpty(data.getImgUrl())){
-            iv_img.setImageResource(R.mipmap.default_head);
+            iv_img.setImageResource(R.color.color_cc);
         }else{
             GlideUtil.loadImage(context,data.getImgUrl(),iv_img);
         }

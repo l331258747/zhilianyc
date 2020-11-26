@@ -21,7 +21,6 @@ public class VerifyDialog extends Dialog {
         mContext = context;
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +28,6 @@ public class VerifyDialog extends Dialog {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.dialog_verify, null);
         this.setContentView(layout);
-
-
-
 
         captCha = layout.findViewById(R.id.captCha);
         captCha.setMode(Captcha.MODE_BAR);

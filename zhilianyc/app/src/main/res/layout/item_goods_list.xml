@@ -15,7 +15,7 @@
         android:layout_width="@dimen/dp_100"
         android:layout_height="@dimen/dp_100"
         android:scaleType="centerCrop"
-        android:src="@mipmap/default_head"
+        android:src="@color/color_cc"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

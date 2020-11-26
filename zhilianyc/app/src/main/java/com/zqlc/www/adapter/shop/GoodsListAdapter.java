@@ -47,7 +47,7 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
         holder.tv_num.setVisibility(View.GONE);
 
         if(TextUtils.isEmpty(data.getImgUrl())){
-            holder.iv_img.setImageResource(R.mipmap.default_head);
+            holder.iv_img.setImageResource(R.color.color_cc);
         }else{
             GlideUtil.loadImage(mContext, data.getImgUrl(),holder.iv_img);
         }

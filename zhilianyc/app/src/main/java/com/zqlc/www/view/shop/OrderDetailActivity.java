@@ -134,7 +134,7 @@ public class OrderDetailActivity extends BaseActivity implements OrderDetailCont
         tv_word_receivingTime.setText(data.getReceiveTime());
 
         if (TextUtils.isEmpty(data.getImgUrl())) {
-            iv_img.setImageResource(R.mipmap.default_head);
+            iv_img.setImageResource(R.color.color_cc);
         } else {
             GlideUtil.loadRoundImage(context, data.getImgUrl(), iv_img, 5);
         }

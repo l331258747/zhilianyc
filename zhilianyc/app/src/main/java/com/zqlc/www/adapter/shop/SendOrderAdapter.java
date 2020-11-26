@@ -56,7 +56,7 @@ public class SendOrderAdapter extends RecyclerView.Adapter<SendOrderAdapter.View
         holder.tv_price_all.setText(StringUtils.getStringNum(totalSum) + "京豆");
 
         if(TextUtils.isEmpty(data.getImgUrl())){
-            holder.iv_img.setImageResource(R.mipmap.default_head);
+            holder.iv_img.setImageResource(R.color.color_cc);
         }else{
             GlideUtil.loadRoundImage(mContext,data.getImgUrl(),holder.iv_img,5);
         }

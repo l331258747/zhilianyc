@@ -45,7 +45,7 @@ public class GoodsClassAdapter extends RecyclerView.Adapter<GoodsClassAdapter.Vi
         holder.tv_name.setText(data.getName());
 
         if(TextUtils.isEmpty(data.getImgUrl())){
-            holder.iv_img.setImageResource(R.mipmap.default_head);
+            holder.iv_img.setImageResource(R.color.color_cc);
         }else{
             GlideUtil.loadImage(mContext,data.getImgUrl(),holder.iv_img);
         }

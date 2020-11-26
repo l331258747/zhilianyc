@@ -276,7 +276,7 @@
             android:layout_marginTop="@dimen/dp_20"
             android:overScrollMode="never"
             android:scaleType="centerCrop"
-            android:src="@mipmap/default_head"
+            tools:src="@mipmap/default_head"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/tv_No"
             app:layout_constraintTop_toBottomOf="@id/tv_collection_code"
