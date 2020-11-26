@@ -67,6 +67,15 @@ public class MyApplication extends Application {
 
 
         rewardInit();
+
+        JLSPInit();
+    }
+
+    private void JLSPInit() {
+//        ZjSdk.init(this,"媒体ID");
+        //String excludeProcess[] =new String[]{"com.xks.cartoon","com.xks.cartoon:****"};
+        //excludeProcess 进程 不会初始化SDK
+        //ZjSdk.init(this,"zj_1110616168",excludeProcess);
     }
 
     //抽奖 TODO key

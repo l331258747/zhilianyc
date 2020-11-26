@@ -30,8 +30,8 @@ import com.zqlc.www.view.otc.MyOtcListActivity;
 import com.zqlc.www.view.otc.OtcMarkerActivity;
 import com.zqlc.www.view.security.SecurityActivity;
 import com.zqlc.www.view.team.InvitationActivity;
+import com.zqlc.www.view.user.ExcitationActivity;
 import com.zqlc.www.view.user.MyTaskActivity;
-import com.zqlc.www.view.web.WebViewActivity;
 
 import java.util.List;
 
@@ -151,10 +151,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
                     new TextDialog(context).setContent("功能完善中，敬请期待！").show();
                     break;
                 case Constant.MY_TAB_RED_PACKAGE:
-                    Intent intentRed = new Intent(context, WebViewActivity.class);
-                    intentRed.putExtra(Constant.EXTRA_TITLE,"去赚红包");
-                    intentRed.putExtra(Constant.EXTRA_URL,"https://www.baidu.com/");
-                    startActivity(intentRed);
+                    startActivity(new Intent(context,ExcitationActivity.class));
                     break;
                 case Constant.MY_TAB_TASK:
                     Intent intent = new Intent(context, MyTaskActivity.class);

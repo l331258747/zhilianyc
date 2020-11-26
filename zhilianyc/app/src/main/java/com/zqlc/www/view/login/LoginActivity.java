@@ -106,6 +106,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         tab_register.setOnClickListener(this);
         btn_login.setOnClickListener(this);
         btn_forget.setOnClickListener(this);
+        iv_check.setOnClickListener(this);
+
 
         testLogin();
 

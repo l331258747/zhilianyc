@@ -171,7 +171,6 @@ dependencies {
     //zxing二维码生成扫描
     implementation 'com.google.zxing:core:3.3.3'
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
-    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
 
     implementation('com.tuia:sdk:3.0.4.0') {
         transitive = true
