@@ -48,7 +48,7 @@
             android:id="@+id/iv_head"
             android:layout_width="@dimen/dp_60"
             android:layout_height="@dimen/dp_60"
-            android:src="@mipmap/ic_logo"
+            android:src="@mipmap/default_head"
             app:layout_constraintStart_toStartOf="@id/view_title"
             app:layout_constraintTop_toTopOf="@id/view_title" />
 

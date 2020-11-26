@@ -31,8 +31,20 @@ public class VerifyDialog extends Dialog {
         this.setContentView(layout);
 
 
+
+
         captCha = layout.findViewById(R.id.captCha);
         captCha.setMode(Captcha.MODE_BAR);
+
+        int drawableId = (int) (Math.random() * 3); //a是已经生成的随机数
+        if(drawableId == 1){
+            captCha.setBitmap(R.mipmap.ic_img_varify2);
+        }else if(drawableId == 2){
+            captCha.setBitmap(R.mipmap.ic_img_varify3);
+        }else{
+            captCha.setBitmap(R.mipmap.ic_img_varify);
+        }
+
         captCha.setCaptchaListener(new Captcha.CaptchaListener() {
             @Override
             public String onAccess(long time) {
@@ -42,7 +54,7 @@ public class VerifyDialog extends Dialog {
                 dismiss();
                 setCanceledOnTouchOutside(true);
 
-                if(submitListener != null){
+                if (submitListener != null) {
                     submitListener.onClick();
                 }
 
@@ -70,6 +82,7 @@ public class VerifyDialog extends Dialog {
     }
 
     OnItemClickListener submitListener;
+
     public VerifyDialog setSubmitListener(OnItemClickListener submitListener) {
         this.submitListener = submitListener;
         return this;
