@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.mediamain.android.view.base.FoxSDK;
+import com.zj.zjsdk.ZjSdk;
 import com.zqlc.www.util.AppUtils;
 import com.zqlc.www.util.SPUtils;
 import com.zqlc.www.util.log.LogUtil;
@@ -72,7 +73,8 @@ public class MyApplication extends Application {
     }
 
     private void JLSPInit() {
-//        ZjSdk.init(this,"媒体ID");
+        //激励视屏 TODO key
+        ZjSdk.init(this,"zj_11120200724001");
         //String excludeProcess[] =new String[]{"com.xks.cartoon","com.xks.cartoon:****"};
         //excludeProcess 进程 不会初始化SDK
         //ZjSdk.init(this,"zj_1110616168",excludeProcess);

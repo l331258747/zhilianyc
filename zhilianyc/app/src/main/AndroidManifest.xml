@@ -146,6 +146,9 @@
         <activity
             android:name=".view.user.ExcitationActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.user.IncentiveVideoActivity"
+            android:windowSoftInputMode="adjustPan" />
 
 
         <meta-data

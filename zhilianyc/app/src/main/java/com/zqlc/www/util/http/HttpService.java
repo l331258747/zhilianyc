@@ -443,6 +443,10 @@ public interface HttpService {
     Observable<BaseResponse<ConfigBean>> getAdConfig(
             @Body RequestBody body
     );
+    @POST("ad/view_video_callback")
+    Observable<BaseResponse<ConfigBean>> viewVideoCallback(
+            @Body RequestBody body
+    );
     @POST("ad/read_news_callback")
     Observable<BaseResponse<EmptyModel>> readNewsCallback(
             @Body RequestBody body

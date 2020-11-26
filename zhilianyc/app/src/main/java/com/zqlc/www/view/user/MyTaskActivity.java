@@ -84,7 +84,7 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_video:
-
+                startActivity(new Intent(context,IncentiveVideoActivity.class));
                 break;
             case R.id.btn_checkIn:
                 mPresenter.signin(MySelfInfo.getInstance().getUserId());
