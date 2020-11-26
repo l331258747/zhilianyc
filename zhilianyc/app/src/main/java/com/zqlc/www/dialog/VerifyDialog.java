@@ -44,8 +44,7 @@ public class VerifyDialog extends Dialog {
         captCha.setCaptchaListener(new Captcha.CaptchaListener() {
             @Override
             public String onAccess(long time) {
-                Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
-
+//                Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
 
                 dismiss();
                 setCanceledOnTouchOutside(true);

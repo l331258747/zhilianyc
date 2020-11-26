@@ -11,6 +11,8 @@ import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.dialog.VerifyDialog;
 import com.zqlc.www.mvp.login.ForgetPwdContract;
 import com.zqlc.www.mvp.login.ForgetPwdPresenter;
+import com.zqlc.www.mvp.my.SendCodeContract;
+import com.zqlc.www.mvp.my.SendCodePresenter;
 import com.zqlc.www.util.LoginUtil;
 import com.zqlc.www.util.StringUtils;
 import com.zqlc.www.util.rxbus.RxBus2;
@@ -24,12 +26,13 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
-public class ForgetActivity extends BaseActivity implements View.OnClickListener, ForgetPwdContract.View {
+public class ForgetActivity extends BaseActivity implements View.OnClickListener, ForgetPwdContract.View, SendCodeContract.View {
 
     EditText et_phone,et_verify,et_pwd;
     TextView tv_verify_code,btn_submit;
 
     ForgetPwdPresenter mPresenter;
+    SendCodePresenter mPresenterCode;
 
     @Override
     public int getLayoutId() {
@@ -58,6 +61,7 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void initData() {
         mPresenter = new ForgetPwdPresenter(context,this);
+        mPresenterCode = new SendCodePresenter(context,this);
     }
 
     @Override
@@ -68,6 +72,7 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
                     return;
                 new VerifyDialog(context).setSubmitListener(() -> {
                     verifyEvent();
+                    mPresenterCode.sendCode(et_phone.getText().toString());
                 }).show();
                 break;
             case R.id.btn_submit:
@@ -140,5 +145,15 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void forgetPwdFailed(String msg) {
         showLongToast(msg);
+    }
+
+    @Override
+    public void sendCodeSuccess(EmptyModel data) {
+        showShortToast("手机验证码发送成功");
+    }
+
+    @Override
+    public void sendCodeFailed(String msg) {
+        showShortToast(msg);
     }
 }

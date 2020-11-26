@@ -16,6 +16,8 @@ import com.zqlc.www.bean.login.LoginBean;
 import com.zqlc.www.dialog.VerifyDialog;
 import com.zqlc.www.mvp.login.LoginContract;
 import com.zqlc.www.mvp.login.LoginPresenter;
+import com.zqlc.www.mvp.my.SendCodeContract;
+import com.zqlc.www.mvp.my.SendCodePresenter;
 import com.zqlc.www.util.AppUtils;
 import com.zqlc.www.util.LoginUtil;
 import com.zqlc.www.util.StatusBarUtil;
@@ -34,7 +36,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginContract.View {
+public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginContract.View, SendCodeContract.View {
 
     TextView tv_title, tv_register, tv_login, btn_login, btn_forget,tv_agreement;
     LinearLayout tab_login, tab_register;
@@ -52,6 +54,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     LoginPresenter mPresenter;
 
     Disposable setMobileDisposable;
+
+    SendCodePresenter mPresenterCode;
 
     @Override
     public int getLayoutId() {
@@ -117,6 +121,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         tv_title.setText(String.format("智链云仓(%1$s)", AppUtils.getVersionName()));
 
         mPresenter = new LoginPresenter(context, this);
+        mPresenterCode = new SendCodePresenter(context,this);
 
         setMobileDisposable = RxBus2.getInstance().toObservable(SetLoginMobileEvent.class, setLoginMobileEvent -> {
             et_phone.setText(setLoginMobileEvent.getMobile());
@@ -152,6 +157,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     return;
                 new VerifyDialog(context).setSubmitListener(() -> {
                     verifyEvent();
+                    mPresenterCode.sendCode(et_phone_rgt.getText().toString());
                 }).show();
                 break;
             case R.id.btn_register:
@@ -438,5 +444,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 "</br>  第二十一条【其他】" +
                 "</br>  21.1如果您对本协议或本服务有意见或建议，可通过APP中“联系客服”功能与智趣链仓客户服务部门取得联系，我们会给予您必要的帮助。" +
                 "";
+    }
+
+    @Override
+    public void sendCodeSuccess(EmptyModel data) {
+        showShortToast("手机验证码发送成功");
+    }
+
+    @Override
+    public void sendCodeFailed(String msg) {
+        showShortToast(msg);
     }
 }

@@ -83,6 +83,11 @@ public class MethodApi {
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
 
+    public static void sendCode(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().sendCode(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+
     public static void resetHead(String uid, File headImg, DisposableObserver subscriber) {
         MultipartBody.Part part = fileToMultipartBodyParts(headImg,"headImg");
         Observable observable = HttpMethods.getInstance().getHttpService().resetHead(getStringPart(uid), part); //在HttpServer中

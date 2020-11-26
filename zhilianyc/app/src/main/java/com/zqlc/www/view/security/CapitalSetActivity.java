@@ -7,9 +7,12 @@ import android.widget.TextView;
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.bean.EmptyModel;
+import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.dialog.VerifyDialog;
 import com.zqlc.www.mvp.account.PayPwdContract;
 import com.zqlc.www.mvp.account.PayPwdPresenter;
+import com.zqlc.www.mvp.my.SendCodeContract;
+import com.zqlc.www.mvp.my.SendCodePresenter;
 import com.zqlc.www.util.LoginUtil;
 import com.zqlc.www.util.StringUtils;
 
@@ -21,11 +24,12 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
-public class CapitalSetActivity extends BaseActivity implements View.OnClickListener, PayPwdContract.View {
+public class CapitalSetActivity extends BaseActivity implements View.OnClickListener, PayPwdContract.View, SendCodeContract.View {
     EditText et_pwd, et_pwd2,et_verify;
     TextView tv_verify_code,btn_submit;
 
     PayPwdPresenter mPresenter;
+    SendCodePresenter mPresenterCode;
 
     @Override
     public int getLayoutId() {
@@ -49,6 +53,7 @@ public class CapitalSetActivity extends BaseActivity implements View.OnClickList
     @Override
     public void initData() {
         mPresenter = new PayPwdPresenter(context,this);
+        mPresenterCode = new SendCodePresenter(context,this);
     }
 
     @Override
@@ -57,6 +62,7 @@ public class CapitalSetActivity extends BaseActivity implements View.OnClickList
             case R.id.tv_verify_code:
                 new VerifyDialog(context).setSubmitListener(() -> {
                     verifyEvent();
+                    mPresenterCode.sendCode(MySelfInfo.getInstance().getUserMobile());
                 }).show();
                 break;
             case R.id.btn_submit:
@@ -128,5 +134,15 @@ public class CapitalSetActivity extends BaseActivity implements View.OnClickList
     @Override
     public void payPwdFailed(String msg) {
         showLongToast(msg);
+    }
+
+    @Override
+    public void sendCodeSuccess(EmptyModel data) {
+        showShortToast("手机验证码发送成功");
+    }
+
+    @Override
+    public void sendCodeFailed(String msg) {
+        showShortToast(msg);
     }
 }

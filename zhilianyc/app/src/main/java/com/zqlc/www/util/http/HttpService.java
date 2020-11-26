@@ -74,6 +74,12 @@ public interface HttpService {
             @Body RequestBody body
     );
 
+    //短信
+    @POST("user/send_code")
+    Observable<BaseResponse<EmptyModel>> sendCode(
+            @Body RequestBody body
+    );
+
     //修改用户头像
     @Multipart
     @POST("user/reset_head_img")

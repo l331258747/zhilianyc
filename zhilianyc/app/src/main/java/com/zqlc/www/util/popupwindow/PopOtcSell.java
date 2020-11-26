@@ -18,6 +18,8 @@ import com.zqlc.www.R;
 import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.dialog.VerifyDialog;
+import com.zqlc.www.mvp.my.SendCodeContract;
+import com.zqlc.www.mvp.my.SendCodePresenter;
 import com.zqlc.www.mvp.otc.OtcSellContract;
 import com.zqlc.www.mvp.otc.OtcSellPresenter;
 import com.zqlc.www.util.DecimalUtil;
@@ -42,7 +44,7 @@ import io.reactivex.disposables.Disposable;
  * Function:
  */
 
-public class PopOtcSell extends BackgroundDarkPopupWindow implements OtcSellContract.View {
+public class PopOtcSell extends BackgroundDarkPopupWindow implements OtcSellContract.View, SendCodeContract.View {
     private View contentView;
     private Activity context;
 
@@ -51,6 +53,8 @@ public class PopOtcSell extends BackgroundDarkPopupWindow implements OtcSellCont
     TextView et_account;
 
     OtcSellPresenter mPresenter;
+
+    SendCodePresenter mPresenterCode;
 
     public PopOtcSell(final Activity context, View parentView) {
         super(parentView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -110,6 +114,7 @@ public class PopOtcSell extends BackgroundDarkPopupWindow implements OtcSellCont
         tv_verify_code.setOnClickListener(v -> {
             new VerifyDialog(context).setSubmitListener(() -> {
                 verifyEvent();
+                mPresenterCode.sendCode(MySelfInfo.getInstance().getUserMobile());
             }).show();
         });
 
@@ -157,6 +162,7 @@ public class PopOtcSell extends BackgroundDarkPopupWindow implements OtcSellCont
 
     private void initData() {
         mPresenter = new OtcSellPresenter(context,this);
+        mPresenterCode = new SendCodePresenter(context,this);
     }
 
 
@@ -225,6 +231,16 @@ public class PopOtcSell extends BackgroundDarkPopupWindow implements OtcSellCont
 
     @Override
     public void sendOtcSellFailed(String msg) {
+        ToastUtil.showShortToast(context,msg);
+    }
+
+    @Override
+    public void sendCodeSuccess(EmptyModel data) {
+        ToastUtil.showShortToast(context,"手机验证码发送成功");
+    }
+
+    @Override
+    public void sendCodeFailed(String msg) {
         ToastUtil.showShortToast(context,msg);
     }
 }

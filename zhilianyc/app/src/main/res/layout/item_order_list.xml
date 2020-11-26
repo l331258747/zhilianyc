@@ -79,7 +79,7 @@
         app:layout_constraintStart_toStartOf="@id/view_content"
         app:layout_constraintTop_toTopOf="@id/view_content"
         app:layout_constraintBottom_toBottomOf="@id/view_content"
-        tools:src="@mipmap/ic_logo"
+        tools:src="@color/color_cc"
         android:scaleType="centerCrop"/>
 
     <TextView
