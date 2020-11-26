@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.bean.EmptyModel;
+import com.zqlc.www.dialog.VerifyDialog;
 import com.zqlc.www.mvp.account.PayPwdContract;
 import com.zqlc.www.mvp.account.PayPwdPresenter;
 import com.zqlc.www.util.LoginUtil;
@@ -54,8 +55,9 @@ public class CapitalSetActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_verify_code:
-                verifyEvent();
-
+                new VerifyDialog(context).setSubmitListener(() -> {
+                    verifyEvent();
+                }).show();
                 break;
             case R.id.btn_submit:
                 if (!LoginUtil.verifyPassword(et_pwd.getText().toString()))

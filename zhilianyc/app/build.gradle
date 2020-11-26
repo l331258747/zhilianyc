@@ -107,6 +107,8 @@ dependencies {
     //banner
     implementation 'com.youth.banner:banner:2.1.0'
 
+    implementation 'com.luozm.captcha:captcha:1.1.2'
+
 //    implementation 'com.android.support:multidex:1.0.3'
 
     //新闻流----------------start

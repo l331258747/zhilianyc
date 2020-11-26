@@ -13,6 +13,7 @@ import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.bean.login.LoginBean;
+import com.zqlc.www.dialog.VerifyDialog;
 import com.zqlc.www.mvp.login.LoginContract;
 import com.zqlc.www.mvp.login.LoginPresenter;
 import com.zqlc.www.util.AppUtils;
@@ -149,7 +150,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             case R.id.tv_verify_code_rgt:
                 if (!LoginUtil.verifyPhone(et_phone_rgt.getText().toString()))
                     return;
-                verifyEvent();
+                new VerifyDialog(context).setSubmitListener(() -> {
+                    verifyEvent();
+                }).show();
                 break;
             case R.id.btn_register:
                 if (!LoginUtil.verifyPhone(et_phone_rgt.getText().toString()))
@@ -185,6 +188,109 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 break;
 
         }
+    }
+
+    public void setTab(boolean isLogin) {
+        tv_login.setTextColor(ContextCompat.getColor(context, R.color.color_99));
+        tv_login.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        line_login.setVisibility(View.INVISIBLE);
+        tv_register.setTextColor(ContextCompat.getColor(context, R.color.color_99));
+        tv_register.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        line_register.setVisibility(View.INVISIBLE);
+        cl_login.setVisibility(View.GONE);
+        cl_register.setVisibility(View.GONE);
+
+        if (isLogin) {
+            tv_login.setTextColor(ContextCompat.getColor(context, R.color.color_text));
+            tv_login.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            line_login.setVisibility(View.VISIBLE);
+            cl_login.setVisibility(View.VISIBLE);
+
+        } else {
+            tv_register.setTextColor(ContextCompat.getColor(context, R.color.color_text));
+            tv_register.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            line_register.setVisibility(View.VISIBLE);
+            cl_register.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void loginSuccess(LoginBean data) {
+        MySelfInfo.getInstance().setLoginData(data, et_phone.getText().toString());
+        finish();
+        startActivity(new Intent(context, HomeActivity.class));
+    }
+
+    @Override
+    public void loginFailed(String msg) {
+        showShortToast(msg);
+    }
+
+    @Override
+    public void registerSuccess(EmptyModel data) {
+        setTab(true);
+        et_phone.setText(et_phone_rgt.getText().toString());
+
+        isCheck = false;
+        iv_check.setImageResource(isCheck ? R.mipmap.ic_check_on : R.mipmap.ic_check_un);
+        et_phone_rgt.setText("");
+        et_verify_rgt.setText("");
+        et_password_rgt.setText("");
+        et_password_rgt2.setText("");
+        et_invite.setText("");
+    }
+
+    @Override
+    public void registerFailed(String msg) {
+        showShortToast(msg);
+    }
+
+
+    Disposable disposable;
+
+    private void verifyEvent() {
+        final int count = 60;//倒计时10秒
+        Observable.interval(0, 1, TimeUnit.SECONDS)//设置0延迟，每隔一秒发送一条数据
+                .take(count + 1)//设置循环次数
+                .map(aLong -> count - aLong)
+                .doOnSubscribe(disposable -> {
+                    tv_verify_code_rgt.setEnabled(false);//在发送数据的时候设置为不能点击
+                    tv_verify_code_rgt.setTextColor(ContextCompat.getColor(context, R.color.color_66));
+                })
+                .observeOn(AndroidSchedulers.mainThread())//ui线程中进行控件更新
+                .subscribe(new Observer<Long>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        disposable = d;
+                    }
+
+                    @Override
+                    public void onNext(Long num) {
+                        StringUtils.setHtml(tv_verify_code_rgt, String.format(getResources().getString(R.string.verify), num));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        //回复原来初始状态
+                        tv_verify_code_rgt.setEnabled(true);
+                        tv_verify_code_rgt.setText("重新发送");
+                        tv_verify_code_rgt.setTextColor(ContextCompat.getColor(context, R.color.white));
+                    }
+                });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposable != null && !disposable.isDisposed())
+            disposable.dispose();
+        if (setMobileDisposable != null && !setMobileDisposable.isDisposed())
+            setMobileDisposable.dispose();
     }
 
     private String getAgreement() {
@@ -333,108 +439,4 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 "</br>  21.1如果您对本协议或本服务有意见或建议，可通过APP中“联系客服”功能与智趣链仓客户服务部门取得联系，我们会给予您必要的帮助。" +
                 "";
     }
-
-    public void setTab(boolean isLogin) {
-        tv_login.setTextColor(ContextCompat.getColor(context, R.color.color_99));
-        tv_login.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        line_login.setVisibility(View.INVISIBLE);
-        tv_register.setTextColor(ContextCompat.getColor(context, R.color.color_99));
-        tv_register.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        line_register.setVisibility(View.INVISIBLE);
-        cl_login.setVisibility(View.GONE);
-        cl_register.setVisibility(View.GONE);
-
-        if (isLogin) {
-            tv_login.setTextColor(ContextCompat.getColor(context, R.color.color_text));
-            tv_login.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            line_login.setVisibility(View.VISIBLE);
-            cl_login.setVisibility(View.VISIBLE);
-
-        } else {
-            tv_register.setTextColor(ContextCompat.getColor(context, R.color.color_text));
-            tv_register.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            line_register.setVisibility(View.VISIBLE);
-            cl_register.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    public void loginSuccess(LoginBean data) {
-        MySelfInfo.getInstance().setLoginData(data, et_phone.getText().toString());
-        finish();
-        startActivity(new Intent(context, HomeActivity.class));
-    }
-
-    @Override
-    public void loginFailed(String msg) {
-        showShortToast(msg);
-    }
-
-    @Override
-    public void registerSuccess(EmptyModel data) {
-        setTab(true);
-        et_phone.setText(et_phone_rgt.getText().toString());
-
-        isCheck = false;
-        iv_check.setImageResource(isCheck ? R.mipmap.ic_check_on : R.mipmap.ic_check_un);
-        et_phone_rgt.setText("");
-        et_verify_rgt.setText("");
-        et_password_rgt.setText("");
-        et_password_rgt2.setText("");
-        et_invite.setText("");
-    }
-
-    @Override
-    public void registerFailed(String msg) {
-        showShortToast(msg);
-    }
-
-
-    Disposable disposable;
-
-    private void verifyEvent() {
-        final int count = 60;//倒计时10秒
-        Observable.interval(0, 1, TimeUnit.SECONDS)//设置0延迟，每隔一秒发送一条数据
-                .take(count + 1)//设置循环次数
-                .map(aLong -> count - aLong)
-                .doOnSubscribe(disposable -> {
-                    tv_verify_code_rgt.setEnabled(false);//在发送数据的时候设置为不能点击
-                    tv_verify_code_rgt.setTextColor(ContextCompat.getColor(context, R.color.color_66));
-                })
-                .observeOn(AndroidSchedulers.mainThread())//ui线程中进行控件更新
-                .subscribe(new Observer<Long>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        disposable = d;
-                    }
-
-                    @Override
-                    public void onNext(Long num) {
-                        StringUtils.setHtml(tv_verify_code_rgt, String.format(getResources().getString(R.string.verify), num));
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        //回复原来初始状态
-                        tv_verify_code_rgt.setEnabled(true);
-                        tv_verify_code_rgt.setText("重新发送");
-                        tv_verify_code_rgt.setTextColor(ContextCompat.getColor(context, R.color.white));
-                    }
-                });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (disposable != null && !disposable.isDisposed())
-            disposable.dispose();
-        if (setMobileDisposable != null && !setMobileDisposable.isDisposed())
-            setMobileDisposable.dispose();
-    }
-
 }

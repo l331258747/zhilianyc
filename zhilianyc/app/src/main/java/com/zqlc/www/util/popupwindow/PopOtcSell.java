@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.zqlc.www.R;
 import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.bean.MySelfInfo;
+import com.zqlc.www.dialog.VerifyDialog;
 import com.zqlc.www.mvp.otc.OtcSellContract;
 import com.zqlc.www.mvp.otc.OtcSellPresenter;
 import com.zqlc.www.util.DecimalUtil;
@@ -106,7 +107,11 @@ public class PopOtcSell extends BackgroundDarkPopupWindow implements OtcSellCont
                     et_verify.getText().toString());
         });
 
-        tv_verify_code.setOnClickListener(v -> verifyEvent());
+        tv_verify_code.setOnClickListener(v -> {
+            new VerifyDialog(context).setSubmitListener(() -> {
+                verifyEvent();
+            }).show();
+        });
 
         et_price.addTextChangedListener(new MyTexxtWatcher() {
             @Override

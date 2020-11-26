@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/container_backgroud"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <com.luozm.captcha.Captcha
+        android:id="@+id/captCha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:progressDrawable="@drawable/progress"
+        app:thumbDrawable="@drawable/thumb1"
+        app:src="@mipmap/ic_banner"/>
+
+</LinearLayout>

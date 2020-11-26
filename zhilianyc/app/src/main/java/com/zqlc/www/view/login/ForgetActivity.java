@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.bean.EmptyModel;
+import com.zqlc.www.dialog.VerifyDialog;
 import com.zqlc.www.mvp.login.ForgetPwdContract;
 import com.zqlc.www.mvp.login.ForgetPwdPresenter;
 import com.zqlc.www.util.LoginUtil;
@@ -65,7 +66,9 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
             case R.id.tv_verify_code:
                 if (!LoginUtil.verifyPhone(et_phone.getText().toString()))
                     return;
-                verifyEvent();
+                new VerifyDialog(context).setSubmitListener(() -> {
+                    verifyEvent();
+                }).show();
                 break;
             case R.id.btn_submit:
                 if (!LoginUtil.verifyPhone(et_phone.getText().toString()))
