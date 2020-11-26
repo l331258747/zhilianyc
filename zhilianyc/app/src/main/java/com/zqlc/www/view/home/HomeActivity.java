@@ -14,10 +14,13 @@ import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.base.BaseFragment;
 import com.zqlc.www.bean.ad.BannerBean;
+import com.zqlc.www.bean.ad.ConfigBean;
 import com.zqlc.www.bean.message.AppUpdateBean;
 import com.zqlc.www.dialog.TipDialog;
 import com.zqlc.www.mvp.ad.BannerContract;
 import com.zqlc.www.mvp.ad.BannerPresenter;
+import com.zqlc.www.mvp.ad.ConfigContract;
+import com.zqlc.www.mvp.ad.ConfigPresenter;
 import com.zqlc.www.mvp.message.AppUpdateContract;
 import com.zqlc.www.mvp.message.AppUpdatePresenter;
 import com.zqlc.www.util.StatusBarUtil;
@@ -39,7 +42,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickListener, BannerContract.View, AppUpdateContract.View {
+public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickListener, BannerContract.View, AppUpdateContract.View, ConfigContract.View {
 
     private TabLayout tabLayout;
     private ArrayList<TabItem> tabItems;
@@ -53,6 +56,7 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
     Banner banner;
     BannerPresenter mPresenter;
     AppUpdatePresenter mPresenterApp;
+    ConfigPresenter mPresenterConfig;
 
     @Override
     public int getLayoutId() {
@@ -92,6 +96,9 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
 
         mPresenterApp = new AppUpdatePresenter(context,this);
         mPresenterApp.getAppUpdate();
+
+        mPresenterConfig = new ConfigPresenter(context,this);
+        mPresenterConfig.getAdConfig();
     }
 
     public void closeDefault(){
@@ -258,6 +265,16 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
 
     @Override
     public void getAppUpdateFailed(String msg) {
+
+    }
+
+    @Override
+    public void getAdConfigSuccess(ConfigBean data) {
+
+    }
+
+    @Override
+    public void getAdConfigFailed(String msg) {
 
     }
 }

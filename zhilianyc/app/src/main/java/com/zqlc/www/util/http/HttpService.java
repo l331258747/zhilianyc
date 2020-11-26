@@ -6,6 +6,7 @@ import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.bean.account.MyBillBean;
 import com.zqlc.www.bean.account.UserAccountBean;
 import com.zqlc.www.bean.ad.BannerBean;
+import com.zqlc.www.bean.ad.ConfigBean;
 import com.zqlc.www.bean.address.AddressBean;
 import com.zqlc.www.bean.coupon.MyCouponBean;
 import com.zqlc.www.bean.coupon.ShopCouponBean;
@@ -435,6 +436,11 @@ public interface HttpService {
     //--------------------ad start
     @POST("ad/index")
     Observable<BaseResponse<List<BannerBean>>> getBanner(
+            @Body RequestBody body
+    );
+
+    @POST("ad/ad_config_android")
+    Observable<BaseResponse<ConfigBean>> getAdConfig(
             @Body RequestBody body
     );
     @POST("ad/read_news_callback")
