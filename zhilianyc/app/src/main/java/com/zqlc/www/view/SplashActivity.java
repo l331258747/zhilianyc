@@ -10,7 +10,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.FrameLayout;
 
+import com.zj.zjsdk.ad.ZjAdError;
+import com.zj.zjsdk.ad.ZjSplashAd;
+import com.zj.zjsdk.ad.ZjSplashAdListener;
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.bean.MySelfInfo;
@@ -29,13 +33,16 @@ import androidx.core.content.ContextCompat;
  * Function:
  */
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity implements ZjSplashAdListener {
+
+    private ZjSplashAd splashAd;
+
+    FrameLayout splash_container;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         hideBottomUIMenu();
-        initUserInfo();
     }
 
 
@@ -47,40 +54,32 @@ public class SplashActivity extends BaseActivity {
     @Override
     public void initView() {
         hideTitleLayout();
+        splash_container = $(R.id.splash_container);
     }
 
     @Override
     public void initData() {
-    }
-
-    /**
-     * 隐藏虚拟按键，并且全屏
-     */
-    protected void hideBottomUIMenu() {
-        //隐藏虚拟按键，并且全屏
-        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
-            View v = this.getWindow().getDecorView();
-            v.setSystemUiVisibility(View.GONE);
-        } else if (Build.VERSION.SDK_INT >= 19) {
-            //for new api versions.
-            View decorView = getWindow().getDecorView();
-            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
-            decorView.setSystemUiVisibility(uiOptions);
-        }
-    }
-
-
-    private void initUserInfo() {
+        loadAdOnly =false;
     }
 
     private void goHome(){
-        new Handler().postDelayed(() -> toHome(), 300);
+        splashAd =new ZjSplashAd(activity,this,"zjad_9071525175974552",2);
+        fetchSplashAD();
+//        new Handler().postDelayed(() -> toHome(), 300);
+    }
+
+    private boolean loadAdOnly = false;
+    private boolean showingAd = false;
+    private void fetchSplashAD() {
+
+        if(loadAdOnly) {
+            splashAd.fetchAdOnly();
+        }else{
+            splashAd.fetchAndShowIn(splash_container);
+        }
     }
 
     private void toHome() {
-
-
 
         // 判断是否是第一次开启应用
 //        boolean isFirstOpened = SPUtils.getInstance().getBoolean(SPUtils.FIRST_OPENED, false);
@@ -103,8 +102,6 @@ public class SplashActivity extends BaseActivity {
         }else{
             startActivity(new Intent(context, LoginActivity.class));
         }
-
-
 
         this.finish();
     }
@@ -138,11 +135,6 @@ public class SplashActivity extends BaseActivity {
         }, 500);
     }
 
-    /**
-     * RECORD_AUDIO 录音
-     * WRITE_EXTERNAL_STORAGE sd写权限
-     * ACCESS_COARSE_LOCATION 定位
-     */
     private boolean checkSelfPermissions() {
         return checkSelfPermission(android.Manifest.permission.CAMERA, PERMISSION_REQ_ID_CAMERA)
                 && checkSelfPermission(android.Manifest.permission.RECORD_AUDIO, PERMISSION_REQ_ID_ACCESS_COARSE_AUDIO)
@@ -261,5 +253,75 @@ public class SplashActivity extends BaseActivity {
                     PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE);
         }
     }
+
+
     //----------end 权限不再询问处理-------------
+
+
+    //-------------- start 隐藏虚拟按键，并且全屏------------
+    protected void hideBottomUIMenu() {
+        //隐藏虚拟按键，并且全屏
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+            View v = this.getWindow().getDecorView();
+            v.setSystemUiVisibility(View.GONE);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            //for new api versions.
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
+    }
+    //-------------- end 隐藏虚拟按键，并且全屏------------
+
+
+    //-------------- start 开屏广告------------
+
+
+
+    @Override
+    public void onZjAdLoaded() {
+        showStatus("onZjAdLoaded:加载成功");
+    }
+
+    @Override
+    public void onZjAdLoadTimeOut() {
+        showStatus("onZjAdLoadTimeOut:拉取广告超时");
+        new Handler().postDelayed(() -> toHome(), 300);
+    }
+
+    @Override
+    public void onZjAdShow() {
+        showStatus("onZjAdShow:开屏广告展示");
+    }
+
+    @Override
+    public void onZjAdClicked() {
+        showStatus("onZjAdClicked:广告被点击");
+    }
+
+    @Override
+    public void onZjAdTickOver() {
+        showStatus("onZjAdTickOver:倒计时结束");
+        new Handler().postDelayed(() -> toHome(), 300);
+    }
+
+    @Override
+    public void onZjAdDismissed() {
+        showStatus("onZjAdDismissed:");
+        new Handler().postDelayed(() -> toHome(), 300);
+    }
+
+
+    @Override
+    public void onZjAdError(ZjAdError error) {
+        showStatus("onZjAdError 广告错误:"+error.getErrorMsg());
+        new Handler().postDelayed(() -> toHome(), 300);
+    }
+
+    private void showStatus(String msg){
+        LogUtil.e(msg);
+    }
+
+    //-------------- end 开屏广告------------
 }

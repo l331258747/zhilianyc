@@ -1,5 +1,7 @@
 package com.zqlc.www.view.user;
 
+import android.widget.TextView;
+
 import com.zj.zjsdk.ad.ZjAdError;
 import com.zj.zjsdk.ad.ZjRewardVideoAd;
 import com.zj.zjsdk.ad.ZjRewardVideoAdListener;
@@ -14,6 +16,7 @@ public class IncentiveVideoActivity extends BaseActivity implements ZjRewardVide
 
     ZjRewardVideoAd rewardVideoAD;
     ReadVideoPresenter mPresenter;
+    TextView tv_error;
 
     @Override
     public int getLayoutId() {
@@ -23,6 +26,8 @@ public class IncentiveVideoActivity extends BaseActivity implements ZjRewardVide
     @Override
     public void initView() {
         hideTitleLayout();
+        tv_error = $(R.id.tv_error);
+
         rewardVideoAD = new ZjRewardVideoAd(activity, "zjad_3091624125775544", this);
         rewardVideoAD.setUserId("app_userID123456");
 
@@ -35,9 +40,6 @@ public class IncentiveVideoActivity extends BaseActivity implements ZjRewardVide
     public void initData() {
         mPresenter = new ReadVideoPresenter(context,this);
         rewardVideoAD.loadAd();
-
-        if(adLoaded)
-            rewardVideoAD.showAD();
     }
 
     /**
@@ -51,7 +53,7 @@ public class IncentiveVideoActivity extends BaseActivity implements ZjRewardVide
         //999003 "激励视频广告已过期，请再次请求广告后进行广告展示！"
 
         showStatus("onZjAdShowError:"+adError.getErrorCode()+"-"+adError.getErrorMsg());
-        showShortToast("onZjAdShowError:"+adError.getErrorCode()+"-"+adError.getErrorMsg());
+        tv_error.setText("onZjAdShowError:"+adError.getErrorCode()+"-"+adError.getErrorMsg());
     }
 
     /**
@@ -63,7 +65,8 @@ public class IncentiveVideoActivity extends BaseActivity implements ZjRewardVide
     public void onZjAdLoaded(String adid) {
         adLoaded = true;
         showStatus("onZjAdLoad:广告加载成功，可在此回调后进行广告展示");
-//        rewardVideoAD.showAD();
+        if(adLoaded)
+            rewardVideoAD.showAD();
     }
 
     /**
@@ -74,7 +77,8 @@ public class IncentiveVideoActivity extends BaseActivity implements ZjRewardVide
 
         videoCached = true;
         showStatus("onZjAdVideoCached:视频素材缓存成功，可在此回调后进行广告展示");
-//        rewardVideoAD.showAD();
+        if(adLoaded)
+            rewardVideoAD.showAD();
     }
 
     /**
@@ -139,8 +143,8 @@ public class IncentiveVideoActivity extends BaseActivity implements ZjRewardVide
      */
     @Override
     public void onZjAdError(ZjAdError adError) {
-        showShortToast("onZjAdError:"+adError.getErrorCode()+"-"+adError.getErrorMsg());
         showStatus("onZjAdError:"+adError.getErrorCode()+"-"+adError.getErrorMsg());
+        tv_error.setText("onZjAdError:"+adError.getErrorCode()+"-"+adError.getErrorMsg());
     }
 
     private void showStatus(String msg){

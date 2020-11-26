@@ -22,6 +22,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.zqlc.www"
+//        applicationId "com.zj.shop.towmall.hwxs"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 3030
@@ -147,23 +148,10 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     //新闻流----------------start
-//    api('cn.vlion.inland:inlandmix:9.8.5') {
-//        exclude group: 'com.mintegral.msdk'
-//    }
     api('cn.vlion.advlion:inlandbase:1.0.30')
-//            {
-//                exclude group: 'cn.vlion.inland', module: 'inlandoaid'
-//            }
+//            {exclude group: 'cn.vlion.inland', module: 'inlandoaid'}
     api('cn.vlion.advlion:inlandnewsX:1.0.27')
-//            {
-//                exclude group: 'cn.vlion.inland', module: 'inlandk'
-//                exclude group: 'cn.vlion.inland', module: 'inlandoaid'
-//            }
     api('cn.vlion.advlion:inlandgame:1.0.37')
-//            {
-//                exclude group: 'cn.vlion.inland', module: 'inlandk'
-//                exclude group: 'cn.vlion.inland', module: 'inlandoaid'
-//            }
     api 'com.github.bumptech.glide:glide:4.9.0'
 
     //新闻流----------------end
@@ -172,14 +160,13 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.3'
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
 
+
+    //抽奖
     implementation('com.tuia:sdk:3.0.4.0') {
         transitive = true
     }
 //    implementation files('libs/miit_mdid_1.0.13.aar')
 
-//    implementation(name: 'msa_mdid_1.0.13', ext: 'aar')
-//    implementation(name: 'arrPack-release', ext: 'aar')
-//    implementation(name: 'zj_kssdk', ext: 'aar')
-
-    implementation(name: 'zj_sdk_2.1.6_ty', ext: 'aar')
+    //激励视频 和 开屏广告
+    implementation(name: 'zj_sdk_2.1.6_zlyc', ext: 'aar')
 }

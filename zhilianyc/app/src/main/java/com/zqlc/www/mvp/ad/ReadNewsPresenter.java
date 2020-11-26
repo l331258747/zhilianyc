@@ -3,6 +3,7 @@ package com.zqlc.www.mvp.ad;
 import android.content.Context;
 
 import com.zqlc.www.bean.EmptyModel;
+import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.util.http.MethodApi;
 import com.zqlc.www.util.http.OnSuccessAndFaultSub;
 import com.zqlc.www.util.http.ResponseCallback;
@@ -35,6 +36,7 @@ public class ReadNewsPresenter implements ReadNewsContract.Presenter{
         };
 
         Map<String, String> params = new HashMap<>();
+        params.put("uid", MySelfInfo.getInstance().getUserId());
 
         MethodApi.readNewsCallback(params, new OnSuccessAndFaultSub(listener, context,false));
     }
