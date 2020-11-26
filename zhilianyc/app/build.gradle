@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 
+def replaceInManifest(manifestPath, fromString, toString) {
+    def manifestContent = file(manifestPath).getText('UTF-8')
+    manifestContent = manifestContent.replace(fromString, toString)
+    file(manifestPath).write(manifestContent, 'UTF-8')
+}
+
 android {
 
     signingConfigs {
@@ -28,7 +34,7 @@ android {
 //            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
 //        }
         ndk {
-            abiFilters 'armeabi-v7a','x86','arm64-v8a','x86_64','armeabi'
+            abiFilters 'armeabi-v7a', 'x86', 'arm64-v8a', 'x86_64', 'armeabi'
         }
         packagingOptions {
             doNotStrip "*/armeabi-v7a/*.so"
@@ -43,6 +49,16 @@ android {
 //            minifyEnabled false
 //            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //        }
+
+        android.applicationVariants.all { variant ->
+            variant.outputs.each { output ->
+                output.processResources.doFirst { pm ->
+                    String manifestPath = output.processResources.manifestFile;
+                    print(manifestPath);
+                    replaceInManifest(manifestPath, 'ZJ_AUTHORITY', variant.applicationId);
+                }
+            }
+        }
 
         debug {
             minifyEnabled false
@@ -61,18 +77,37 @@ android {
         }
     }
 
+    lintOptions {
+
+        abortOnError false
+
+        checkReleaseBuilds false
+
+// 防止在发布的时候出现因MissingTranslation导致Build Failed!
+
+        disable 'MissingTranslation'
+
+    }
+
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
 
-    sourceSets{
-        main{
+    sourceSets {
+        main {
             jniLibs.srcDir 'libs'
             jni.srcDirs = []    //disable automatic ndk-build
         }
     }
 }
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -109,16 +144,26 @@ dependencies {
 
     implementation 'com.luozm.captcha:captcha:1.1.2'
 
-//    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.android.support:multidex:1.0.3'
 
     //新闻流----------------start
 //    api('cn.vlion.inland:inlandmix:9.8.5') {
 //        exclude group: 'com.mintegral.msdk'
 //    }
-    api 'cn.vlion.advlion:inlandbase:1.0.30'
-    api ('cn.vlion.advlion:inlandnewsX:1.0.27')
-//            {exclude group: 'com.googlecode.android-query'}
-    api 'cn.vlion.advlion:inlandgame:1.0.37'
+    api('cn.vlion.advlion:inlandbase:1.0.30')
+            {
+                exclude group: 'cn.vlion.inland', module: 'inlandoaid'
+            }
+    api('cn.vlion.advlion:inlandnewsX:1.0.27')
+            {
+                exclude group: 'cn.vlion.inland', module: 'inlandk'
+                exclude group: 'cn.vlion.inland', module: 'inlandoaid'
+            }
+    api('cn.vlion.advlion:inlandgame:1.0.37')
+            {
+                exclude group: 'cn.vlion.inland', module: 'inlandk'
+                exclude group: 'cn.vlion.inland', module: 'inlandoaid'
+            }
     api 'com.github.bumptech.glide:glide:4.9.0'
 
     //新闻流----------------end
@@ -128,8 +173,12 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
 
-    implementation ('com.tuia:sdk:3.0.4.0'){
+    implementation('com.tuia:sdk:3.0.4.0') {
         transitive = true
     }
 //    implementation files('libs/miit_mdid_1.0.13.aar')
+
+    implementation(name: 'msa_mdid_1.0.13', ext: 'aar')
+//    implementation(name: 'arrPack-release', ext: 'aar')
+    implementation(name: 'zj_kssdk', ext: 'aar')
 }
