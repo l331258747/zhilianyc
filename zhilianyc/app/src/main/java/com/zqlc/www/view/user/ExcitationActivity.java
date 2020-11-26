@@ -43,7 +43,7 @@ public class ExcitationActivity extends BaseActivity implements AwardContract.Vi
 
     private void initAd() {
         //s:appkey s1：slotId  s2:userId  s3:deviceId
-        ad = new Ad("4UycwwZv41rwzne1ZXgtQBgDSnPH","325021", "", "");
+        ad = new Ad("4UycwwZv41rwzne1ZXgtQBgDSnPH","331946", "test-123456");
         ad.init(activity, mContainer, Ad.AD_URL_NEW, new AdCallBack()     {
 
             @Override

@@ -77,7 +77,7 @@ public class MyApplication extends Application {
         //在自定义的Application 的onCreate方法中，调用以下方法：（详细内容请参考demo中的代码示例）
         //基础SDK初始化
 //        FoxSDK.init(this,appKey,appSecret);
-        FoxSDK.init(this,"","");
+        FoxSDK.init(this,"4UycwwZv41rwzne1ZXgtQBgDSnPH","3WpyTLfifQyGhvgivxtUjvzXxtkzdceETBU2n5g");
     }
 
     private void initRuishi() {
