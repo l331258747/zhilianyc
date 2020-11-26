@@ -131,6 +131,7 @@ public class IncentiveVideoActivity extends BaseActivity implements ZjRewardVide
     public void onZjAdClose() {
         showStatus("onZjAdClose:激励视频广告被关闭");
         mPresenter.viewVideoCallback();
+        finish();
     }
 
     /**
