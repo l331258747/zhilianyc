@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Editable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +22,9 @@ import com.zqlc.www.mvp.my.SendCodeContract;
 import com.zqlc.www.mvp.my.SendCodePresenter;
 import com.zqlc.www.mvp.otc.OtcSellContract;
 import com.zqlc.www.mvp.otc.OtcSellPresenter;
+import com.zqlc.www.util.DecimalUtil;
 import com.zqlc.www.util.LoginUtil;
+import com.zqlc.www.util.MyTextWatcher.MyTexxtWatcher;
 import com.zqlc.www.util.StringUtils;
 import com.zqlc.www.util.ToastUtil;
 import com.zqlc.www.util.rxbus.RxBus2;
@@ -45,18 +49,21 @@ public class PopOtcSellSend extends BackgroundDarkPopupWindow implements OtcSell
     private Activity context;
 
     EditText et_price,et_num,et_password,et_verify;
-    TextView tv_verify_code,btn_submit;
+    TextView tv_verify_code,btn_submit,tv_fee;
 
     OtcSellPresenter mPresenter;
 
     SendCodePresenter mPresenterCode;
 
-    public PopOtcSellSend(final Activity context, View parentView) {
+    float feeRate = 0;
+
+    public PopOtcSellSend(final Activity context, View parentView,float feeRate) {
         super(parentView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         contentView = inflater.inflate(R.layout.popup_otc_sell_send, null);
         this.context = context;
+        this.feeRate = feeRate;
 
         initView();
 
@@ -81,6 +88,7 @@ public class PopOtcSellSend extends BackgroundDarkPopupWindow implements OtcSell
         et_num = contentView.findViewById(R.id.et_num);
         et_password = contentView.findViewById(R.id.et_password);
         btn_submit = contentView.findViewById(R.id.btn_submit);
+        tv_fee = contentView.findViewById(R.id.tv_fee);
 
         btn_submit.setOnClickListener(v -> {
             if(!LoginUtil.verifyEmpty(et_price.getText().toString(),"请输入单价"))
@@ -104,6 +112,23 @@ public class PopOtcSellSend extends BackgroundDarkPopupWindow implements OtcSell
                 verifyEvent();
                 mPresenterCode.sendCode(MySelfInfo.getInstance().getUserMobile());
             }).show();
+        });
+
+        tv_fee.setText("手续费：" + 0 + "京豆");
+
+        et_num.addTextChangedListener(new MyTexxtWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                tv_fee.setVisibility(View.GONE);
+                if(TextUtils.isEmpty(s.toString())){
+                    tv_fee.setText("手续费：" + 0 + "京豆");
+                    return;
+                }
+                tv_fee.setVisibility(View.VISIBLE);
+                int num = Integer.parseInt(s.toString());
+                tv_fee.setText("手续费：" + DecimalUtil.multiply(num , feeRate) + "京豆");
+
+            }
         });
 
         initData();

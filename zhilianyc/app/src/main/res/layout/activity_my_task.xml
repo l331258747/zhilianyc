@@ -172,7 +172,7 @@
             android:layout_marginTop="@dimen/dp_5"
             android:textColor="@color/color_99"
             android:textSize="@dimen/sp_12"
-            android:text="获得卷轴及加成金豆"/>
+            android:text="获得仓储及加成金豆"/>
 
         <TextView
             android:id="@+id/btn_video"

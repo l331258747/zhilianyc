@@ -43,19 +43,21 @@ public class PopOtcSellSubmit extends BackgroundDarkPopupWindow implements SendC
     private Activity context;
 
     EditText et_password,et_verify;
-    TextView btn_submit,tv_verify_code;
+    TextView btn_submit,tv_verify_code,tv_fee;
     TextView et_account,et_price,et_num;
 
     SendCodePresenter mPresenterCode;
     OtcDetailBean data;
+    float feeRate = 0;
 
-    public PopOtcSellSubmit(final Activity context, View parentView, OtcDetailBean data) {
+    public PopOtcSellSubmit(final Activity context, View parentView, OtcDetailBean data,float feeRate) {
         super(parentView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         contentView = inflater.inflate(R.layout.popup_otc_sell_submit, null);
         this.context = context;
         this.data = data;
+        this.feeRate = feeRate;
 
         initView();
         initData();
@@ -86,6 +88,7 @@ public class PopOtcSellSubmit extends BackgroundDarkPopupWindow implements SendC
         et_account = contentView.findViewById(R.id.et_account);
         et_price = contentView.findViewById(R.id.et_price);
         et_num = contentView.findViewById(R.id.et_num);
+        tv_fee = contentView.findViewById(R.id.tv_fee);
 
         btn_submit.setOnClickListener(v -> {
             if(!LoginUtil.verifyEmpty(et_price.getText().toString(),"请输入单价"))
@@ -112,6 +115,7 @@ public class PopOtcSellSubmit extends BackgroundDarkPopupWindow implements SendC
         et_price.setText(StringUtils.getStringNum(data.getUnitPrice()));
         et_num.setText(StringUtils.getStringNum(data.getCount()));
         et_account.setText(DecimalUtil.multiply(data.getCount() , data.getUnitPrice()) + "");
+        tv_fee.setText("手续费：" + DecimalUtil.multiply(data.getCount() , feeRate) + "京豆");
 
         tv_verify_code.setOnClickListener(v -> {
             new VerifyDialog(context).setSubmitListener(() -> {

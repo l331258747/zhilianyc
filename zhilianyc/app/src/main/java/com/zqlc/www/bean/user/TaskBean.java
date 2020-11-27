@@ -53,8 +53,8 @@ public class TaskBean {
 
     public String getVideoBeansStr() {
         if(videoBeans == 0)
-            return "获得卷轴及加成金豆";
-        return "获得卷轴及加成金豆" + StringUtils.getStringNum(videoBeans);
+            return "获得仓储及加成金豆";
+        return "获得仓储及加成金豆" + StringUtils.getStringNum(videoBeans);
     }
 
     public String getVideoMission() {

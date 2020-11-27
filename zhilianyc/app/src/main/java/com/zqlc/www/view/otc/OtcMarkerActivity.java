@@ -17,6 +17,8 @@ import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.bean.otc.OtcInfoBean;
 import com.zqlc.www.bean.otc.OtcListBean;
 import com.zqlc.www.constant.Constant;
+import com.zqlc.www.mvp.my.FeeContract;
+import com.zqlc.www.mvp.my.FeePresenter;
 import com.zqlc.www.mvp.otc.OtcMarkerContract;
 import com.zqlc.www.mvp.otc.OtcMarkerPresenter;
 import com.zqlc.www.util.StringUtils;
@@ -37,7 +39,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import io.reactivex.disposables.Disposable;
 
-public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract.View, View.OnClickListener {
+public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract.View, View.OnClickListener, FeeContract.View {
 
     SwipeRefreshLayout swipe;
     NestedScrollView scrollView;
@@ -53,6 +55,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
 
     OtcMarkerPresenter mPresenter;
     OtcListAdapter mAdapter;
+    FeePresenter mPresenterFee;
 
     private List<OtcListBean> list;
     private LoadMoreWrapper loadMoreWrapper;
@@ -124,6 +127,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
     public void initData() {
         mPresenter = new OtcMarkerPresenter(context, this);
         mPresenter.getOtcOpen();
+        mPresenterFee = new FeePresenter(context,this);
 
         mChartHelp = new ChartHelp(context,lineChart);
 
@@ -350,8 +354,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
             case R.id.btn_submit:
                 //TODO popupwindow
                 if(orderType == 1){
-                    mPopOtcSellSend = new PopOtcSellSend(activity, view_pop);
-                    mPopOtcSellSend.showPopupWindow(view_pop);
+                    mPresenterFee.feeRatio(MySelfInfo.getInstance().getUserId());
                 }else{
                     mPopOtcBuySend = new PopOtcBuySend(activity, view_pop);
                     mPopOtcBuySend.showPopupWindow(view_pop);
@@ -398,5 +401,16 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
         super.onDestroy();
         if (disposable != null && !disposable.isDisposed())
             disposable.dispose();
+    }
+
+    @Override
+    public void feeRatioSuccess(Float data) {
+        mPopOtcSellSend = new PopOtcSellSend(activity, view_pop, data);
+        mPopOtcSellSend.showPopupWindow(view_pop);
+    }
+
+    @Override
+    public void feeRatioFailed(String msg) {
+        showShortToast(msg);
     }
 }

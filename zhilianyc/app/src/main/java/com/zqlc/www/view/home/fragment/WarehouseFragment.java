@@ -19,7 +19,7 @@ public class WarehouseFragment extends BaseFragment {
     private ViewPager mViewPager;
 
     private List<Fragment> mFragments;
-    private String[] titles = {"我的卷轴" ,"卷轴商城"};
+    private String[] titles = {"我的仓储" ,"仓储商城"};
 
     MyCouponFragment fMyCoupon;
     ShopCouponFragment fShopCoupon;

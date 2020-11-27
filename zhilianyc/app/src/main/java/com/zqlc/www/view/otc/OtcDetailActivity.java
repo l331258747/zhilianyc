@@ -12,6 +12,8 @@ import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.bean.otc.OtcDetailBean;
+import com.zqlc.www.mvp.my.FeeContract;
+import com.zqlc.www.mvp.my.FeePresenter;
 import com.zqlc.www.mvp.otc.OtcDetailContract;
 import com.zqlc.www.mvp.otc.OtcDetailPresenter;
 import com.zqlc.www.util.StringUtils;
@@ -33,11 +35,12 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
-public class OtcDetailActivity extends BaseActivity implements OtcDetailContract.View {
+public class OtcDetailActivity extends BaseActivity implements OtcDetailContract.View, FeeContract.View {
 
     int orderType;
     String beansSendId;
     OtcDetailPresenter mPresenter;
+    FeePresenter mPresenterFee;
 
     TextView tv_status, tv_count_down, tv_No, tv_seller, tv_buyer, tv_unit_price, tv_number, tv_total_price, tv_order_time, tv_collection_code, tv_voucher;
     TextView btn_1, btn_2, btn_text;
@@ -103,11 +106,14 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
 
         mPresenter.getOtcCheck(MySelfInfo.getInstance().getUserId(), beansSendId);
 
+        mPresenterFee = new FeePresenter(context,this);
 
     }
 
+    OtcDetailBean data;
     @Override
     public void getOtcDetailSuccess(OtcDetailBean data) {
+        this.data = data;
         if (disposableDown != null && !disposableDown.isDisposed())
             disposableDown.dispose();
 
@@ -192,11 +198,8 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
                     btn_1.setText("我要转让");
                     btn_1.setOnClickListener(v -> {
                         if (!isCheck()) return;
-                        mPopOtcSellSubmit = new PopOtcSellSubmit(activity, view_pop,data);
-                        mPopOtcSellSubmit.setOnItemClickListener((pwd, vCode) -> {
-                            getOtcHandleSubmit(pwd,vCode);
-                        });
-                        mPopOtcSellSubmit.showPopupWindow(view_pop);
+                        mPresenterFee.feeRatio(MySelfInfo.getInstance().getUserId());
+
                     });
                 } else if (sendStatus == 4) {
                     btn_1.setVisibility(View.VISIBLE);
@@ -439,4 +442,17 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
     }
 
 
+    @Override
+    public void feeRatioSuccess(Float fee) {
+        mPopOtcSellSubmit = new PopOtcSellSubmit(activity, view_pop,data,fee);
+        mPopOtcSellSubmit.setOnItemClickListener((pwd, vCode) -> {
+            getOtcHandleSubmit(pwd,vCode);
+        });
+        mPopOtcSellSubmit.showPopupWindow(view_pop);
+    }
+
+    @Override
+    public void feeRatioFailed(String msg) {
+
+    }
 }

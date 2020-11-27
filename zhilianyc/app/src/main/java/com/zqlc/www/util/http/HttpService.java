@@ -169,6 +169,10 @@ public interface HttpService {
     Observable<BaseResponse<AuthRealPayBean>> authRealPay(
             @Body RequestBody body
     );
+    @POST("account/fee_ratio")
+    Observable<BaseResponse<Float>> feeRatio(
+            @Body RequestBody body
+    );
 
     //设置交易密码
     @POST("account/pay_password")
