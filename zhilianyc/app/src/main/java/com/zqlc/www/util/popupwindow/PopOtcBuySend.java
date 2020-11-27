@@ -28,7 +28,7 @@ import com.zqlc.www.util.rxbus.busEvent.OtcMarkerEvent;
  * Function:
  */
 
-public class PopOtcBuy extends BackgroundDarkPopupWindow implements OtcBuyContract.View {
+public class PopOtcBuySend extends BackgroundDarkPopupWindow implements OtcBuyContract.View {
     private View contentView;
     private Activity context;
 
@@ -38,11 +38,11 @@ public class PopOtcBuy extends BackgroundDarkPopupWindow implements OtcBuyContra
     OtcBuyPresenter mPresenter;
 
 
-    public PopOtcBuy(final Activity context, View parentView) {
+    public PopOtcBuySend(final Activity context, View parentView) {
         super(parentView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        contentView = inflater.inflate(R.layout.popup_otc_buy, null);
+        contentView = inflater.inflate(R.layout.popup_otc_buy_send, null);
         this.context = context;
 
         initView();

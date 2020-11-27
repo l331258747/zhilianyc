@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.text.Editable;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +20,7 @@ import com.zqlc.www.mvp.my.SendCodeContract;
 import com.zqlc.www.mvp.my.SendCodePresenter;
 import com.zqlc.www.mvp.otc.OtcSellContract;
 import com.zqlc.www.mvp.otc.OtcSellPresenter;
-import com.zqlc.www.util.DecimalUtil;
 import com.zqlc.www.util.LoginUtil;
-import com.zqlc.www.util.MyTextWatcher.MyTexxtWatcher;
 import com.zqlc.www.util.StringUtils;
 import com.zqlc.www.util.ToastUtil;
 import com.zqlc.www.util.rxbus.RxBus2;
@@ -44,19 +40,18 @@ import io.reactivex.disposables.Disposable;
  * Function:
  */
 
-public class PopOtcSell extends BackgroundDarkPopupWindow implements OtcSellContract.View, SendCodeContract.View {
+public class PopOtcSellSend extends BackgroundDarkPopupWindow implements OtcSellContract.View, SendCodeContract.View {
     private View contentView;
     private Activity context;
 
     EditText et_price,et_num,et_password,et_verify;
     TextView tv_verify_code,btn_submit;
-    TextView et_account;
 
     OtcSellPresenter mPresenter;
 
     SendCodePresenter mPresenterCode;
 
-    public PopOtcSell(final Activity context, View parentView) {
+    public PopOtcSellSend(final Activity context, View parentView) {
         super(parentView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -82,7 +77,6 @@ public class PopOtcSell extends BackgroundDarkPopupWindow implements OtcSellCont
     private void initView() {
         et_verify = contentView.findViewById(R.id.et_verify);
         tv_verify_code = contentView.findViewById(R.id.tv_verify_code);
-        et_account = contentView.findViewById(R.id.et_account);
         et_price = contentView.findViewById(R.id.et_price);
         et_num = contentView.findViewById(R.id.et_num);
         et_password = contentView.findViewById(R.id.et_password);
@@ -93,12 +87,6 @@ public class PopOtcSell extends BackgroundDarkPopupWindow implements OtcSellCont
                 return;
             if(!LoginUtil.verifyEmpty(et_num.getText().toString(),"请输入数量"))
                 return;
-            if(!LoginUtil.verifyEmpty(et_account.getText().toString(),"请输入数量和单价"))
-                return;
-            if(Float.valueOf(et_account.getText().toString()) <= 0){
-                ToastUtil.showLongToast(context,"请输入正确的数量和单价");
-                return;
-            }
             if (!LoginUtil.verifyPassword(et_password.getText().toString()))
                 return;
             if (!LoginUtil.verifyVerify(et_verify.getText().toString()))
@@ -117,45 +105,6 @@ public class PopOtcSell extends BackgroundDarkPopupWindow implements OtcSellCont
                 mPresenterCode.sendCode(MySelfInfo.getInstance().getUserMobile());
             }).show();
         });
-
-        et_price.addTextChangedListener(new MyTexxtWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(TextUtils.isEmpty(et_num.getText().toString())){
-                    et_account.setText(0 + "");
-                    return;
-                }
-                int num = Integer.parseInt(et_num.getText().toString());
-
-                if(TextUtils.isEmpty(s.toString())){
-                    et_account.setText(0 + "");
-                    return;
-                }
-
-
-                et_account.setText(DecimalUtil.multiply(num , Float.parseFloat(s.toString())) + "");
-            }
-        });
-
-        et_num.addTextChangedListener(new MyTexxtWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(TextUtils.isEmpty(et_price.getText().toString())){
-                    et_account.setText(0 + "");
-                    return;
-                }
-                float price = Float.parseFloat(et_price.getText().toString());
-
-                if(TextUtils.isEmpty(s.toString())){
-                    et_account.setText(0 + "");
-                    return;
-                }
-
-                et_account.setText(DecimalUtil.multiply(price , Integer.parseInt(s.toString())) + "");
-            }
-        });
-
-        et_account.setText(0+"");
 
         initData();
     }

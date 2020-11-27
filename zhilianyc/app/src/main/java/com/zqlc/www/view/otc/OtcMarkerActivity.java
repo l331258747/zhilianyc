@@ -22,8 +22,8 @@ import com.zqlc.www.mvp.otc.OtcMarkerPresenter;
 import com.zqlc.www.util.StringUtils;
 import com.zqlc.www.util.chart.ChartHelp;
 import com.zqlc.www.util.chart.ChartLineBean;
-import com.zqlc.www.util.popupwindow.PopOtcBuy;
-import com.zqlc.www.util.popupwindow.PopOtcSell;
+import com.zqlc.www.util.popupwindow.PopOtcBuySend;
+import com.zqlc.www.util.popupwindow.PopOtcSellSend;
 import com.zqlc.www.util.rxbus.RxBus2;
 import com.zqlc.www.util.rxbus.busEvent.OtcMarkerEvent;
 
@@ -64,8 +64,8 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
     private ChartHelp mChartHelp;
     private Disposable disposable;
 
-    private PopOtcBuy mPopOtcBuy;
-    private PopOtcSell mPopOtcSell;
+    private PopOtcBuySend mPopOtcBuySend;
+    private PopOtcSellSend mPopOtcSellSend;
 
     @Override
     public int getLayoutId() {
@@ -350,11 +350,11 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
             case R.id.btn_submit:
                 //TODO popupwindow
                 if(orderType == 1){
-                    mPopOtcSell = new PopOtcSell(activity, view_pop);
-                    mPopOtcSell.showPopupWindow(view_pop);
+                    mPopOtcSellSend = new PopOtcSellSend(activity, view_pop);
+                    mPopOtcSellSend.showPopupWindow(view_pop);
                 }else{
-                    mPopOtcBuy = new PopOtcBuy(activity, view_pop);
-                    mPopOtcBuy.showPopupWindow(view_pop);
+                    mPopOtcBuySend = new PopOtcBuySend(activity, view_pop);
+                    mPopOtcBuySend.showPopupWindow(view_pop);
                 }
                 break;
             case R.id.view_order_price:

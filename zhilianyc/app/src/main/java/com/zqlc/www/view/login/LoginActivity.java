@@ -57,6 +57,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     SendCodePresenter mPresenterCode;
 
+    String phone;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_login;
@@ -68,6 +70,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context, R.color.color_1C81E9));
 
         hideTitleLayout();
+
+        phone = intent.getStringExtra("LOGIN_PHONE");
 
         tv_title = $(R.id.tv_title);
         cl_register = $(R.id.cl_register);
@@ -98,6 +102,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
         et_password = $(R.id.et_password);
         et_phone = $(R.id.et_phone);
+        et_phone.setText(phone);
 
         btn_login = $(R.id.btn_login);
         btn_forget = $(R.id.btn_forget);
