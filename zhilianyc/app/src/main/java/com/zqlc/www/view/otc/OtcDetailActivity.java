@@ -19,6 +19,8 @@ import com.zqlc.www.util.accessory.ImageUtils;
 import com.zqlc.www.util.dialog.LoadingDialog;
 import com.zqlc.www.util.glide.GlideUtil;
 import com.zqlc.www.util.photo.TackPicturesUtil;
+import com.zqlc.www.util.popupwindow.PopOtcBuySubmit;
+import com.zqlc.www.util.popupwindow.PopOtcSellSubmit;
 import com.zqlc.www.util.rxbus.RxBus2;
 import com.zqlc.www.util.rxbus.busEvent.UpLoadPhotos;
 import com.zqlc.www.util.thread.MyThreadPool;
@@ -42,7 +44,12 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
 
     boolean isCheck;
 
+    View view_pop;
+
     ImageView iv_camera;
+
+    private PopOtcBuySubmit mPopOtcBuySubmit;
+    private PopOtcSellSubmit mPopOtcSellSubmit;
 
     @Override
     public int getLayoutId() {
@@ -60,6 +67,7 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
         }
 
 
+        view_pop = $(R.id.view_pop);
         btn_text = $(R.id.btn_text);
         btn_1 = $(R.id.btn_1);
         btn_2 = $(R.id.btn_2);
@@ -184,7 +192,11 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
                     btn_1.setText("我要转让");
                     btn_1.setOnClickListener(v -> {
                         if (!isCheck()) return;
-                        getOtcHandle(2);
+                        mPopOtcSellSubmit = new PopOtcSellSubmit(activity, view_pop,data);
+                        mPopOtcSellSubmit.setOnItemClickListener((pwd, vCode) -> {
+                            getOtcHandleSubmit(pwd,vCode);
+                        });
+                        mPopOtcSellSubmit.showPopupWindow(view_pop);
                     });
                 } else if (sendStatus == 4) {
                     btn_1.setVisibility(View.VISIBLE);
@@ -235,7 +247,11 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
                     btn_1.setText("我要求购");
                     btn_1.setOnClickListener(v -> {
                         if (!isCheck()) return;
-                        getOtcHandle(2);
+                        mPopOtcBuySubmit = new PopOtcBuySubmit(activity, view_pop,data);
+                        mPopOtcBuySubmit.setOnItemClickListener((pwd, vCode) -> {
+                            getOtcHandleSubmit(pwd,vCode);
+                        });
+                        mPopOtcBuySubmit.showPopupWindow(view_pop);
                     });
                 } else if (sendStatus == 2
                         && TextUtils.equals(data.getLockUid(), MySelfInfo.getInstance().getUserId())
@@ -266,6 +282,10 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
     //otc sendStatus 0已成交1订单已发起2订单已锁定卖方已放豆4买方已付款5卖方确认7卖方申诉中9用户撤回10系统撤回11系统解除申诉
     public void getOtcHandle(int sendStatus) {
         mPresenter.getOtcHandle(MySelfInfo.getInstance().getUserId(), sendStatus, beansSendId);
+    }
+
+    public void getOtcHandleSubmit(String pwd,String vCode) {
+        mPresenter.getOtcHandleSubmit(MySelfInfo.getInstance().getUserId(), 2, beansSendId,pwd,vCode);
     }
 
     public boolean isCheck() {
@@ -305,7 +325,7 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
     @Override
     public void getOtcHandleSuccess(EmptyModel data) {
         //处理
-
+        mPresenter.getOtcDetail(MySelfInfo.getInstance().getUserId(),beansSendId);
     }
 
     @Override
@@ -417,4 +437,6 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
         if (disposableDown != null && !disposableDown.isDisposed())
             disposableDown.dispose();
     }
+
+
 }

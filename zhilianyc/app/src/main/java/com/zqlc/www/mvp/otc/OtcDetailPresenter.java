@@ -102,4 +102,28 @@ public class OtcDetailPresenter implements OtcDetailContract.Presenter {
 
         MethodApi.getOtcHandle(params, new OnSuccessAndFaultSub(listener, context));
     }
+
+    @Override
+    public void getOtcHandleSubmit(String uid, int sendStatus, String beansSendId, String payPassword, String vcode) {
+        ResponseCallback listener = new ResponseCallback<EmptyModel>() {
+            @Override
+            public void onSuccess(EmptyModel data) {
+                iView.getOtcHandleSuccess(data);
+            }
+
+            @Override
+            public void onFault(String errorMsg) {
+                iView.getOtcHandleFailed(errorMsg);
+            }
+        };
+
+        Map<String, String> params = new HashMap<>();
+        params.put("uid", uid);
+        params.put("sendStatus", sendStatus + "");
+        params.put("beansSendId", beansSendId);
+        params.put("payPassword", payPassword);
+        params.put("vcode", vcode);
+
+        MethodApi.getOtcHandle(params, new OnSuccessAndFaultSub(listener, context));
+    }
 }

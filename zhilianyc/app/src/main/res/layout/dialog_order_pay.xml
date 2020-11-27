@@ -105,7 +105,7 @@
         android:layout_marginStart="@dimen/dp_25"
         android:layout_marginEnd="@dimen/dp_25"
         android:inputType="textPassword"
-        android:maxLength="12"
+        android:maxLength="20"
         android:maxLines="1"
         android:hint="请输入交易密码"
         app:layout_constraintEnd_toEndOf="parent"

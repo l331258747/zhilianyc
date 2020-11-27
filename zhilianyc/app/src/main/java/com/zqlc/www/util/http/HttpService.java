@@ -403,13 +403,13 @@ public interface HttpService {
 
     //发布买单
     @POST("otc/publish_buy")
-    Observable<BaseResponse<String>> sendOtcBuy(
+    Observable<BaseResponse<EmptyModel>> sendOtcBuy(
             @Body RequestBody body
     );
 
     //发布卖单
     @POST("otc/publish_sell")
-    Observable<BaseResponse<String>> sendOtcSell(
+    Observable<BaseResponse<EmptyModel>> sendOtcSell(
             @Body RequestBody body
     );
 

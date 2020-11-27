@@ -34,10 +34,10 @@ public class OtcDetailBean {
     private String sendAccount;
     private String receiveId;
     private String receiveName;
-    private double unitPrice;
+    private float unitPrice;
     private int count;
-    private double totalPrice;
-    private double fee;
+    private float totalPrice;
+    private float fee;
     private String payImgUrl;
     private int sendStatus;
     private int version;
@@ -81,7 +81,7 @@ public class OtcDetailBean {
         return receiveName;
     }
 
-    public double getUnitPrice() {
+    public float getUnitPrice() {
         return unitPrice;
     }
 
@@ -89,11 +89,11 @@ public class OtcDetailBean {
         return count;
     }
 
-    public double getTotalPrice() {
+    public float getTotalPrice() {
         return totalPrice;
     }
 
-    public double getFee() {
+    public float getFee() {
         return fee;
     }
 

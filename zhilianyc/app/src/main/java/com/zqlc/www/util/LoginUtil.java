@@ -32,6 +32,17 @@ public class LoginUtil {
         return false;
     }
 
+    public static boolean verifyPasswordPay(String password) {
+        if (password.equals("")) {
+            ToastUtil.showShortToast(AppUtils.getContext(), "请输入密码");
+        } else if (password.length() < 8) {
+            ToastUtil.showShortToast(AppUtils.getContext(), "请输入不少于6位的密码");
+        } else {
+            return true;
+        }
+        return false;
+    }
+
     public static boolean verifyPasswordDouble(String password,String newPassword) {
         if(!TextUtils.equals(password,newPassword)){
             ToastUtil.showShortToast(AppUtils.getContext(), "两次密码不正确");

@@ -14,7 +14,7 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="发布转让单"
+        android:text="求购转让"
         android:textSize="@dimen/sp_18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,13 +49,14 @@
         app:layout_constraintStart_toStartOf="@id/view_price"
         app:layout_constraintTop_toTopOf="@id/view_price" />
 
-    <EditText
+    <TextView
         android:id="@+id/et_price"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/dp_100"
         android:layout_marginEnd="@dimen/dp_15"
         android:background="@null"
+        android:gravity="center_vertical"
         android:hint="请输入单价"
         android:inputType="numberDecimal"
         android:maxLines="1"
@@ -82,7 +83,7 @@
         app:layout_constraintStart_toStartOf="@id/view_num"
         app:layout_constraintTop_toTopOf="@id/view_num" />
 
-    <EditText
+    <TextView
         android:id="@+id/et_num"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -91,6 +92,7 @@
         android:background="@null"
         android:hint="请输入数量，最低1个"
         android:inputType="number"
+        android:gravity="center_vertical"
         android:maxLength="9"
         android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="@id/view_num"
@@ -159,6 +161,7 @@
         android:background="@null"
         android:hint="请输入交易密码"
         android:inputType="textPassword"
+        android:maxLength="20"
         android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="@id/view_password"
         app:layout_constraintEnd_toEndOf="@id/view_password"
@@ -224,7 +227,7 @@
         android:layout_marginTop="@dimen/dp_50"
         android:background="@drawable/bg_gradients_btn_1c81e9"
         android:gravity="center"
-        android:text="发布"
+        android:text="确认"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_16"
         app:layout_constraintEnd_toEndOf="parent"

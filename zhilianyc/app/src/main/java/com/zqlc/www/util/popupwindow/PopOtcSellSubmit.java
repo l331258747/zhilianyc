@@ -15,16 +15,14 @@ import android.widget.TextView;
 import com.zqlc.www.R;
 import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.bean.MySelfInfo;
+import com.zqlc.www.bean.otc.OtcDetailBean;
 import com.zqlc.www.dialog.VerifyDialog;
 import com.zqlc.www.mvp.my.SendCodeContract;
 import com.zqlc.www.mvp.my.SendCodePresenter;
-import com.zqlc.www.mvp.otc.OtcSellContract;
-import com.zqlc.www.mvp.otc.OtcSellPresenter;
+import com.zqlc.www.util.DecimalUtil;
 import com.zqlc.www.util.LoginUtil;
 import com.zqlc.www.util.StringUtils;
 import com.zqlc.www.util.ToastUtil;
-import com.zqlc.www.util.rxbus.RxBus2;
-import com.zqlc.www.util.rxbus.busEvent.OtcMarkerEvent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -40,25 +38,27 @@ import io.reactivex.disposables.Disposable;
  * Function:
  */
 
-public class PopOtcSellSend extends BackgroundDarkPopupWindow implements OtcSellContract.View, SendCodeContract.View {
+public class PopOtcSellSubmit extends BackgroundDarkPopupWindow implements SendCodeContract.View{
     private View contentView;
     private Activity context;
 
-    EditText et_price,et_num,et_password,et_verify;
-    TextView tv_verify_code,btn_submit;
-
-    OtcSellPresenter mPresenter;
+    EditText et_password,et_verify;
+    TextView btn_submit,tv_verify_code;
+    TextView et_account,et_price,et_num;
 
     SendCodePresenter mPresenterCode;
+    OtcDetailBean data;
 
-    public PopOtcSellSend(final Activity context, View parentView) {
+    public PopOtcSellSubmit(final Activity context, View parentView, OtcDetailBean data) {
         super(parentView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        contentView = inflater.inflate(R.layout.popup_otc_sell_send, null);
+        contentView = inflater.inflate(R.layout.popup_otc_sell_submit, null);
         this.context = context;
+        this.data = data;
 
         initView();
+        initData();
 
         this.setContentView(contentView);
         setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
@@ -74,30 +74,44 @@ public class PopOtcSellSend extends BackgroundDarkPopupWindow implements OtcSell
 
     }
 
+    private void initData() {
+        mPresenterCode = new SendCodePresenter(context,this);
+    }
+
     private void initView() {
+        et_password = contentView.findViewById(R.id.et_password);
         et_verify = contentView.findViewById(R.id.et_verify);
+        btn_submit = contentView.findViewById(R.id.btn_submit);
         tv_verify_code = contentView.findViewById(R.id.tv_verify_code);
+        et_account = contentView.findViewById(R.id.et_account);
         et_price = contentView.findViewById(R.id.et_price);
         et_num = contentView.findViewById(R.id.et_num);
-        et_password = contentView.findViewById(R.id.et_password);
-        btn_submit = contentView.findViewById(R.id.btn_submit);
 
         btn_submit.setOnClickListener(v -> {
             if(!LoginUtil.verifyEmpty(et_price.getText().toString(),"请输入单价"))
                 return;
             if(!LoginUtil.verifyEmpty(et_num.getText().toString(),"请输入数量"))
                 return;
+            if(!LoginUtil.verifyEmpty(et_account.getText().toString(),"请输入数量和单价"))
+                return;
+            if(Float.valueOf(et_account.getText().toString()) <= 0){
+                ToastUtil.showLongToast(context,"请输入正确的数量和单价");
+                return;
+            }
             if (!LoginUtil.verifyPasswordPay(et_password.getText().toString()))
                 return;
             if (!LoginUtil.verifyVerify(et_verify.getText().toString()))
                 return;
 
-            mPresenter.sendOtcSell(MySelfInfo.getInstance().getUserId(),
-                    Float.valueOf(et_price.getText().toString()),
-                    Integer.parseInt(et_num.getText().toString()),
-                    et_password.getText().toString(),
-                    et_verify.getText().toString());
+            if(mOnItemClickListener != null){
+                mOnItemClickListener.onClick(et_password.getText().toString(),et_verify.getText().toString());
+                dismissPopupWindow();
+            }
         });
+
+        et_price.setText(StringUtils.getStringNum(data.getUnitPrice()));
+        et_num.setText(StringUtils.getStringNum(data.getCount()));
+        et_account.setText(DecimalUtil.multiply(data.getCount() , data.getUnitPrice()) + "");
 
         tv_verify_code.setOnClickListener(v -> {
             new VerifyDialog(context).setSubmitListener(() -> {
@@ -106,12 +120,6 @@ public class PopOtcSellSend extends BackgroundDarkPopupWindow implements OtcSell
             }).show();
         });
 
-        initData();
-    }
-
-    private void initData() {
-        mPresenter = new OtcSellPresenter(context,this);
-        mPresenterCode = new SendCodePresenter(context,this);
     }
 
 
@@ -127,10 +135,10 @@ public class PopOtcSellSend extends BackgroundDarkPopupWindow implements OtcSell
     }
 
     public void dismissPopupWindow() {
-        if (this.isShowing())
-            this.dismiss();
         if (disposable != null && !disposable.isDisposed())
             disposable.dispose();
+        if (this.isShowing())
+            this.dismiss();
     }
 
     Disposable disposable;
@@ -172,18 +180,6 @@ public class PopOtcSellSend extends BackgroundDarkPopupWindow implements OtcSell
     }
 
     @Override
-    public void sendOtcSellSuccess(EmptyModel data) {
-        ToastUtil.showShortToast(context,"发布成功");
-        RxBus2.getInstance().post(new OtcMarkerEvent());
-        dismissPopupWindow();
-    }
-
-    @Override
-    public void sendOtcSellFailed(String msg) {
-        ToastUtil.showShortToast(context,msg);
-    }
-
-    @Override
     public void sendCodeSuccess(EmptyModel data) {
         ToastUtil.showShortToast(context,"手机验证码发送成功");
     }
@@ -191,5 +187,16 @@ public class PopOtcSellSend extends BackgroundDarkPopupWindow implements OtcSell
     @Override
     public void sendCodeFailed(String msg) {
         ToastUtil.showShortToast(context,msg);
+    }
+
+
+    OnItemClickListener mOnItemClickListener;
+
+    public interface OnItemClickListener {
+        void onClick(String pwd,String vCode);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
     }
 }

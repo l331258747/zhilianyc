@@ -12,6 +12,7 @@ public interface OtcDetailContract {
         void getOtcVoucher(String uid, String beansSendId, File file);
         void getOtcCheck(String uid,String beansSendId);
         void getOtcHandle(String uid,int sendStatus,String beansSendId);
+        void getOtcHandleSubmit(String uid,int sendStatus,String beansSendId,String vcode,String payPassword);
     }
 
     interface View {
