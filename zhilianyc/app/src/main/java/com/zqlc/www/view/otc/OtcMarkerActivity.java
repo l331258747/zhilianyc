@@ -179,6 +179,8 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
     }
 
     private void getRefreshData() {
+        mAdapter.setOrderType(orderType);
+        
         swipe.setRefreshing(true);
         isLoad = true;
         page = Constant.DEFAULT_PAGE;
@@ -194,8 +196,8 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
     }
 
     int orderType = 0;//转让还是求购订单0是求购蛋1是转让单
-    int priceSort = 0;//价格排序方式0是升序1是倒序
-    int numSort = 0;//数量排序方式0是升序1是倒序
+    int priceSort = 1;//价格排序方式0是升序1是倒序
+    int numSort = 1;//数量排序方式0是升序1是倒序
     int numType = 0;//散货还是整货0是散货1是整货
 
     @Override

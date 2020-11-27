@@ -82,7 +82,7 @@ public class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.ViewHolder
 
     public void addData(List<TeamInviteListBean> datas) {
         this.datas.addAll(datas);
-        setData(this.datas);
+        notifyDataSetChanged();
     }
 
 
