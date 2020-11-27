@@ -101,7 +101,7 @@ public class PopOtcSellSubmit extends BackgroundDarkPopupWindow implements SendC
                 ToastUtil.showLongToast(context,"请输入正确的数量和单价");
                 return;
             }
-            if (!LoginUtil.verifyPasswordPay(et_password.getText().toString()))
+            if (!LoginUtil.verifyEmpty(et_password.getText().toString(),"密码不能为空"))
                 return;
             if (!LoginUtil.verifyVerify(et_verify.getText().toString()))
                 return;

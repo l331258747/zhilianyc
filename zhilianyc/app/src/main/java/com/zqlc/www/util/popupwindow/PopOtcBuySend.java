@@ -85,7 +85,7 @@ public class PopOtcBuySend extends BackgroundDarkPopupWindow implements OtcBuyCo
                 ToastUtil.showLongToast(context,"散单：小于50个，整单：大于等于50个");
                 return;
             }
-            if (!LoginUtil.verifyPasswordPay(et_password.getText().toString()))
+            if (!LoginUtil.verifyEmpty(et_password.getText().toString(),"密码不能为空"))
                 return;
 
             mPresenter.sendOtcBuy(MySelfInfo.getInstance().getUserId(),

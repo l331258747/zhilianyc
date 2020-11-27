@@ -95,7 +95,7 @@ public class PopOtcSellSend extends BackgroundDarkPopupWindow implements OtcSell
                 return;
             if(!LoginUtil.verifyEmpty(et_num.getText().toString(),"请输入数量"))
                 return;
-            if (!LoginUtil.verifyPasswordPay(et_password.getText().toString()))
+            if (!LoginUtil.verifyEmpty(et_password.getText().toString(),"密码不能为空"))
                 return;
             if (!LoginUtil.verifyVerify(et_verify.getText().toString()))
                 return;

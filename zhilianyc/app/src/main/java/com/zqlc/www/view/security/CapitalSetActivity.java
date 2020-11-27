@@ -66,9 +66,9 @@ public class CapitalSetActivity extends BaseActivity implements View.OnClickList
                 }).show();
                 break;
             case R.id.btn_submit:
-                if (!LoginUtil.verifyPasswordPay(et_pwd.getText().toString()))
+                if (!LoginUtil.verifyPassword(et_pwd.getText().toString()))
                     return;
-                if (!LoginUtil.verifyPasswordPay(et_pwd2.getText().toString()))
+                if (!LoginUtil.verifyPassword(et_pwd2.getText().toString()))
                     return;
                 if (!LoginUtil.verifyPasswordDouble(et_pwd.getText().toString(), et_pwd2.getText().toString()))
                     return;
