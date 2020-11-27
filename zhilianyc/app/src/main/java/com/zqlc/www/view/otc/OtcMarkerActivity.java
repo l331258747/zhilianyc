@@ -42,7 +42,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
     SwipeRefreshLayout swipe;
     NestedScrollView scrollView;
     ImageView iv_img, iv_change, iv_order_price, iv_order_num;
-    TextView tv_todayTradeNum, tv_name, tv_change, tv_height, tv_low, tv_amount, btn_submit;
+    TextView tv_todayTradeNum, tv_name, tv_change, tv_height, tv_low, tv_amount, btn_submit,tv_order_price,tv_order_num;
     View view_order_price, view_order_num;
     LineChart lineChart;
     RecyclerView recyclerView;
@@ -75,6 +75,9 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
     @Override
     public void initView() {
         showLeftAndTitle("置换中心");
+
+        tv_order_num = $(R.id.tv_order_num);
+        tv_order_price = $(R.id.tv_order_price);
 
         view_pop = $(R.id.view_pop);
         tab_bulk = $(R.id.tab_bulk);
@@ -126,6 +129,8 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
 
         iv_order_price.setImageResource(priceSort == 1 ? R.mipmap.ic_order_down : R.mipmap.ic_order_up);
         iv_order_num.setImageResource(numSort == 1 ? R.mipmap.ic_order_down : R.mipmap.ic_order_up);
+        tv_order_price.setText(priceSort == 1 ? "价格由高到低" : "价格由低到高");
+        tv_order_num.setText(numSort == 1 ? "数量由多到少" : "数量由少到多");
         setTab(numType == 0 ? true : false);
 
         disposable = RxBus2.getInstance().toObservable(OtcMarkerEvent.class, otcMarkerEvent -> {
@@ -356,6 +361,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
                 priceSort = priceSort == 0 ? 1 : 0;
 
                 iv_order_price.setImageResource(priceSort == 1 ? R.mipmap.ic_order_down : R.mipmap.ic_order_up);
+                tv_order_price.setText(priceSort == 1 ? "价格由高到低" : "价格由低到高");
 
                 getRefreshData();
                 break;
@@ -363,6 +369,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
                 numSort = numSort == 0 ? 1 : 0;
 
                 iv_order_num.setImageResource(numSort == 1 ? R.mipmap.ic_order_down : R.mipmap.ic_order_up);
+                tv_order_num.setText(numSort == 1 ? "数量由多到少" : "数量由少到多");
 
                 getRefreshData();
                 break;
