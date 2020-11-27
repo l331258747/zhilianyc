@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_20"
-        android:text="智链云仓(4.0.1)"
+        tools:text="智趣链仓(4.0.1)"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/iv_logo"
         app:layout_constraintStart_toStartOf="@+id/iv_logo"
@@ -396,7 +396,7 @@
                 android:id="@+id/tv_agreement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="《智链云仓用户隐私协议》"
+                android:text="《智趣链仓用户隐私协议》"
                 android:textSize="@dimen/sp_12"
                 android:textColor="@color/color_368feb" />
 

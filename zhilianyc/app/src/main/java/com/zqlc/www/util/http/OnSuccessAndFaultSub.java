@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.zqlc.www.base.ActivityCollect;
 import com.zqlc.www.bean.BaseResponse;
 import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.dialog.DialogUtil;
@@ -117,10 +118,12 @@ public class OnSuccessAndFaultSub extends DisposableObserver<BaseResponse> imple
             if (t.getCode() == 20004) {
                 MySelfInfo.getInstance().loginOff();
                 DialogUtil.getInstance().getDefaultDialog(context,"提示", t.getMsg(), "去登陆", alterDialog -> {
+                    ActivityCollect.getAppCollect().finishAllActivity();
                     Intent intent = new Intent(new Intent(context, LoginActivity.class));
                     intent.putExtra("LOGIN_PHONE", phone);
                     context.startActivity(intent);
                 }, alterDialog2 -> {
+                    ActivityCollect.getAppCollect().finishAllActivity();
                     Intent intent = new Intent(new Intent(context, LoginActivity.class));
                     intent.putExtra("LOGIN_PHONE", phone);
                     context.startActivity(intent);

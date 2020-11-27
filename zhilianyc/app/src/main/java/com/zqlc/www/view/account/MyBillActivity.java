@@ -31,7 +31,7 @@ public class MyBillActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        showLeftAndTitle("我的订单");
+        showLeftAndTitle("我的账单");
 
         mTabLayout = $(R.id.tabs);
         mViewPager = $(R.id.viewpager);

@@ -76,6 +76,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/color_99"
         android:layout_marginEnd="@dimen/dp_10"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/tv_price"
         app:layout_constraintEnd_toEndOf="@+id/view_card"
         tools:text="剩余6" />

@@ -12,6 +12,11 @@ public class MyBillListBean {
     private String time;
     private String source;
     private float count;
+    private String sourceDesc;
+
+    public String getSourceDesc() {
+        return sourceDesc;
+    }
 
     public String getTime() {
         return time;

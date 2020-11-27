@@ -27,14 +27,6 @@
                 android:focusableInTouchMode="true"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_180"
-                    android:src="@mipmap/ic_banner"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/view_tab"
                     android:layout_width="match_parent"
@@ -44,8 +36,8 @@
                     android:orientation="horizontal"
                     android:overScrollMode="never"
                     android:scrollbars="none"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:layout_marginStart="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_160"
                     android:layout_marginEnd="@dimen/dp_10"/>
 
 <!--                <View-->

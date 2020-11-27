@@ -44,7 +44,7 @@ public class WebViewActivity extends BaseActivity {
 		if(TextUtils.isEmpty(url)){
 			url = "https://jingyan.baidu.com/article/6525d4b179af49ac7d2e94a1.html";
 		}
-		if(TextUtils.isEmpty(title)) title = "智链云仓";
+		if(TextUtils.isEmpty(title)) title = "智趣链仓";
 	}
 
 	@Override

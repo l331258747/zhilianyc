@@ -199,6 +199,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
 
         if (!TextUtils.isEmpty(data.getCityPartnerName())) {
             tv_region.setText(data.getCityPartnerName());
+            tv_region.setVisibility(View.VISIBLE);
         }
 
     }

@@ -108,9 +108,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         btn_forget.setOnClickListener(this);
         iv_check.setOnClickListener(this);
 
-
-        testLogin();
-
     }
 
     public void testLogin() {
@@ -120,7 +117,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void initData() {
-        tv_title.setText(String.format("智链云仓(%1$s)", AppUtils.getVersionName()));
+        tv_title.setText(String.format("智趣链仓(%1$s)", AppUtils.getVersionName()));
 
         mPresenter = new LoginPresenter(context, this);
         mPresenterCode = new SendCodePresenter(context,this);

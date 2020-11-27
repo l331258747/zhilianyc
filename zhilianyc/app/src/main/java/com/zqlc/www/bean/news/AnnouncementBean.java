@@ -8,7 +8,7 @@ public class AnnouncementBean {
      * createTime : 2020-07-20 18:09:53
      * updateTime : 2020-11-20 14:26:21
      * status : 1
-     * title : 智链云仓守护者计划
+     * title : 智趣链仓守护者计划
      * img : https://wall123-1301456511.cos.ap-guangzhou.myqcloud.com/478609052595654656.png
      * tag :
      * readNum : 14155

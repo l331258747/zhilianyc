@@ -40,7 +40,7 @@ public class BillListAdapter extends RecyclerView.Adapter<BillListAdapter.ViewHo
         if (data == null) return;
 
 
-        holder.tv_name.setText(data.getSource());
+        holder.tv_name.setText(data.getSourceDesc());
         holder.tv_time.setText(data.getTime());
 
 

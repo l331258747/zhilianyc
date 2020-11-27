@@ -40,7 +40,7 @@ public class MyTabBean {
         List<MyTabBean> datas = new ArrayList<>();
         datas.add(getItem(Constant.MY_TAB_TEAM,R.mipmap.ic_my_team,"我的团队"));
         datas.add(getItem(Constant.MY_TAB_SECURITY,R.mipmap.ic_my_security,"安全中心"));
-        datas.add(getItem(Constant.MY_TAB_ORDER,R.mipmap.ic_my_order,"我的订单"));
+        datas.add(getItem(Constant.MY_TAB_ORDER,R.mipmap.ic_my_order,"我的账单"));
         datas.add(getItem(Constant.MY_TAB_TRANSACTION_DTS,R.mipmap.ic_my_transaction_dts,"交易明细"));
 
         datas.add(getItem(Constant.MY_TAB_INVITAT,R.mipmap.ic_my_invitat,"我的邀请"));
