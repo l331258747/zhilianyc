@@ -7,6 +7,7 @@ import com.zj.zjsdk.ad.ZjRewardVideoAd;
 import com.zj.zjsdk.ad.ZjRewardVideoAdListener;
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
+import com.zqlc.www.bean.ConfigInfo;
 import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.mvp.ad.ReadVideoContract;
 import com.zqlc.www.mvp.ad.ReadVideoPresenter;
@@ -28,8 +29,8 @@ public class IncentiveVideoActivity extends BaseActivity implements ZjRewardVide
         hideTitleLayout();
         tv_error = $(R.id.tv_error);
 
-        rewardVideoAD = new ZjRewardVideoAd(activity, "zjad_3091624125775544", this);
-        rewardVideoAD.setUserId("app_userID123456");
+        rewardVideoAD = new ZjRewardVideoAd(activity, ConfigInfo.getInstance().getZjVideoId(), this);
+        rewardVideoAD.setUserId(ConfigInfo.getInstance().getZjVideoUserId());
 
     }
 

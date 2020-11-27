@@ -17,6 +17,7 @@ import com.zj.zjsdk.ad.ZjSplashAd;
 import com.zj.zjsdk.ad.ZjSplashAdListener;
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
+import com.zqlc.www.bean.ConfigInfo;
 import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.util.log.LogUtil;
 import com.zqlc.www.view.home.HomeActivity;
@@ -63,7 +64,7 @@ public class SplashActivity extends BaseActivity implements ZjSplashAdListener {
     }
 
     private void goHome(){
-        splashAd =new ZjSplashAd(activity,this,"zjad_9071525175974552",2);
+        splashAd =new ZjSplashAd(activity,this, ConfigInfo.getInstance().getZjSplashId(),2);
         fetchSplashAD();
 //        new Handler().postDelayed(() -> toHome(), 300);
     }

@@ -8,6 +8,7 @@ import com.mediamain.android.nativead.Ad;
 import com.mediamain.android.nativead.AdCallBack;
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
+import com.zqlc.www.bean.ConfigInfo;
 import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.mvp.ad.AwardContract;
 import com.zqlc.www.mvp.ad.AwardPresenter;
@@ -36,6 +37,7 @@ public class ExcitationActivity extends BaseActivity implements AwardContract.Vi
     public void initData() {
 
         mPresenter = new AwardPresenter(context,this);
+
         initAd();
         //点击某个按钮展示广告或者进入页面直接展现广告
         ad.loadAd(activity, false);
@@ -43,7 +45,8 @@ public class ExcitationActivity extends BaseActivity implements AwardContract.Vi
 
     private void initAd() {
         //s:appkey s1：slotId  s2:userId  s3:deviceId
-        ad = new Ad("4UycwwZv41rwzne1ZXgtQBgDSnPH","331946", "test-123456");
+
+        ad = new Ad(ConfigInfo.getInstance().getTaAppKey(),ConfigInfo.getInstance().getTaAlotId(), ConfigInfo.getInstance().getTaUserId());
         ad.init(activity, mContainer, Ad.AD_URL_NEW, new AdCallBack()     {
 
             @Override

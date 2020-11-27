@@ -26,6 +26,20 @@ public class SPUtils {
     public static final String SP_APP_VERSION = "sp_app_version";
 
 
+
+    public static final String SP_CONFIG_rsAppId = "SP_CONFIG_rsAppId";
+    public static final String SP_CONFIG_rsAppTid = "SP_CONFIG_rsAppTid";
+    public static final String SP_CONFIG_rsGameMediaId = "SP_CONFIG_rsGameMediaId";
+    public static final String SP_CONFIG_taAppKey = "SP_CONFIG_taAppKey";
+    public static final String SP_CONFIG_taAppSecret = "SP_CONFIG_taAppSecret";
+    public static final String SP_CONFIG_taAlotId = "SP_CONFIG_taAlotId";
+    public static final String SP_CONFIG_taUserId = "SP_CONFIG_taUserId";
+    public static final String SP_CONFIG_zjAppKey = "SP_CONFIG_zjAppKey";
+    public static final String SP_CONFIG_zjVideoId = "SP_CONFIG_zjVideoId";
+    public static final String SP_CONFIG_zjVideoUserId = "SP_CONFIG_zjVideoUserId";
+    public static final String SP_CONFIG_zjSplashId = "SP_CONFIG_zjSplashId";
+
+
     private static SharedPreferences mSharedPreferences;
     private static SPUtils mPreferenceUtils;
     private static SharedPreferences.Editor editor;

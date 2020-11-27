@@ -3,73 +3,59 @@ package com.zqlc.www.bean.ad;
 public class ConfigBean {
 
 
-    /**
-     * tataAppkey : null
-     * tataSecret : null
-     * tatSlotid : null
-     * vnappleId : 50071
-     * zjvideoUId : robin6666
-     * vngameMediaId : 157
-     * zjappleId : zj_20201014iOSDEMO
-     * zjplacementId : zjad_M235223
-     * zjvideoId : zjad_G8020744212936426
-     * vnmedia : 1035
-     * vnsubmedia : 1401
-     */
+    String rsAppId;
+    String rsAppTid;
+    String rsGameMediaId;
+    String taAppKey;
+    String taAppSecret;
+    String taAlotId;
+    String taUserId;
+    String zjAppKey;
+    String zjVideoId;
+    String zjVideoUserId;
+    String zjSplashId;
 
-    private String tataAppkey;
-    private String tataSecret;
-    private String tatSlotid;
-    private String vnappleId;
-    private String zjvideoUId;
-    private String vngameMediaId;
-    private String zjappleId;
-    private String zjplacementId;
-    private String zjvideoId;
-    private String vnmedia;
-    private String vnsubmedia;
-
-    public String getTataAppkey() {
-        return tataAppkey;
+    public String getRsAppId() {
+        return rsAppId;
     }
 
-    public String getTataSecret() {
-        return tataSecret;
+    public String getRsAppTid() {
+        return rsAppTid;
     }
 
-    public String getTatSlotid() {
-        return tatSlotid;
+    public String getRsGameMediaId() {
+        return rsGameMediaId;
     }
 
-    public String getVnappleId() {
-        return vnappleId;
+    public String getTaAppKey() {
+        return taAppKey;
     }
 
-    public String getZjvideoUId() {
-        return zjvideoUId;
+    public String getTaAppSecret() {
+        return taAppSecret;
     }
 
-    public String getVngameMediaId() {
-        return vngameMediaId;
+    public String getTaAlotId() {
+        return taAlotId;
     }
 
-    public String getZjappleId() {
-        return zjappleId;
+    public String getTaUserId() {
+        return taUserId;
     }
 
-    public String getZjplacementId() {
-        return zjplacementId;
+    public String getZjAppKey() {
+        return zjAppKey;
     }
 
-    public String getZjvideoId() {
-        return zjvideoId;
+    public String getZjVideoId() {
+        return zjVideoId;
     }
 
-    public String getVnmedia() {
-        return vnmedia;
+    public String getZjVideoUserId() {
+        return zjVideoUserId;
     }
 
-    public String getVnsubmedia() {
-        return vnsubmedia;
+    public String getZjSplashId() {
+        return zjSplashId;
     }
 }

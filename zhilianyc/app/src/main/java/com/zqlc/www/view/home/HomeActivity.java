@@ -10,9 +10,11 @@ import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
 import com.youth.banner.indicator.CircleIndicator;
+import com.zqlc.www.MyApplication;
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.base.BaseFragment;
+import com.zqlc.www.bean.ConfigInfo;
 import com.zqlc.www.bean.ad.BannerBean;
 import com.zqlc.www.bean.ad.ConfigBean;
 import com.zqlc.www.bean.message.AppUpdateBean;
@@ -26,6 +28,7 @@ import com.zqlc.www.mvp.message.AppUpdatePresenter;
 import com.zqlc.www.util.StatusBarUtil;
 import com.zqlc.www.util.glide.GlideUtil;
 import com.zqlc.www.util.location.LocationUtil;
+import com.zqlc.www.util.log.LogUtil;
 import com.zqlc.www.view.home.fragment.GameFragment;
 import com.zqlc.www.view.home.fragment.MyFragment;
 import com.zqlc.www.view.home.fragment.NewFragment;
@@ -265,16 +268,17 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
 
     @Override
     public void getAppUpdateFailed(String msg) {
-
+        LogUtil.e(msg);
     }
 
     @Override
     public void getAdConfigSuccess(ConfigBean data) {
-
+        ConfigInfo.getInstance().setConfigData(data);
+        MyApplication.getInstance().setConfigKey();
     }
 
     @Override
     public void getAdConfigFailed(String msg) {
-
+        LogUtil.e(msg);
     }
 }

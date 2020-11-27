@@ -2,9 +2,11 @@ package com.zqlc.www;
 
 import android.app.Application;
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.mediamain.android.view.base.FoxSDK;
 import com.zj.zjsdk.ZjSdk;
+import com.zqlc.www.bean.ConfigInfo;
 import com.zqlc.www.util.AppUtils;
 import com.zqlc.www.util.SPUtils;
 import com.zqlc.www.util.log.LogUtil;
@@ -64,23 +66,26 @@ public class MyApplication extends Application {
         AppUtils.init(this);
         LogUtil.setShowLog(true);
 
+    }
+
+    public void setConfigKey(){
         initRuishi();
-
-
         rewardInit();
-
         JLSPInit();
     }
 
     private void JLSPInit() {
         //激励视屏 TODO key
-        ZjSdk.init(this,"zj_11120200724001");
+        if(!TextUtils.isEmpty(ConfigInfo.getInstance().getZjAppKey())){
+            ZjSdk.init(this,ConfigInfo.getInstance().getZjAppKey());
+        }
+
         //String excludeProcess[] =new String[]{"com.xks.cartoon","com.xks.cartoon:****"};
         //excludeProcess 进程 不会初始化SDK
         //ZjSdk.init(this,"zj_1110616168",excludeProcess);
     }
 
-    //抽奖 TODO key
+    //抽奖 推啊 TODO key
     // android:value="kEzAJT4iRMMag29Z7yWcJGfcVgG"
     // FoxSDK.init(this,"","");
     //s:appkey s1：slotId  s2:userId  s3:deviceId
@@ -88,16 +93,24 @@ public class MyApplication extends Application {
         //在自定义的Application 的onCreate方法中，调用以下方法：（详细内容请参考demo中的代码示例）
         //基础SDK初始化
 //        FoxSDK.init(this,appKey,appSecret);
-        FoxSDK.init(this,"4UycwwZv41rwzne1ZXgtQBgDSnPH","3WpyTLfifQyGhvgivxtUjvzXxtkzdceETBU2n5g");
+        if(!TextUtils.isEmpty(ConfigInfo.getInstance().getTaAppKey()) && !TextUtils.isEmpty(ConfigInfo.getInstance().getTaAppSecret())){
+            FoxSDK.init(this,
+                    ConfigInfo.getInstance().getTaAppKey(),
+                    ConfigInfo.getInstance().getTaAppSecret());
+        }
+
     }
 
     private void initRuishi() {
+        if(!TextUtils.isEmpty(ConfigInfo.getInstance().getRsAppId()) && !TextUtils.isEmpty(ConfigInfo.getInstance().getRsAppTid())){
+            VlionMulAdManager.getInstance().init(this)
+                    .setAppid(ConfigInfo.getInstance().getRsAppId())
+                    .setTid(ConfigInfo.getInstance().getRsAppTid());//必选参数，瑞狮提供
+            VlionNewsManager.getInstance().init(this);//必选参数
+            //setUserReward true表示开启激励，false表示关闭激励
+            VlionGameManager.getInstance().init(this).setUserReward(false).setXWebview(false);
+        }
 
-        VlionMulAdManager.getInstance().init(this).setAppid("50070")
-                .setTid("5118785");//必选参数，瑞狮提供
-        VlionNewsManager.getInstance().init(this);//必选参数
-        //setUserReward true表示开启激励，false表示关闭激励
-        VlionGameManager.getInstance().init(this).setUserReward(false).setXWebview(false);
     }
 
 }

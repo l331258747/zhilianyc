@@ -2,6 +2,7 @@ package com.zqlc.www.view.home.fragment;
 
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseFragment;
+import com.zqlc.www.bean.ConfigInfo;
 import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.mvp.ad.PlayGameContract;
 import com.zqlc.www.mvp.ad.PlayGamePresenter;
@@ -30,7 +31,7 @@ public class GameFragment extends BaseFragment implements PlayGameContract.View 
     public void initData() {
         mPresenter = new PlayGamePresenter(context,this);
 
-        VlionGameManager.getInstance().setMediaID("157");
+        VlionGameManager.getInstance().setMediaID(ConfigInfo.getInstance().getRsGameMediaId());
         VlionGameManager.getInstance().getVlionRewardFragment("default" ,new VlionMediaIdCallBack() {//sceneId 瑞狮提供
             @Override
             public void vlionGetFragmentSuccess(Fragment fragment) {
