@@ -66,6 +66,7 @@ public class MyApplication extends Application {
         AppUtils.init(this);
         LogUtil.setShowLog(true);
 
+        JLSPInit();
     }
 
     public void setConfigKey(){
@@ -80,6 +81,7 @@ public class MyApplication extends Application {
             ZjSdk.init(this,ConfigInfo.getInstance().getZjAppKey());
         }
 
+//        ZjSdk.init(this,"zj_11120200724001");
         //String excludeProcess[] =new String[]{"com.xks.cartoon","com.xks.cartoon:****"};
         //excludeProcess 进程 不会初始化SDK
         //ZjSdk.init(this,"zj_1110616168",excludeProcess);

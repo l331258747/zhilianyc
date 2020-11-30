@@ -29,6 +29,9 @@ public class IncentiveVideoActivity extends BaseActivity implements ZjRewardVide
         hideTitleLayout();
         tv_error = $(R.id.tv_error);
 
+//        rewardVideoAD = new ZjRewardVideoAd(activity, "zjad_3091624125775544", this);
+//        rewardVideoAD.setUserId("app_userID123456");
+
         rewardVideoAD = new ZjRewardVideoAd(activity, ConfigInfo.getInstance().getZjVideoId(), this);
         rewardVideoAD.setUserId(ConfigInfo.getInstance().getZjVideoUserId());
 

@@ -64,6 +64,7 @@ public class SplashActivity extends BaseActivity implements ZjSplashAdListener {
     }
 
     private void goHome(){
+        //splashAd =new ZjSplashAd(activity,this, "zjad_9071525175974552",2);
         splashAd =new ZjSplashAd(activity,this, ConfigInfo.getInstance().getZjSplashId(),2);
         fetchSplashAD();
 //        new Handler().postDelayed(() -> toHome(), 300);

@@ -158,4 +158,10 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
     public void signinFailed(String msg) {
         showShortToast(msg);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.getTask(MySelfInfo.getInstance().getUserId());
+    }
 }
