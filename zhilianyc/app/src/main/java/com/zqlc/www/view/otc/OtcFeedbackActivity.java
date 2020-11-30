@@ -103,7 +103,7 @@ public class OtcFeedbackActivity extends BaseActivity implements OtcFeedbackCont
         loadingDialog.dismiss();
         filePaths.add(data);
 
-        showShortToast("头像上传成功");
+        showShortToast("图片上传成功");
 
         if (filePaths.size() >= 3) {
             iv_camera.setVisibility(View.GONE);
@@ -205,7 +205,7 @@ public class OtcFeedbackActivity extends BaseActivity implements OtcFeedbackCont
             disposable.dispose();
         });
 
-        loadingDialog.showDialog("上传头像...");
+        loadingDialog.showDialog("上传图片...");
         loadingDialog.setCancelable(false);
         compressImage();
     }
@@ -219,7 +219,7 @@ public class OtcFeedbackActivity extends BaseActivity implements OtcFeedbackCont
     private void compressImage() {
         MyThreadPool.getInstance().submit(() -> {
             File file = new File(headpath);
-            String savePath = TackPicturesUtil.IMAGE_CACHE_PATH + "crop" + file.getName();
+            String savePath = TackPicturesUtil.IMAGE_CACHE_PATH + File.separator + "crop" + file.getName();
             ImageUtils.getImage(headpath, savePath);
             headCompressPath = savePath;
             RxBus2.getInstance().post(new UpLoadPhotos());

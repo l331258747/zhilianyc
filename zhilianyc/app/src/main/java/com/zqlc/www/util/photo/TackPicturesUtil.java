@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 
 import com.zqlc.www.constant.Constant;
 import com.zqlc.www.dialog.PicChooseDialog;
@@ -62,7 +63,7 @@ public class TackPicturesUtil {
     }
 
     public void setCameraUri() {
-        File outFile = FileUtil.createDownloadFile(IMAGE_CACHE_PATH + System.currentTimeMillis() + ".jpg");
+        File outFile = FileUtil.createDownloadFile(IMAGE_CACHE_PATH + File.separator + System.currentTimeMillis() + ".jpg");
         if (Build.VERSION.SDK_INT >= 24) {
             String authority = activity.getApplicationInfo().packageName + ".fileprovider";
             cameraUri = FileProvider.getUriForFile(activity, authority, outFile);
@@ -72,9 +73,13 @@ public class TackPicturesUtil {
     }
 
     public void setCropUri() {
-        File outFile = FileUtil.createDownloadFile(IMAGE_CACHE_PATH + System.currentTimeMillis() + ".jpg");
+        File outFile = FileUtil.createDownloadFile(IMAGE_CACHE_PATH + File.separator + System.currentTimeMillis() + ".jpg");
         cropPath = outFile.getAbsolutePath();
         CropUri = Uri.fromFile(outFile);
+    }
+
+    public static boolean isHuaWeiUri(Uri uri) {
+        return "com.huawei.hidisk.fileprovider".equals(uri.getAuthority());
     }
 
     //兼容7.0照相获取uri
@@ -102,14 +107,61 @@ public class TackPicturesUtil {
             if (isCrop){
                 cropImageUri(uri, CROP_PIC);
             } else {
-                // 不需要剪裁就直接返回原图路径
-                Cursor cursor = activity.getContentResolver().query(uri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
-                if (cursor == null) {
-                    return null;
+
+                String realPath = null;
+
+                if (isHuaWeiUri(uri)) {
+                    String uriPath = uri.getPath();
+                    //content://com.huawei.hidisk.fileprovider/root/storage/emulated/0/Android/data/com.xxx.xxx/
+                    if (uriPath != null && uriPath.startsWith("/root")) {
+                        return uriPath.replaceAll("/root", "");
+                    }
                 }
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                if (cursor.moveToFirst())
-                    return cursor.getString(column_index);
+
+                Cursor cursor = activity.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA},
+                        null, null, null);
+                if (null != cursor) {
+                    if (cursor.moveToFirst()) {
+                        int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                        if (index > -1) {
+                            realPath = cursor.getString(index);
+                        }
+                    }
+                    cursor.close();
+                }
+
+                if (TextUtils.isEmpty(realPath)) {
+                    if (uri != null) {
+                        String uriString = uri.toString();
+                        int index = uriString.lastIndexOf("/");
+                        String imageName = uriString.substring(index);
+
+                        realPath = IMAGE_CACHE_PATH + File.separator + imageName;
+
+//                        File storageDir;
+//                        storageDir = FileUtil.getFolder(Constant.IMAGE_PATH);
+//                        File file = new File(storageDir, imageName);
+//                        if (file.exists()) {
+//                            realPath = file.getAbsolutePath();
+//                        } else {
+//                            storageDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//                            File file1 = new File(storageDir, imageName);
+//                            realPath = file1.getAbsolutePath();
+//                        }
+                    }
+                }
+                return realPath;
+
+//                // 不需要剪裁就直接返回原图路径
+//                Cursor cursor = null;
+//                cursor = activity.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null,null);
+//
+//                if (cursor == null) {
+//                    return null;
+//                }
+//                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATA);
+//                if (cursor.moveToFirst())
+//                    return cursor.getString(column_index);
             }
 
         }

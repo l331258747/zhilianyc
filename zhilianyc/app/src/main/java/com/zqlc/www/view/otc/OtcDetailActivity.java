@@ -304,12 +304,14 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
 
     @Override
     public void getOtcVoucherSuccess(EmptyModel data) {
+        loadingDialog.dismiss();
         //支付凭证
         mPresenter.getOtcDetail(MySelfInfo.getInstance().getUserId(), beansSendId);
     }
 
     @Override
     public void getOtcVoucherFailed(String msg) {
+        loadingDialog.dismiss();
         showShortToast(msg);
     }
 
@@ -378,7 +380,7 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
             disposable.dispose();
         });
 
-        loadingDialog.showDialog("上传头像...");
+        loadingDialog.showDialog("上传图片...");
         loadingDialog.setCancelable(false);
         compressImage();
     }
@@ -392,7 +394,7 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
     private void compressImage() {
         MyThreadPool.getInstance().submit(() -> {
             File file = new File(headpath);
-            String savePath = TackPicturesUtil.IMAGE_CACHE_PATH + "crop" + file.getName();
+            String savePath = TackPicturesUtil.IMAGE_CACHE_PATH + File.separator + "crop" + file.getName();
             ImageUtils.getImage(headpath, savePath);
             headCompressPath = savePath;
             RxBus2.getInstance().post(new UpLoadPhotos());
