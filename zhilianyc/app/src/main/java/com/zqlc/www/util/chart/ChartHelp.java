@@ -82,11 +82,13 @@ public class ChartHelp {
 
         //保证Y轴从0开始，不然会上移一点
         leftYAxis.setAxisMinimum(0f);
+//        leftYAxis.setGranularity(0.2f);
         leftYAxis.setTextColor(ContextCompat.getColor(mContext,R.color.color_text));
         //但还是显示了网格线，而且不是我们想要的 虚线 。其实那是 X Y轴自己的网格线，禁掉即可
         leftYAxis.setDrawGridLines(true);
         //设置X Y轴网格线为虚线（实体线长度、间隔距离、偏移量：通常使用 0）
         leftYAxis.enableGridDashedLine(10f, 10f, 0f);
+//        leftYAxis.setLabelCount(6,true);
 
         rightYaxis.setEnabled(false);
 
