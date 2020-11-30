@@ -213,9 +213,9 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
     public void getOtcInfoSuccess(OtcInfoBean data) {
         this.infoData = data;
         if (orderType == 1) {
-            tv_todayTradeNum.setText(StringUtils.getStringNum(data.getTodayBuyNum()));
-        } else {
             tv_todayTradeNum.setText(StringUtils.getStringNum(data.getTodaySellNum()));
+        } else {
+            tv_todayTradeNum.setText(StringUtils.getStringNum(data.getTodayBuyNum()));
         }
         tv_height.setText(StringUtils.getStringNum(data.getTodayMaxPrice()));
         tv_low.setText(StringUtils.getStringNum(data.getTodayMinPrice()));

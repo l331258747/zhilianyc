@@ -7,6 +7,7 @@ import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.util.http.MethodApi;
 import com.zqlc.www.util.http.OnSuccessAndFaultSub;
 import com.zqlc.www.util.http.ResponseCallback;
+import com.zqlc.www.util.md5.MD5Utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class PayPwdPresenter implements PayPwdContract.Presenter{
         };
 
         Map<String, String> params = new HashMap<>();
-        params.put("payPassword",payPassword);
+        params.put("payPassword", MD5Utils.MD5(payPassword));
         params.put("vcode", vcode);
         params.put("uid", MySelfInfo.getInstance().getUserId());
         params.put("mobile", MySelfInfo.getInstance().getUserMobile());

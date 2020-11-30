@@ -33,8 +33,6 @@ public class MyBillListBean {
     public String getCountStr(){
         if (count > 0) {
             return "+" + StringUtils.getStringNum(count);
-        } else if (count < 0) {
-            return "-" + StringUtils.getStringNum(count);
         } else {
             return StringUtils.getStringNum(count);
         }

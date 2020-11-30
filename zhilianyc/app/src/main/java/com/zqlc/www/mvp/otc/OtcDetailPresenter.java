@@ -7,6 +7,7 @@ import com.zqlc.www.bean.otc.OtcDetailBean;
 import com.zqlc.www.util.http.MethodApi;
 import com.zqlc.www.util.http.OnSuccessAndFaultSub;
 import com.zqlc.www.util.http.ResponseCallback;
+import com.zqlc.www.util.md5.MD5Utils;
 
 import java.io.File;
 import java.util.HashMap;
@@ -121,7 +122,7 @@ public class OtcDetailPresenter implements OtcDetailContract.Presenter {
         params.put("uid", uid);
         params.put("sendStatus", sendStatus + "");
         params.put("beansSendId", beansSendId);
-        params.put("payPassword", payPassword);
+        params.put("payPassword", MD5Utils.MD5(payPassword));
         params.put("vcode", vcode);
 
         MethodApi.getOtcHandle(params, new OnSuccessAndFaultSub(listener, context));

@@ -322,7 +322,7 @@
                     android:id="@+id/iv_invite"
                     android:layout_width="@dimen/dp_30"
                     android:layout_height="@dimen/dp_30"
-                    android:src="@mipmap/ic_password"
+                    android:src="@mipmap/ic_vcode"
                     app:layout_constraintBottom_toBottomOf="@+id/view_invite"
                     app:layout_constraintStart_toStartOf="@+id/view_invite"
                     app:layout_constraintTop_toTopOf="@+id/view_invite" />

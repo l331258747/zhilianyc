@@ -36,7 +36,7 @@ public class ForgetPwdPresenter implements ForgetPwdContract.Presenter{
         };
 
         Map<String, String> params = new HashMap<>();
-        params.put("mobile", MD5Utils.MD5(mobile));
+        params.put("mobile", mobile);
         params.put("password", MD5Utils.MD5(password));
         params.put("vcode", vcode);
 
