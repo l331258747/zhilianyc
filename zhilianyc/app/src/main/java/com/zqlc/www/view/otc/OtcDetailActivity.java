@@ -117,7 +117,7 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
         if (disposableDown != null && !disposableDown.isDisposed())
             disposableDown.dispose();
 
-        if (data.getCountDownTime() > 0) {
+        if ((data.getSendStatus() == 3 || data.getSendStatus() == 4) && data.getCountDownTime() > 0) {
             tv_count_down.setVisibility(View.VISIBLE);
             verifyEvent(data.getCountDownTime(), "自动取消");
         } else {
