@@ -55,7 +55,7 @@
             android:textSize="@dimen/sp_12"
             app:layout_constraintBottom_toBottomOf="@+id/tv_task_all"
             app:layout_constraintStart_toEndOf="@+id/tv_task_all"
-            tools:text="3.0京豆/天" />
+            tools:text="3.0金豆/天" />
 
         <TextView
             android:layout_width="wrap_content"

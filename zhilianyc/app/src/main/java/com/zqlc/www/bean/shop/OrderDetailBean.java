@@ -85,7 +85,7 @@ public class OrderDetailBean {
     }
 
     public String getSumStr() {
-        return StringUtils.getStringNum(sum) + "京豆";
+        return StringUtils.getStringNum(sum) + "金豆";
     }
 
     public float getTotalSum() {
@@ -93,7 +93,7 @@ public class OrderDetailBean {
     }
 
     public String getTotalSumStr() {
-        return StringUtils.getStringNum(totalSum)  + "京豆";
+        return StringUtils.getStringNum(totalSum)  + "金豆";
     }
 
     public float getPostage() {
@@ -101,7 +101,7 @@ public class OrderDetailBean {
     }
 
     public String getPostageStr() {
-        return StringUtils.getStringNum(postage)  + "京豆";
+        return StringUtils.getStringNum(postage)  + "金豆";
     }
 
     public String getReceiveName() {
@@ -182,6 +182,6 @@ public class OrderDetailBean {
     }
 
     public String getPriceStr() {
-        return "单价："+ StringUtils.getStringNum(price) +"京豆";
+        return "单价："+ StringUtils.getStringNum(price) +"金豆";
     }
 }

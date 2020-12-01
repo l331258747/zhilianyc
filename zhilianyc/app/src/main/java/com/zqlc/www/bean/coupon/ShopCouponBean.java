@@ -43,7 +43,7 @@ public class ShopCouponBean {
     public String getDailyReleaseStr() {
         if(TextUtils.isEmpty(dailyRelease))
             return "";
-        return dailyRelease+ "京豆/天";
+        return dailyRelease+ "金豆/天";
     }
 
     public String getDay() {
@@ -86,8 +86,8 @@ public class ShopCouponBean {
     }
     public String getPriceStr() {
         if(TextUtils.isEmpty(price))
-            return "0京豆";
-        return price + "京豆";
+            return "0金豆";
+        return price + "金豆";
     }
 
     public String getName() {

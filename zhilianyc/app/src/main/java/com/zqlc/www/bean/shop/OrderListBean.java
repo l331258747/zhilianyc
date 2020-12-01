@@ -50,7 +50,7 @@ public class OrderListBean {
     }
 
     public String getPriceStr() {
-        return "单价："+ StringUtils.getStringNum(price) +"京豆";
+        return "单价："+ StringUtils.getStringNum(price) +"金豆";
     }
 
 

@@ -26,7 +26,7 @@ public class MyCouponBean {
     }
 
     public String getOutputStr() {
-        return output + "京豆/天";
+        return output + "金豆/天";
     }
 
     public String getLaborStr() {

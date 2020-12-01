@@ -270,7 +270,7 @@
         android:textColor="@color/color_cc"
         android:textSize="@dimen/sp_10"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="如订单成立两小时内未付款，则京豆退还且作封禁买家账号处理"/>
+        android:text="如订单成立两小时内未付款，则金豆退还且作封禁买家账号处理"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

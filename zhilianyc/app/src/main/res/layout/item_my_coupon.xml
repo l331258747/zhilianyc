@@ -53,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="@id/iv_img"
         android:textColor="@color/color_99"
         android:textSize="@dimen/sp_12"
-        android:text="总产量120京豆"/>
+        android:text="总产量120金豆"/>
 
     <TextView
         android:id="@+id/tv_task_all"
@@ -75,7 +75,7 @@
         android:textSize="@dimen/sp_12"
         app:layout_constraintStart_toEndOf="@id/tv_task_all"
         android:layout_marginStart="@dimen/dp_10"
-        tools:text="3.0京豆/天"/>
+        tools:text="3.0金豆/天"/>
 
     <TextView
         android:id="@+id/tv_2"

@@ -204,7 +204,7 @@
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintStart_toEndOf="@+id/iv_img"
                 app:layout_constraintTop_toBottomOf="@+id/tv_num"
-                tools:text="单价：150京豆" />
+                tools:text="单价：150金豆" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -231,7 +231,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                tools:text="150京豆"
+                tools:text="150金豆"
                 android:textColor="@color/color_99"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="@id/gl_end_15"
@@ -242,7 +242,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_42"
-                tools:text="40京豆"
+                tools:text="40金豆"
                 android:textColor="@color/color_99"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="@id/gl_end_15"
@@ -262,7 +262,7 @@
                 app:layout_constraintEnd_toEndOf="@id/gl_end_15"
                 app:layout_constraintTop_toBottomOf="@+id/iv_img"
                 android:layout_marginTop="@dimen/dp_70"
-                tools:text="195京豆"
+                tools:text="195金豆"
                 android:textColor="@color/color_FF4751"
                 android:textSize="@dimen/sp_15"
                 android:layout_width="wrap_content"

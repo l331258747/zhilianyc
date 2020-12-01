@@ -74,7 +74,7 @@ public class GoodsDetailsBean implements Serializable {
     }
 
     public String getPostageStr(){
-        return "运费:<font color=\"#FF4751\">"+postage+"京豆</font>";
+        return "运费:<font color=\"#FF4751\">"+postage+"金豆</font>";
     }
 
     public int getMinNum() {

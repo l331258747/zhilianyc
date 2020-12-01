@@ -215,7 +215,7 @@ public class OrderListFragment  extends BaseFragment implements OrderListContrac
                 return;
             }
             if(data.getBeans() < this.datas.get(payPosition).getTotalSum()){
-                showShortToast("支付京豆不足");
+                showShortToast("支付金豆不足");
                 return;
             }
             mPresenter.payOrder(MySelfInfo.getInstance().getUserId(),this.datas.get(payPosition).getId(),content);

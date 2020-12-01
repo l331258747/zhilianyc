@@ -191,7 +191,7 @@ public interface HttpService {
             @Body RequestBody body
     );
 
-    //京豆账单
+    //金豆账单
     @POST("account/beans_record")
     Observable<BaseResponse<MyBillBean>> beansRecord(
             @Body RequestBody body

@@ -15,9 +15,9 @@ public class MineBean {
      * contributionRank : lv0   贡献度等级
      * labor : 0.0  自身劳动力
      * extraLabor : 0.0 加成劳动力
-     * beans : 100000.0 京豆
-     * sellableBeans : 10000.0  京豆可售额度
-     * todayBeans : 0.0 今日活动的京豆数量
+     * beans : 100000.0 金豆
+     * sellableBeans : 10000.0  金豆可售额度
+     * todayBeans : 0.0 今日活动的金豆数量
      * middleman : 0    中间商：1是，0不是
      */
 

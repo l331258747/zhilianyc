@@ -40,7 +40,7 @@ public class MyCouponList {
     }
 
     public String getTotalCountStr() {
-        return "总产量" + totalCount + "京豆";
+        return "总产量" + totalCount + "金豆";
     }
 
     public String getTime() {
@@ -48,7 +48,7 @@ public class MyCouponList {
     }
 
     public String getDailyReleaseStr() {
-        return dailyRelease + "京豆/天";
+        return dailyRelease + "金豆/天";
     }
 
     public String getLaborStr() {

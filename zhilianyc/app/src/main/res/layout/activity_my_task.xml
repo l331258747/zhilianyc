@@ -118,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_30"
-            android:text="开心赚京豆（0/0）"
+            android:text="开心赚金豆（0/0）"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/gl_start_15"

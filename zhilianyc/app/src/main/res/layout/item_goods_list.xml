@@ -61,7 +61,7 @@
             android:textSize="@dimen/sp_10"
             android:layout_marginStart="@dimen/dp_5"
             android:textColor="@color/color_99"
-            android:text="京豆"/>
+            android:text="金豆"/>
     </LinearLayout>
 
     <TextView

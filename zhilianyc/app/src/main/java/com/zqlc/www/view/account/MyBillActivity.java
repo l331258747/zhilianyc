@@ -17,7 +17,7 @@ public class MyBillActivity extends BaseActivity {
     private ViewPager mViewPager;
 
     private List<Fragment> mFragments;
-    private String[] titles = {"京豆" ,"贡献","劳动力","可售额度"};
+    private String[] titles = {"金豆" ,"贡献","劳动力","可售额度"};
 
     MyBillFragment fBillJindou;
     MyBillFragment fBillContribution;

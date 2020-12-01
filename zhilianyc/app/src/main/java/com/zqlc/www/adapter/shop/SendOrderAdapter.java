@@ -49,11 +49,11 @@ public class SendOrderAdapter extends RecyclerView.Adapter<SendOrderAdapter.View
 
         holder.tv_name.setText(data.getName());
         holder.tv_num.setText("数量："+num+"件");
-        holder.tv_price.setText("单价："+ StringUtils.getStringNum(data.getPrice()) +"京豆");
-        holder.tv_price_goods.setText(StringUtils.getStringNum(DecimalUtil.multiply(num,data.getPrice())) + "京豆");
-        holder.tv_freight.setText(StringUtils.getStringNum(data.getPostage())  + "京豆");
+        holder.tv_price.setText("单价："+ StringUtils.getStringNum(data.getPrice()) +"金豆");
+        holder.tv_price_goods.setText(StringUtils.getStringNum(DecimalUtil.multiply(num,data.getPrice())) + "金豆");
+        holder.tv_freight.setText(StringUtils.getStringNum(data.getPostage())  + "金豆");
         float totalSum = DecimalUtil.add(data.getPostage(),DecimalUtil.multiply(data.getPrice(),num));
-        holder.tv_price_all.setText(StringUtils.getStringNum(totalSum) + "京豆");
+        holder.tv_price_all.setText(StringUtils.getStringNum(totalSum) + "金豆");
 
         if(TextUtils.isEmpty(data.getImgUrl())){
             holder.iv_img.setImageResource(R.color.color_cc);

@@ -114,19 +114,19 @@ public class PopOtcSellSend extends BackgroundDarkPopupWindow implements OtcSell
             }).show();
         });
 
-        tv_fee.setText("手续费：" + 0 + "京豆");
+        tv_fee.setText("手续费：" + 0 + "金豆");
 
         et_num.addTextChangedListener(new MyTexxtWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 tv_fee.setVisibility(View.GONE);
                 if(TextUtils.isEmpty(s.toString())){
-                    tv_fee.setText("手续费：" + 0 + "京豆");
+                    tv_fee.setText("手续费：" + 0 + "金豆");
                     return;
                 }
                 tv_fee.setVisibility(View.VISIBLE);
                 int num = Integer.parseInt(s.toString());
-                tv_fee.setText("手续费：" + DecimalUtil.multiply(num , feeRate) + "京豆");
+                tv_fee.setText("手续费：" + DecimalUtil.multiply(num , feeRate) + "金豆");
 
             }
         });

@@ -249,7 +249,7 @@ public class OrderDetailActivity extends BaseActivity implements OrderDetailCont
                 return;
             }
             if(data.getBeans() < this.data.getTotalSum()){
-                showShortToast("支付京豆不足");
+                showShortToast("支付金豆不足");
                 return;
             }
             mPresenter.payOrder(MySelfInfo.getInstance().getUserId(),orderId,content);

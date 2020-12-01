@@ -116,7 +116,7 @@
         android:textColor="@color/color_99"
         android:textSize="@dimen/sp_12"
         android:layout_marginTop="@dimen/dp_8"
-        android:text="单价：150京豆"/>
+        android:text="单价：150金豆"/>
 
 
     <View
@@ -157,7 +157,7 @@
         app:layout_constraintTop_toTopOf="@id/view_bottom"
         android:textColor="@color/color_FF4751"
         app:layout_constraintBottom_toBottomOf="@id/view_bottom"
-        tools:text="京豆"/>
+        tools:text="金豆"/>
 
     <FrameLayout
         android:id="@+id/fl_btn"

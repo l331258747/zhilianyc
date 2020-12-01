@@ -59,7 +59,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="京豆" />
+            android:text="金豆" />
 
     </LinearLayout>
 
@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
-            android:text="可用京豆："
+            android:text="可用金豆："
             android:textColor="@color/color_99"
             android:textSize="@dimen/sp_12"
             android:textStyle="bold" />

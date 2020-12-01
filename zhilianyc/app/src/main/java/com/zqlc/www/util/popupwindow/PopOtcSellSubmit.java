@@ -115,7 +115,7 @@ public class PopOtcSellSubmit extends BackgroundDarkPopupWindow implements SendC
         et_price.setText(StringUtils.getStringNum(data.getUnitPrice()));
         et_num.setText(StringUtils.getStringNum(data.getCount()));
         et_account.setText(DecimalUtil.multiply(data.getCount() , data.getUnitPrice()) + "");
-        tv_fee.setText("手续费：" + DecimalUtil.multiply(data.getCount() , feeRate) + "京豆");
+        tv_fee.setText("手续费：" + DecimalUtil.multiply(data.getCount() , feeRate) + "金豆");
 
         tv_verify_code.setOnClickListener(v -> {
             new VerifyDialog(context).setSubmitListener(() -> {
