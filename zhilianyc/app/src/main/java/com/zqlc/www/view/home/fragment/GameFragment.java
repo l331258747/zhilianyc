@@ -32,6 +32,7 @@ public class GameFragment extends BaseFragment implements PlayGameContract.View 
         mPresenter = new PlayGamePresenter(context,this);
 
         VlionGameManager.getInstance().setMediaID(ConfigInfo.getInstance().getRsGameMediaId());
+//        VlionGameManager.getInstance().setMediaID("156");
         VlionGameManager.getInstance().getVlionRewardFragment("default" ,new VlionMediaIdCallBack() {//sceneId 瑞狮提供
             @Override
             public void vlionGetFragmentSuccess(Fragment fragment) {

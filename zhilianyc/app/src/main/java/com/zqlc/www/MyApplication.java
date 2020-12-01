@@ -66,7 +66,7 @@ public class MyApplication extends Application {
         AppUtils.init(this);
         LogUtil.setShowLog(true);
 
-        JLSPInit();
+        setConfigKey();
     }
 
     public void setConfigKey(){
@@ -107,6 +107,8 @@ public class MyApplication extends Application {
         if(!TextUtils.isEmpty(ConfigInfo.getInstance().getRsAppId()) && !TextUtils.isEmpty(ConfigInfo.getInstance().getRsAppTid())){
             VlionMulAdManager.getInstance().init(this)
                     .setAppid(ConfigInfo.getInstance().getRsAppId())
+//                    .setAppid("50079")
+//                    .setTid("5118785");//必选参数，瑞狮提供
                     .setTid(ConfigInfo.getInstance().getRsAppTid());//必选参数，瑞狮提供
             VlionNewsManager.getInstance().init(this);//必选参数
             //setUserReward true表示开启激励，false表示关闭激励

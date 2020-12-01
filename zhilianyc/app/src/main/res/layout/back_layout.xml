@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:text="详情"
         android:textSize="16sp"
+        android:textColor="@color/color_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
         android:layout_marginBottom="13dp"/>
