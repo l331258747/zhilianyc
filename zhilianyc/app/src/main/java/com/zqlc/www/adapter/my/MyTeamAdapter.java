@@ -52,7 +52,7 @@ public class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.ViewHolder
 
         holder.tv_people.setText(data.getLabor() + "");
         holder.tv_team.setText(data.getTeamLabor() + "");
-        holder.tv_name.setText(data.getRank());
+        holder.tv_name.setText(data.getMobile());
 
         if(data.getRealName() == 0){
             holder.tv_realName.setText("审核不通过");
