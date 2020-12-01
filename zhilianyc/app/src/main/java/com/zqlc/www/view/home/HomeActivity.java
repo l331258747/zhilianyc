@@ -1,5 +1,6 @@
 package com.zqlc.www.view.home;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -280,5 +281,11 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
     @Override
     public void getAdConfigFailed(String msg) {
         LogUtil.e(msg);
+    }
+
+    //防止fragment混淆
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+//		super.onSaveInstanceState(outState);
     }
 }

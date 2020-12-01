@@ -108,9 +108,14 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.btn_loginOff:
                 new TextDialog(context).setContent("是否确认退出APP？").setSubmitListener(v1 -> {
+                    final String phone = MySelfInfo.getInstance().getUserMobile();
+
                     MySelfInfo.getInstance().loginOff();
                     ActivityCollect.getAppCollect().finishAllActivity();
-                    startActivity(new Intent(context, LoginActivity.class));
+
+                    Intent intent = new Intent(new Intent(context, LoginActivity.class));
+                    intent.putExtra("LOGIN_PHONE", phone);
+                    context.startActivity(intent);
                 }).show();
                 break;
 
