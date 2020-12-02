@@ -405,6 +405,7 @@ public class OtcMarkerActivity extends BaseActivity implements OtcMarkerContract
 
     @Override
     public void feeRatioSuccess(Float data) {
+        if(data == null) data = 0f;
         mPopOtcSellSend = new PopOtcSellSend(activity, view_pop, data);
         mPopOtcSellSend.showPopupWindow(view_pop);
     }
