@@ -3,7 +3,6 @@ package com.zqlc.www.view.web;
 import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -13,6 +12,7 @@ import android.widget.ProgressBar;
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.constant.Constant;
+import com.zqlc.www.util.log.LogUtil;
 import com.zqlc.www.util.webview.LWebView;
 
 
@@ -89,7 +89,7 @@ public class WebViewActivity extends BaseActivity {
 				webView.loadUrl(url);
 			}
 
-			Log.e("li", "url:" + url);
+			LogUtil.e("url:" + url);
 		} else {
 //			webView.loadUrl("file:///android_asset/error.html");
 		}

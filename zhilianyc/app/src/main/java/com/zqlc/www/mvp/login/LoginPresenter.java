@@ -46,7 +46,7 @@ public class LoginPresenter implements LoginContract.Presenter{
     }
 
     @Override
-    public void register(String mobile, String code, String password, String vcode) {
+    public void register(String mobile, String vcode, String password, String code) {
         ResponseCallback listener = new ResponseCallback<EmptyModel>() {
             @Override
             public void onSuccess(EmptyModel data) {
@@ -61,9 +61,9 @@ public class LoginPresenter implements LoginContract.Presenter{
 
         Map<String, String> params = new HashMap<>();
         params.put("mobile",mobile);
+        params.put("vcode",vcode);
         params.put("password", MD5Utils.MD5(password));
         params.put("code",code);
-        params.put("vcode",vcode);
 
         MethodApi.register(params, new OnSuccessAndFaultSub(listener, context));
     }

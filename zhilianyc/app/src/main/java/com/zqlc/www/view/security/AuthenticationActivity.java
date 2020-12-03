@@ -1,6 +1,7 @@
 package com.zqlc.www.view.security;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -13,7 +14,6 @@ import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.bean.user.AuthRealInfoBean;
 import com.zqlc.www.bean.user.AuthRealNameBean;
 import com.zqlc.www.bean.user.AuthRealPayBean;
-import com.zqlc.www.constant.Constant;
 import com.zqlc.www.dialog.TextDialog;
 import com.zqlc.www.mvp.my.AuthRealNameContract;
 import com.zqlc.www.mvp.my.AuthRealNamePresenter;
@@ -24,7 +24,6 @@ import com.zqlc.www.util.pickerView.PickerCityHelp;
 import com.zqlc.www.util.rxbus.RxBus2;
 import com.zqlc.www.util.rxbus.busEvent.RegionSelEvent;
 import com.zqlc.www.view.user.ListRegionActivity;
-import com.zqlc.www.view.web.WebViewActivity;
 
 import java.net.URLEncoder;
 
@@ -113,9 +112,15 @@ public class AuthenticationActivity extends BaseActivity implements AuthRealName
 
         inType = 2;
 
-        Intent intentRed = new Intent(context, WebViewActivity.class);
-        intentRed.putExtra(Constant.EXTRA_URL,url);
-        startActivity(intentRed);
+//        Intent intentRed = new Intent(context, WebViewActivity.class);
+//        intentRed.putExtra(Constant.EXTRA_URL,url);
+//        startActivity(intentRed);
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri content_url = Uri.parse(url);
+        intent.setData(content_url);
+        startActivity(Intent.createChooser(intent, "请选择浏览器"));
 
 //        showShortToast("提交成功");
 //        finish();
@@ -133,16 +138,16 @@ public class AuthenticationActivity extends BaseActivity implements AuthRealName
         if (data.getCode() == 1) {
             inType = 1;
 
-            Intent intentRed = new Intent(context, WebViewActivity.class);
-            intentRed.putExtra(Constant.EXTRA_URL,data.getAuthRealNameVO().getPayUrl());
-            startActivity(intentRed);
+//            Intent intentRed = new Intent(context, WebViewActivity.class);
+//            intentRed.putExtra(Constant.EXTRA_URL,data.getAuthRealNameVO().getPayUrl());
+//            startActivity(intentRed);
 
-//            //从其他浏览器打开
-//            Intent intent = new Intent();
-//            intent.setAction(Intent.ACTION_VIEW);
-//            Uri content_url = Uri.parse(data.getAuthRealNameVO().getPayUrl());
-//            intent.setData(content_url);
-//            startActivity(Intent.createChooser(intent, "请选择浏览器"));
+            //从其他浏览器打开
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            Uri content_url = Uri.parse(data.getAuthRealNameVO().getPayUrl());
+            intent.setData(content_url);
+            startActivity(Intent.createChooser(intent, "请选择浏览器"));
         } else if (data.getCode() == 2) {
             if (!LoginUtil.verifyName(et_real_name.getText().toString()))
                 return;
