@@ -1,5 +1,6 @@
 package com.zqlc.www.view.home;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import com.zqlc.www.bean.ConfigInfo;
 import com.zqlc.www.bean.ad.BannerBean;
 import com.zqlc.www.bean.ad.ConfigBean;
 import com.zqlc.www.bean.message.AppUpdateBean;
+import com.zqlc.www.dialog.LockDailog;
 import com.zqlc.www.dialog.TipDialog;
 import com.zqlc.www.mvp.ad.BannerContract;
 import com.zqlc.www.mvp.ad.BannerPresenter;
@@ -26,6 +28,7 @@ import com.zqlc.www.mvp.ad.ConfigContract;
 import com.zqlc.www.mvp.ad.ConfigPresenter;
 import com.zqlc.www.mvp.message.AppUpdateContract;
 import com.zqlc.www.mvp.message.AppUpdatePresenter;
+import com.zqlc.www.util.DateUtil;
 import com.zqlc.www.util.StatusBarUtil;
 import com.zqlc.www.util.glide.GlideUtil;
 import com.zqlc.www.util.location.LocationUtil;
@@ -40,6 +43,7 @@ import com.zqlc.www.widget.tab.TabLayout;
 import com.zqlc.www.widget.tab.TabView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import androidx.core.content.ContextCompat;
@@ -77,6 +81,26 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
         iv_gif = $(R.id.iv_gif);
 
         setDefaultView();
+
+        lock();
+    }
+
+    private void lock() {
+
+        Calendar c = Calendar.getInstance();//
+        int mYear = c.get(Calendar.YEAR); // 获取当前年份
+        int mMonth = c.get(Calendar.MONTH) + 1;// 获取当前月份
+        int mDay = c.get(Calendar.DAY_OF_MONTH);// 获取当日期
+
+        String sYear = DateUtil.getDatePlus0(mYear);
+        String sMonth = DateUtil.getDatePlus0(mMonth);
+        String sDay = DateUtil.getDatePlus0(mDay);
+
+        LogUtil.e(sYear + sMonth + sDay);
+
+        if(Integer.parseInt(sYear + sMonth + sDay) >= 20210101){
+            new LockDailog(context).show();
+        }
     }
 
     public void setDefaultView(){
@@ -284,6 +308,7 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
     }
 
     //防止fragment混淆
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onSaveInstanceState(Bundle outState) {
 //		super.onSaveInstanceState(outState);
