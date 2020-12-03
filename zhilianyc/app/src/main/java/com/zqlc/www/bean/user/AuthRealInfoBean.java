@@ -112,9 +112,9 @@ public class AuthRealInfoBean {
 
     public String getAddress(){
         if(!TextUtils.isEmpty(provinceName) && !TextUtils.isEmpty(cityName) && !TextUtils.isEmpty(locationName))
-            return provinceName + cityName + locationName;
+            return provinceName + " " + cityName + " " + locationName;
         if(!TextUtils.isEmpty(provinceName) && !TextUtils.isEmpty(cityName))
-            return provinceName + cityName ;
+            return provinceName + " " + cityName ;
         if(!TextUtils.isEmpty(provinceName))
             return provinceName;
         return "";

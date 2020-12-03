@@ -84,6 +84,8 @@ public class AuthenticationActivity extends BaseActivity implements AuthRealName
             tv_address.setText(regionSelEvent.getAddressDes());
             locationCode = regionSelEvent.getpCode();
         });
+
+        mPresenter.realNameInfo(MySelfInfo.getInstance().getUserId());
     }
 
 
@@ -177,16 +179,16 @@ public class AuthenticationActivity extends BaseActivity implements AuthRealName
             et_real_name.setClickable(false); // user navigates with wheel and selects widget
         }
         if(!TextUtils.isEmpty(data.getIdCard())){
-            et_real_name.setText(data.getIdCard());
-            et_real_name.setFocusable(false);
-            et_real_name.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
-            et_real_name.setClickable(false); // user navigates with wheel and selects widget
+            et_code.setText(data.getIdCard());
+            et_code.setFocusable(false);
+            et_code.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
+            et_code.setClickable(false); // user navigates with wheel and selects widget
         }
         if(!TextUtils.isEmpty(data.getAddress())){
-            et_real_name.setText(data.getAddress());
-            et_real_name.setFocusable(false);
-            et_real_name.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
-            et_real_name.setClickable(false); // user navigates with wheel and selects widget
+            tv_address.setText(data.getAddress());
+            tv_address.setFocusable(false);
+            tv_address.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
+            tv_address.setClickable(false); // user navigates with wheel and selects widget
 
             locationCode = data.getLocation();
         }
