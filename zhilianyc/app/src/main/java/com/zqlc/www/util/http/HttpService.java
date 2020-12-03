@@ -465,7 +465,7 @@ public interface HttpService {
     );
     //签到回调 (奖励额外金豆)
     @POST("ad/signin_callback")
-    Observable<BaseResponse<EmptyModel>> signin(
+    Observable<BaseResponse<String>> signin(
             @Body RequestBody body
     );
     //--------------------ad end

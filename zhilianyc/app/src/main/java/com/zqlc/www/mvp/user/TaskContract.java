@@ -1,6 +1,5 @@
 package com.zqlc.www.mvp.user;
 
-import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.bean.user.TaskBean;
 
 public interface TaskContract {
@@ -14,7 +13,7 @@ public interface TaskContract {
         void getTaskSuccess(TaskBean data);
         void getTaskFailed(String msg);
 
-        void signinSuccess(EmptyModel data);
+        void signinSuccess(String data);
         void signinFailed(String msg);
 
     }

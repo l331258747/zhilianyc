@@ -7,7 +7,6 @@ import android.widget.TextView;
 import com.zqlc.www.R;
 import com.zqlc.www.base.ActivityCollect;
 import com.zqlc.www.base.BaseActivity;
-import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.bean.user.TaskBean;
 import com.zqlc.www.mvp.user.TaskContract;
@@ -149,7 +148,7 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
     }
 
     @Override
-    public void signinSuccess(EmptyModel data) {
+    public void signinSuccess(String data) {
         showShortToast("签到成功");
         mPresenter.getTask(MySelfInfo.getInstance().getUserId());
     }

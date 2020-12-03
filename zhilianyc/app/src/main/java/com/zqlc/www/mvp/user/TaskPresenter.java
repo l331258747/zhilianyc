@@ -2,7 +2,6 @@ package com.zqlc.www.mvp.user;
 
 import android.content.Context;
 
-import com.zqlc.www.bean.EmptyModel;
 import com.zqlc.www.bean.user.TaskBean;
 import com.zqlc.www.util.http.MethodApi;
 import com.zqlc.www.util.http.OnSuccessAndFaultSub;
@@ -44,9 +43,9 @@ public class TaskPresenter implements TaskContract.Presenter {
 
     @Override
     public void signin(String uid) {
-        ResponseCallback listener = new ResponseCallback<EmptyModel>() {
+        ResponseCallback listener = new ResponseCallback<String>() {
             @Override
-            public void onSuccess(EmptyModel data) {
+            public void onSuccess(String data) {
                 iView.signinSuccess(data);
             }
 
