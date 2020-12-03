@@ -38,7 +38,7 @@ public class AppUpdatePresenter implements AppUpdateContract.Presenter{
 
         Map<String, String> params = new HashMap<>();
         params.put("name", "jmallapp");
-        params.put("version", AppUtils.getVersionName());
+        params.put("version", AppUtils.getVersionCode());
         params.put("platform", "android");
 
         MethodApi.getAppUpdate(params, new OnSuccessAndFaultSub(listener, context, false));

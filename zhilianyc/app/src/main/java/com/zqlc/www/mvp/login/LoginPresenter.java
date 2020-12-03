@@ -40,7 +40,7 @@ public class LoginPresenter implements LoginContract.Presenter{
         Map<String, String> params = new HashMap<>();
         params.put("mobile",username);
         params.put("password", MD5Utils.MD5(password));
-        params.put("version",AppUtils.getVersionName());
+        params.put("version",AppUtils.getVersionCode());
 
         MethodApi.login(params, new OnSuccessAndFaultSub(listener, context));
     }

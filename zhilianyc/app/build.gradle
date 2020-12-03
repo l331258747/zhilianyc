@@ -25,8 +25,8 @@ android {
 //        applicationId "com.zj.shop.towmall.hwxs"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 3030
-        versionName "3.0.3"
+        versionCode 100
+        versionName "1.0.0"
         multiDexEnabled true
         manifestPlaceholders = [
                 "APPLICATION_ID": applicationId,
