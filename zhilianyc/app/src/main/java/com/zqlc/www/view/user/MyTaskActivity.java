@@ -37,7 +37,7 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void initView() {
-        showLeftAndTitle("进入任务");
+        showLeftAndTitle("今日任务");
 
         beans = intent.getStringExtra("beans");
         todayBeans = intent.getStringExtra("todayBeans");
