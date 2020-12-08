@@ -1,6 +1,7 @@
 package com.zqlc.www.view.user;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,11 +14,15 @@ import com.zqlc.www.mvp.user.TaskContract;
 import com.zqlc.www.mvp.user.TaskPresenter;
 import com.zqlc.www.view.home.HomeActivity;
 
+import androidx.constraintlayout.widget.Group;
+
 public class MyTaskActivity extends BaseActivity implements View.OnClickListener, TaskContract.View {
 
     TextView tv_num_all, tv_num_today, tv_num_use, tv_task_all, tv_video, tv_checkIn, tv_game, tv_read, tv_luck;
     TextView tv_video2, tv_checkIn2, tv_game2, tv_read2, tv_luck2;
     TextView btn_video, btn_checkIn, btn_game, btn_read, btn_luck;
+
+    Group group_game;
 
     TaskPresenter mPresenter;
 
@@ -42,6 +47,8 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
         tv_num_all = $(R.id.tv_num_all);
         tv_num_today = $(R.id.tv_num_today);
         tv_num_use = $(R.id.tv_num_use);
+
+        group_game = $(R.id.group_game);
 
         tv_num_all.setText(beans);
         tv_num_today.setText(todayBeans);
@@ -70,6 +77,13 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
         btn_game.setOnClickListener(this);
         btn_read.setOnClickListener(this);
         btn_luck.setOnClickListener(this);
+
+        if(TextUtils.equals(MySelfInfo.getInstance().getUserState(),"1")){
+            group_game.setVisibility(View.GONE);
+        }else{
+            group_game.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override

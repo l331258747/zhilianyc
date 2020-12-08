@@ -45,6 +45,11 @@ public class MySelfInfo {
     public String getUserId(){
         return SPUtils.getInstance().getString(SPUtils.SP_USER_ID);
     }
+
+    public String getUserState(){
+        return SPUtils.getInstance().getString(SPUtils.SP_USER_USERSTATE);
+    }
+
     public String getShareUrl(){
         return SPUtils.getInstance().getString(SPUtils.SP_USER_SHARE_URL);
     }

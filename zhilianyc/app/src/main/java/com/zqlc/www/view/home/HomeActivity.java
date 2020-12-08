@@ -2,6 +2,7 @@ package com.zqlc.www.view.home;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +18,7 @@ import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.base.BaseFragment;
 import com.zqlc.www.bean.ConfigInfo;
+import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.bean.ad.BannerBean;
 import com.zqlc.www.bean.ad.ConfigBean;
 import com.zqlc.www.bean.message.AppUpdateBean;
@@ -140,30 +142,62 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
     public void initData() {
         setDefaultData();
 
-        // 初始化页面
-        try {
-            fragmentCls[0] = NewFragment.class;
-            fragmentCls[1] = GameFragment.class;
-            fragmentCls[2] = ShopFragment.class;
-            fragmentCls[3] = WarehouseFragment.class;
-            fragmentCls[4] = MyFragment.class;
-
-            fragments[0] = (BaseFragment) fragmentCls[0].newInstance();
-            fragments[1] = (BaseFragment) fragmentCls[1].newInstance();
-            fragments[2] = (BaseFragment) fragmentCls[2].newInstance();
-            fragments[3] = (BaseFragment) fragmentCls[3].newInstance();
-            fragments[4] = (BaseFragment) fragmentCls[4].newInstance();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         tabItems = new ArrayList<>();
-        tabItems.add(new TabItem(R.drawable.tab_new, R.string.str_tab_new, 0, fragmentCls[0]));
-        tabItems.add(new TabItem(R.drawable.tab_game, R.string.str_tab_game, 0, fragmentCls[1]));
-        tabItems.add(new TabItem(R.drawable.tab_shop, R.string.str_tab_shop, 0, fragmentCls[2]));
-        tabItems.add(new TabItem(R.drawable.tab_warehouse, R.string.str_tab_warehouse, 0, fragmentCls[3]));
-        tabItems.add(new TabItem(R.drawable.tab_my, R.string.str_tab_my, 0, fragmentCls[4]));
+        if(TextUtils.equals(MySelfInfo.getInstance().getUserState(),"1")){
+
+            fragmentCls = new Class[4];
+            fragments = new Fragment[4];
+
+            // 初始化页面
+            try {
+                fragmentCls[0] = NewFragment.class;
+                fragmentCls[1] = ShopFragment.class;
+                fragmentCls[2] = WarehouseFragment.class;
+                fragmentCls[3] = MyFragment.class;
+
+                fragments[0] = (BaseFragment) fragmentCls[0].newInstance();
+                fragments[1] = (BaseFragment) fragmentCls[1].newInstance();
+                fragments[2] = (BaseFragment) fragmentCls[2].newInstance();
+                fragments[3] = (BaseFragment) fragmentCls[3].newInstance();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            tabItems.add(new TabItem(R.drawable.tab_new, R.string.str_tab_new, 0, fragmentCls[0]));
+            tabItems.add(new TabItem(R.drawable.tab_shop, R.string.str_tab_shop, 0, fragmentCls[1]));
+            tabItems.add(new TabItem(R.drawable.tab_warehouse, R.string.str_tab_warehouse, 0, fragmentCls[2]));
+            tabItems.add(new TabItem(R.drawable.tab_my, R.string.str_tab_my, 0, fragmentCls[3]));
+        }else{
+
+            fragmentCls = new Class[5];
+            fragments = new Fragment[5];
+
+            // 初始化页面
+            try {
+                fragmentCls[0] = NewFragment.class;
+                fragmentCls[1] = GameFragment.class;
+                fragmentCls[2] = ShopFragment.class;
+                fragmentCls[3] = WarehouseFragment.class;
+                fragmentCls[4] = MyFragment.class;
+
+                fragments[0] = (BaseFragment) fragmentCls[0].newInstance();
+                fragments[1] = (BaseFragment) fragmentCls[1].newInstance();
+                fragments[2] = (BaseFragment) fragmentCls[2].newInstance();
+                fragments[3] = (BaseFragment) fragmentCls[3].newInstance();
+                fragments[4] = (BaseFragment) fragmentCls[4].newInstance();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            tabItems.add(new TabItem(R.drawable.tab_new, R.string.str_tab_new, 0, fragmentCls[0]));
+            tabItems.add(new TabItem(R.drawable.tab_game, R.string.str_tab_game, 0, fragmentCls[1]));
+            tabItems.add(new TabItem(R.drawable.tab_shop, R.string.str_tab_shop, 0, fragmentCls[2]));
+            tabItems.add(new TabItem(R.drawable.tab_warehouse, R.string.str_tab_warehouse, 0, fragmentCls[3]));
+            tabItems.add(new TabItem(R.drawable.tab_my, R.string.str_tab_my, 0, fragmentCls[4]));
+        }
 
         tabLayout.initData(tabItems, this);
 
@@ -212,34 +246,62 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
     public void onTabItemClick(TabItem tabItem) {
         closeDefault();
 
+        int index = 0;
+        if(TextUtils.equals(MySelfInfo.getInstance().getUserState(),"1")){
+            index = tabItems.indexOf(tabItem);
 
-        int index = tabItems.indexOf(tabItem);
+            switch (index) {
+                case 0:
+                    setTitleSingle(true, getResString(R.string.str_tab_new));
+                    break;
+                case 1:
+                    setTitleSingle(true, getResString(R.string.str_tab_shop));
+                    break;
+                case 2:
+                    setTitleSingle(true, getResString(R.string.str_tab_warehouse));
+                    break;
+                case 3:
+                    setTitleSingle(false, getResString(R.string.str_tab_my));
+                    break;
+            }
 
-        switch (index) {
-            case 0:
-                setTitleSingle(true, getResString(R.string.str_tab_new));
-                break;
-            case 1:
-                setTitleSingle(true, getResString(R.string.str_tab_game));
-                break;
-            case 2:
-                setTitleSingle(true, getResString(R.string.str_tab_shop));
-                break;
-            case 3:
-                setTitleSingle(true, getResString(R.string.str_tab_warehouse));
+            if (index == 3) {
+                StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context, R.color.color_1C81E9));
+            } else {
+                StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context, R.color.white));
+            }
+
+        }else{
+            index = tabItems.indexOf(tabItem);
+
+            switch (index) {
+                case 0:
+                    setTitleSingle(true, getResString(R.string.str_tab_new));
+                    break;
+                case 1:
+                    setTitleSingle(true, getResString(R.string.str_tab_game));
+                    break;
+                case 2:
+                    setTitleSingle(true, getResString(R.string.str_tab_shop));
+                    break;
+                case 3:
+                    setTitleSingle(true, getResString(R.string.str_tab_warehouse));
 //                RxBus2.getInstance().post(new NotifyEvent(false));
-                break;
-            case 4:
-                setTitleSingle(false, getResString(R.string.str_tab_my));
+                    break;
+                case 4:
+                    setTitleSingle(false, getResString(R.string.str_tab_my));
 
-                break;
+                    break;
+            }
+
+            if (index == 4) {
+                StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context, R.color.color_1C81E9));
+            } else {
+                StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context, R.color.white));
+            }
+
         }
 
-        if (index == 4) {
-            StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context, R.color.color_1C81E9));
-        } else {
-            StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context, R.color.white));
-        }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         for (Fragment fragment : fragments) {

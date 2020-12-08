@@ -245,7 +245,13 @@
 
 
 
-
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_game"
+            android:layout_width="wrap_content"
+            app:constraint_referenced_ids="view_game,iv_game,tv_game,tv_game2,btn_game"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_height="wrap_content"/>
 
 
 
