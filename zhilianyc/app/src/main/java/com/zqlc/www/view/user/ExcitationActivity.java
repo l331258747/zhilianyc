@@ -59,7 +59,7 @@ public class ExcitationActivity extends BaseActivity {
                     mOxCustomerTm.adClicked();
                     mOxCustomerTm.openFoxActivity(mDataBean.getActivityUrl());
 
-                    mOxCustomerTm.adExposed();
+//                    mOxCustomerTm.adExposed();
                 }
             }
 
