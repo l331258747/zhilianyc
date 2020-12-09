@@ -31,8 +31,8 @@ public class ConfigInfo {
         SPUtils.getInstance().putString(SPUtils.SP_CONFIG_rsGameMediaId, model.getRsGameMediaId());
         SPUtils.getInstance().putString(SPUtils.SP_CONFIG_taAppKey, model.getTaAppKey());
         SPUtils.getInstance().putString(SPUtils.SP_CONFIG_taAppSecret, model.getTaAppSecret());
-        SPUtils.getInstance().putString(SPUtils.SP_CONFIG_taAlotId, model.getTaAlotId());
-        SPUtils.getInstance().putString(SPUtils.SP_CONFIG_taUserId, model.getTaUserId());
+        SPUtils.getInstance().putString(SPUtils.SP_CONFIG_taAwardAlotId, model.getTaAwardAlotId());
+        SPUtils.getInstance().putString(SPUtils.SP_CONFIG_taSiginAlotId, model.getTaSiginAlotId());
         SPUtils.getInstance().putString(SPUtils.SP_CONFIG_zjAppKey, model.getZjAppKey());
         SPUtils.getInstance().putString(SPUtils.SP_CONFIG_zjVideoId, model.getZjVideoId());
         SPUtils.getInstance().putString(SPUtils.SP_CONFIG_zjVideoUserId, model.getZjVideoUserId());
@@ -60,12 +60,11 @@ public class ConfigInfo {
         return SPUtils.getInstance().getString(SPUtils.SP_CONFIG_taAppSecret);
     }
 
-    public String getTaAlotId() {
-        return SPUtils.getInstance().getString(SPUtils.SP_CONFIG_taAlotId);
+    public String getTaAwardAlotId() {
+        return SPUtils.getInstance().getString(SPUtils.SP_CONFIG_taAwardAlotId);
     }
-
-    public String getTaUserId() {
-        return SPUtils.getInstance().getString(SPUtils.SP_CONFIG_taUserId);
+    public String getTaSiginAlotId() {
+        return SPUtils.getInstance().getString(SPUtils.SP_CONFIG_taSiginAlotId);
     }
 
     public String getZjAppKey() {

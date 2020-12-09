@@ -8,8 +8,8 @@ public class ConfigBean {
     String rsGameMediaId;
     String taAppKey;
     String taAppSecret;
-    String taAlotId;
-    String taUserId;
+    String taSiginAlotId;
+    String taAwardAlotId;
     String zjAppKey;
     String zjVideoId;
     String zjVideoUserId;
@@ -35,12 +35,12 @@ public class ConfigBean {
         return taAppSecret;
     }
 
-    public String getTaAlotId() {
-        return taAlotId;
+    public String getTaSiginAlotId() {
+        return taSiginAlotId;
     }
 
-    public String getTaUserId() {
-        return taUserId;
+    public String getTaAwardAlotId() {
+        return taAwardAlotId;
     }
 
     public String getZjAppKey() {

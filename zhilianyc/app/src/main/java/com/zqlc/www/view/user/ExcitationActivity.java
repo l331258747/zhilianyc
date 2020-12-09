@@ -9,17 +9,19 @@ import com.mediamain.android.nativead.AdCallBack;
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.bean.ConfigInfo;
-import com.zqlc.www.bean.EmptyModel;
-import com.zqlc.www.mvp.ad.AwardContract;
-import com.zqlc.www.mvp.ad.AwardPresenter;
+import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.util.log.LogUtil;
 
-public class ExcitationActivity extends BaseActivity implements AwardContract.View {
+//public class ExcitationActivity extends BaseActivity implements AwardContract.View, SigninContract.View {
+public class ExcitationActivity extends BaseActivity {
 
     private FrameLayout mContainer;
-    AwardPresenter mPresenter;
+//    AwardPresenter mPresenter;
+//    SigninPresenter mPresenterSignin;
 
     Ad ad;
+
+    boolean isSignin;
 
     @Override
     public int getLayoutId() {
@@ -28,7 +30,14 @@ public class ExcitationActivity extends BaseActivity implements AwardContract.Vi
 
     @Override
     public void initView() {
-        showLeftAndTitle("今日抽奖");
+        isSignin = intent.getBooleanExtra("isSignin",false);
+
+        String title = "今日抽奖";
+        if(isSignin){
+            title = "今日签到";
+        }
+
+        showLeftAndTitle(title);
         mContainer = $(R.id.container);
 
     }
@@ -36,7 +45,9 @@ public class ExcitationActivity extends BaseActivity implements AwardContract.Vi
     @Override
     public void initData() {
 
-        mPresenter = new AwardPresenter(context,this);
+
+//        mPresenter = new AwardPresenter(context,this);
+//        mPresenterSignin = new SigninPresenter(context,this);
 
         initAd();
         //点击某个按钮展示广告或者进入页面直接展现广告
@@ -46,7 +57,12 @@ public class ExcitationActivity extends BaseActivity implements AwardContract.Vi
     private void initAd() {
         //s:appkey s1：slotId  s2:userId  s3:deviceId
 
-        ad = new Ad(ConfigInfo.getInstance().getTaAppKey(),ConfigInfo.getInstance().getTaAlotId(), ConfigInfo.getInstance().getTaUserId());
+        String taAlotId = ConfigInfo.getInstance().getTaAwardAlotId();
+        if(isSignin){
+            taAlotId = ConfigInfo.getInstance().getTaSiginAlotId();
+        }
+
+        ad = new Ad(ConfigInfo.getInstance().getTaAppKey(), taAlotId, MySelfInfo.getInstance().getUserId());
         ad.init(activity, mContainer, Ad.AD_URL_NEW, new AdCallBack()     {
 
             @Override
@@ -84,7 +100,7 @@ public class ExcitationActivity extends BaseActivity implements AwardContract.Vi
                 //奖励弹窗show回调
                 LogUtil.e( "onRewardShow");
 
-                mPresenter.awardCallback();
+//                mPresenter.awardCallback();
             }
 
             @Override
@@ -130,13 +146,24 @@ public class ExcitationActivity extends BaseActivity implements AwardContract.Vi
     }
 
 
-    @Override
-    public void awardCallbackSuccess(EmptyModel datas) {
-
-    }
-
-    @Override
-    public void awardCallbackFailed(String msg) {
-
-    }
+//    @Override
+//    public void awardCallbackSuccess(EmptyModel datas) {
+//
+//    }
+//
+//    @Override
+//    public void awardCallbackFailed(String msg) {
+//
+//    }
+//
+//
+//    @Override
+//    public void signinSuccess(String data) {
+//        showShortToast("签到成功");
+//    }
+//
+//    @Override
+//    public void signinFailed(String msg) {
+//        showShortToast(msg);
+//    }
 }

@@ -100,7 +100,9 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
                 startActivity(new Intent(context,IncentiveVideoActivity.class));
                 break;
             case R.id.btn_checkIn:
-                mPresenter.signin(MySelfInfo.getInstance().getUserId());
+                intent = new Intent(context,ExcitationActivity.class);
+                intent.putExtra("isSignin",true);
+                startActivity(intent);
                 break;
             case R.id.btn_game:
                 ActivityCollect.getAppCollect().finishAllNotHome();
@@ -158,17 +160,6 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void getTaskFailed(String msg) {
-        showShortToast(msg);
-    }
-
-    @Override
-    public void signinSuccess(String data) {
-        showShortToast("签到成功");
-        mPresenter.getTask(MySelfInfo.getInstance().getUserId());
-    }
-
-    @Override
-    public void signinFailed(String msg) {
         showShortToast(msg);
     }
 
