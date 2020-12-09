@@ -12,12 +12,9 @@ import com.zqlc.www.bean.ConfigInfo;
 import com.zqlc.www.bean.MySelfInfo;
 import com.zqlc.www.util.log.LogUtil;
 
-//public class ExcitationActivity extends BaseActivity implements AwardContract.View, SigninContract.View {
 public class ExcitationActivity extends BaseActivity {
 
     private FrameLayout mContainer;
-//    AwardPresenter mPresenter;
-//    SigninPresenter mPresenterSignin;
 
     Ad ad;
 
@@ -44,10 +41,6 @@ public class ExcitationActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
-
-//        mPresenter = new AwardPresenter(context,this);
-//        mPresenterSignin = new SigninPresenter(context,this);
 
         initAd();
         //点击某个按钮展示广告或者进入页面直接展现广告
@@ -145,25 +138,4 @@ public class ExcitationActivity extends BaseActivity {
         }
     }
 
-
-//    @Override
-//    public void awardCallbackSuccess(EmptyModel datas) {
-//
-//    }
-//
-//    @Override
-//    public void awardCallbackFailed(String msg) {
-//
-//    }
-//
-//
-//    @Override
-//    public void signinSuccess(String data) {
-//        showShortToast("签到成功");
-//    }
-//
-//    @Override
-//    public void signinFailed(String msg) {
-//        showShortToast(msg);
-//    }
 }
