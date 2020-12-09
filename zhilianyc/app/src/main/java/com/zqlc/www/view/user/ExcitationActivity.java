@@ -1,24 +1,30 @@
 package com.zqlc.www.view.user;
 
-import android.content.res.Configuration;
-import android.view.KeyEvent;
-import android.widget.FrameLayout;
+import android.text.TextUtils;
+import android.widget.TextView;
 
 import com.mediamain.android.nativead.Ad;
-import com.mediamain.android.nativead.AdCallBack;
+import com.mediamain.android.view.FoxCustomerTm;
+import com.mediamain.android.view.interfaces.FoxNsTmListener;
 import com.zqlc.www.R;
 import com.zqlc.www.base.BaseActivity;
 import com.zqlc.www.bean.ConfigInfo;
 import com.zqlc.www.bean.MySelfInfo;
+import com.zqlc.www.util.GsonUtil;
 import com.zqlc.www.util.log.LogUtil;
 
 public class ExcitationActivity extends BaseActivity {
 
-    private FrameLayout mContainer;
+    private FoxCustomerTm mOxCustomerTm;
+
+
+    private TextView mContainer;
 
     Ad ad;
 
     boolean isSignin;
+
+    ExcitationBean mDataBean;
 
     @Override
     public int getLayoutId() {
@@ -27,115 +33,73 @@ public class ExcitationActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        isSignin = intent.getBooleanExtra("isSignin",false);
+        isSignin = intent.getBooleanExtra("isSignin", false);
 
-        String title = "今日抽奖";
-        if(isSignin){
-            title = "今日签到";
+        hideTitleLayout();
+
+        String taAlotId = ConfigInfo.getInstance().getTaAwardAlotId();
+        if (isSignin) {
+            taAlotId = ConfigInfo.getInstance().getTaSiginAlotId();
         }
 
-        showLeftAndTitle(title);
         mContainer = $(R.id.container);
+
+        //创建广告对象
+        mOxCustomerTm = new FoxCustomerTm(this);
+
+        mOxCustomerTm.setAdListener(new FoxNsTmListener() {
+            @Override
+            public void onReceiveAd(String result) {
+                //获取广告返回结果
+                LogUtil.e("onReceiveAd:" + result);
+                mDataBean = GsonUtil.convertString2Object(result,ExcitationBean.class);
+
+                if (mOxCustomerTm!=null && mDataBean!=null && !TextUtils.isEmpty(mDataBean.getActivityUrl())){
+                    //素材点击时候调用素材点击曝光方法
+                    mOxCustomerTm.adClicked();
+                    mOxCustomerTm.openFoxActivity(mDataBean.getActivityUrl());
+
+                    mOxCustomerTm.adExposed();
+                }
+            }
+
+            @Override
+            public void onFailedToReceiveAd(int i, String s) {
+                LogUtil.e("onFailedToReceiveAd");
+                mContainer.setText("onFailedToReceiveAd" + "\n" + "i:" + i + "\n" + "s:" + s);
+            }
+
+            //增加奖励回调接口
+            @Override
+            public void onAdActivityClose(String s) {
+                LogUtil.e("onAdActivityClose" + s);
+
+                finish();
+            }
+        });
+        //加载广告,传入对应的(必传)广告位id和用户id(可选,禁止以固定值填充相关引导,如果有发奖类活动userId是唯一标志)
+        if (mOxCustomerTm != null) {
+            try {
+                mOxCustomerTm.loadAd(Integer.parseInt(taAlotId), MySelfInfo.getInstance().getUserId());
+            } catch (Exception e) {
+                LogUtil.e("Exception:" + e.toString());
+            }
+        }
 
     }
 
     @Override
     public void initData() {
 
-        initAd();
-        //点击某个按钮展示广告或者进入页面直接展现广告
-        ad.loadAd(activity, false);
     }
 
-    private void initAd() {
-        //s:appkey s1：slotId  s2:userId  s3:deviceId
-
-        String taAlotId = ConfigInfo.getInstance().getTaAwardAlotId();
-        if(isSignin){
-            taAlotId = ConfigInfo.getInstance().getTaSiginAlotId();
-        }
-
-        ad = new Ad(ConfigInfo.getInstance().getTaAppKey(), taAlotId, MySelfInfo.getInstance().getUserId());
-        ad.init(activity, mContainer, Ad.AD_URL_NEW, new AdCallBack()     {
-
-            @Override
-            public void onReceiveAd() {
-                //活动弹窗关闭回调 只针对弹窗类型广告有效
-                LogUtil.e( "onReceiveAd");
-            }
-
-            @Override
-            public void onFailedToReceiveAd(int i, String s) {
-                //活动弹窗关闭回调 只针对弹窗类型广告有效
-                LogUtil.e( "onFailedToReceiveAd");
-            }
-
-            @Override
-            public void onActivityClose() {
-                //活动弹窗关闭回调 只针对弹窗类型广告有效
-                LogUtil.e( "onActivityClose");
-            }
-
-            @Override
-            public void onActivityShow() {
-                //活动弹窗show回调 只针对弹窗类型广告有效
-                LogUtil.e( "onActivityShow");
-            }
-
-            @Override
-            public void onRewardClose() {
-                //奖励弹窗关闭回调
-                LogUtil.e( "onRewardClose");
-            }
-
-            @Override
-            public void onRewardShow() {
-                //奖励弹窗show回调
-                LogUtil.e( "onRewardShow");
-
-//                mPresenter.awardCallback();
-            }
-
-            @Override
-            public void onPrizeClose() {
-                //我的奖品页弹窗关闭回调
-                LogUtil.e( "onPrizeClose");
-            }
-
-            @Override
-            public void onPrizeShow() {
-                //我的奖品页弹窗show回调
-                LogUtil.e( "onPrizeShow");
-            }
-        });
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (ad != null) {
-            ad.resetAdSize(newConfig.orientation);
-        }
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        boolean isConsume = false;
-        if (ad != null) {
-            isConsume = ad.onKeyBack(keyCode, event);
-        }
-        if (!isConsume) {
-            return super.onKeyDown(keyCode, event);
-        }
-        return isConsume;
-    }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        if (ad != null) {
-            ad.destroy();
+        //销毁控件
+        if (mOxCustomerTm != null) {
+            mOxCustomerTm.destroy();
         }
+        super.onDestroy();
     }
-
 }
