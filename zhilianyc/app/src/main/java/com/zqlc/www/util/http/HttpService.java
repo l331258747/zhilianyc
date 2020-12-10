@@ -491,6 +491,11 @@ public interface HttpService {
     Observable<BaseResponse<AppUpdateBean>> getAppUpdate(
             @Body RequestBody body
     );
+
+    @POST("shop/is_open")
+    Observable<BaseResponse<String>> shopIsOpen(
+            @Body RequestBody body
+    );
     //--------------------message end
 
 

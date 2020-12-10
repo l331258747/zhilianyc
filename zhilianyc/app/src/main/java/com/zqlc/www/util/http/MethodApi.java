@@ -364,6 +364,10 @@ public class MethodApi {
         Observable observable = HttpMethods.getInstance().getHttpService().getAppUpdate(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
+    public static void shopIsOpen(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().shopIsOpen(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
 
 
     //--------------------news end

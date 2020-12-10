@@ -94,6 +94,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
         swipe.setColorSchemeResources(R.color.color_1C81E9);
         swipe.setOnRefreshListener(() -> {
             mPresenter.mine(MySelfInfo.getInstance().getUserId(),false);
+            rnsPresenter.realNameStatus(MySelfInfo.getInstance().getUserId());
         });
     }
 

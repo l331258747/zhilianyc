@@ -30,6 +30,7 @@ import com.zqlc.www.mvp.ad.ConfigContract;
 import com.zqlc.www.mvp.ad.ConfigPresenter;
 import com.zqlc.www.mvp.message.AppUpdateContract;
 import com.zqlc.www.mvp.message.AppUpdatePresenter;
+import com.zqlc.www.mvp.message.ShopIsOpenContract;
 import com.zqlc.www.util.DateUtil;
 import com.zqlc.www.util.StatusBarUtil;
 import com.zqlc.www.util.glide.GlideUtil;
@@ -52,7 +53,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickListener, BannerContract.View, AppUpdateContract.View, ConfigContract.View {
+public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickListener, BannerContract.View, AppUpdateContract.View, ConfigContract.View, ShopIsOpenContract.View {
 
     private TabLayout tabLayout;
     private ArrayList<TabItem> tabItems;
@@ -84,7 +85,7 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
 
         setDefaultView();
 
-        lock();
+//        lock();
     }
 
     private void lock() {
@@ -255,7 +256,11 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
                     setTitleSingle(true, getResString(R.string.str_tab_new));
                     break;
                 case 1:
-                    setTitleSingle(true, getResString(R.string.str_tab_shop));
+                    if(!shopIsOpen){
+                        showShortToast("敬请期待");
+                    }else{
+                        setTitleSingle(true, getResString(R.string.str_tab_shop));
+                    }
                     break;
                 case 2:
                     setTitleSingle(true, getResString(R.string.str_tab_warehouse));
@@ -271,6 +276,29 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
                 StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context, R.color.white));
             }
 
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            for (Fragment fragment : fragments) {
+                if (fragment.isAdded()) {
+                    transaction.hide(fragment);
+                }
+            }
+
+            if(shopIsOpen || index != 1){
+                try {
+                    tabLayout.setTabSelect(index);
+
+                    if (fragments[index].isAdded()) {
+                        transaction.show(fragments[index]).commitAllowingStateLoss();
+                    } else {
+                        transaction.add(R.id.cus_tab_fragment, fragments[index]).commitAllowingStateLoss();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
         }else{
             index = tabItems.indexOf(tabItem);
 
@@ -282,7 +310,11 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
                     setTitleSingle(true, getResString(R.string.str_tab_game));
                     break;
                 case 2:
-                    setTitleSingle(true, getResString(R.string.str_tab_shop));
+                    if(!shopIsOpen){
+                        showShortToast("敬请期待");
+                    }else{
+                        setTitleSingle(true, getResString(R.string.str_tab_shop));
+                    }
                     break;
                 case 3:
                     setTitleSingle(true, getResString(R.string.str_tab_warehouse));
@@ -300,27 +332,28 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
                 StatusBarUtil.setStatusBar(this, ContextCompat.getColor(context, R.color.white));
             }
 
-        }
-
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        for (Fragment fragment : fragments) {
-            if (fragment.isAdded()) {
-                transaction.hide(fragment);
-            }
-        }
-
-        try {
-            tabLayout.setTabSelect(index);
-
-            if (fragments[index].isAdded()) {
-                transaction.show(fragments[index]).commitAllowingStateLoss();
-            } else {
-                transaction.add(R.id.cus_tab_fragment, fragments[index]).commitAllowingStateLoss();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            for (Fragment fragment : fragments) {
+                if (fragment.isAdded()) {
+                    transaction.hide(fragment);
+                }
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            if(shopIsOpen || index != 2){
+                try {
+                    tabLayout.setTabSelect(index);
+
+                    if (fragments[index].isAdded()) {
+                        transaction.show(fragments[index]).commitAllowingStateLoss();
+                    } else {
+                        transaction.add(R.id.cus_tab_fragment, fragments[index]).commitAllowingStateLoss();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
 
@@ -374,5 +407,18 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
     @Override
     protected void onSaveInstanceState(Bundle outState) {
 //		super.onSaveInstanceState(outState);
+    }
+
+    boolean shopIsOpen;
+    @Override
+    public void shopIsOpenSuccess(String data) {
+        if(TextUtils.equals(data,"1")){
+            shopIsOpen = true;
+        }
+    }
+
+    @Override
+    public void shopIsOpenFailed(String msg) {
+        LogUtil.e(msg);
     }
 }
