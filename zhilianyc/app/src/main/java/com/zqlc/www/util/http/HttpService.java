@@ -21,6 +21,7 @@ import com.zqlc.www.bean.otc.MyOtcListBean;
 import com.zqlc.www.bean.otc.OtcDetailBean;
 import com.zqlc.www.bean.otc.OtcInfoBean;
 import com.zqlc.www.bean.otc.OtcListBean;
+import com.zqlc.www.bean.otc.TradeRuleBean;
 import com.zqlc.www.bean.shop.GoodsClassBean;
 import com.zqlc.www.bean.shop.GoodsDetailsBean;
 import com.zqlc.www.bean.shop.GoodsListBean;
@@ -414,6 +415,11 @@ public interface HttpService {
     //发布卖单
     @POST("otc/publish_sell")
     Observable<BaseResponse<EmptyModel>> sendOtcSell(
+            @Body RequestBody body
+    );
+    //京豆交易规则 返回值的内容包括 sell_small_min 转让散单最低单价
+    @POST("otc/beans_trade_rule")
+    Observable<BaseResponse<TradeRuleBean>> beansTradeRule(
             @Body RequestBody body
     );
 

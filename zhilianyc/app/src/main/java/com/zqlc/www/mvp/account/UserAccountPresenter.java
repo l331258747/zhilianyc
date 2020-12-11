@@ -58,7 +58,7 @@ public class UserAccountPresenter implements UserAccountContract.Presenter {
 
         Map<String, String> params = new HashMap<>();
         params.put("uid", uid);
-        params.put("account", account);
+        params.put("accountNum", account);
 
         MethodApi.updateAccountNo(params, new OnSuccessAndFaultSub(listener, context));
     }

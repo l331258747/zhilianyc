@@ -2,7 +2,6 @@ package com.zqlc.www.mvp.my;
 
 import android.content.Context;
 
-import com.zqlc.www.bean.login.MineBean;
 import com.zqlc.www.util.http.MethodApi;
 import com.zqlc.www.util.http.OnSuccessAndFaultSub;
 import com.zqlc.www.util.http.ResponseCallback;
@@ -25,6 +24,7 @@ public class FeePresenter implements FeeContract.Presenter{
         ResponseCallback listener = new ResponseCallback<Float>() {
             @Override
             public void onSuccess(Float data) {
+                if(data == null) data = 0f;
                 iView.feeRatioSuccess(data);
             }
 

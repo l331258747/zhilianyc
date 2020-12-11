@@ -251,7 +251,7 @@ public class MethodApi {
 
     //--------------------team end
 
-    //--------------------otc end
+    //--------------------otc start
     public static void getMyOtcList(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().getMyOtcList(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
@@ -298,6 +298,10 @@ public class MethodApi {
     }
     public static void sendOtcSell(Map<String, String> params, DisposableObserver subscriber) {
         Observable observable = HttpMethods.getInstance().getHttpService().sendOtcSell(getRequestBody(params)); //在HttpServer中
+        HttpMethods.getInstance().toSubscribe(observable, subscriber);
+    }
+    public static void beansTradeRule(Map<String, String> params, DisposableObserver subscriber) {
+        Observable observable = HttpMethods.getInstance().getHttpService().beansTradeRule(getRequestBody(params)); //在HttpServer中
         HttpMethods.getInstance().toSubscribe(observable, subscriber);
     }
     public static void otcFeedback(String uid, File file, DisposableObserver subscriber) {
