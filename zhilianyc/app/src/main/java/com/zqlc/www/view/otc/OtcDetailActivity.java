@@ -394,7 +394,7 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
     private void compressImage() {
         MyThreadPool.getInstance().submit(() -> {
             File file = new File(headpath);
-            String savePath = TackPicturesUtil.IMAGE_CACHE_PATH + File.separator + "crop" + file.getName();
+            String savePath = TackPicturesUtil.IMAGE_CACHE_PATH + File.separator + "crop" + File.separator + file.getName();
             ImageUtils.getImage(headpath, savePath);
             headCompressPath = savePath;
             RxBus2.getInstance().post(new UpLoadPhotos());
