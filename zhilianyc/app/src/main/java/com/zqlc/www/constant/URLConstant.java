@@ -17,7 +17,7 @@ public class URLConstant {
 //            return "http://180.101.185.20:38080/";//测试地址
 //        }
 //        return "https://api.zqlc.net.cn/";
-        return "http://180.101.185.20:38080/";
-//        return "http://106.55.24.39:80/";
+//        return "http://180.101.185.20:38080/";
+        return "http://106.55.24.39:80/";
     }
 }
