@@ -80,7 +80,7 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
 
         tv_copy.setOnClickListener(v -> {
             ClipboardManager copy = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            copy.setText(MySelfInfo.getInstance().getInviteCode());
+            copy.setText(data.getSendAccount());
             showShortToast("卖方收款号复制成功");
         });
 
