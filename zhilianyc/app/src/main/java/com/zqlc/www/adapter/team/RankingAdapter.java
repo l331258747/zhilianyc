@@ -60,7 +60,8 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
         }else {
             holder.tv_num.setVisibility(View.VISIBLE);
             holder.iv_img.setVisibility(View.GONE);
-            holder.tv_num.setText(position + "");
+            int rank = position + 1;
+            holder.tv_num.setText(rank + "");
         }
 
         if(TextUtils.isEmpty(data.getHeadImg())){
