@@ -1,5 +1,6 @@
 package com.zqlc.www.view.otc;
 
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -43,7 +44,7 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
     FeePresenter mPresenterFee;
 
     TextView tv_status, tv_count_down, tv_No, tv_seller, tv_buyer, tv_unit_price, tv_number, tv_total_price, tv_order_time, tv_collection_code, tv_voucher;
-    TextView btn_1, btn_2, btn_text;
+    TextView btn_1, btn_2, btn_text,tv_copy;
 
     boolean isCheck;
 
@@ -75,6 +76,13 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
         btn_1 = $(R.id.btn_1);
         btn_2 = $(R.id.btn_2);
         iv_camera = $(R.id.iv_camera);
+        tv_copy = $(R.id.tv_copy);
+
+        tv_copy.setOnClickListener(v -> {
+            ClipboardManager copy = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            copy.setText(MySelfInfo.getInstance().getInviteCode());
+            showShortToast("卖方收款号复制成功");
+        });
 
         tv_status = $(R.id.tv_status);
         tv_count_down = $(R.id.tv_count_down);
@@ -133,6 +141,12 @@ public class OtcDetailActivity extends BaseActivity implements OtcDetailContract
         tv_total_price.setText(StringUtils.getStringNum(data.getTotalPrice()));
         tv_order_time.setText(data.getCreateTime());
         tv_collection_code.setText(data.getSendAccount());
+
+        if(!TextUtils.isEmpty(data.getSendAccount())){
+            tv_copy.setVisibility(View.VISIBLE);
+        }else{
+            tv_copy.setVisibility(View.GONE);
+        }
 
         if (TextUtils.isEmpty(data.getPayImgUrl())) {
             iv_camera.setVisibility(View.GONE);

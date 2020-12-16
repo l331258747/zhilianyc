@@ -50,6 +50,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
 
     ImageView iv_head;
     TextView tv_name, tv_UID, tv_data_all_num, tv_data_today_num, tv_data_use_num, tv_data_contribution_num, tv_data_labour_num, tv_region, tv_authentication;
+    TextView tv_data_contribution_level,tv_data_labour_num_level;
+
     View view_title;
 
     MyInfoPresenter mPresenter;
@@ -67,6 +69,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
     @Override
     public void initView() {
 
+        tv_data_contribution_level = $(R.id.tv_data_contribution_level);
+        tv_data_labour_num_level = $(R.id.tv_data_labour_num_level);
         iv_head = $(R.id.iv_head);
         tv_name = $(R.id.tv_name);
         tv_UID = $(R.id.tv_UID);
@@ -197,6 +201,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener, My
         tv_data_use_num.setText(data.getSellableBeans());
         tv_data_contribution_num.setText(data.getContribution());
         tv_data_labour_num.setText(data.getLabor());
+        tv_data_contribution_level.setText(data.getContributionRankStr());
+        tv_data_labour_num_level.setText(data.getExtraLabor());
 
         if (!TextUtils.isEmpty(data.getCityPartnerName())) {
             tv_region.setText(data.getCityPartnerName());

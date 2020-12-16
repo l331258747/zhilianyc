@@ -4,10 +4,12 @@ import android.os.Bundle;
 
 import com.zqlc.www.R;
 import com.zqlc.www.adapter.account.BillListAdapter;
+import com.zqlc.www.adapter.base.EndlessRecyclerOnScrollListener;
+import com.zqlc.www.adapter.base.LoadMoreWrapper;
 import com.zqlc.www.base.BaseFragment;
 import com.zqlc.www.bean.MySelfInfo;
-import com.zqlc.www.bean.account.MyBillBean;
 import com.zqlc.www.bean.account.MyBillListBean;
+import com.zqlc.www.constant.Constant;
 import com.zqlc.www.mvp.account.MyBillPresenter;
 import com.zqlc.www.mvp.account.MybillContract;
 
@@ -35,8 +37,11 @@ public class MyBillFragment extends BaseFragment implements MybillContract.View 
     private MyBillPresenter mPresenter;
 
     private boolean isViewCreated;
-    boolean isLoad = false;
 
+    int page = Constant.DEFAULT_PAGE;
+    LoadMoreWrapper loadMoreWrapper;
+    int isLoadType = 1;//1下拉刷新，2上拉加载
+    boolean isLoad = false;//是否在加载，重复加载问题
 
     public static Fragment newInstance(int billType) {
         MyBillFragment fragment = new MyBillFragment();
@@ -87,12 +92,23 @@ public class MyBillFragment extends BaseFragment implements MybillContract.View 
 
     public void getRefreshData() {
         swipe.setRefreshing(true);
+        page = Constant.DEFAULT_PAGE;
         isLoad = true;
-        mPresenter.getBill(MySelfInfo.getInstance().getUserId(),billType);
+        isLoadType = 1;
+        mPresenter.getBill(MySelfInfo.getInstance().getUserId(),billType,page);
+    }
+
+    public void getMoreData() {
+        isLoad = true;
+        page = page + 1;
+        isLoadType = 2;
+        mPresenter.getBill(MySelfInfo.getInstance().getUserId(),billType,page);
     }
 
     @Override
     public void initData() {
+        page = Constant.DEFAULT_PAGE;
+
         mPresenter = new MyBillPresenter(context,this);
 
         if (getUserVisibleHint()) {
@@ -105,18 +121,39 @@ public class MyBillFragment extends BaseFragment implements MybillContract.View 
         recyclerView = $(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         mAdapter = new BillListAdapter(activity, new ArrayList<>());
-        recyclerView.setAdapter(mAdapter);
+        loadMoreWrapper = new LoadMoreWrapper(mAdapter);
+        recyclerView.setAdapter(loadMoreWrapper);
 
+        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                if (isLoad || loadMoreWrapper.getLoadState() == LoadMoreWrapper.LOADING_END) return;
+                loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING);
+                getMoreData();
+            }
+        });
     }
 
 
     @Override
-    public void getBillSuccess(MyBillBean data) {
-        List<MyBillListBean> datas = data.getList();
-        mAdapter.setData(datas);
+    public void getBillSuccess(List<MyBillListBean> data) {
+        List<MyBillListBean> datas = data;
 
+        if (isLoadType == 1) {
+            mAdapter.setData(datas);
+        } else {
+            mAdapter.addData(datas);
+        }
         isLoad = false;
+
         swipe.setRefreshing(false);
+
+        if (datas.size() >= Constant.DEFAULT_SIZE) {
+            loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING_COMPLETE);
+        } else {
+            // 显示加载到底的提示
+            loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING_END);
+        }
     }
 
     @Override
@@ -124,5 +161,6 @@ public class MyBillFragment extends BaseFragment implements MybillContract.View 
         showLongToast(msg);
         isLoad = false;
         swipe.setRefreshing(false);
+        loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING_COMPLETE);
     }
 }

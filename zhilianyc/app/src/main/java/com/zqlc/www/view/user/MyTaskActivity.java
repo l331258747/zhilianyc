@@ -18,9 +18,9 @@ import androidx.constraintlayout.widget.Group;
 
 public class MyTaskActivity extends BaseActivity implements View.OnClickListener, TaskContract.View {
 
-    TextView tv_num_all, tv_num_today, tv_num_use, tv_task_all, tv_video, tv_checkIn, tv_game, tv_read, tv_luck;
-    TextView tv_video2, tv_checkIn2, tv_game2, tv_read2, tv_luck2;
-    TextView btn_video, btn_checkIn, btn_game, btn_read, btn_luck;
+    TextView tv_num_all, tv_num_today, tv_num_use, tv_task_all, tv_video, tv_game, tv_read, tv_luck;
+    TextView tv_video2,  tv_game2, tv_read2, tv_luck2;
+    TextView btn_video,  btn_game, btn_read, btn_luck;
 
     Group group_game;
 
@@ -56,24 +56,20 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
 
         tv_task_all = $(R.id.tv_task_all);
         tv_video = $(R.id.tv_video);
-        tv_checkIn = $(R.id.tv_checkIn);
         tv_game = $(R.id.tv_game);
         tv_read = $(R.id.tv_read);
         tv_luck = $(R.id.tv_luck);
         btn_video = $(R.id.btn_video);
-        btn_checkIn = $(R.id.btn_checkIn);
         btn_game = $(R.id.btn_game);
         btn_read = $(R.id.btn_read);
         btn_luck = $(R.id.btn_luck);
 
         tv_video2 = $(R.id.tv_video2);
-        tv_checkIn2 = $(R.id.tv_checkIn2);
         tv_game2 = $(R.id.tv_game2);
         tv_read2 = $(R.id.tv_read2);
         tv_luck2 = $(R.id.tv_luck2);
 
         btn_video.setOnClickListener(this);
-        btn_checkIn.setOnClickListener(this);
         btn_game.setOnClickListener(this);
         btn_read.setOnClickListener(this);
         btn_luck.setOnClickListener(this);
@@ -98,11 +94,6 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
         switch (v.getId()) {
             case R.id.btn_video:
                 startActivity(new Intent(context,IncentiveVideoActivity.class));
-                break;
-            case R.id.btn_checkIn:
-                intent = new Intent(context,ExcitationActivity.class);
-                intent.putExtra("isSignin",true);
-                startActivity(intent);
                 break;
             case R.id.btn_game:
                 ActivityCollect.getAppCollect().finishAllNotHome();
@@ -130,19 +121,16 @@ public class MyTaskActivity extends BaseActivity implements View.OnClickListener
         tv_task_all.setText(data.getTaskAll());
 
         tv_video.setText(data.getVideoMission());
-        tv_checkIn.setText(data.getSignin());
         tv_game.setText(data.getGame());
         tv_read.setText(data.getReadNews());
         tv_luck.setText(data.getAward());
 
         setBtn(btn_video, data.getVideoMissionMax(), data.getVideoMissionNum());
-        setBtn(btn_checkIn, data.getSigninMax(), data.getSigninNum());
         setBtn(btn_game, data.getGameMax(), data.getGameNum());
         setBtn(btn_read, data.getReadNewsMax(), data.getReadNewsNum());
         setBtn(btn_luck, data.getAwardMax(), data.getAwardNum());
 
         tv_video2.setText(data.getVideoBeansStr());
-        tv_checkIn2.setText(data.getSigninBeansStr());
         tv_game2.setText(data.getGameSellableBeansStr());
         tv_read2.setText(data.getReadNewsContributionStr());
         tv_luck2.setText(data.getAwardContributionStr());

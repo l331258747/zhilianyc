@@ -64,6 +64,11 @@ public class BillListAdapter extends RecyclerView.Adapter<BillListAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public void addData(List<MyBillListBean> data){
+        this.datas.addAll(data);
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tv_name, tv_time, tv_value;

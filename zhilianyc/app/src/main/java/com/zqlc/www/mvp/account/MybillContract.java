@@ -1,14 +1,16 @@
 package com.zqlc.www.mvp.account;
 
-import com.zqlc.www.bean.account.MyBillBean;
+import com.zqlc.www.bean.account.MyBillListBean;
+
+import java.util.List;
 
 public interface MybillContract {
     interface Presenter {
-        void getBill(String uid, int type);
+        void getBill(String uid, int type,int page);
     }
 
     interface View {
-        void getBillSuccess(MyBillBean data);
+        void getBillSuccess(List<MyBillListBean> data);
         void getBillFailed(String msg);
     }
 

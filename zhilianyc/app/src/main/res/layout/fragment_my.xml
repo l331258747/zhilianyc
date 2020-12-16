@@ -262,6 +262,17 @@
             app:layout_constraintStart_toStartOf="@+id/view_data_contribution"
             app:layout_constraintTop_toBottomOf="@+id/tv_data_contribution_num" />
 
+        <TextView
+            android:id="@+id/tv_data_contribution_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_5"
+            android:textColor="@color/white_66"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_data_contribution"
+            app:layout_constraintStart_toEndOf="@+id/tv_data_contribution"
+            app:layout_constraintTop_toTopOf="@+id/tv_data_contribution"
+            tools:text="(lv1)"/>
+
         <View
             android:id="@+id/view_data_labour"
             android:layout_width="0dp"
@@ -284,6 +295,18 @@
             app:layout_constraintStart_toStartOf="@+id/view_data_labour"
             app:layout_constraintTop_toTopOf="@+id/view_data_labour"
             tools:text="555" />
+
+        <TextView
+            android:id="@+id/tv_data_labour_num_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_5"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintTop_toTopOf="@+id/tv_data_labour_num"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_data_labour_num"
+            app:layout_constraintStart_toEndOf="@+id/tv_data_labour_num"
+            tools:text="+25"/>
 
         <TextView
             android:id="@+id/tv_data_labour"

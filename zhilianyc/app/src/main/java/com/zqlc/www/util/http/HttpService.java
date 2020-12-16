@@ -3,7 +3,7 @@ package com.zqlc.www.util.http;
 import com.zqlc.www.bean.BasePageModel;
 import com.zqlc.www.bean.BaseResponse;
 import com.zqlc.www.bean.EmptyModel;
-import com.zqlc.www.bean.account.MyBillBean;
+import com.zqlc.www.bean.account.MyBillListBean;
 import com.zqlc.www.bean.account.UserAccountBean;
 import com.zqlc.www.bean.ad.BannerBean;
 import com.zqlc.www.bean.ad.ConfigBean;
@@ -194,25 +194,25 @@ public interface HttpService {
 
     //金豆账单
     @POST("account/beans_record")
-    Observable<BaseResponse<MyBillBean>> beansRecord(
+    Observable<BaseResponse<BasePageModel<MyBillListBean>>> beansRecord(
             @Body RequestBody body
     );
 
     //可售额度账单
     @POST("account/sellable_beans_record")
-    Observable<BaseResponse<MyBillBean>> sellableBeansRecord(
+    Observable<BaseResponse<BasePageModel<MyBillListBean>>> sellableBeansRecord(
             @Body RequestBody body
     );
 
     //劳动值账单
     @POST("account/labor_record")
-    Observable<BaseResponse<MyBillBean>> laborRecord(
+    Observable<BaseResponse<BasePageModel<MyBillListBean>>> laborRecord(
             @Body RequestBody body
     );
 
     //贡献度账单
     @POST("account/contribution_record")
-    Observable<BaseResponse<MyBillBean>> contributionRecord(
+    Observable<BaseResponse<BasePageModel<MyBillListBean>>> contributionRecord(
             @Body RequestBody body
     );
     //--------------------account end

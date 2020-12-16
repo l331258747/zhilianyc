@@ -1,5 +1,7 @@
 package com.zqlc.www.bean.login;
 
+import android.text.TextUtils;
+
 import com.zqlc.www.util.StringUtils;
 
 public class MineBean {
@@ -36,6 +38,7 @@ public class MineBean {
     private int middleman;
     private String headImg;
 
+
     public String getHeadImg() {
         return headImg;
     }
@@ -68,14 +71,19 @@ public class MineBean {
         return contributionRank;
     }
 
+    public String getContributionRankStr() {
+        if(TextUtils.isEmpty(contributionRank))
+            return "";
+        return "(" + contributionRank + ")";
+    }
+
     public String getLabor() {
         return StringUtils.getStringNum(labor);
     }
 
     public String getExtraLabor() {
-        return StringUtils.getStringNum(extraLabor);
+        return "+" + StringUtils.getStringNum(extraLabor);
     }
-
 
     public float getBeans() {
         return beans;
